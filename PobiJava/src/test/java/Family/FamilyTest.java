@@ -40,8 +40,8 @@ class FamilyTest {
         Child child = new Child("Szymon", "Dubowski", 6);
         family.addChild(child);
 
-        assertEquals(family.numberOfChildren(), family.getChildren().size());
-        assertEquals(1, family.numberOfChildren());
+        assertEquals(family.getNumberOfChildren(), family.getChildren().size());
+        assertEquals(1, family.getNumberOfChildren());
     }
 
     @Test
@@ -63,12 +63,12 @@ class FamilyTest {
     @Test
     void getAgeOfTheYoungestChild_EmptyList() {
         Family family = new Family();
-        assertEquals(0, family.numberOfChildren());
+        assertEquals(0, family.getNumberOfChildren());
         assertThrows(FamilyException.class, family::getAgeOfTheYoungestChild);
     }
 
     @Test
-    void getAgeOfTheYoungestChild_childrenWithTheSameAge() {
+    void getAgeOfTheYoungestChild_allChildrenWithTheSameAge() {
         Family family = new Family();
 
         Child child1 = new Child("Szymon", "Dubowski", 6);
@@ -87,8 +87,15 @@ class FamilyTest {
     @Test
     void testToString() {
         Family family = new Family();
+
         Child child = new Child("Szymon", "Dubowski", 6);
         family.addChild(child);
+
+        Child child2 = new Child("Szymon", "Dubowski", 7);
+        family.addChild(child2);
+
+        Child child3 = new Child("Szymon", "Dubowski", 8);
+        family.addChild(child3);
 
         log.info(family.toString());
     }

@@ -29,11 +29,11 @@ public class Family {
         throw new FamilyException("Child does not exists");
     }
 
-    public int numberOfChildren() {
+    public int getNumberOfChildren() {
         return children.size();
     }
 
-    public int getAgeOfTheYoungestChild() { //TODO: PRZETESTOWAC
+    public int getAgeOfTheYoungestChild() {
         return children
                 .stream()
                 .mapToInt(Child::getAge)
@@ -41,10 +41,16 @@ public class Family {
                 .orElseThrow(() -> new FamilyException("This family has no children"));
     }
 
-    @Override public String toString() { //TODO: ZOBACZYC
-        return new ToStringBuilder(this)
-                .append("children", children)
-                .toString();
+    @Override public String toString() {
+        ToStringBuilder stringBuilder = new ToStringBuilder(this);
+        stringBuilder.append(System.getProperty("line.separator"));
+
+        for (Child child : children) {
+            stringBuilder.append("child", child.toString());
+            stringBuilder.append(System.getProperty("line.separator"));
+        }
+
+        return stringBuilder.toString();
     }
 
     public List<Child> getChildren() {
