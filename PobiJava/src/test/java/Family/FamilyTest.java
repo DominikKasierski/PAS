@@ -23,6 +23,18 @@ class FamilyTest {
     }
 
     @Test
+    void tryingToAddAddedChild() {
+        Family family = new Family();
+        Child child = new Child("Szymon", "Dubowski", 6);
+
+        assertEquals(0, family.getChildren().size());
+
+        family.addChild(child);
+        assertEquals(1, family.getChildren().size());
+        assertThrows(FamilyException.class, () -> family.addChild(child));
+    }
+
+    @Test
     void deleteChild() {
         Family family = new Family();
         Child child = new Child("Szymon", "Dubowski", 6);
@@ -32,6 +44,19 @@ class FamilyTest {
 
         family.deleteChild(child);
         assertEquals(0, family.getChildren().size());
+    }
+
+    @Test
+    void deleteChild_IncorrectCase() {
+        Family family = new Family();
+        Child child = new Child("Szymon", "Dubowski", 6);
+        family.addChild(child);
+
+        assertEquals(1, family.getChildren().size());
+
+        family.deleteChild(child);
+        assertEquals(0, family.getChildren().size());
+        assertThrows(FamilyException.class, () -> family.deleteChild(child));
     }
 
     @Test

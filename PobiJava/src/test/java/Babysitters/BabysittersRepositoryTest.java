@@ -1,5 +1,7 @@
 package Babysitters;
 
+import Exceptions.BabysitterException;
+import Exceptions.RepositoryException;
 import Family.Family;
 import Family.FamilyRepository;
 import org.junit.jupiter.api.Test;
@@ -19,13 +21,15 @@ class BabysittersRepositoryTest {
         BabysittersRepository babysittersRepository = new BabysittersRepository();
 
         assertEquals(0, babysittersRepository.getElements().size());
-        assertEquals(babysittersRepository.getElements().size(), babysittersRepository.getNumberOfElements());
+        assertEquals(babysittersRepository.getElements().size(),
+                babysittersRepository.getNumberOfElements());
 
         Babysitter babysitter = new TeachingSitter("Ola", "Nowak", 20, 3, 4, 13);
         babysittersRepository.addElement(babysitter);
 
         assertEquals(1, babysittersRepository.getElements().size());
-        assertEquals(babysittersRepository.getElements().size(), babysittersRepository.getNumberOfElements());
+        assertEquals(babysittersRepository.getElements().size(),
+                babysittersRepository.getNumberOfElements());
     }
 
     @Test
@@ -90,6 +94,27 @@ class BabysittersRepositoryTest {
         Babysitter babysitter3 = new TidingSitter("Kasia", "Parkowska", 11, 10, 2, 560);
         babysittersRepository.addElement(babysitter3);
 
-        log.info(babysittersRepository.toString());
+        log.config(babysittersRepository.toString());
+    }
+
+    @Test
+    void tryingToAddAddedElement() {
+        BabysittersRepository babysittersRepository = new BabysittersRepository();
+
+        Babysitter babysitter = new TeachingSitter("Ola", "Nowak", 20, 3, 4, 13);
+        babysittersRepository.addElement(babysitter);
+
+        assertThrows(RepositoryException.class, () -> babysittersRepository.addElement(babysitter));
+    }
+
+    @Test
+    void tryingToDeleteDeletedElement() {
+        BabysittersRepository babysittersRepository = new BabysittersRepository();
+
+        Babysitter babysitter = new TeachingSitter("Ola", "Nowak", 20, 3, 4, 13);
+        babysittersRepository.addElement(babysitter);
+        babysittersRepository.deleteElement(babysitter);
+
+        assertThrows(RepositoryException.class, () -> babysittersRepository.deleteElement(babysitter));
     }
 }

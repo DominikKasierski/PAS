@@ -35,9 +35,12 @@ public class Employment {
         return !(endOfEmployment == null);
     }
 
-    public double employmentDurationInHours() { //TODO: Dodać wyjątek dla nieskończonego wypożyczenia i przetestować
-        long differenceInSeconds = SECONDS.between(beginningOfEmployment, endOfEmployment);
-        return Math.ceil(differenceInSeconds / 3600.0);
+    public double employmentDurationInHours() {
+        if (isEnded()) {
+            long differenceInSeconds = SECONDS.between(beginningOfEmployment, endOfEmployment);
+            return Math.ceil(differenceInSeconds / 3600.0);
+        }
+        throw new EmploymentException("Employment has not been ended");
     }
 
     public double employmentCost() {

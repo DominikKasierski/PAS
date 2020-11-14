@@ -127,6 +127,6 @@ class EmploymentRepositoryTest {
 
         employmentRepository.addElement(employment);
 
-        log.info(employmentRepository.toString());
+        log.config(employmentRepository.toString());
     }
 }

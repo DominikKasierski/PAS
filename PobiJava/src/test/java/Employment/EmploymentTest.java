@@ -66,6 +66,20 @@ class EmploymentTest {
     }
 
     @Test
+    void employmentDurationInHours_NotEndedEmployment() {
+        Babysitter babysitter = new Babysitter("Anna", "Kowalska", 20, 4, 5);
+
+        Family family = new Family();
+        Child child = new Child("Tomek", "Kowalski", 4);
+        family.addChild(child);
+
+        Employment employment = new Employment(babysitter, family);
+
+        //Zmiana w Employment na potrzeby testów
+        assertThrows(EmploymentException.class, employment::employmentDurationInHours);
+    }
+
+    @Test
     void employmentCost_Case1() {
         Babysitter babysitter = new Babysitter("Anna", "Kowalska", 15, 4, 5);
 

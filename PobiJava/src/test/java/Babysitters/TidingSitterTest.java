@@ -1,5 +1,6 @@
 package Babysitters;
 
+import Exceptions.BabysitterException;
 import org.junit.jupiter.api.Test;
 
 import java.util.logging.Logger;
@@ -9,6 +10,11 @@ import static org.junit.jupiter.api.Assertions.*;
 class TidingSitterTest {
 
     protected final Logger log = Logger.getLogger(getClass().getName());
+
+    @Test
+    void constructor() {
+        assertThrows(BabysitterException.class, () -> new TidingSitter("Ola", "Nowak", -3, 3, 4, -5));
+    }
 
     @Test
     void getValueOfCleaningEquipment() {
