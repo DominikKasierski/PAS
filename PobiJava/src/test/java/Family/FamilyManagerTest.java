@@ -10,12 +10,12 @@ class FamilyManagerTest {
     void addFamily() {
         FamilyManager familyManager = new FamilyManager(new FamilyRepository());
 
-        assertEquals(0, familyManager.getNumberOfFamiliesInRepository());
+        assertEquals(0, familyManager.getNumberOfFamilies());
 
         Family family = new Family();
 
         familyManager.addFamily(family);
-        assertEquals(1, familyManager.getNumberOfFamiliesInRepository());
+        assertEquals(1, familyManager.getNumberOfFamilies());
     }
 
     @Test
@@ -25,10 +25,10 @@ class FamilyManagerTest {
         Family family = new Family();
 
         familyManager.addFamily(family);
-        assertEquals(1, familyManager.getNumberOfFamiliesInRepository());
+        assertEquals(1, familyManager.getNumberOfFamilies());
 
         familyManager.deleteFamily(family);
-        assertEquals(0, familyManager.getNumberOfFamiliesInRepository());
+        assertEquals(0, familyManager.getNumberOfFamilies());
     }
 
     @Test
@@ -69,7 +69,7 @@ class FamilyManagerTest {
         Family family = new Family();
         familyManager.addFamily(family);
 
-        assertEquals(1, familyManager.getNumberOfFamiliesInRepository());
+        assertEquals(1, familyManager.getNumberOfFamilies());
     }
 
     @Test

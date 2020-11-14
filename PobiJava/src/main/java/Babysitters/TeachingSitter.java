@@ -7,25 +7,26 @@ public class TeachingSitter extends Babysitter {
 
     private int yearsOfExperienceInTeaching;
 
-    public TeachingSitter(String name, String surname, int basePrice, int minChildAge,
+    public TeachingSitter(String name, String surname, int basePriceForHour, int minChildAge,
                           int maxNumberOfChildrenInTheFamily, int yearsOfExperienceInTeaching) {
-        super(name, surname, basePrice, minChildAge, maxNumberOfChildrenInTheFamily);
+        super(name, surname, basePriceForHour, minChildAge, maxNumberOfChildrenInTheFamily);
         this.yearsOfExperienceInTeaching = yearsOfExperienceInTeaching;
         if (yearsOfExperienceInTeaching < 0) {
             throw new BabysitterException("Invalid argument");
         }
     }
 
-    @Override public double price() {
-        return getBasePrice() * (1 + yearsOfExperienceInTeaching / 10.0);
+    @Override public double priceForHour() {
+        return getBasePriceForHour() * (1 + yearsOfExperienceInTeaching / 10.0);
     }
 
     public int getYearsOfExperienceInTeaching() {
         return yearsOfExperienceInTeaching;
     }
 
-    @Override public String toString() { //TODO: SPRAWDZIC CZY WYPISZE IMIE NAZWISKO ITD
+    @Override public String toString() {
         return new ToStringBuilder(this)
+                .appendSuper(super.toString())
                 .append("yearsOfExperienceInTeaching", yearsOfExperienceInTeaching)
                 .toString();
     }

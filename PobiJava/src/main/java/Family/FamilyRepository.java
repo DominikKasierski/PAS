@@ -29,6 +29,4 @@ public class FamilyRepository extends Repository<Family> {
 
         return stringBuilder.toString();
     }
-
-
 }

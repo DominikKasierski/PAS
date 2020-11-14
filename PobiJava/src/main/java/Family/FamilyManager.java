@@ -24,7 +24,7 @@ public class FamilyManager {
         familyRepository.deleteChildFromFamily(family, child);
     }
 
-    public int getNumberOfFamiliesInRepository() {
+    public int getNumberOfFamilies() {
         return familyRepository.getNumberOfElements();
     }
 

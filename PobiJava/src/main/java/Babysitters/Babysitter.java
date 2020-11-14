@@ -7,24 +7,24 @@ public class Babysitter {
 
     private String name;
     private String surname;
-    private int basePrice;
+    private int basePriceForHour;
     private int minChildAge;
     private int maxNumberOfChildrenInTheFamily;
 
-    public Babysitter(String name, String surname, int basePrice, int minChildAge,
+    public Babysitter(String name, String surname, int basePriceForHour, int minChildAge,
                       int maxNumberOfChildrenInTheFamily) {
         this.name = name;
         this.surname = surname;
-        this.basePrice = basePrice;
+        this.basePriceForHour = basePriceForHour;
         this.minChildAge = minChildAge;
         this.maxNumberOfChildrenInTheFamily = maxNumberOfChildrenInTheFamily;
-        if (basePrice <= 0 || minChildAge < 0 || maxNumberOfChildrenInTheFamily <= 0) {
+        if (basePriceForHour <= 0 || minChildAge < 0 || maxNumberOfChildrenInTheFamily <= 0) {
             throw new BabysitterException("Invalid argument");
         }
     }
 
-    public double price() {
-        return basePrice;
+    public double priceForHour() {
+        return basePriceForHour;
     }
 
     public String getName() {
@@ -35,8 +35,8 @@ public class Babysitter {
         return surname;
     }
 
-    public int getBasePrice() {
-        return basePrice;
+    public int getBasePriceForHour() {
+        return basePriceForHour;
     }
 
     public int getMinChildAge() {
@@ -51,7 +51,7 @@ public class Babysitter {
         return new ToStringBuilder(this)
                 .append("name", name)
                 .append("surname", surname)
-                .append("basePrice", basePrice)
+                .append("basePrice", basePriceForHour)
                 .append("minChildAge", minChildAge)
                 .append("maxNumberOfChildrenInTheFamily", maxNumberOfChildrenInTheFamily)
                 .toString();
