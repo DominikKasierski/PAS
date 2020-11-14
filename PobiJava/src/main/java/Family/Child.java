@@ -1,5 +1,7 @@
 package Family;
 
+import Exceptions.FamilyException;
+
 public class Child {
 
     private String name;
@@ -10,6 +12,9 @@ public class Child {
         this.name = name;
         this.surname = surname;
         this.age = age;
+        if (age < 0) {
+            throw new FamilyException("Invalid argument");
+        }
     }
 
     public int getAge() {
