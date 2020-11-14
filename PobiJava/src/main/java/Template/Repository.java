@@ -19,18 +19,18 @@ public abstract class Repository<T> {
     }
 
     public void addElement(T element) {
-        for (T item : elements) {
-            if (item == element) {
-                throw new RepositoryException("Element already exists");
-            }
+        if (!checkIfTheElementIsPresent(element)) {
+            elements.add(element);
+        } else {
+            throw new RepositoryException("Element already exists");
         }
-        elements.add(element);
     }
 
     public void deleteElement(T element) {
         for (T item : elements) {
             if (item == element) {
                 elements.remove(element);
+                return;
             }
         }
         throw new RepositoryException("Element does not exists");

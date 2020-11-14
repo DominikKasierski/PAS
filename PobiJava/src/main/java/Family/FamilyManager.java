@@ -9,11 +9,11 @@ public class FamilyManager {
     }
 
     public void addFamily(Family family) {
-        familyRepository.addFamilyToRepository(family);
+        familyRepository.addElement(family);
     }
 
     public void deleteFamily(Family family) {
-        familyRepository.deleteFamilyFromRepository(family);
+        familyRepository.deleteElement(family);
     }
 
     public void addChildToFamily(Family family, Child child) {
@@ -25,11 +25,11 @@ public class FamilyManager {
     }
 
     public int getNumberOfFamiliesInRepository() {
-        return familyRepository.getNumberOfFamiliesInRepository();
+        return familyRepository.getNumberOfElements();
     }
 
     public int getNumberOfChildrenInTheFamily(Family family) {
-        return familyRepository.getNumberOfFamiliesInRepository();
+        return familyRepository.getNumberOfChildrenInTheFamily(family);
     }
 
 }

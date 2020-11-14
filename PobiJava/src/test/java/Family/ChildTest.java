@@ -19,6 +19,6 @@ class ChildTest {
     @Test
     void testToString() {
         Child child = new Child("Szymon", "Dubowski", 6);
-        log.info(child.toString());
+        log.config(child.toString());
     }
 }

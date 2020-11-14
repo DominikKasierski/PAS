@@ -97,6 +97,6 @@ class FamilyTest {
         Child child3 = new Child("Szymon", "Dubowski", 8);
         family.addChild(child3);
 
-        log.info(family.toString());
+        log.config(family.toString());
     }
 }

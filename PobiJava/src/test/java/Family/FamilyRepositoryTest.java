@@ -1,4 +1,5 @@
 package Family;
+
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -12,68 +13,68 @@ class FamilyRepositoryTest {
     protected final Logger log = Logger.getLogger(getClass().getName());
 
     @Test
-    void getNumberOfFamiliesInRepository() {
+    void getNumberOfElements() {
         FamilyRepository repository = new FamilyRepository();
 
-        assertEquals(0, repository.getFamiliesList().size());
-        assertEquals(repository.getFamiliesList().size(), repository.getNumberOfFamiliesInRepository());
+        assertEquals(0, repository.getElements().size());
+        assertEquals(repository.getElements().size(), repository.getNumberOfElements());
 
         Family family = new Family();
-        repository.addFamilyToRepository(family);
+        repository.addElement(family);
 
-        assertEquals(1, repository.getFamiliesList().size());
-        assertEquals(repository.getFamiliesList().size(), repository.getNumberOfFamiliesInRepository());
+        assertEquals(1, repository.getElements().size());
+        assertEquals(repository.getElements().size(), repository.getNumberOfElements());
     }
 
     @Test
-    void addFamilyToRepository() {
+    void addElement() {
         FamilyRepository repository = new FamilyRepository();
 
-        assertEquals(0, repository.getNumberOfFamiliesInRepository());
+        assertEquals(0, repository.getNumberOfElements());
 
         Family family = new Family();
-        repository.addFamilyToRepository(family);
+        repository.addElement(family);
 
-        assertEquals(1, repository.getNumberOfFamiliesInRepository());
+        assertEquals(1, repository.getNumberOfElements());
     }
 
     @Test
-    void checkIfFamilyIsInRepository() {
+    void checkIfTheElementIsPresent() {
         FamilyRepository repository = new FamilyRepository();
 
         Family family = new Family();
-        repository.addFamilyToRepository(family);
+        repository.addElement(family);
 
-        assertTrue(repository.checkIfFamilyIsInRepository(family));
+        assertTrue(repository.checkIfTheElementIsPresent(family));
     }
 
     @Test
-    void deleteFamilyFromRepository() {
+    void deleteElement() {
         FamilyRepository repository = new FamilyRepository();
 
-        assertEquals(0, repository.getNumberOfFamiliesInRepository());
+        assertEquals(0, repository.getNumberOfElements());
 
         Family family = new Family();
-        repository.addFamilyToRepository(family);
+        repository.addElement(family);
 
-        assertEquals(1, repository.getNumberOfFamiliesInRepository());
+        assertEquals(1, repository.getNumberOfElements());
 
-        repository.deleteFamilyFromRepository(family);
+        repository.deleteElement(family);
 
-        assertEquals(1, repository.getNumberOfFamiliesInRepository());
+        assertEquals(0, repository.getNumberOfElements());
     }
 
     @Test
-    void getFamiliesList() {
+    void getElements() {
         FamilyRepository repository = new FamilyRepository();
 
         Family family = new Family();
-        repository.addFamilyToRepository(family);
+        repository.addElement(family);
 
         List<Family> familyList = new ArrayList<>();
         familyList.add(family);
 
-        assertEquals(familyList, repository.getFamiliesList());
+        assertEquals(familyList, repository.getElements());
     }
 
     @Test
@@ -83,7 +84,7 @@ class FamilyRepositoryTest {
         Family family = new Family();
         Child child = new Child("Szymon", "Dubowski", 13);
         family.addChild(child);
-        repository.addFamilyToRepository(family);
+        repository.addElement(family);
 
         assertEquals(1, repository.getNumberOfChildrenInTheFamily(family));
     }
@@ -93,7 +94,7 @@ class FamilyRepositoryTest {
         FamilyRepository repository = new FamilyRepository();
 
         Family family = new Family();
-        repository.addFamilyToRepository(family);
+        repository.addElement(family);
 
         assertEquals(0, repository.getNumberOfChildrenInTheFamily(family));
 
@@ -108,7 +109,7 @@ class FamilyRepositoryTest {
         FamilyRepository repository = new FamilyRepository();
 
         Family family = new Family();
-        repository.addFamilyToRepository(family);
+        repository.addElement(family);
 
         Child child = new Child("Szymon", "Dubowski", 13);
         repository.addChildToFamily(family, child);
@@ -125,20 +126,20 @@ class FamilyRepositoryTest {
         FamilyRepository repository = new FamilyRepository();
 
         Family family1 = new Family();
-        repository.addFamilyToRepository(family1);
+        repository.addElement(family1);
         Child child1 = new Child("Jan", "Dubowski", 13);
         repository.addChildToFamily(family1, child1);
 
         Family family2 = new Family();
-        repository.addFamilyToRepository(family2);
+        repository.addElement(family2);
         Child child2 = new Child("Jacek", "Dubowski", 17);
         repository.addChildToFamily(family2, child2);
 
         Family family3 = new Family();
-        repository.addFamilyToRepository(family3);
-        Child child3 = new Child("Jacek", "Dubowski", 19);
+        repository.addElement(family3);
+        Child child3 = new Child("Wojtek", "Dubowski", 19);
         repository.addChildToFamily(family3, child3);
 
-        log.info(repository.toString());
+        log.config(repository.toString());
     }
 }
