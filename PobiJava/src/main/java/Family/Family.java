@@ -5,10 +5,17 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class Family {
 
     private List<Child> children = new ArrayList<>();
+
+    private UUID uniqueID;
+
+    public Family() {
+        uniqueID = UUID.randomUUID();
+    }
 
     public void addChild(Child child) {
         for (Child kid : children) {
@@ -39,6 +46,10 @@ public class Family {
                 .mapToInt(Child::getAge)
                 .min()
                 .orElseThrow(() -> new FamilyException("This family has no children"));
+    }
+
+    public UUID getUuid() {
+        return uniqueID;
     }
 
     @Override public String toString() {

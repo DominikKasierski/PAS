@@ -3,6 +3,8 @@ package Babysitters;
 import Exceptions.BabysitterException;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import java.util.UUID;
+
 public class Babysitter {
 
     private String name;
@@ -10,6 +12,7 @@ public class Babysitter {
     private int basePriceForHour;
     private int minChildAge;
     private int maxNumberOfChildrenInTheFamily;
+    private UUID uniqueID;
 
     public Babysitter(String name, String surname, int basePriceForHour, int minChildAge,
                       int maxNumberOfChildrenInTheFamily) {
@@ -18,6 +21,7 @@ public class Babysitter {
         this.basePriceForHour = basePriceForHour;
         this.minChildAge = minChildAge;
         this.maxNumberOfChildrenInTheFamily = maxNumberOfChildrenInTheFamily;
+        uniqueID = UUID.randomUUID();
         if (basePriceForHour <= 0 || minChildAge < 0 || maxNumberOfChildrenInTheFamily <= 0) {
             throw new BabysitterException("Invalid argument");
         }
@@ -45,6 +49,10 @@ public class Babysitter {
 
     public int getMaxNumberOfChildrenInTheFamily() {
         return maxNumberOfChildrenInTheFamily;
+    }
+
+    public UUID getUuid() {
+        return uniqueID;
     }
 
     @Override public String toString() {

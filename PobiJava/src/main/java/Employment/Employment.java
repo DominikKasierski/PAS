@@ -76,4 +76,8 @@ public class Employment {
     public Family getFamily() {
         return family;
     }
+
+    public UUID getUuid() {
+        return uniqueID;
+    }
 }

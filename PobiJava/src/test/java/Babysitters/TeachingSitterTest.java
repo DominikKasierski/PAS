@@ -19,7 +19,6 @@ class TeachingSitterTest {
     @Test
     void getYearsOfExperienceInTeaching() {
         TeachingSitter babysitter = new TeachingSitter("Ola", "Nowak", 20, 3, 4, 13);
-
         assertEquals(13, babysitter.getYearsOfExperienceInTeaching());
     }
 
