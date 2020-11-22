@@ -1,11 +1,29 @@
 package com.mycompany.firstapplication.Babysitters;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.enterprise.context.Conversation;
+import javax.enterprise.context.ConversationScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
-public class BabysittersManager {
+@ConversationScoped
+@Named
+public class BabysittersManager implements Serializable {
+    
+    @Inject
     private BabysittersRepository babysittersRepository;
+    
+    @Inject
+    private Conversation conversation;
+    
+    private Babysitter newBabysitter = new Babysitter();
+    
+    public Babysitter getNewBabysitter() {
+        return newBabysitter;
+    }
 
     public BabysittersManager(BabysittersRepository babysittersRepository) {
         this.babysittersRepository = babysittersRepository;

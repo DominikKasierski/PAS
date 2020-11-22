@@ -14,6 +14,9 @@ public class Babysitter {
     private int maxNumberOfChildrenInTheFamily;
     private UUID uniqueID;
 
+    public Babysitter() {
+    }
+
     public Babysitter(String name, String surname, int basePriceForHour, int minChildAge,
                       int maxNumberOfChildrenInTheFamily) {
         this.name = name;
