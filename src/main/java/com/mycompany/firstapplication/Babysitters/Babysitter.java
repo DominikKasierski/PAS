@@ -15,10 +15,11 @@ public class Babysitter {
     private UUID uniqueID;
 
     public Babysitter() {
+        uniqueID = UUID.randomUUID();
     }
 
     public Babysitter(String name, String surname, int basePriceForHour, int minChildAge,
-                      int maxNumberOfChildrenInTheFamily) {
+            int maxNumberOfChildrenInTheFamily) {
         this.name = name;
         this.surname = surname;
         this.basePriceForHour = basePriceForHour;
@@ -58,7 +59,8 @@ public class Babysitter {
         return uniqueID;
     }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
         return new ToStringBuilder(this)
                 .append("name", name)
                 .append("surname", surname)
