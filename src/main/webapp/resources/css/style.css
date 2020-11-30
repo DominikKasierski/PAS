@@ -2,6 +2,65 @@ body {
     background-color: #ffc375
 }
 
+/*------Forms style------*/
+#container
+{
+    background-color: white;
+    /*width: 600px;*/
+    padding: 50px;
+    margin: 80px auto;
+    -webkit-box-shadow: 3px 3px 30px 5px rgba(204,204,204,0.9);
+    -moz-box-shadow: 3px 3px 30px 5px rgba(204,204,204,0.9);
+    box-shadow: 3px 3px 30px 5px rgba(204,204,204,0.9);
+}
+
+input[type=text] {
+    /*width: 500px;*/
+    width: 100%;
+    background-color: #efefef;
+    color: #666;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 20px;
+    padding: 10px;
+    box-sizing: border-box;
+    outline: none;
+    margin-top: 10px;
+}
+
+input[type=submit]
+{
+    /*width: 500px;*/
+    width: 100%;
+    background-color: #36b03c;
+    font-size:20px;
+    color: white;
+    padding: 15px 10px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    letter-spacing: 2px;
+    outline: none;
+}
+
+input.positive_btn[type=submit] {
+    background-color: #36b03c;
+}
+
+input.negative_btn[type=submit] {
+    background-color: #ff005b;
+}
+
+input.positive_btn[type=submit]:hover {
+    background-color: #37b93d;
+}
+
+input.negative_btn[type=submit]:hover {
+    background-color: #f8005b;
+}
+/*------Forms style------*/
+
 /*------Common layout style------*/
 #page{
     width: 1000px;
@@ -74,61 +133,52 @@ body {
         float: none;
     }
 }
+
+@media (min-width: 320px) {
+    #page {
+        width: 320px;
+    }
+    #container {
+        width: 300px;
+    }
+    input[type=text] {
+        font-size: 15px;
+    }
+}
+
+@media (min-width: 576px) {
+    #page {
+        width: 480px;
+    }
+    #container {
+        width: 380px;
+    }
+    input[type=text] {
+        font-size: 20px;
+    }
+}
+@media (min-width: 768px) {
+    #page {
+        width: 720px;
+    }
+    #container {
+        width: 520px;
+    }
+}
+@media (min-width: 992px) {
+    #page {
+        width: 920px;
+    }
+    #container {
+        width: 580px;
+    }
+}
+@media (min-width: 1200px) {
+    #page {
+        width: 1000px;
+    }
+    #container {
+        width: 600px;
+    }
+}
 /*------Common layout style------*/
-
-/*------Forms style------*/
-#container
-{
-    background-color: white;
-    width: 600px;
-    padding: 50px;
-    margin: 80px auto;
-    -webkit-box-shadow: 3px 3px 30px 5px rgba(204,204,204,0.9);
-    -moz-box-shadow: 3px 3px 30px 5px rgba(204,204,204,0.9);
-    box-shadow: 3px 3px 30px 5px rgba(204,204,204,0.9);
-}
-
-input[type=text] {
-    width: 500px;
-    background-color: #efefef;
-    color: #666;
-    border: 2px solid #ddd;
-    border-radius: 5px;
-    font-size: 20px;
-    padding: 10px;
-    box-sizing: border-box;
-    outline: none;
-    margin-top: 10px;
-}
-
-input[type=submit]
-{
-    width: 500px;
-    background-color: #36b03c;
-    font-size:20px;
-    color: white;
-    padding: 15px 10px;
-    margin-top: 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    letter-spacing: 2px;
-    outline: none;
-}
-
-input.positive_btn[type=submit] {
-    background-color: #36b03c;
-}
-
-input.negative_btn[type=submit] {
-    background-color: #ff005b;
-}
-
-input.positive_btn[type=submit]:hover {
-    background-color: #37b93d;
-}
-
-input.negative_btn[type=submit]:hover {
-    background-color: #f8005b;
-}
-/*------Forms style------*/
