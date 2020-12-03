@@ -3,15 +3,16 @@ package com.mycompany.firstapplication.Babysitters;
 import com.mycompany.firstapplication.Exceptions.BabysitterException;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 public class Babysitter {
 
     private String name;
     private String surname;
-    private int basePriceForHour;
-    private int minChildAge;
-    private int maxNumberOfChildrenInTheFamily;
+    private Integer basePriceForHour;
+    private Integer minChildAge;
+    private Integer maxNumberOfChildrenInTheFamily;
     private UUID uniqueID;
 
     public Babysitter() {
@@ -35,6 +36,26 @@ public class Babysitter {
         return basePriceForHour;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public void setBasePriceForHour(Integer basePriceForHour) {
+        this.basePriceForHour = basePriceForHour;
+    }
+
+    public void setMinChildAge(Integer minChildAge) {
+        this.minChildAge = minChildAge;
+    }
+
+    public void setMaxNumberOfChildrenInTheFamily(Integer maxNumberOfChildrenInTheFamily) {
+        this.maxNumberOfChildrenInTheFamily = maxNumberOfChildrenInTheFamily;
+    }
+
     public String getName() {
         return name;
     }
@@ -43,15 +64,15 @@ public class Babysitter {
         return surname;
     }
 
-    public int getBasePriceForHour() {
+    public Integer getBasePriceForHour() {
         return basePriceForHour;
     }
 
-    public int getMinChildAge() {
+    public Integer getMinChildAge() {
         return minChildAge;
     }
 
-    public int getMaxNumberOfChildrenInTheFamily() {
+    public Integer getMaxNumberOfChildrenInTheFamily() {
         return maxNumberOfChildrenInTheFamily;
     }
 

@@ -19,7 +19,7 @@
                         <h:inputText pt:placeholder="Base price/h" value="#{babysittersManager.newBabysitter.basePriceForHour}" />
                         <h:inputText pt:placeholder="Minimal child age" value="#{babysittersManager.newBabysitter.minChildAge}" />
                         <h:inputText pt:placeholder="Max number of children" value="#{babysittersManager.newBabysitter.maxNumberOfChildrenInTheFamily}" />
-                        <h:commandButton value="OK" action="main" immediate="true" class="positive_btn" />
+                        <h:commandButton value="OK" action="#{babysittersManager.processNewBabysitter()}" class="positive_btn" />
                         <h:commandButton value="Cancel" action="main" immediate="true" class="negative_btn" />
                     </h:form>
                 </div>

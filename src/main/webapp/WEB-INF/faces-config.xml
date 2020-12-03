@@ -23,18 +23,18 @@
               xmlns="http://xmlns.jcp.org/xml/ns/javaee"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_3.xsd">
-    
+
     <navigation-rule>
         <navigation-case>
             <from-outcome>main</from-outcome>
             <to-view-id>/index.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
-<!--    <navigation-rule>
-        <from-view-id>/index.xhtml</from-view-id>
+    <navigation-rule>
+        <from-view-id>/NewBabysitter.xhtml</from-view-id>
         <navigation-case>
-            <from-outcome>case1</from-outcome>
-            <to-view-id>/NewBabysitter.xhtml</to-view-id>
+            <from-outcome>NewBabysitterConfirm</from-outcome>
+            <to-view-id>/NewBabysitterConfirm.xhtml</to-view-id>
         </navigation-case>
-    </navigation-rule>-->
+    </navigation-rule>
 </faces-config>

@@ -5,9 +5,13 @@ import com.mycompany.firstapplication.Exceptions.RepositoryException;
 import com.mycompany.firstapplication.Template.Repository;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.ApplicationScoped;
+import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 
+@ApplicationScoped
 public class BabysittersRepository extends Repository<Babysitter> {
 
     public Babysitter findByKey(UUID uuid) {

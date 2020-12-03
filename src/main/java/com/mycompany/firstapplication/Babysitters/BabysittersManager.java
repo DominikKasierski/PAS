@@ -12,7 +12,10 @@ import javax.inject.Named;
 @ConversationScoped
 @Named
 public class BabysittersManager implements Serializable {
-    
+
+    public BabysittersManager() {
+    }
+
     @Inject
     private BabysittersRepository babysittersRepository;
     
@@ -23,6 +26,17 @@ public class BabysittersManager implements Serializable {
     
     public Babysitter getNewBabysitter() {
         return newBabysitter;
+    }
+
+    public String processNewBabysitter() {
+        conversation.begin();
+        return "NewBabysitterConfirm";
+    }
+
+    public String confirmNewBabysitter() {
+        babysittersRepository.addElement(newBabysitter);
+        conversation.end();
+        return "main";
     }
 
     public BabysittersManager(BabysittersRepository babysittersRepository) {
