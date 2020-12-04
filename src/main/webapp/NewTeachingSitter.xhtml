@@ -30,6 +30,9 @@
                     <h:inputText pt:placeholder="* Max number of children" value="#{babysittersManager.newTeachingSitter.maxNumberOfChildrenInTheFamily}" required="true" validatorMessage="Number3">
                         <!-- TODO:Validate number -->
                     </h:inputText>
+                    <h:inputText pt:placeholder="* Years of experience in teaching" value="#{babysittersManager.newTeachingSitter.yearsOfExperienceInTeaching}" required="true" validatorMessage="Number3">
+                        <!-- TODO:Validate number -->
+                    </h:inputText>
                     <h:commandButton value="OK" action="#{babysittersManager.processNewTeachingSitter()}" class="positive_btn" />
                     <h:commandButton value="Cancel" action="main" immediate="true" class="negative_btn" />
                 </h:form>

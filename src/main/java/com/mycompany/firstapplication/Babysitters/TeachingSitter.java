@@ -5,7 +5,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class TeachingSitter extends Babysitter {
 
-    private int yearsOfExperienceInTeaching;
+    private Integer yearsOfExperienceInTeaching;
 
     public TeachingSitter(String name, String surname, int basePriceForHour, int minChildAge,
                           int maxNumberOfChildrenInTheFamily, int yearsOfExperienceInTeaching) {
@@ -23,11 +23,11 @@ public class TeachingSitter extends Babysitter {
         return getBasePriceForHour() * (1 + yearsOfExperienceInTeaching / 10.0);
     }
 
-    public void setYearsOfExperienceInTeaching(int yearsOfExperienceInTeaching) {
+    public void setYearsOfExperienceInTeaching(Integer yearsOfExperienceInTeaching) {
         this.yearsOfExperienceInTeaching = yearsOfExperienceInTeaching;
     }
 
-    public int getYearsOfExperienceInTeaching() {
+    public Integer getYearsOfExperienceInTeaching() {
         return yearsOfExperienceInTeaching;
     }
 

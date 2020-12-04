@@ -5,10 +5,10 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class TidingSitter extends Babysitter {
 
-    private double valueOfCleaningEquipment;
+    private Double valueOfCleaningEquipment;
 
-    public TidingSitter(String name, String surname, int basePriceForHour, int minChildAge,
-                        int maxNumberOfChildrenInTheFamily, double valueOfCleaningEquipment) {
+    public TidingSitter(String name, String surname, Integer basePriceForHour, Integer minChildAge,
+                        Integer maxNumberOfChildrenInTheFamily, double valueOfCleaningEquipment) {
         super(name, surname, basePriceForHour, minChildAge, maxNumberOfChildrenInTheFamily);
         this.valueOfCleaningEquipment = valueOfCleaningEquipment;
         if (valueOfCleaningEquipment < 0) {
@@ -23,7 +23,11 @@ public class TidingSitter extends Babysitter {
         return getBasePriceForHour() * (1 + valueOfCleaningEquipment / 500.0);
     }
 
-    public double getValueOfCleaningEquipment() {
+    public void setValueOfCleaningEquipment(Double valueOfCleaningEquipment) {
+        this.valueOfCleaningEquipment = valueOfCleaningEquipment;
+    }
+
+    public Double getValueOfCleaningEquipment() {
         return valueOfCleaningEquipment;
     }
 
