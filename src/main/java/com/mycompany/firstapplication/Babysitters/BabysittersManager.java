@@ -26,6 +26,9 @@ public class BabysittersManager implements Serializable {
     private final TeachingSitter newTeachingSitter = new TeachingSitter();
     private final TidingSitter newTidingSitter = new TidingSitter();
 
+    public BabysittersRepository getBabysittersRepository() {
+        return babysittersRepository;
+    }
 
     public Babysitter getNewBabysitter() {
         return newBabysitter;

@@ -10,6 +10,14 @@
             <from-outcome>main</from-outcome>
             <to-view-id>/index.xhtml</to-view-id>
         </navigation-case>
+        <navigation-case>
+            <from-outcome>NewBabysitter</from-outcome>
+            <to-view-id>/NewBabysitter.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>BabysitterList</from-outcome>
+            <to-view-id>/BabysitterList.xhtml</to-view-id>
+        </navigation-case>
     </navigation-rule>
     <navigation-rule>
         <from-view-id>/NewBabysitter.xhtml</from-view-id>
