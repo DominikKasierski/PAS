@@ -118,6 +118,11 @@ body {
     min-height: 700px;
 }
 
+.content a {
+    text-decoration: none;
+    color: black;
+}
+
 .footer{
     text-align: center;
     font-size: 10px;
