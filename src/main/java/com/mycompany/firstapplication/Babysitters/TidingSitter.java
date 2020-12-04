@@ -16,6 +16,9 @@ public class TidingSitter extends Babysitter {
         }
     }
 
+    public TidingSitter() {
+    }
+
     @Override public double priceForHour() {
         return getBasePriceForHour() * (1 + valueOfCleaningEquipment / 500.0);
     }

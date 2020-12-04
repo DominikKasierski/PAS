@@ -16,8 +16,15 @@ public class TeachingSitter extends Babysitter {
         }
     }
 
+    public TeachingSitter() {
+    }
+
     @Override public double priceForHour() {
         return getBasePriceForHour() * (1 + yearsOfExperienceInTeaching / 10.0);
+    }
+
+    public void setYearsOfExperienceInTeaching(int yearsOfExperienceInTeaching) {
+        this.yearsOfExperienceInTeaching = yearsOfExperienceInTeaching;
     }
 
     public int getYearsOfExperienceInTeaching() {

@@ -3,28 +3,24 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <h:head>
     <title>Facelet Title</title>
 </h:head>
 <h:body>
-    <!--        <h:outputStylesheet library="css" name="style.css" />-->
     <ui:composition template="template/commonLayout.xhtml">
         <ui:define name="content">
-            <!--                <h:panelGroup id="container" layout="block">-->
             <div id="container">
                 <h:form>
-                    <h:outputText pt:placeholder="Name" value="#{babysittersManager.newBabysitter.name}" />
-                    <h:outputText pt:placeholder="Surname" value="#{babysittersManager.newBabysitter.surname}" />
-                    <h:outputText pt:placeholder="Base price/h" value="#{babysittersManager.newBabysitter.basePriceForHour}" />
-                    <h:outputText pt:placeholder="Minimal child age" value="#{babysittersManager.newBabysitter.minChildAge}" />
-                    <h:outputText pt:placeholder="Max number of children" value="#{babysittersManager.newBabysitter.maxNumberOfChildrenInTheFamily}" />
+                    <h:outputText value="#{babysittersManager.newBabysitter.name}" /> <br/>
+                    <h:outputText value="#{babysittersManager.newBabysitter.surname}" /> <br/>
+                    <h:outputText value="#{babysittersManager.newBabysitter.basePriceForHour}" /> <br/>
+                    <h:outputText value="#{babysittersManager.newBabysitter.minChildAge}" /> <br/>
+                    <h:outputText value="#{babysittersManager.newBabysitter.maxNumberOfChildrenInTheFamily}" /> <br/>
                     <h:commandButton value="OK" action="#{babysittersManager.confirmNewBabysitter()}" class="positive_btn" />
                     <h:commandButton value="Cancel" action="main" immediate="true" class="negative_btn" />
                 </h:form>
             </div>
-            <!--                </h:panelGroup>-->
         </ui:define>
     </ui:composition>
 </h:body>
