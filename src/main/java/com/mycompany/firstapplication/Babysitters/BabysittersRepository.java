@@ -5,6 +5,7 @@ import com.mycompany.firstapplication.Exceptions.RepositoryException;
 import com.mycompany.firstapplication.Template.Repository;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import java.util.List;
 import java.util.UUID;
@@ -33,5 +34,12 @@ public class BabysittersRepository extends Repository<Babysitter> {
         }
 
         return stringBuilder.toString();
+    }
+
+    @PostConstruct
+    private void initBabysittersList(){
+        this.addElement(new Babysitter("Anna", "Kwiatkowska", 123,12,4));
+        this.addElement(new Babysitter("Kinga", "Rusin", 50,5,4));
+        this.addElement(new Babysitter("Joanna", "Krupa", 40,7,2));
     }
 }
