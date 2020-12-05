@@ -12,29 +12,31 @@
     <ui:composition template="template/commonLayout.xhtml">
         <ui:define name="content">
             <h:form>
-                <h:dataTable value="#{babysittersManager.getBabysittersRepository().elements}" var="babysitter">
-                    <h:column>
-                        <f:facet name="header">Name</f:facet>
-                        ${babysitter.name}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Surname</f:facet>
-                        ${babysitter.surname}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Base price for hour</f:facet>
-                        ${babysitter.basePriceForHour}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Minimal child age</f:facet>
-                        ${babysitter.minChildAge}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Maximal number of children</f:facet>
-                        ${babysitter.basePriceForHour}
-                    </h:column>
-                </h:dataTable>
-                <h:commandButton value="Cancel" action="main" immediate="true" class="negative_btn" />
+                <div style="overflow-x: auto;">
+                    <h:dataTable value="#{babysittersManager.getBabysittersRepository().elements}" var="babysitter">
+                        <h:column>
+                            <f:facet name="header">Name</f:facet>
+                            ${babysitter.name}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Surname</f:facet>
+                            ${babysitter.surname}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Base price for hour</f:facet>
+                            ${babysitter.basePriceForHour}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Minimal child age</f:facet>
+                            ${babysitter.minChildAge}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Maximal number of children</f:facet>
+                            ${babysitter.basePriceForHour}
+                        </h:column>
+                    </h:dataTable>
+                </div>
+                <h:commandButton value="Cancel" action="main" immediate="true" class="negative_btn"/>
             </h:form>
         </ui:define>
     </ui:composition>
