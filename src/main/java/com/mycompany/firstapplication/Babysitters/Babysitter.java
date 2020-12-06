@@ -36,6 +36,13 @@ public class Babysitter {
         return basePriceForHour;
     }
 
+    public Integer getYearsOfExperienceInTeaching() {
+        return null;
+    }
+    public Double getValueOfCleaningEquipment() {
+        return null;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
