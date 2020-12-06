@@ -18,17 +18,13 @@ public class BabysittersManager implements Serializable {
 
     @Inject
     private BabysittersRepository babysittersRepository;
-    
+
     @Inject
     private Conversation conversation;
-    
+
     private final Babysitter newBabysitter = new Babysitter();
     private final TeachingSitter newTeachingSitter = new TeachingSitter();
     private final TidingSitter newTidingSitter = new TidingSitter();
-
-    public BabysittersRepository getBabysittersRepository() {
-        return babysittersRepository;
-    }
 
     public Babysitter getNewBabysitter() {
         return newBabysitter;
@@ -42,6 +38,11 @@ public class BabysittersManager implements Serializable {
         return newTidingSitter;
     }
 
+    public BabysittersRepository getBabysittersRepository() {
+        return babysittersRepository;
+    }
+
+    //TODO:Sprobowac uproscic
     public String processNewBabysitter() {
         conversation.begin();
         return "NewBabysitterConfirm";
@@ -58,19 +59,19 @@ public class BabysittersManager implements Serializable {
     }
 
     public String confirmNewBabysitter() {
-        babysittersRepository.addElement(newBabysitter);
+        addBabysitter(newBabysitter);
         conversation.end();
         return "main";
     }
 
     public String confirmNewTeachingSitter() {
-        babysittersRepository.addElement(newTeachingSitter);
+        addBabysitter(newTeachingSitter);
         conversation.end();
         return "main";
     }
 
     public String confirmNewTidingSitter() {
-        babysittersRepository.addElement(newTidingSitter);
+        addBabysitter(newTidingSitter);
         conversation.end();
         return "main";
     }

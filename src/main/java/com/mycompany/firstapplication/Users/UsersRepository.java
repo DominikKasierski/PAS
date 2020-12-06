@@ -1,55 +1,49 @@
 package com.mycompany.firstapplication.Users;
 
-
 import com.mycompany.firstapplication.Exceptions.UserException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import com.mycompany.firstapplication.Template.Repository;
 
-public class UsersRepository {
+import javax.enterprise.context.ApplicationScoped;
 
-    private static List<Client> clients = new ArrayList<>();
+@ApplicationScoped
+public class UsersRepository extends Repository<User> {
 
-    public static boolean isLoginUnique(String login) {
-        for (Client client : clients) {
-            if (client.getLogin().equals(login)) {
+    @Override public void addElement(User user) {
+        if(isLoginUnique(user.getLogin())) {
+            super.addElement(user);
+        } else {
+            throw new UserException("Login is not unique");
+        }
+    }
+
+    public boolean isLoginUnique(String login) {
+        for (User user : getElements()) {
+            if (user.getLogin().equals(login)) {
                 return false;
             }
         }
         return true;
     }
 
-    public static void addToList(Client client) {
-        clients.add(client);
-    }
-
-    public static Client findClient(UUID uuid) {
-        for (Client client : clients) {
-            if (client.getUuid() == uuid) {
-                return client;
+    public User findUserByUuid(String uuid) {
+        for (User user : getElements()) {
+            if (user.getUuid().equals(uuid)) {
+                return user;
             }
         }
         throw new UserException("Element not found");
     }
 
-    public static Client findClient(String login) {
-        for (Client client : clients) {
-            if (client.getLogin().equals(login)) {
-                return client;
+    public User findUserByLogin(String login) {
+        for (User user : getElements()) {
+            if (user.getLogin().equals(login)) {
+                return user;
             }
         }
         throw new UserException("Element not found");
     }
 
-    public static List<Client> getClients () {
-        return new ArrayList<>(clients);
-    }
-
-    public void setActive(Client client) {
-        findClient(client.getUuid()).setActive(true);
-    }
-
-    public void setInactive(Client client) {
-        findClient(client.getUuid()).setActive(false);
+    public void changeActiveForUser(User user) {
+        findUserByUuid(user.getUuid()).changeActive();
     }
 }

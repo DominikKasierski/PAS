@@ -7,8 +7,8 @@ public class TeachingSitter extends Babysitter {
 
     private Integer yearsOfExperienceInTeaching;
 
-    public TeachingSitter(String name, String surname, int basePriceForHour, int minChildAge,
-                          int maxNumberOfChildrenInTheFamily, int yearsOfExperienceInTeaching) {
+    public TeachingSitter(String name, String surname, Integer basePriceForHour, Integer minChildAge,
+                          Integer maxNumberOfChildrenInTheFamily, Integer yearsOfExperienceInTeaching) {
         super(name, surname, basePriceForHour, minChildAge, maxNumberOfChildrenInTheFamily);
         this.yearsOfExperienceInTeaching = yearsOfExperienceInTeaching;
         if (yearsOfExperienceInTeaching < 0) {

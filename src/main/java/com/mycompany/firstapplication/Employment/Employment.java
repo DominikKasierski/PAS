@@ -2,33 +2,32 @@ package com.mycompany.firstapplication.Employment;
 
 import com.mycompany.firstapplication.Babysitters.Babysitter;
 import com.mycompany.firstapplication.Exceptions.EmploymentException;
-import com.mycompany.firstapplication.Family.Family;
+import com.mycompany.firstapplication.Users.Client;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 import static java.time.temporal.ChronoUnit.*;
 
 public class Employment {
 
-    private UUID uniqueID;
+    private String uniqueID;
     private Babysitter babysitter;
-    private Family family;
+    private Client client;
     private LocalDateTime beginningOfEmployment;
     private LocalDateTime endOfEmployment;
+    final int SHORT_ID_LENGTH = 8;
 
-    public Employment(Babysitter babysitter, Family family) {
+    public Employment(Babysitter babysitter, Client client) {
         this.babysitter = babysitter;
-        this.family = family;
-        uniqueID = UUID.randomUUID();
+        this.client = client;
+        uniqueID = RandomStringUtils.randomAlphabetic(SHORT_ID_LENGTH);
         beginningOfEmployment = LocalDateTime.now();
     }
 
     public void endEmployment() {
-        endOfEmployment = LocalDateTime.now().plusMinutes(60).plusSeconds(1);
-        //endOfEmployment = LocalDateTime.now();
-        //tak powinno być, ale czasy początku i końca byłyby te same
+        endOfEmployment = LocalDateTime.now();
     }
 
     public boolean isEnded() {
@@ -57,12 +56,16 @@ public class Employment {
                 .append(System.getProperty("line.separator"))
                 .append("babysitter", babysitter)
                 .append(System.getProperty("line.separator"))
-                .append("family", family)
+                .append("user", client)
                 .append(System.getProperty("line.separator"))
                 .append("beginningOfEmployment", beginningOfEmployment)
                 .append(System.getProperty("line.separator"))
                 .append("endOfEmployment", endOfEmployment)
                 .toString();
+    }
+
+    public void setEndOfEmployment(LocalDateTime endOfEmployment) {
+        this.endOfEmployment = endOfEmployment;
     }
 
     public LocalDateTime getEndOfEmployment() {
@@ -73,11 +76,11 @@ public class Employment {
         return babysitter;
     }
 
-    public Family getFamily() {
-        return family;
+    public Client getClient() {
+        return client;
     }
 
-    public UUID getUuid() {
+    public String getUuid() {
         return uniqueID;
     }
 }

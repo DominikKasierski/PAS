@@ -5,8 +5,7 @@ import com.mycompany.firstapplication.Babysitters.Babysitter;
 import com.mycompany.firstapplication.Babysitters.TeachingSitter;
 import com.mycompany.firstapplication.Babysitters.TidingSitter;
 import com.mycompany.firstapplication.Exceptions.EmploymentException;
-import com.mycompany.firstapplication.Family.Child;
-import com.mycompany.firstapplication.Family.Family;
+import com.mycompany.firstapplication.Users.Client;
 import org.junit.jupiter.api.Test;
 
 import java.util.logging.Logger;
@@ -21,11 +20,9 @@ class EmploymentTest {
     void endEmployment() {
         Babysitter babysitter = new Babysitter("Anna", "Kowalska", 20, 4, 5);
 
-        Family family = new Family();
-        Child child = new Child("Tomek", "Kowalski", 4);
-        family.addChild(child);
+        Client client = new Client("Login", "Szymon", "Dubowski", 5, 10);
 
-        Employment employment = new Employment(babysitter, family);
+        Employment employment = new Employment(babysitter, client);
 
         assertNull(employment.getEndOfEmployment());
 
@@ -38,11 +35,9 @@ class EmploymentTest {
     void isEnded() {
         Babysitter babysitter = new Babysitter("Anna", "Kowalska", 20, 4, 5);
 
-        Family family = new Family();
-        Child child = new Child("Tomek", "Kowalski", 4);
-        family.addChild(child);
+        Client client = new Client("Login", "Szymon", "Dubowski", 5, 10);
 
-        Employment employment = new Employment(babysitter, family);
+        Employment employment = new Employment(babysitter, client);
 
         assertFalse(employment.isEnded());
 
@@ -55,14 +50,12 @@ class EmploymentTest {
     void employmentDurationInHours() {
         Babysitter babysitter = new Babysitter("Anna", "Kowalska", 20, 4, 5);
 
-        Family family = new Family();
-        Child child = new Child("Tomek", "Kowalski", 4);
-        family.addChild(child);
+        Client client = new Client("Login", "Szymon", "Dubowski", 5, 10);
 
-        Employment employment = new Employment(babysitter, family);
+        Employment employment = new Employment(babysitter, client);
         employment.endEmployment();
+        employment.setEndOfEmployment(employment.getEndOfEmployment().plusMinutes(66));
 
-        //Zmiana w Employment na potrzeby testów
         assertEquals(2, employment.employmentDurationInHours());
     }
 
@@ -70,13 +63,10 @@ class EmploymentTest {
     void employmentDurationInHours_NotEndedEmployment() {
         Babysitter babysitter = new Babysitter("Anna", "Kowalska", 20, 4, 5);
 
-        Family family = new Family();
-        Child child = new Child("Tomek", "Kowalski", 4);
-        family.addChild(child);
+        Client client = new Client("Login", "Szymon", "Dubowski", 5, 10);
 
-        Employment employment = new Employment(babysitter, family);
+        Employment employment = new Employment(babysitter, client);
 
-        //Zmiana w Employment na potrzeby testów
         assertThrows(EmploymentException.class, employment::employmentDurationInHours);
     }
 
@@ -84,15 +74,15 @@ class EmploymentTest {
     void employmentCost_Case1() {
         Babysitter babysitter = new Babysitter("Anna", "Kowalska", 15, 4, 5);
 
-        Family family = new Family();
-        Child child = new Child("Tomek", "Kowalski", 4);
-        family.addChild(child);
+        Client client = new Client("Login", "Szymon", "Dubowski", 5, 10);
 
-        Employment employment = new Employment(babysitter, family);
+        Employment employment = new Employment(babysitter, client);
 
         assertThrows(EmploymentException.class, employment::employmentCost);
 
         employment.endEmployment();
+
+        employment.setEndOfEmployment(employment.getEndOfEmployment().plusMinutes(66));
 
         assertEquals(30, employment.employmentCost());
     }
@@ -101,15 +91,15 @@ class EmploymentTest {
     void employmentCost_Case2() {
         Babysitter babysitter = new TeachingSitter("Anna", "Kowalska", 10, 4, 5, 10);
 
-        Family family = new Family();
-        Child child = new Child("Tomek", "Kowalski", 4);
-        family.addChild(child);
+        Client client = new Client("Login", "Szymon", "Dubowski", 5, 10);
 
-        Employment employment = new Employment(babysitter, family);
+        Employment employment = new Employment(babysitter, client);
 
         assertThrows(EmploymentException.class, employment::employmentCost);
 
         employment.endEmployment();
+
+        employment.setEndOfEmployment(employment.getEndOfEmployment().plusMinutes(66));
 
         assertEquals(40, employment.employmentCost());
     }
@@ -118,15 +108,15 @@ class EmploymentTest {
     void employmentCost_Case3() {
         Babysitter babysitter = new TidingSitter("Anna", "Kowalska", 20, 4, 5, 500);
 
-        Family family = new Family();
-        Child child = new Child("Tomek", "Kowalski", 4);
-        family.addChild(child);
+        Client client = new Client("Login", "Szymon", "Dubowski", 5, 10);
 
-        Employment employment = new Employment(babysitter, family);
+        Employment employment = new Employment(babysitter, client);
 
         assertThrows(EmploymentException.class, employment::employmentCost);
 
         employment.endEmployment();
+
+        employment.setEndOfEmployment(employment.getEndOfEmployment().plusMinutes(66));
 
         assertEquals(80, employment.employmentCost());
     }
@@ -136,11 +126,9 @@ class EmploymentTest {
 
         Babysitter babysitter = new TidingSitter("Anna", "Kowalska", 20, 4, 5, 500);
 
-        Family family = new Family();
-        Child child = new Child("Tomek", "Kowalski", 4);
-        family.addChild(child);
+        Client client = new Client("Login", "Szymon", "Dubowski", 5, 10);
 
-        Employment employment = new Employment(babysitter, family);
+        Employment employment = new Employment(babysitter, client);
         employment.endEmployment();
 
         log.config(employment.toString());

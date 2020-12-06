@@ -14,6 +14,10 @@
             <h:form>
                 <h:dataTable value="#{babysittersManager.getBabysittersRepository().elements}" var="babysitter">
                     <h:column>
+                        <f:facet name="header">Id</f:facet>
+                        ${babysitter.uuid}
+                    </h:column>
+                    <h:column>
                         <f:facet name="header">Name</f:facet>
                         ${babysitter.name}
                     </h:column>

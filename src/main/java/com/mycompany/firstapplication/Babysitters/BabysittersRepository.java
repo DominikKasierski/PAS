@@ -7,16 +7,15 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.enterprise.context.ApplicationScoped;
 import java.util.List;
-import java.util.UUID;
 
 @ApplicationScoped
 public class BabysittersRepository extends Repository<Babysitter> {
 
-    public Babysitter findByKey(UUID uuid) {
+    public Babysitter findByKey(String uuid) {
         List<Babysitter> babysitterList = getElements();
 
         for (Babysitter babysitter : babysitterList) {
-            if (babysitter.getUuid() == uuid) {
+            if (babysitter.getUuid().equals(uuid)) {
                 return babysitter;
             }
         }

@@ -8,13 +8,13 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import java.util.List;
 import java.util.UUID;
 
-public class EmploymentRepository extends Repository<Employment> {
+public class EmploymentsRepository extends Repository<Employment> {
 
-    public Employment findByKey(UUID uuid) {
+    public Employment findByKey(String uuid) {
         List<Employment> employmentList = getElements();
 
         for (Employment employment : employmentList) {
-            if (employment.getUuid() == uuid) {
+            if (employment.getUuid().equals(uuid)) {
                 return employment;
             }
         }
@@ -26,7 +26,7 @@ public class EmploymentRepository extends Repository<Employment> {
         stringBuilder.append(System.getProperty("line.separator"));
 
         for (Employment employment : getElements()) {
-            stringBuilder.append("babysitter", employment.toString());
+            stringBuilder.append("employment", employment.toString());
             stringBuilder.append(System.getProperty("line.separator"));
         }
 

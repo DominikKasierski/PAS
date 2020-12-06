@@ -1,6 +1,7 @@
 package com.mycompany.firstapplication.Babysitters;
 
 import com.mycompany.firstapplication.Exceptions.BabysitterException;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.io.Serializable;
@@ -13,20 +14,21 @@ public class Babysitter {
     private Integer basePriceForHour;
     private Integer minChildAge;
     private Integer maxNumberOfChildrenInTheFamily;
-    private UUID uniqueID;
+    private final String uniqueID;
+    final int SHORT_ID_LENGTH = 8;
 
     public Babysitter() {
-        uniqueID = UUID.randomUUID();
+        uniqueID = RandomStringUtils.randomAlphabetic(SHORT_ID_LENGTH);
     }
 
-    public Babysitter(String name, String surname, int basePriceForHour, int minChildAge,
+    public Babysitter(String name, String surname, Integer basePriceForHour, Integer minChildAge,
             int maxNumberOfChildrenInTheFamily) {
         this.name = name;
         this.surname = surname;
         this.basePriceForHour = basePriceForHour;
         this.minChildAge = minChildAge;
         this.maxNumberOfChildrenInTheFamily = maxNumberOfChildrenInTheFamily;
-        uniqueID = UUID.randomUUID();
+        uniqueID = RandomStringUtils.random(SHORT_ID_LENGTH);
         if (basePriceForHour <= 0 || minChildAge < 0 || maxNumberOfChildrenInTheFamily <= 0) {
             throw new BabysitterException("Invalid argument");
         }
@@ -76,7 +78,7 @@ public class Babysitter {
         return maxNumberOfChildrenInTheFamily;
     }
 
-    public UUID getUuid() {
+    public String getUuid() {
         return uniqueID;
     }
 

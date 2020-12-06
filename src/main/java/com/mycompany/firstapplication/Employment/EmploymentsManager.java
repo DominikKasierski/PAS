@@ -1,29 +1,27 @@
 package com.mycompany.firstapplication.Employment;
 
-
-
 import com.mycompany.firstapplication.Babysitters.Babysitter;
 import com.mycompany.firstapplication.Exceptions.EmploymentException;
-import com.mycompany.firstapplication.Family.Family;
+import com.mycompany.firstapplication.Users.Client;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmploymentManager {
+public class EmploymentsManager {
 
-    private EmploymentRepository employmentRepository;
+    private final EmploymentsRepository employmentsRepository;
 
-    public EmploymentManager(EmploymentRepository employmentRepository) {
-        this.employmentRepository = employmentRepository;
+    public EmploymentsManager(EmploymentsRepository employmentsRepository) {
+        this.employmentsRepository = employmentsRepository;
     }
 
-    public void employBabysitter(Family family, Babysitter babysitter) {
-        checkIfBabysitterMeetRequires(babysitter, family.getAgeOfTheYoungestChild(),
-                family.getNumberOfChildren());
+    public void employBabysitter(Client client, Babysitter babysitter) {
+        checkIfBabysitterMeetRequires(babysitter, client.getAgeOfTheYoungestChild(),
+                client.getNumberOfChildren());
         checkIfBabysitterIsCurrentlyEmployed(babysitter);
 
-        Employment employment = new Employment(babysitter, family);
-        employmentRepository.addElement(employment);
+        Employment employment = new Employment(babysitter, client);
+        employmentsRepository.addElement(employment);
     }
 
     private void checkIfBabysitterMeetRequires(Babysitter babysitter, int minAge,
@@ -37,7 +35,7 @@ public class EmploymentManager {
     }
 
     private void checkIfBabysitterIsCurrentlyEmployed(Babysitter babysitter) {
-        List<Employment> allEmploymentsList = employmentRepository.getElements();
+        List<Employment> allEmploymentsList = employmentsRepository.getElements();
 
         for (Employment employment : allEmploymentsList) {
             if (employment.getBabysitter() == babysitter &&
@@ -54,12 +52,12 @@ public class EmploymentManager {
         employment.endEmployment();
     }
 
-    public int numberOfCurrentFamilyEmployment(Family family) {
-        List<Employment> allEmploymentsList = employmentRepository.getElements();
+    public int numberOfCurrentClientEmployment(Client client) {
+        List<Employment> allEmploymentsList = employmentsRepository.getElements();
         int counter = 0;
 
         for (Employment employment : allEmploymentsList) {
-            if (employment.getFamily() == family &&
+            if (employment.getClient() == client &&
                     employment.getEndOfEmployment() == null) {
                 counter++;
             }
@@ -67,12 +65,12 @@ public class EmploymentManager {
         return counter;
     }
 
-    public int numberOfEndedFamilyEmployment(Family family) {
-        List<Employment> allEmploymentsList = employmentRepository.getElements();
+    public int numberOfEndedClientEmployment(Client client) {
+        List<Employment> allEmploymentsList = employmentsRepository.getElements();
         int counter = 0;
 
         for (Employment employment : allEmploymentsList) {
-            if (employment.getFamily() == family &&
+            if (employment.getClient() == client &&
                     employment.getEndOfEmployment() != null) {
                 counter++;
             }
@@ -81,10 +79,11 @@ public class EmploymentManager {
     }
 
     public Employment getActualEmploymentForBabysitter(Babysitter babysitter) {
-        List<Employment> allEmploymentsList = employmentRepository.getElements();
+        List<Employment> allEmploymentsList = employmentsRepository.getElements();
 
         for (Employment employment : allEmploymentsList) {
-            if (employment.getBabysitter() == babysitter && employment.getEndOfEmployment() == null) {
+            if (employment.getBabysitter() == babysitter &&
+                    employment.getEndOfEmployment() == null) {
                 return employment;
             }
         }
@@ -92,7 +91,7 @@ public class EmploymentManager {
     }
 
     public List<Employment> getAllEmploymentsForBabysitter(Babysitter babysitter) {
-        List<Employment> allEmploymentsList = employmentRepository.getElements();
+        List<Employment> allEmploymentsList = employmentsRepository.getElements();
         List<Employment> allEmploymentsForBabysitterList = new ArrayList<Employment>();
 
         for (Employment employment : allEmploymentsList) {
@@ -103,23 +102,23 @@ public class EmploymentManager {
         return allEmploymentsForBabysitterList;
     }
 
-    public Employment getActualEmploymentForFamily(Family family) {
-        List<Employment> allEmploymentsList = employmentRepository.getElements();
+    public Employment getActualEmploymentForClient(Client client) {
+        List<Employment> allEmploymentsList = employmentsRepository.getElements();
 
         for (Employment employment : allEmploymentsList) {
-            if (employment.getFamily() == family && employment.getEndOfEmployment() == null) {
+            if (employment.getClient() == client && employment.getEndOfEmployment() == null) {
                 return employment;
             }
         }
-        throw new EmploymentException("Babysitter is not already employed");
+        throw new EmploymentException("Client has not any actual employment");
     }
 
-    public List<Employment> getAllEmploymentsForFamily(Family family) {
-        List<Employment> allEmploymentsList = employmentRepository.getElements();
+    public List<Employment> getAllEmploymentsForClient(Client client) {
+        List<Employment> allEmploymentsList = employmentsRepository.getElements();
         List<Employment> allEmploymentsForFamilyList = new ArrayList<Employment>();
 
         for (Employment employment : allEmploymentsList) {
-            if (employment.getFamily() == family) {
+            if (employment.getClient() == client) {
                 allEmploymentsForFamilyList.add(employment);
             }
         }
