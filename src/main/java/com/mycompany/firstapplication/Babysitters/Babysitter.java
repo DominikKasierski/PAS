@@ -28,7 +28,7 @@ public class Babysitter {
         this.basePriceForHour = basePriceForHour;
         this.minChildAge = minChildAge;
         this.maxNumberOfChildrenInTheFamily = maxNumberOfChildrenInTheFamily;
-        uniqueID = RandomStringUtils.random(SHORT_ID_LENGTH);
+        uniqueID = RandomStringUtils.randomNumeric(SHORT_ID_LENGTH);
         if (basePriceForHour <= 0 || minChildAge < 0 || maxNumberOfChildrenInTheFamily <= 0) {
             throw new BabysitterException("Invalid argument");
         }
@@ -36,6 +36,13 @@ public class Babysitter {
 
     public double priceForHour() {
         return basePriceForHour;
+    }
+
+    public Integer getYearsOfExperienceInTeaching() {
+        return null;
+    }
+    public Double getValueOfCleaningEquipment() {
+        return null;
     }
 
     public void setName(String name) {

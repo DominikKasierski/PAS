@@ -27,7 +27,7 @@ public class TeachingSitter extends Babysitter {
         this.yearsOfExperienceInTeaching = yearsOfExperienceInTeaching;
     }
 
-    public Integer getYearsOfExperienceInTeaching() {
+    @Override public Integer getYearsOfExperienceInTeaching() {
         return yearsOfExperienceInTeaching;
     }
 

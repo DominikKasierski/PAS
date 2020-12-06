@@ -12,11 +12,11 @@
         <ui:define name="content">
             <div id="container">
                 <h:form>
-                    <h:outputText value="#{babysittersManager.newBabysitter.name}" /> <br/>
-                    <h:outputText value="#{babysittersManager.newBabysitter.surname}" /> <br/>
-                    <h:outputText value="#{babysittersManager.newBabysitter.basePriceForHour}" /> <br/>
-                    <h:outputText value="#{babysittersManager.newBabysitter.minChildAge}" /> <br/>
-                    <h:outputText value="#{babysittersManager.newBabysitter.maxNumberOfChildrenInTheFamily}" /> <br/>
+                    <h:outputText value="#{babysittersManager.newBabysitter.name}" styleClass="formOutput"/>
+                    <h:outputText value="#{babysittersManager.newBabysitter.surname}" styleClass="formOutput"/>
+                    <h:outputText value="#{babysittersManager.newBabysitter.basePriceForHour}" styleClass="formOutput"/>
+                    <h:outputText value="#{babysittersManager.newBabysitter.minChildAge}" styleClass="formOutput"/>
+                    <h:outputText value="#{babysittersManager.newBabysitter.maxNumberOfChildrenInTheFamily}" styleClass="formOutput" />
                     <h:commandButton value="OK" action="#{babysittersManager.confirmNewBabysitter()}" class="positive_btn" />
                     <h:commandButton value="Cancel" action="main" immediate="true" class="negative_btn" />
                 </h:form>

@@ -19,10 +19,14 @@ public class Employment {
     private LocalDateTime endOfEmployment;
     final int SHORT_ID_LENGTH = 8;
 
+    public Employment() {
+        uniqueID = RandomStringUtils.randomNumeric(SHORT_ID_LENGTH);
+    }
+
     public Employment(Babysitter babysitter, Client client) {
         this.babysitter = babysitter;
         this.client = client;
-        uniqueID = RandomStringUtils.randomAlphabetic(SHORT_ID_LENGTH);
+        uniqueID = RandomStringUtils.randomNumeric(SHORT_ID_LENGTH);
         beginningOfEmployment = LocalDateTime.now();
     }
 

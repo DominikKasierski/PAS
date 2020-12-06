@@ -27,7 +27,7 @@ public class TidingSitter extends Babysitter {
         this.valueOfCleaningEquipment = valueOfCleaningEquipment;
     }
 
-    public Double getValueOfCleaningEquipment() {
+    @Override public Double getValueOfCleaningEquipment() {
         return valueOfCleaningEquipment;
     }
 

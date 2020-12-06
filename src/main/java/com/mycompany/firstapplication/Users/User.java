@@ -14,7 +14,7 @@ public abstract class User {
     final int SHORT_ID_LENGTH = 8;
 
     public User() {
-        uniqueID = RandomStringUtils.randomAlphabetic(SHORT_ID_LENGTH);
+        uniqueID = RandomStringUtils.randomNumeric(SHORT_ID_LENGTH);
     }
 
     public User(String login, String name, String surname) {
@@ -24,7 +24,7 @@ public abstract class User {
         this.login = login;
         this.name = name;
         this.surname = surname;
-        uniqueID = RandomStringUtils.randomAlphabetic(SHORT_ID_LENGTH);
+        uniqueID = RandomStringUtils.randomNumeric(SHORT_ID_LENGTH);
     }
 
     public void changeActive() {
