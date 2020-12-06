@@ -25,6 +25,11 @@ body {
     margin-top: 10px;
 }
 
+.formOutput {
+    display: block;
+    background: rgba(54,176,60,.2);
+}
+
 input[type=submit] {
     width: 100%;
     background-color: #36b03c;
