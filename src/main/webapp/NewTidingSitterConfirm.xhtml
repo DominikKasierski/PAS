@@ -12,12 +12,12 @@
         <ui:define name="content">
             <div id="container">
                 <h:form>
-                    <h:outputText value="#{babysittersManager.newTidingSitter.name}" /> <br/>
-                    <h:outputText value="#{babysittersManager.newTidingSitter.surname}" /> <br/>
-                    <h:outputText value="#{babysittersManager.newTidingSitter.basePriceForHour}" /> <br/>
-                    <h:outputText value="#{babysittersManager.newTidingSitter.minChildAge}" /> <br/>
-                    <h:outputText value="#{babysittersManager.newTidingSitter.maxNumberOfChildrenInTheFamily}" /> <br/>
-                    <h:outputText value="#{babysittersManager.newTidingSitter.valueOfCleaningEquipment}" /> <br/>
+                    <h:outputText value="#{babysittersManager.newTidingSitter.name}" styleClass="formOutput" /> <br/>
+                    <h:outputText value="#{babysittersManager.newTidingSitter.surname}" styleClass="formOutput" /> <br/>
+                    <h:outputText value="#{babysittersManager.newTidingSitter.basePriceForHour}" styleClass="formOutput" /> <br/>
+                    <h:outputText value="#{babysittersManager.newTidingSitter.minChildAge}" styleClass="formOutput" /> <br/>
+                    <h:outputText value="#{babysittersManager.newTidingSitter.maxNumberOfChildrenInTheFamily}" styleClass="formOutput" /> <br/>
+                    <h:outputText value="#{babysittersManager.newTidingSitter.valueOfCleaningEquipment}" styleClass="formOutput" /> <br/>
                     <h:commandButton value="OK" action="#{babysittersManager.confirmNewTidingSitter()}" class="positive_btn" />
                     <h:commandButton value="Cancel" action="main" immediate="true" class="negative_btn" />
                 </h:form>
