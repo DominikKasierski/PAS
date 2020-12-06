@@ -17,8 +17,8 @@
                     <h:outputText value="#{babysittersManager.newBabysitter.basePriceForHour}" styleClass="formOutput"/>
                     <h:outputText value="#{babysittersManager.newBabysitter.minChildAge}" styleClass="formOutput"/>
                     <h:outputText value="#{babysittersManager.newBabysitter.maxNumberOfChildrenInTheFamily}" styleClass="formOutput" />
-                    <h:commandButton value="OK" action="#{babysittersManager.confirmNewBabysitter()}" class="positive_btn" />
-                    <h:commandButton value="Cancel" action="main" immediate="true" class="negative_btn" />
+                    <h:commandButton value="Confirm" action="#{babysittersManager.confirmNewBabysitter()}" class="positive_btn" />
+                    <h:commandButton value="Reject" action="main" immediate="true" class="negative_btn" />
                 </h:form>
             </div>
         </ui:define>

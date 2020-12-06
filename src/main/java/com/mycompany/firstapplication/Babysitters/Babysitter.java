@@ -18,7 +18,7 @@ public class Babysitter {
     final int SHORT_ID_LENGTH = 8;
 
     public Babysitter() {
-        uniqueID = RandomStringUtils.randomAlphabetic(SHORT_ID_LENGTH);
+        uniqueID = RandomStringUtils.randomNumeric(SHORT_ID_LENGTH);
     }
 
     public Babysitter(String name, String surname, Integer basePriceForHour, Integer minChildAge,
