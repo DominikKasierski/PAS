@@ -13,7 +13,7 @@
         <ui:define name="content">
             <h:form>
                 <div style="overflow-x: auto;">
-                    <h:dataTable value="#{babysittersManager.getBabysittersRepository().elements}" var="babysitter">
+                    <h:dataTable value="#{resourcesController.babysittersManager.getBabysittersRepository().elements}" var="babysitter">
                         <h:column>
                             <f:facet name="header">Id</f:facet>
                             ${babysitter.uuid}
@@ -43,7 +43,7 @@
                             ${babysitter.yearsOfExperienceInTeaching}
                         </h:column>
                         <h:column>
-                            <f:facet name="header">Years of experience in teaching</f:facet>
+                            <f:facet name="header">Value of cleaning equipment</f:facet>
                             ${babysitter.valueOfCleaningEquipment}
                         </h:column>
                     </h:dataTable>

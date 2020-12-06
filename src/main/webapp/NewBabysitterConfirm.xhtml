@@ -12,12 +12,12 @@
         <ui:define name="content">
             <div id="container">
                 <h:form>
-                    <h:outputText value="#{babysittersManager.newBabysitter.name}" styleClass="formOutput"/>
-                    <h:outputText value="#{babysittersManager.newBabysitter.surname}" styleClass="formOutput"/>
-                    <h:outputText value="#{babysittersManager.newBabysitter.basePriceForHour}" styleClass="formOutput"/>
-                    <h:outputText value="#{babysittersManager.newBabysitter.minChildAge}" styleClass="formOutput"/>
-                    <h:outputText value="#{babysittersManager.newBabysitter.maxNumberOfChildrenInTheFamily}" styleClass="formOutput" />
-                    <h:commandButton value="Confirm" action="#{babysittersManager.confirmNewBabysitter()}" class="positive_btn" />
+                    <h:outputText value="#{resourcesController.newBabysitter.name}" styleClass="formOutput"/>
+                    <h:outputText value="#{resourcesController.newBabysitter.surname}" styleClass="formOutput"/>
+                    <h:outputText value="#{resourcesController.newBabysitter.basePriceForHour}" styleClass="formOutput"/>
+                    <h:outputText value="#{resourcesController.newBabysitter.minChildAge}" styleClass="formOutput"/>
+                    <h:outputText value="#{resourcesController.newBabysitter.maxNumberOfChildrenInTheFamily}" styleClass="formOutput" />
+                    <h:commandButton value="Confirm" action="#{resourcesController.confirmNewBabysitter()}" class="positive_btn" />
                     <h:commandButton value="Reject" action="main" immediate="true" class="negative_btn" />
                 </h:form>
             </div>

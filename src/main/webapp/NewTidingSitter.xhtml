@@ -13,27 +13,27 @@
         <ui:define name="content">
             <div id="container">
                 <h:form>
-                    <h:inputText pt:placeholder="* Name" value="#{babysittersManager.newTidingSitter.name}" required="true" validatorMessage="Name">
+                    <h:inputText pt:placeholder="* Name" value="#{resourcesController.newTidingSitter.name}" required="true" validatorMessage="Name">
                         <f:validateRegex pattern="[A-Za-z]{2,}"/>
                         <!-- TODO:ąćęłńóśżźĄĆĘŁŃÓŚŻŹ -->
                     </h:inputText>
-                    <h:inputText pt:placeholder="* Surname" value="#{babysittersManager.newTidingSitter.surname}" required="true" validatorMessage="Surname">
+                    <h:inputText pt:placeholder="* Surname" value="#{resourcesController.newTidingSitter.surname}" required="true" validatorMessage="Surname">
                         <f:validateRegex pattern="[A-Za-z]{2,}"/>
                         <!-- TODO:ąćęłńóśżźĄĆĘŁŃÓŚŻŹ -->
                     </h:inputText>
-                    <h:inputText pt:placeholder="* Base price/h" value="#{babysittersManager.newTidingSitter.basePriceForHour}" required="true" validatorMessage="Number1">
+                    <h:inputText pt:placeholder="* Base price/h" value="#{resourcesController.newTidingSitter.basePriceForHour}" required="true" validatorMessage="Number1">
                         <!-- TODO:Validate number -->
                     </h:inputText>
-                    <h:inputText pt:placeholder="* Minimal child age" value="#{babysittersManager.newTidingSitter.minChildAge}" required="true" validatorMessage="Number2">
+                    <h:inputText pt:placeholder="* Minimal child age" value="#{resourcesController.newTidingSitter.minChildAge}" required="true" validatorMessage="Number2">
                         <!-- TODO:Validate number -->
                     </h:inputText>
-                    <h:inputText pt:placeholder="* Max number of children" value="#{babysittersManager.newTidingSitter.maxNumberOfChildrenInTheFamily}" required="true" validatorMessage="Number3">
+                    <h:inputText pt:placeholder="* Max number of children" value="#{resourcesController.newTidingSitter.maxNumberOfChildrenInTheFamily}" required="true" validatorMessage="Number3">
                         <!-- TODO:Validate number -->
                     </h:inputText>
-                    <h:inputText pt:placeholder="* Value of cleaning equipment" value="#{babysittersManager.newTidingSitter.valueOfCleaningEquipment}" required="true" validatorMessage="Number4">
+                    <h:inputText pt:placeholder="* Value of cleaning equipment" value="#{resourcesController.newTidingSitter.valueOfCleaningEquipment}" required="true" validatorMessage="Number4">
                         <!-- TODO:Validate number -->
                     </h:inputText>
-                    <h:commandButton value="OK" action="#{babysittersManager.processNewTidingSitter()}" class="positive_btn" />
+                    <h:commandButton value="OK" action="#{resourcesController.processNewTidingSitter()}" class="positive_btn" />
                     <h:commandButton value="Cancel" action="main" immediate="true" class="negative_btn" />
                 </h:form>
             </div>
