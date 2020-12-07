@@ -4,14 +4,20 @@ package com.mycompany.firstapplication.Babysitters;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 
-@ApplicationScoped
+@ViewScoped
+@Named
 public class BabysittersManager implements Serializable {
 
     @Inject
     private BabysittersRepository babysittersRepository;
+
+    private List<Babysitter> currentBabysitters;
 
     public BabysittersManager() {
     }
@@ -28,8 +34,9 @@ public class BabysittersManager implements Serializable {
         babysittersRepository.addElement(babysitter);
     }
 
-    public void deleteBabysitter(Babysitter babysitter) {
+    public String deleteBabysitter(Babysitter babysitter) {
         babysittersRepository.deleteElement(babysitter);
+        return "BabysitterList";
     }
 
     public int getNumberOfBabysitters() {
@@ -49,6 +56,16 @@ public class BabysittersManager implements Serializable {
         }
 
         return appropriateBabysitters;
+    }
+
+
+    public List<Babysitter> getAllBabysitters() {
+        return currentBabysitters;
+    }
+
+    @PostConstruct
+    public void initCurrentPersons() {
+        currentBabysitters = babysittersRepository.getElements();
     }
 
 }

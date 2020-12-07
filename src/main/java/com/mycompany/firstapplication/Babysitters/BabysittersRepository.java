@@ -6,8 +6,10 @@ import com.mycompany.firstapplication.Template.Repository;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.ApplicationScoped;
 import java.util.List;
 
+@ApplicationScoped
 public class BabysittersRepository extends Repository<Babysitter> {
 
     public Babysitter findByKey(String uuid) {
