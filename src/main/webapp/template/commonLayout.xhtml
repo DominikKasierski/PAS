@@ -20,10 +20,17 @@
             </ui:insert>
         </div>
 
-        <div class="content">
-            <ui:insert name="content" >
-                <ui:include src="/template/commonContent.xhtml" />
-            </ui:insert>
+        <div>
+            <div class="leftSidebar">
+                <ui:insert name="leftSidebar">
+                    <ui:include src="/template/commonSidebar.xhtml" />
+                </ui:insert>
+            </div>
+            <div class="content">
+                <ui:insert name="content" >
+                    <ui:include src="/template/commonContent.xhtml" />
+                </ui:insert>
+            </div>
         </div>
 
         <div class="footer">

@@ -96,8 +96,8 @@ tr:hover {
 
 /*------Common layout style------*/
 #page {
-    width: 1000px;
-    margin: 0 auto;
+    /*width: 1400px;*/
+    margin: 20px auto;
     background-color: #e3e0cf;
 }
 
@@ -148,7 +148,8 @@ body {
 }
 
 .content {
-    width: 100%;
+    float: right;
+    width: 85%;
     border: 1px solid #000;
     min-height: 700px;
 }
@@ -158,12 +159,23 @@ body {
     color: black;
 }
 
+.leftSidebar {
+    float: left;
+    background-color: #ece3a5;
+    padding: 5px;
+    width: 15%;
+    border: 1px solid #000;
+    min-height: 700px;
+}
+
 .footer {
+    margin-top: 10px;
     text-align: center;
     font-size: 10px;
     width: 100%;
     height: 50px;
     border: 1px solid #000;
+    clear: both;
 }
 
 @media screen and (max-width: 800px) {
@@ -236,4 +248,13 @@ body {
     }
 }
 
+@media (min-width: 1800px) {
+    #page {
+        width: 1600px;
+    }
+
+    #container {
+        width: 600px;
+    }
+}
 /*------Common layout style------*/
