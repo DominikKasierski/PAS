@@ -13,7 +13,7 @@
         <ui:define name="content">
             <h:form>
                 <div style="overflow-x: auto;">
-                    <h:dataTable value="#{resourcesController.babysittersManager.getBabysittersRepository().elements}" var="babysitter">
+                    <h:dataTable value="#{resourcesController.babysittersManager.allBabysitters}" var="babysitter">
                         <h:column>
                             <f:facet name="header">Id</f:facet>
                             ${babysitter.uuid}
@@ -46,8 +46,14 @@
                             <f:facet name="header">Value of cleaning equipment</f:facet>
                             ${babysitter.valueOfCleaningEquipment}
                         </h:column>
+                        <h:column>
+                            <f:facet name="header">Actions</f:facet>
+<!--                            <h:commandButton value="Edit" action="" />-->
+                            <h:commandButton value="Delete" action="#{resourcesController.babysittersManager.deleteBabysitter(babysitter)}" class="negative_btn"/>
+                        </h:column>
                     </h:dataTable>
                 </div>
+                <h:commandButton value="Refresh" action="#{resourcesController.babysittersManager.initCurrentPersons()}" immediate="true" class="positive_btn"/>
                 <h:commandButton value="Cancel" action="main" immediate="true" class="negative_btn"/>
             </h:form>
         </ui:define>
