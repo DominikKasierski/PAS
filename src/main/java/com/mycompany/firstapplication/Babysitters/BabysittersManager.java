@@ -11,7 +11,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 @ViewScoped
-@Named
 public class BabysittersManager implements Serializable {
 
     @Inject
