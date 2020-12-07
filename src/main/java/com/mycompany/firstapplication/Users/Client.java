@@ -2,8 +2,10 @@ package com.mycompany.firstapplication.Users;
 
 public class Client extends User {
 
-    private int numberOfChildren;
-    private int ageOfTheYoungestChild;
+    private final String role = "Client";
+
+    private Integer numberOfChildren;
+    private Integer ageOfTheYoungestChild;
 
     public Client() {
     }
@@ -15,19 +17,19 @@ public class Client extends User {
         this.ageOfTheYoungestChild = ageOfTheYoungestChild;
     }
 
-    public void setNumberOfChildren(int numberOfChildren) {
+    public void setNumberOfChildren(Integer numberOfChildren) {
         this.numberOfChildren = numberOfChildren;
     }
 
-    public void setAgeOfTheYoungestChild(int ageOfTheYoungestChild) {
+    public void setAgeOfTheYoungestChild(Integer ageOfTheYoungestChild) {
         this.ageOfTheYoungestChild = ageOfTheYoungestChild;
     }
 
-    public int getNumberOfChildren() {
+    public Integer getNumberOfChildren() {
         return numberOfChildren;
     }
 
-    public int getAgeOfTheYoungestChild() {
+    public Integer getAgeOfTheYoungestChild() {
         return ageOfTheYoungestChild;
     }
 }

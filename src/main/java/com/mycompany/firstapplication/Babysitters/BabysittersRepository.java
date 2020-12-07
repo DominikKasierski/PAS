@@ -34,9 +34,9 @@ public class BabysittersRepository extends Repository<Babysitter> {
     }
 
     @PostConstruct
-    private void initBabysittersList(){
-        this.addElement(new Babysitter("Anna", "Kwiatkowska", 123,12,4));
-        this.addElement(new Babysitter("Kinga", "Rusin", 50,5,4));
-        this.addElement(new Babysitter("Joanna", "Krupa", 40,7,2));
+    private void initBabysittersList() {
+        addElement(new Babysitter("Anna", "Kwiatkowska", 123, 12, 4));
+        addElement(new Babysitter("Kinga", "Rusin", 50, 5, 4));
+        addElement(new Babysitter("Joanna", "Krupa", 40, 7, 2));
     }
 }

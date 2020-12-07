@@ -38,12 +38,14 @@ public class Babysitter {
         return basePriceForHour;
     }
 
+    //TODO: Zastanowić się nad tym
     public Integer getYearsOfExperienceInTeaching() {
         return null;
     }
     public Double getValueOfCleaningEquipment() {
         return null;
     }
+    //
 
     public void setName(String name) {
         this.name = name;

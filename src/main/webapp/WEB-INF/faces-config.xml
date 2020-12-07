@@ -11,11 +11,11 @@
             <to-view-id>/index.xhtml</to-view-id>
             <redirect />
         </navigation-case>
-        <navigation-case>
-            <from-outcome>NewBabysitter</from-outcome>
-            <to-view-id>/NewBabysitter.xhtml</to-view-id>
-            <redirect />
-        </navigation-case>
+<!--        <navigation-case>-->
+<!--            <from-outcome>NewBabysitter</from-outcome>-->
+<!--            <to-view-id>/NewBabysitter.xhtml</to-view-id>-->
+<!--            <redirect />-->
+<!--        </navigation-case>-->
         <navigation-case>
             <from-outcome>BabysitterList</from-outcome>
             <to-view-id>/BabysitterList.xhtml</to-view-id>
@@ -43,6 +43,38 @@
         <navigation-case>
             <from-outcome>NewTidingSitterConfirm</from-outcome>
             <to-view-id>/NewTidingSitterConfirm.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/NewClient.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>NewClientConfirm</from-outcome>
+            <to-view-id>/NewClientConfirm.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/NewClient.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>NewClientConfirm</from-outcome>
+            <to-view-id>/NewClientConfirm.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/NewAdmin.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>NewAdminConfirm</from-outcome>
+            <to-view-id>/NewAdminConfirm.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/NewSuperUser.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>NewSuperUserConfirm</from-outcome>
+            <to-view-id>/NewSuperUserConfirm.xhtml</to-view-id>
             <redirect />
         </navigation-case>
     </navigation-rule>

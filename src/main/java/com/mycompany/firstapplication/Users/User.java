@@ -6,6 +6,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 
 public abstract class User {
 
+    //TODO: Czy User może utworzyć employment jak jest nieaktywny?
     private boolean isActive;
     private String login;
     private String name;
@@ -49,6 +50,22 @@ public abstract class User {
 
     public boolean isActive() {
         return isActive;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public Integer getNumberOfChildren() {
+        return null;
+    }
+
+    public Integer getAgeOfTheYoungestChild() {
+        return null;
     }
 
     public String getUuid() {

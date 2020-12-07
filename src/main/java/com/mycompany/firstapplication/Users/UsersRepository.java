@@ -3,13 +3,12 @@ package com.mycompany.firstapplication.Users;
 import com.mycompany.firstapplication.Exceptions.UserException;
 import com.mycompany.firstapplication.Template.Repository;
 
-import javax.enterprise.context.ApplicationScoped;
+import javax.annotation.PostConstruct;
 
-@ApplicationScoped
 public class UsersRepository extends Repository<User> {
 
     @Override public void addElement(User user) {
-        if(isLoginUnique(user.getLogin())) {
+        if (isLoginUnique(user.getLogin())) {
             super.addElement(user);
         } else {
             throw new UserException("Login is not unique");
@@ -45,5 +44,12 @@ public class UsersRepository extends Repository<User> {
 
     public void changeActiveForUser(User user) {
         findUserByUuid(user.getUuid()).changeActive();
+    }
+
+    @PostConstruct
+    private void initUsersList() {
+        addElement(new Admin("Admin1", "Adam", "Adamski"));
+        addElement(new SuperUser("Manager1", "Tomek", "Tomkowski"));
+        addElement(new Client("Client1", "Tomasz", "Hajto", 3, 4));
     }
 }
