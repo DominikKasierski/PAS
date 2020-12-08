@@ -21,7 +21,7 @@ body {
     border: 1px solid #000;
 }
 
-.header a {
+.header a, .breadcrumbs {
     float: left;
     color: black;
     text-align: center;
@@ -32,7 +32,13 @@ body {
     border-radius: 4px;
 }
 
+.breadcrumbs {
+    float: none;
+    text-align: left;
+}
+
 .header a.logo {
+    float: none;
     font-size: 25px;
     font-weight: bold;
 }
@@ -46,7 +52,9 @@ body {
     background-color: #9fa8a3;
     color: white;
 }
-
+.header-left {
+    float: left;
+}
 .header-right {
     float: right;
 }
@@ -83,6 +91,9 @@ body {
 }
 
 @media screen and (max-width: 800px) {
+    .header-left{
+        float: none;
+    }
     .header a {
         float: none;
         display: block;
@@ -161,4 +172,5 @@ body {
         width: 600px;
     }
 }
+
 /*------Common layout style------*/
