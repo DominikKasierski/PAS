@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.ApplicationScoped;
+import javax.faces.event.ValueChangeEvent;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 
@@ -57,6 +59,17 @@ public class BabysittersManager implements Serializable {
 
     public List<Babysitter> getAllBabysitters() {
         return currentBabysitters;
+    }
+
+    public Babysitter[] getAllBabysittersArray() {
+        Babysitter[] babysittersArray = new Babysitter[getAllBabysitters().size()];
+        getAllBabysitters().toArray(babysittersArray);
+        return babysittersArray;
+//        return currentBabysitters.toArray(Babysitter[]::new);
+    }
+
+    public void valueChanged(ValueChangeEvent event) {
+        System.out.println("klik");
     }
 
     @PostConstruct
