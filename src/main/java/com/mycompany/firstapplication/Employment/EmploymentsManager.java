@@ -4,15 +4,23 @@ import com.mycompany.firstapplication.Babysitters.Babysitter;
 import com.mycompany.firstapplication.Exceptions.EmploymentException;
 import com.mycompany.firstapplication.Users.Client;
 
+import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmploymentsManager {
+@ViewScoped
+public class EmploymentsManager implements Serializable {
 
-    private final EmploymentsRepository employmentsRepository;
+    @Inject
+    private EmploymentsRepository employmentsRepository;
 
     public EmploymentsManager(EmploymentsRepository employmentsRepository) {
         this.employmentsRepository = employmentsRepository;
+    }
+
+    public EmploymentsManager() {
     }
 
     public void employBabysitter(Client client, Babysitter babysitter) {
