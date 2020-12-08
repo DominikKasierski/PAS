@@ -21,7 +21,7 @@ body {
     border: 1px solid #000;
 }
 
-.header a {
+.header a, .breadcrumbs {
     float: left;
     color: black;
     text-align: center;
@@ -161,4 +161,5 @@ body {
         width: 600px;
     }
 }
+
 /*------Common layout style------*/
