@@ -5,9 +5,10 @@ import com.mycompany.firstapplication.Exceptions.RepositoryException;
 import com.mycompany.firstapplication.Template.Repository;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import javax.enterprise.context.ApplicationScoped;
 import java.util.List;
-import java.util.UUID;
 
+@ApplicationScoped
 public class EmploymentsRepository extends Repository<Employment> {
 
     public Employment findByKey(String uuid) {

@@ -12,7 +12,7 @@ import static java.time.temporal.ChronoUnit.*;
 
 public class Employment {
 
-    private String uniqueID;
+    private final String uniqueID;
     private Babysitter babysitter;
     private Client client;
     private LocalDateTime beginningOfEmployment;
