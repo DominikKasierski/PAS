@@ -17,6 +17,8 @@ public class BabysittersManager implements Serializable {
 
     private List<Babysitter> currentBabysitters;
 
+    String id;
+
     public BabysittersManager() {
     }
 
@@ -56,7 +58,6 @@ public class BabysittersManager implements Serializable {
         return appropriateBabysitters;
     }
 
-
     public List<Babysitter> getAllBabysitters() {
         return currentBabysitters;
     }
@@ -69,7 +70,10 @@ public class BabysittersManager implements Serializable {
     }
 
     public void valueChanged(ValueChangeEvent event) {
-        System.out.println("klik");
+        id = event.getNewValue().toString();
+        List<Babysitter> temporaryBabysittersList = new ArrayList<>();
+        temporaryBabysittersList.add(babysittersRepository.findByKey(id));
+        currentBabysitters = temporaryBabysittersList;
     }
 
     @PostConstruct

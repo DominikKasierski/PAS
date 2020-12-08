@@ -13,13 +13,15 @@
         <ui:define name="content">
             <h:form>
                 <div style="overflow-x: auto;">
-                    <h:selectOneMenu valueChangeListener="#{resourcesController.babysittersManager.valueChanged}" onchange="submit()" >
-                        <f:selectItems value="#{resourcesController.babysittersManager.allBabysittersArray}" var="item"
-                                       itemLabel="#{item.uuid}" itemValue="#{item.surname}"/>
-                    </h:selectOneMenu>
+
                     <h:dataTable value="#{resourcesController.babysittersManager.allBabysitters}" var="babysitter">
                         <h:column>
-                            <f:facet name="header">Id</f:facet>
+                            <f:facet name="header">Id
+                                <h:selectOneMenu valueChangeListener="#{resourcesController.babysittersManager.valueChanged}" onchange="submit()" >
+                                    <f:selectItems value="#{resourcesController.babysittersManager.allBabysittersArray}" var="item"
+                                                   itemLabel="#{item.uuid}" itemValue="#{item.uuid}"/>
+                                </h:selectOneMenu>
+                            </f:facet>
                             ${babysitter.uuid}
                         </h:column>
                         <h:column>
