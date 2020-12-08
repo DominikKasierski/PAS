@@ -87,4 +87,8 @@ public class Employment {
     public String getUuid() {
         return uniqueID;
     }
+
+    public LocalDateTime getBeginningOfEmployment() {
+        return beginningOfEmployment;
+    }
 }

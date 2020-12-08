@@ -7,7 +7,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 public abstract class User {
 
     //TODO: Czy User może utworzyć employment jak jest nieaktywny?
-    private boolean isActive;
+    private boolean isActive = true;
     private String login;
     private String name;
     private String surname;

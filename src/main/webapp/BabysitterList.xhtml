@@ -15,9 +15,9 @@
                 <div style="overflow-x: auto;">
                     <h:selectOneMenu valueChangeListener="#{resourcesController.babysittersManager.valueChanged}" onchange="submit()" >
                         <f:selectItems value="#{resourcesController.babysittersManager.allBabysittersArray}" var="item"
-                                       itemLabel="#{item.uuid}" itemValue="#{item.surname}"/>
+                                       itemLabel="#{item.uuid}" itemValue="#{item.uuid}"/>
                     </h:selectOneMenu>
-                    <h:dataTable value="#{resourcesController.babysittersManager.allBabysitters}" var="babysitter">
+                    <h:dataTable value="#{resourcesController.babysittersManager.getBabysittersList()}" var="babysitter">
                         <h:column>
                             <f:facet name="header">Id</f:facet>
                             ${babysitter.uuid}
@@ -40,7 +40,11 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header">Maximal number of children</f:facet>
-                            ${babysitter.basePriceForHour}
+                            ${babysitter.maxNumberOfChildrenInTheFamily}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Currently employed</f:facet>
+                            ${babysitter.employed}
                         </h:column>
                         <h:column>
                             <f:facet name="header">Years of experience in teaching</f:facet>
@@ -52,7 +56,6 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header">Actions</f:facet>
-<!--                            <h:commandButton value="Edit" action="" />-->
                             <h:commandButton value="Delete" action="#{resourcesController.babysittersManager.deleteBabysitter(babysitter)}" class="negative_btn"/>
                         </h:column>
                     </h:dataTable>

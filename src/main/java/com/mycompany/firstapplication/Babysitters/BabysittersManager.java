@@ -1,5 +1,7 @@
 package com.mycompany.firstapplication.Babysitters;
 
+import com.mycompany.firstapplication.Users.User;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +18,8 @@ public class BabysittersManager implements Serializable {
     private BabysittersRepository babysittersRepository;
 
     private List<Babysitter> currentBabysitters;
+
+    private String id;
 
     public BabysittersManager() {
     }
@@ -37,6 +41,14 @@ public class BabysittersManager implements Serializable {
         return "BabysitterList";
     }
 
+    public List<Babysitter> getBabysittersList() {
+        return babysittersRepository.getBabysittersList();
+    }
+
+    public Babysitter[] getAllBabysittersArray() {
+        return babysittersRepository.getBabysittersList().toArray(new Babysitter[0]);
+    }
+
     public int getNumberOfBabysitters() {
         return babysittersRepository.getNumberOfElements();
     }
@@ -56,25 +68,13 @@ public class BabysittersManager implements Serializable {
         return appropriateBabysitters;
     }
 
-
-    public List<Babysitter> getAllBabysitters() {
-        return currentBabysitters;
-    }
-
-    public Babysitter[] getAllBabysittersArray() {
-        Babysitter[] babysittersArray = new Babysitter[getAllBabysitters().size()];
-        getAllBabysitters().toArray(babysittersArray);
-        return babysittersArray;
-//        return currentBabysitters.toArray(Babysitter[]::new);
-    }
-
     public void valueChanged(ValueChangeEvent event) {
-        System.out.println("klik");
+        id = event.getNewValue().toString();
     }
 
     @PostConstruct
     public void initCurrentPersons() {
-        currentBabysitters = babysittersRepository.getElements();
+        currentBabysitters = babysittersRepository.getBabysittersList();
     }
 
 }

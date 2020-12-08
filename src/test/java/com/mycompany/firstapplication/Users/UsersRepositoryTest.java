@@ -33,11 +33,11 @@ class UsersRepositoryTest {
         assertEquals(client, usersRepository.findUserByLogin(client.getLogin()));
 
         //change active
-        assertFalse(client.isActive());
-        usersRepository.changeActiveForUser(client);
         assertTrue(client.isActive());
         usersRepository.changeActiveForUser(client);
         assertFalse(client.isActive());
+        usersRepository.changeActiveForUser(client);
+        assertTrue(client.isActive());
 
         //check if present
         assertTrue(usersRepository.checkIfTheElementIsPresent(client));

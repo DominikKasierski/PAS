@@ -4,8 +4,26 @@ import com.mycompany.firstapplication.Exceptions.UserException;
 import com.mycompany.firstapplication.Template.Repository;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UsersRepository extends Repository<User> {
+
+    public List<User> getUsersList() {
+        return getElements();
+    }
+
+    public List<Client> getClientList() {
+        List<Client> clientList = new ArrayList<>();
+        List<User> elements = getUsersList();
+
+        for (User element : elements) {
+            if (element instanceof Client) {
+                clientList.add((Client) element);
+            }
+        }
+        return clientList;
+    }
 
     @Override public void addElement(User user) {
         if (isLoginUnique(user.getLogin())) {
@@ -51,5 +69,6 @@ public class UsersRepository extends Repository<User> {
         addElement(new Admin("Admin1", "Adam", "Adamski"));
         addElement(new SuperUser("Manager1", "Tomek", "Tomkowski"));
         addElement(new Client("Client1", "Tomasz", "Hajto", 3, 4));
+        addElement(new Client("Client2", "Jan", "Urban", 2, 7));
     }
 }

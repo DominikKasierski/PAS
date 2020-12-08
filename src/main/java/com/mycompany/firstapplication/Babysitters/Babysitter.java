@@ -14,6 +14,7 @@ public class Babysitter {
     private Integer basePriceForHour;
     private Integer minChildAge;
     private Integer maxNumberOfChildrenInTheFamily;
+    private boolean isEmployed;
     private final String uniqueID;
     final int SHORT_ID_LENGTH = 8;
 
@@ -65,6 +66,14 @@ public class Babysitter {
 
     public void setMaxNumberOfChildrenInTheFamily(Integer maxNumberOfChildrenInTheFamily) {
         this.maxNumberOfChildrenInTheFamily = maxNumberOfChildrenInTheFamily;
+    }
+
+    public boolean isEmployed() {
+        return isEmployed;
+    }
+
+    public void setEmployed(boolean employed) {
+        isEmployed = employed;
     }
 
     public String getName() {

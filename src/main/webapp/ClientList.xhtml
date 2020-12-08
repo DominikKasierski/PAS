@@ -6,14 +6,13 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
-    <title>Babysitter List</title>
+    <title>Client List</title>
 </h:head>
 <h:body>
     <ui:composition template="template/commonLayout.xhtml">
         <ui:define name="content">
             <h:form>
                 <div style="overflow-x: auto;">
-<!--                    TODO: Czy da się tu zrobić ifa?-->
                     <h:dataTable value="#{usersController.usersManager.getUsersRepository().elements}" var="client">
                         <h:column>
                             <f:facet name="header">Id</f:facet>
@@ -28,6 +27,10 @@
                             ${client.name}
                         </h:column>
                         <h:column>
+                            <f:facet name="header">Active</f:facet>
+                            ${client.active}
+                        </h:column>
+                        <h:column>
                             <f:facet name="header">Surname</f:facet>
                             ${client.surname}
                         </h:column>
@@ -38,6 +41,10 @@
                         <h:column>
                             <f:facet name="header">Age of the youngest child</f:facet>
                             ${client.ageOfTheYoungestChild}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Actions</f:facet>
+                            <h:commandButton value="Change active" action="#{usersController.usersManager.changeActive(client)}" class="negative_btn"/>
                         </h:column>
                     </h:dataTable>
                 </div>

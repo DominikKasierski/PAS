@@ -23,13 +23,23 @@ public class EmploymentsManager implements Serializable {
     public EmploymentsManager() {
     }
 
+
     public void employBabysitter(Client client, Babysitter babysitter) {
+
+        checkIfUserIsActive(client);
         checkIfBabysitterMeetRequires(babysitter, client.getAgeOfTheYoungestChild(),
                 client.getNumberOfChildren());
         checkIfBabysitterIsCurrentlyEmployed(babysitter);
 
+        babysitter.setEmployed(true);
         Employment employment = new Employment(babysitter, client);
         employmentsRepository.addElement(employment);
+    }
+
+    private void checkIfUserIsActive(Client client) {
+        if (!client.isActive()) {
+            throw new EmploymentException("Client is not active");
+        }
     }
 
     private void checkIfBabysitterMeetRequires(Babysitter babysitter, int minAge,
@@ -43,13 +53,8 @@ public class EmploymentsManager implements Serializable {
     }
 
     private void checkIfBabysitterIsCurrentlyEmployed(Babysitter babysitter) {
-        List<Employment> allEmploymentsList = employmentsRepository.getElements();
-
-        for (Employment employment : allEmploymentsList) {
-            if (employment.getBabysitter() == babysitter &&
-                    employment.getEndOfEmployment() == null) {
-                throw new EmploymentException("Babysitter already employed");
-            }
+        if (babysitter.isEmployed()) {
+            throw new EmploymentException("Babysitter already employed");
         }
     }
 
@@ -58,6 +63,11 @@ public class EmploymentsManager implements Serializable {
             throw new EmploymentException("Employment already ended");
         }
         employment.endEmployment();
+        employment.getBabysitter().setEmployed(false);
+    }
+
+    public EmploymentsRepository getEmploymentsRepository() {
+        return employmentsRepository;
     }
 
     public int numberOfCurrentClientEmployment(Client client) {

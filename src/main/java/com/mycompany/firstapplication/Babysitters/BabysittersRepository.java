@@ -12,6 +12,10 @@ import java.util.List;
 @ApplicationScoped
 public class BabysittersRepository extends Repository<Babysitter> {
 
+    public List<Babysitter> getBabysittersList() {
+        return getElements();
+    }
+
     public Babysitter findByKey(String uuid) {
         List<Babysitter> babysitterList = getElements();
 
@@ -38,7 +42,7 @@ public class BabysittersRepository extends Repository<Babysitter> {
     @PostConstruct
     private void initBabysittersList() {
         addElement(new Babysitter("Anna", "Kwiatkowska", 123, 12, 4));
-        addElement(new Babysitter("Kinga", "Rusin", 50, 5, 4));
+        addElement(new Babysitter("Kinga", "Rusin", 50, 4, 4));
         addElement(new Babysitter("Joanna", "Krupa", 40, 7, 2));
     }
 }

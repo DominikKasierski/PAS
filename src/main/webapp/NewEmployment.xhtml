@@ -5,7 +5,81 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-<f:view>
-    <h:outputLabel value="Hello, world"/>
-</f:view>
+<h:head>
+    <title>Babysitter List</title>
+</h:head>
+<h:body>
+    <ui:composition template="template/commonLayout.xhtml">
+        <ui:define name="content">
+                <h:form>
+                    <div style="overflow-x: auto;">
+                        <h:selectOneListbox value="#{employmentsController.currentClient}" required="true" size="1">
+                            <f:converter binding="#{userToIdConverter}" />
+                            <f:selectItems value="#{usersController.usersManager.clientList}" var="client" itemValue="${client}" itemDisabled="#{!client.active}" itemLabel="[#{client.uuid}] #{client.name} #{client.surname}"/>
+                        </h:selectOneListbox> <br/>
+
+                        <h:selectOneListbox value="#{employmentsController.currentBabysitter}" required="true" size="1">
+                            <f:converter binding="#{babysitterToIdConverter}" />
+                            <f:selectItems value="#{resourcesController.babysittersManager.babysittersList}" var="babysitter" itemValue="${babysitter}" itemLabel="[#{babysitter.uuid}] #{babysitter.name} #{babysitter.surname}"/>
+                        </h:selectOneListbox> <br/>
+
+                        <h:commandButton value="OK" action="#{employmentsController.processNewEmployment()}" class="positive_btn" />
+                        <h:commandButton value="Cancel" action="main" immediate="true" class="negative_btn" />
+                    </div>
+                </h:form>
+        </ui:define>
+    </ui:composition>
+</h:body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--                    <table>-->
+<!--                        <tr>-->
+<!--                            <th>Clients</th>-->
+<!--                            <th>Babysitters</th>-->
+<!--                            <th>Action</th>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+<!--                            <th>-->
+<!--                                <h:selectOneMenu valueChangeListener="#{employmentsController.babysitterValueChanged}" onchange="submit()" >-->
+<!--                                <f:selectItem itemLabel="Select client id" />-->
+<!--                                <f:selectItems value="#{resourcesController.babysittersManager.allBabysittersArray}" var="babysitter"-->
+<!--                                               itemLabel="#{babysitter.uuid}" itemValue="#{babysitter.uuid}"/>-->
+<!--                            </h:selectOneMenu>-->
+<!--                            </th>-->
+<!--                            <th>-->
+<!--                                <h:selectOneMenu valueChangeListener="#{employmentsController.clientValueChanged}" onchange="submit()" >-->
+<!--                                <f:selectItem itemLabel="Select babysitter id" />-->
+<!--                                <f:selectItems value="#{usersController.usersManager.allUsersArray}" var="client"-->
+<!--                                               itemLabel="#{client.uuid}" itemValue="#{client.uuid}"/>-->
+<!--                            </h:selectOneMenu>-->
+<!--                            </th>-->
+<!--                            <th>-->
+<!--                                <h:commandButton value="Employ" action="#{employmentsController.employ}" class="negative_btn"/>-->
+<!--                            </th>-->
+<!--                        </tr>-->
+<!--                    </table>-->
+
+<!--                </div>-->
+
+<!--                <h:commandButton value="Cancel" action="main" immediate="true" class="negative_btn"/>-->
+<!--            </h:form>-->
+<!--        </ui:define>-->
+<!--    </ui:composition>-->
+<!--</h:body>-->
+<!--</html>-->

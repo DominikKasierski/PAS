@@ -78,4 +78,12 @@
             <redirect />
         </navigation-case>
     </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/NewEmployment.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>NewEmploymentConfirm</from-outcome>
+            <to-view-id>/NewEmploymentConfirm.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
 </faces-config>
