@@ -21,6 +21,8 @@ public class BabysittersManager implements Serializable {
 
     private String id;
 
+    private int type;
+
     public BabysittersManager() {
     }
 
@@ -57,6 +59,10 @@ public class BabysittersManager implements Serializable {
         return babysittersRepository.getNumberOfElements();
     }
 
+    public int getType() {
+        return type;
+    }
+
     public List<Babysitter> getListWithAppropriateBabysitters(int minAge, int numberOfChildren) {
 
         List<Babysitter> allBabysittersInRepository = babysittersRepository.getElements();
@@ -81,10 +87,31 @@ public class BabysittersManager implements Serializable {
         List<Babysitter> temporaryBabysittersList = new ArrayList<>();
         temporaryBabysittersList.add(babysittersRepository.findByKey(id));
         currentBabysitters = temporaryBabysittersList;
+        setType();
+    }
+
+    private void setType() {
+//        for (Babysitter babysitter : currentBabysitters) {
+//            if (babysitter instanceof  TeachingSitter){
+//                type = 1;
+//            } if (babysitter instanceof TidingSitter) {
+//                type = 2;
+//            } else {
+//                type = 3;
+//            }
+//        }
+        if (currentBabysitters.get(0) instanceof TeachingSitter) {
+            type = 1;
+        } else if (currentBabysitters.get(0) instanceof TidingSitter) {
+            type = 2;
+        } else {
+            type = 3;
+        }
     }
 
     @PostConstruct
     public void initCurrentPersons() {
+        type = 3;
         currentBabysitters = babysittersRepository.getBabysittersList();
     }
 

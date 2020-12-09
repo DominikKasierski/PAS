@@ -44,5 +44,7 @@ public class BabysittersRepository extends Repository<Babysitter> {
         addElement(new Babysitter("Anna", "Kwiatkowska", 123, 12, 4));
         addElement(new Babysitter("Kinga", "Rusin", 50, 4, 4));
         addElement(new Babysitter("Joanna", "Krupa", 40, 7, 2));
+        addElement(new TidingSitter("Renia", "Sprzatajaca", 60, 1, 2, 40));
+        addElement(new TeachingSitter("Jola", "Uczaca", 100, 4, 1, 3));
     }
 }

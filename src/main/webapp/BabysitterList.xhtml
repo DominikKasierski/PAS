@@ -48,11 +48,11 @@
                             <f:facet name="header">Currently employed</f:facet>
                             ${babysitter.employed}
                         </h:column>
-                        <h:column>
+                        <h:column rendered="#{resourcesController.babysittersManager.type eq 1}">
                             <f:facet name="header">Years of experience in teaching</f:facet>
                             ${babysitter.yearsOfExperienceInTeaching}
                         </h:column>
-                        <h:column>
+                        <h:column rendered="#{resourcesController.babysittersManager.type eq 2}">
                             <f:facet name="header">Value of cleaning equipment</f:facet>
                             ${babysitter.valueOfCleaningEquipment}
                         </h:column>
