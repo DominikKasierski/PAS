@@ -2,7 +2,6 @@ package com.mycompany.firstapplication.Controllers;
 
 import com.mycompany.firstapplication.Babysitters.*;
 
-import javax.annotation.PostConstruct;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
@@ -25,6 +24,21 @@ public class ResourcesController implements Serializable {
 
     private TypeOfBabysitter typeOfBabysitter;
 
+    public BabysittersManager getBabysittersManager() {
+        return babysittersManager;
+    }
+
+    public Object getSomeBabysitter(TypeOfBabysitter type) {
+        switch (type) {
+            case TIDING:
+                return newTidingSitter;
+            case TEACHING:
+                return newTeachingSitter;
+            default:
+                return newBabysitter;
+        }
+    }
+
     public TypeOfBabysitter getTypeOfBabysitter() {
         return typeOfBabysitter;
     }
@@ -41,67 +55,9 @@ public class ResourcesController implements Serializable {
         return "NewBabysitter";
     }
 
-    @PostConstruct
-    public Object getSomeBabysitter(TypeOfBabysitter type) {
-        switch (type) {
-            case TIDING:
-                return newTidingSitter;
-            case TEACHING:
-                return newTeachingSitter;
-            default:
-                return newBabysitter;
-        }
-    }
-
-    public Babysitter getNewBabysitter() {
-        return newBabysitter;
-    }
-
-    public TeachingSitter getNewTeachingSitter() {
-        return newTeachingSitter;
-    }
-
-    public TidingSitter getNewTidingSitter() {
-        return newTidingSitter;
-    }
-
-    public BabysittersManager getBabysittersManager() {
-        return babysittersManager;
-    }
-
-    //TODO:Sprobowac uproscic
     public String processNewBabysitter() {
-//        conversation.begin();
         return "NewBabysitterConfirm";
     }
-
-//    public String processNewTeachingSitter() {
-////        conversation.begin();
-//        return "NewTeachingSitterConfirm";
-//    }
-//
-//    public String processNewTidingSitter() {
-////        conversation.begin();
-//        return "NewTidingSitterConfirm";
-//    }
-
-//    public String confirmNewBabysitter() {
-//        babysittersManager.addBabysitter(newBabysitter);
-//        conversation.end();
-//        return "main";
-//    }
-//
-//    public String confirmNewTeachingSitter() {
-//        babysittersManager.addBabysitter(newTeachingSitter);
-//        conversation.end();
-//        return "main";
-//    }
-//
-//    public String confirmNewTidingSitter() {
-//        babysittersManager.addBabysitter(newTidingSitter);
-//        conversation.end();
-//        return "main";
-//    }
 
     public String confirmNewBabysitter(TypeOfBabysitter typeOfBabysitter) {
         switch (typeOfBabysitter) {

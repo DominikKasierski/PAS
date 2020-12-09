@@ -43,22 +43,6 @@
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
-        <from-view-id>/NewTeachingSitter.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>NewTeachingSitterConfirm</from-outcome>
-            <to-view-id>/NewTeachingSitterConfirm.xhtml</to-view-id>
-            <redirect />
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>/NewTidingSitter.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>NewTidingSitterConfirm</from-outcome>
-            <to-view-id>/NewTidingSitterConfirm.xhtml</to-view-id>
-            <redirect />
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
         <from-view-id>/NewClient.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>NewClientConfirm</from-outcome>
