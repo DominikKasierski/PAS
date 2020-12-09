@@ -16,11 +16,8 @@ public class BabysittersManager implements Serializable {
 
     @Inject
     private BabysittersRepository babysittersRepository;
-
     private List<Babysitter> currentBabysitters;
-
     private String id;
-
     private TypeOfBabysitter typeOfBabysitter = TypeOfBabysitter.NORMAL;
 
 //    private int type;

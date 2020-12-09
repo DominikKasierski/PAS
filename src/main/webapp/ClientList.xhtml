@@ -13,9 +13,15 @@
         <ui:define name="content">
             <h:form>
                 <div style="overflow-x: auto;">
-                    <h:dataTable value="#{usersController.usersManager.getUsersRepository().elements}" var="client">
+                    <h:dataTable value="#{usersController.usersManager.currentUsers}" var="client">
                         <h:column>
-                            <f:facet name="header">Id</f:facet>
+                            <f:facet name="header">Id
+                                <h:selectOneMenu valueChangeListener="#{usersController.usersManager.valueChanged}" onchange="submit()" >
+                                    <f:selectItem itemLabel="Wybierz id" itemValue="0" />
+                                    <f:selectItems value="#{usersController.usersManager.allUsersArray}" var="item"
+                                                   itemLabel="#{item.uuid}" itemValue="#{item.uuid}"/>
+                                </h:selectOneMenu>
+                            </f:facet>
                             ${client.uuid}
                         </h:column>
                         <h:column>
@@ -34,11 +40,11 @@
                             <f:facet name="header">Surname</f:facet>
                             ${client.surname}
                         </h:column>
-                        <h:column>
+                        <h:column rendered="#{usersController.usersManager.typeOfUser == 'CLIENT' }">
                             <f:facet name="header">Number of children</f:facet>
                             ${client.numberOfChildren}
                         </h:column>
-                        <h:column>
+                        <h:column rendered="#{usersController.usersManager.typeOfUser == 'CLIENT' }">
                             <f:facet name="header">Age of the youngest child</f:facet>
                             ${client.ageOfTheYoungestChild}
                         </h:column>
@@ -48,6 +54,7 @@
                         </h:column>
                     </h:dataTable>
                 </div>
+                <h:commandButton value="Refresh" action="#{usersController.usersManager.initCurrentPersons()}" immediate="true" class="positive_btn"/>
                 <h:commandButton value="Cancel" action="main" immediate="true" class="negative_btn"/>
             </h:form>
         </ui:define>
