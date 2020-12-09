@@ -22,6 +22,23 @@ public class ResourcesController implements Serializable {
     private final TeachingSitter newTeachingSitter = new TeachingSitter();
     private final TidingSitter newTidingSitter = new TidingSitter();
 
+    private TypeOfBabysitter typeOfBabysitter;
+
+    public TypeOfBabysitter getTypeOfBabysitter() {
+        return typeOfBabysitter;
+    }
+
+    public String sitterType(String string)  {
+        if (string.equals("TEACHING")) {
+            this.typeOfBabysitter = TypeOfBabysitter.TEACHING;
+        } else if (string.equals("TIDING")) {
+            this.typeOfBabysitter = TypeOfBabysitter.TIDING;
+        } else {
+            this.typeOfBabysitter = TypeOfBabysitter.NORMAL;
+        }
+        return "NewBabysitter";
+    }
+
     public Babysitter getNewBabysitter() {
         return newBabysitter;
     }
