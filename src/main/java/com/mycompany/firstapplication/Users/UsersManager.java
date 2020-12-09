@@ -16,7 +16,6 @@ public class UsersManager implements Serializable {
 
     private List<User> currentUsers;
 
-
     public UsersManager() {
     }
 

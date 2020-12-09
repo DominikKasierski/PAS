@@ -8,6 +8,8 @@ import com.mycompany.firstapplication.Users.UsersManager;
 
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
@@ -69,14 +71,21 @@ public class UsersController implements Serializable {
         return "main";
     }
 
+    //TODO:Pododawać do kazdego message i odpowiednie przejścia
     public String confirmNewAdmin() {
         try {
             usersManager.addUser(newAdmin);
+            conversation.end();
+            return "main";
         } catch (UserException e) {
-            //TODO:Zastanowić się?
+            FacesContext.getCurrentInstance().addMessage("newAdminConfirm:login",
+                    new FacesMessage("Taki login już istnieje"));
         }
+        return "";
+    }
 
+    public String reject() {
         conversation.end();
-        return "main";
+        return "NewAdmin";
     }
 }
