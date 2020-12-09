@@ -49,6 +49,10 @@ public class BabysittersManager implements Serializable {
         return babysittersRepository.getBabysittersList().toArray(new Babysitter[0]);
     }
 
+    public List<Babysitter> getCurrentBabysitters() {
+        return currentBabysitters;
+    }
+
     public int getNumberOfBabysitters() {
         return babysittersRepository.getNumberOfElements();
     }
@@ -70,6 +74,13 @@ public class BabysittersManager implements Serializable {
 
     public void valueChanged(ValueChangeEvent event) {
         id = event.getNewValue().toString();
+        showSelectedBabysitter(id);
+    }
+
+    private void showSelectedBabysitter(String id) {
+        List<Babysitter> temporaryBabysittersList = new ArrayList<>();
+        temporaryBabysittersList.add(babysittersRepository.findByKey(id));
+        currentBabysitters = temporaryBabysittersList;
     }
 
     @PostConstruct

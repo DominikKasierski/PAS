@@ -14,7 +14,7 @@
             <h:form>
                 <div style="overflow-x: auto;">
 
-                    <h:dataTable value="#{resourcesController.babysittersManager.babysittersList}" var="babysitter">
+                    <h:dataTable value="#{resourcesController.babysittersManager.currentBabysitters}" var="babysitter">
                         <h:column>
                             <f:facet name="header">Id
                                 <h:selectOneMenu valueChangeListener="#{resourcesController.babysittersManager.valueChanged}" onchange="submit()" >
