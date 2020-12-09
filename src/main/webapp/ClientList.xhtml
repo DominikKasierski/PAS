@@ -33,12 +33,12 @@
                             ${client.name}
                         </h:column>
                         <h:column>
-                            <f:facet name="header">Active</f:facet>
-                            ${client.active}
-                        </h:column>
-                        <h:column>
                             <f:facet name="header">Surname</f:facet>
                             ${client.surname}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Active</f:facet>
+                            ${client.active}
                         </h:column>
                         <h:column rendered="#{usersController.usersManager.typeOfUser == 'CLIENT' }">
                             <f:facet name="header">Number of children</f:facet>

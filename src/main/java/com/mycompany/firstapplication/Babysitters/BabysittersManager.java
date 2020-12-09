@@ -17,10 +17,8 @@ public class BabysittersManager implements Serializable {
     @Inject
     private BabysittersRepository babysittersRepository;
     private List<Babysitter> currentBabysitters;
-    private String id;
     private TypeOfBabysitter typeOfBabysitter = TypeOfBabysitter.NORMAL;
 
-//    private int type;
 
     public BabysittersManager() {
     }
@@ -42,9 +40,9 @@ public class BabysittersManager implements Serializable {
         return "BabysitterList";
     }
 
-    public List<Babysitter> getBabysittersList() {
-        return babysittersRepository.getBabysittersList();
-    }
+//    public List<Babysitter> getBabysittersList() {
+//        return babysittersRepository.getBabysittersList();
+//    }
 
     public Babysitter[] getAllBabysittersArray() {
         return babysittersRepository.getBabysittersList().toArray(new Babysitter[0]);
@@ -61,9 +59,6 @@ public class BabysittersManager implements Serializable {
     public TypeOfBabysitter getTypeOfBabysitter() {
         return typeOfBabysitter;
     }
-    //    public int getType() {
-//        return type;
-//    }
 
     public List<Babysitter> getListWithAppropriateBabysitters(int minAge, int numberOfChildren) {
 
@@ -82,7 +77,7 @@ public class BabysittersManager implements Serializable {
 
     public void valueChanged(ValueChangeEvent event) {
         if (!event.getNewValue().toString().equals("0")) {
-            id = event.getNewValue().toString();
+            String id = event.getNewValue().toString();
             showSelectedBabysitter(id);
         }
     }

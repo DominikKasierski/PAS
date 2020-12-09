@@ -19,7 +19,6 @@ public class UsersManager implements Serializable {
     @Inject
     private UsersRepository usersRepository;
     private List<User> currentUsers;
-    private String id;
     private TypeOfUser typeOfUser = TypeOfUser.USER;
 
     public UsersManager() {
@@ -55,7 +54,7 @@ public class UsersManager implements Serializable {
 
     public void valueChanged(ValueChangeEvent event) {
         if (!event.getNewValue().toString().equals("0")) {
-            id = event.getNewValue().toString();
+            String id = event.getNewValue().toString();
             showSelectedUser(id);
         }
     }

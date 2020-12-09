@@ -13,24 +13,28 @@
         <ui:define name="content">
             <div id="container">
                 <h:form>
-                    <h:inputText pt:placeholder="* Name" value="#{resourcesController.newTeachingSitter.name}" required="true" validatorMessage="Name">
+                    <h:inputText pt:placeholder="#{msg.personName}" value="#{resourcesController.newTeachingSitter.name}" requiredMessage="#{msg.requiredName}" required="true" validatorMessage="Name">
                         <f:validateRegex pattern="[A-Za-z]{2,}"/>
                         <!-- TODO:ąćęłńóśżźĄĆĘŁŃÓŚŻŹ -->
                     </h:inputText>
-                    <h:inputText pt:placeholder="* Surname" value="#{resourcesController.newTeachingSitter.surname}" required="true" validatorMessage="Surname">
+                    <h:inputText pt:placeholder="#{msg.personSurname}" value="#{resourcesController.newTeachingSitter.surname}" requiredMessage="#{msg.requiredSurname}" required="true" validatorMessage="Surname">
                         <f:validateRegex pattern="[A-Za-z]{2,}"/>
                         <!-- TODO:ąćęłńóśżźĄĆĘŁŃÓŚŻŹ -->
                     </h:inputText>
-                    <h:inputText pt:placeholder="* Base price/h" value="#{resourcesController.newTeachingSitter.basePriceForHour}" required="true" validatorMessage="Number1">
+                    <h:inputText pt:placeholder="#{msg.basePricePerHour}" value="#{resourcesController.newTeachingSitter.basePriceForHour}" requiredMessage="#{msg.requiredBasePrice}" required="true" validatorMessage="Number1">
+                        <f:validateLongRange minimum="0"/>
                         <!-- TODO:Validate number -->
                     </h:inputText>
-                    <h:inputText pt:placeholder="* Minimal child age" value="#{resourcesController.newTeachingSitter.minChildAge}" required="true" validatorMessage="Number2">
+                    <h:inputText pt:placeholder="#{msg.childAge}" value="#{resourcesController.newTeachingSitter.minChildAge}" requiredMessage="#{msg.requiredChildAge}" required="true" validatorMessage="Number2">
+                        <f:validateLongRange minimum="0" maximum="15"/>
                         <!-- TODO:Validate number -->
                     </h:inputText>
-                    <h:inputText pt:placeholder="* Max number of children" value="#{resourcesController.newTeachingSitter.maxNumberOfChildrenInTheFamily}" required="true" validatorMessage="Number3">
+                    <h:inputText pt:placeholder="#{msg.numberOfChildren}" value="#{resourcesController.newTeachingSitter.maxNumberOfChildrenInTheFamily}" requiredMessage="#{msg.requiredMaxNumberOfChildren}" required="true" validatorMessage="Number3">
+                        <f:validateLongRange minimum="0"/>
                         <!-- TODO:Validate number -->
                     </h:inputText>
-                    <h:inputText pt:placeholder="* Years of experience in teaching" value="#{resourcesController.newTeachingSitter.yearsOfExperienceInTeaching}" required="true" validatorMessage="Number3">
+                    <h:inputText pt:placeholder="#{msg.yearsOfExperience}" value="#{resourcesController.newTeachingSitter.yearsOfExperienceInTeaching}" requiredMessage="#{msg.requiredYearsOfExperience}" required="true" validatorMessage="Number3">
+                        <f:validateLongRange minimum="0" maximum="70"/>
                         <!-- TODO:Validate number -->
                     </h:inputText>
                     <h:commandButton value="OK" action="#{resourcesController.processNewTeachingSitter()}" class="positive_btn" />
