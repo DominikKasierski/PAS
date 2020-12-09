@@ -13,28 +13,36 @@
             <ui:define name="content">
                 <div id="container">
                     <h:form>
-                        <h:inputText pt:placeholder="#{msg.personName}" value="#{resourcesController.newBabysitter.name}" required="true" requiredMessage="#{msg.requiredName}" validatorMessage="Name">
+                        <h:inputText pt:placeholder="#{msg.personName}" value="#{resourcesController.getSomeBabysitter(resourcesController.typeOfBabysitter).name}" required="true" requiredMessage="#{msg.requiredName}" validatorMessage="Name">
                             <f:validateRegex pattern="[A-Za-z]{2,}"/>
                             <!-- TODO:ąćęłńóśżźĄĆĘŁŃÓŚŻŹ -->
                         </h:inputText>
-                        <h:inputText pt:placeholder="#{msg.personSurname}" value="#{resourcesController.newBabysitter.surname}" required="true" requiredMessage="#{msg.requiredSurname}" validatorMessage="Surname">
+                        <h:inputText pt:placeholder="#{msg.personSurname}" value="#{resourcesController.getSomeBabysitter(resourcesController.typeOfBabysitter).surname}" required="true" requiredMessage="#{msg.requiredSurname}" validatorMessage="Surname">
                             <f:validateRegex pattern="[A-Za-z]{2,}"/>
                             <!-- TODO:ąćęłńóśżźĄĆĘŁŃÓŚŻŹ -->
                         </h:inputText>
-                        <h:inputText pt:placeholder="#{msg.basePricePerHour}" value="#{resourcesController.newBabysitter.basePriceForHour}" requiredMessage="#{msg.requiredBasePrice}" required="true" validatorMessage="Number1">
+                        <h:inputText pt:placeholder="#{msg.basePricePerHour}" value="#{resourcesController.getSomeBabysitter(resourcesController.typeOfBabysitter).basePriceForHour}" required="true" requiredMessage="#{msg.requiredBasePrice}" validatorMessage="Number1">
                             <f:validateLongRange minimum="0"/>
                             <!-- TODO:Validate number -->
                         </h:inputText>
-                        <h:inputText pt:placeholder="#{msg.childAge}" value="#{resourcesController.newBabysitter.minChildAge}" requiredMessage="#{msg.requiredChildAge}" required="true" validatorMessage="Number2">
+                        <h:inputText pt:placeholder="#{msg.childAge}" value="#{resourcesController.getSomeBabysitter(resourcesController.typeOfBabysitter).minChildAge}" required="true" requiredMessage="#{msg.requiredChildAge}" validatorMessage="Number2">
                             <f:validateLongRange minimum="0" maximum="15"/>
                             <!-- TODO:Validate number -->
                         </h:inputText>
-                        <h:inputText pt:placeholder="#{msg.numberOfChildren}" value="#{resourcesController.newBabysitter.maxNumberOfChildrenInTheFamily}" requiredMessage="#{msg.requiredMaxNumberOfChildren}" required="true" validatorMessage="Number3">
+                        <h:inputText pt:placeholder="#{msg.numberOfChildren}" value="#{resourcesController.getSomeBabysitter(resourcesController.typeOfBabysitter).maxNumberOfChildrenInTheFamily}" required="true" requiredMessage="#{msg.requiredMaxNumberOfChildren}" validatorMessage="Number3">
+                            <f:validateLongRange minimum="0"/>
+                            <!-- TODO:Validate number -->
+                        </h:inputText>
+                        <h:inputText pt:placeholder="#{msg.yearsOfExperience}" value="#{resourcesController.getSomeBabysitter(resourcesController.typeOfBabysitter).yearsOfExperienceInTeaching}" required="true" requiredMessage="#{msg.requiredYearsOfExperience}" validatorMessage="Number3" rendered="#{resourcesController.typeOfBabysitter == 'TEACHING'}">
+                            <f:validateLongRange minimum="0" maximum="70"/>
+                            <!-- TODO:Validate number -->
+                        </h:inputText>
+                        <h:inputText pt:placeholder="#{msg.valueOfEquipment}" value="#{resourcesController.getSomeBabysitter(resourcesController.typeOfBabysitter).valueOfCleaningEquipment}" required="true" requiredMessage="#{msg.requiredValueOfEquipment}" validatorMessage="Number4" rendered="#{resourcesController.typeOfBabysitter == 'TIDING'}">
                             <f:validateLongRange minimum="0"/>
                             <!-- TODO:Validate number -->
                         </h:inputText>
                         <h:commandButton value="OK" action="#{resourcesController.processNewBabysitter()}" class="positive_btn" />
-                        <h:commandButton value="Cancel" action="main" immediate="true" class="negative_btn" />
+                        <h:commandButton value="Cancel" action="#{resourcesController.backToMain}" immediate="true" class="negative_btn" />
                     </h:form>
                 </div>
             </ui:define>

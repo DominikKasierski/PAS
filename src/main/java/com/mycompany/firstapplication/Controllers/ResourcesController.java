@@ -2,6 +2,7 @@ package com.mycompany.firstapplication.Controllers;
 
 import com.mycompany.firstapplication.Babysitters.*;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
@@ -22,6 +23,36 @@ public class ResourcesController implements Serializable {
     private final TeachingSitter newTeachingSitter = new TeachingSitter();
     private final TidingSitter newTidingSitter = new TidingSitter();
 
+    private TypeOfBabysitter typeOfBabysitter;
+
+    public TypeOfBabysitter getTypeOfBabysitter() {
+        return typeOfBabysitter;
+    }
+
+    public String sitterType(String string)  {
+        conversation.begin();
+        if (string.equals("TEACHING")) {
+            this.typeOfBabysitter = TypeOfBabysitter.TEACHING;
+        } else if (string.equals("TIDING")) {
+            this.typeOfBabysitter = TypeOfBabysitter.TIDING;
+        } else {
+            this.typeOfBabysitter = TypeOfBabysitter.NORMAL;
+        }
+        return "NewBabysitter";
+    }
+
+    @PostConstruct
+    public Object getSomeBabysitter(TypeOfBabysitter type) {
+        switch (type) {
+            case TIDING:
+                return newTidingSitter;
+            case TEACHING:
+                return newTeachingSitter;
+            default:
+                return newBabysitter;
+        }
+    }
+
     public Babysitter getNewBabysitter() {
         return newBabysitter;
     }
@@ -40,34 +71,54 @@ public class ResourcesController implements Serializable {
 
     //TODO:Sprobowac uproscic
     public String processNewBabysitter() {
-        conversation.begin();
+//        conversation.begin();
         return "NewBabysitterConfirm";
     }
 
-    public String processNewTeachingSitter() {
-        conversation.begin();
-        return "NewTeachingSitterConfirm";
+//    public String processNewTeachingSitter() {
+////        conversation.begin();
+//        return "NewTeachingSitterConfirm";
+//    }
+//
+//    public String processNewTidingSitter() {
+////        conversation.begin();
+//        return "NewTidingSitterConfirm";
+//    }
+
+//    public String confirmNewBabysitter() {
+//        babysittersManager.addBabysitter(newBabysitter);
+//        conversation.end();
+//        return "main";
+//    }
+//
+//    public String confirmNewTeachingSitter() {
+//        babysittersManager.addBabysitter(newTeachingSitter);
+//        conversation.end();
+//        return "main";
+//    }
+//
+//    public String confirmNewTidingSitter() {
+//        babysittersManager.addBabysitter(newTidingSitter);
+//        conversation.end();
+//        return "main";
+//    }
+
+    public String confirmNewBabysitter(TypeOfBabysitter typeOfBabysitter) {
+        switch (typeOfBabysitter) {
+            case NORMAL:
+                babysittersManager.addBabysitter(newBabysitter);
+                break;
+            case TEACHING:
+                babysittersManager.addBabysitter(newTeachingSitter);
+                break;
+            case TIDING:
+                babysittersManager.addBabysitter(newTidingSitter);
+                break;
+        }
+        return backToMain();
     }
 
-    public String processNewTidingSitter() {
-        conversation.begin();
-        return "NewTidingSitterConfirm";
-    }
-
-    public String confirmNewBabysitter() {
-        babysittersManager.addBabysitter(newBabysitter);
-        conversation.end();
-        return "main";
-    }
-
-    public String confirmNewTeachingSitter() {
-        babysittersManager.addBabysitter(newTeachingSitter);
-        conversation.end();
-        return "main";
-    }
-
-    public String confirmNewTidingSitter() {
-        babysittersManager.addBabysitter(newTidingSitter);
+    public String backToMain() {
         conversation.end();
         return "main";
     }
