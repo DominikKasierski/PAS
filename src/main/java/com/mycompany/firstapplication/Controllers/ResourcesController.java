@@ -75,30 +75,50 @@ public class ResourcesController implements Serializable {
         return "NewBabysitterConfirm";
     }
 
-    public String processNewTeachingSitter() {
-//        conversation.begin();
-        return "NewTeachingSitterConfirm";
+//    public String processNewTeachingSitter() {
+////        conversation.begin();
+//        return "NewTeachingSitterConfirm";
+//    }
+//
+//    public String processNewTidingSitter() {
+////        conversation.begin();
+//        return "NewTidingSitterConfirm";
+//    }
+
+//    public String confirmNewBabysitter() {
+//        babysittersManager.addBabysitter(newBabysitter);
+//        conversation.end();
+//        return "main";
+//    }
+//
+//    public String confirmNewTeachingSitter() {
+//        babysittersManager.addBabysitter(newTeachingSitter);
+//        conversation.end();
+//        return "main";
+//    }
+//
+//    public String confirmNewTidingSitter() {
+//        babysittersManager.addBabysitter(newTidingSitter);
+//        conversation.end();
+//        return "main";
+//    }
+
+    public String confirmNewBabysitter(TypeOfBabysitter typeOfBabysitter) {
+        switch (typeOfBabysitter) {
+            case NORMAL:
+                babysittersManager.addBabysitter(newBabysitter);
+                break;
+            case TEACHING:
+                babysittersManager.addBabysitter(newTeachingSitter);
+                break;
+            case TIDING:
+                babysittersManager.addBabysitter(newTidingSitter);
+                break;
+        }
+        return backToMain();
     }
 
-    public String processNewTidingSitter() {
-//        conversation.begin();
-        return "NewTidingSitterConfirm";
-    }
-
-    public String confirmNewBabysitter() {
-        babysittersManager.addBabysitter(newBabysitter);
-        conversation.end();
-        return "main";
-    }
-
-    public String confirmNewTeachingSitter() {
-        babysittersManager.addBabysitter(newTeachingSitter);
-        conversation.end();
-        return "main";
-    }
-
-    public String confirmNewTidingSitter() {
-        babysittersManager.addBabysitter(newTidingSitter);
+    public String backToMain() {
         conversation.end();
         return "main";
     }
