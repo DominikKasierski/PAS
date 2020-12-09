@@ -13,9 +13,9 @@
             <h1>Hello from NewIndex</h1>
             <h:form>
                 <ul>
-                    <li><h:commandButton value="Add new babysitter" action="#{resourcesController.sitterType('Normal')}"/></li>
-                    <li><h:link outcome="NewTeachingSitter.xhtml">Add new teaching babysitter</h:link></li>
-                    <li><h:link outcome="NewTidingSitter.xhtml">Add new tiding babysitter</h:link></li>
+                    <li><h:commandLink value="Add new babysitter" action="#{resourcesController.sitterType('NORMAL')}"/></li>
+                    <li><h:commandLink value="Add new teaching babysitter" action="#{resourcesController.sitterType('TEACHING')}"/></li>
+                    <li><h:commandLink value="Add new tiding babysitter" action="#{resourcesController.sitterType('TIDING')}"/></li>
                     <li><h:link outcome="BabysitterList.xhtml">Show babysitters list</h:link></li>
                 </ul>
                 <br/>

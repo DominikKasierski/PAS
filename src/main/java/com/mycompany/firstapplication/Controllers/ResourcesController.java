@@ -2,6 +2,7 @@ package com.mycompany.firstapplication.Controllers;
 
 import com.mycompany.firstapplication.Babysitters.*;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
@@ -29,6 +30,7 @@ public class ResourcesController implements Serializable {
     }
 
     public String sitterType(String string)  {
+        conversation.begin();
         if (string.equals("TEACHING")) {
             this.typeOfBabysitter = TypeOfBabysitter.TEACHING;
         } else if (string.equals("TIDING")) {
@@ -37,6 +39,18 @@ public class ResourcesController implements Serializable {
             this.typeOfBabysitter = TypeOfBabysitter.NORMAL;
         }
         return "NewBabysitter";
+    }
+
+    @PostConstruct
+    public Object getSomeBabysitter(TypeOfBabysitter type) {
+        switch (type) {
+            case TIDING:
+                return newTidingSitter;
+            case TEACHING:
+                return newTeachingSitter;
+            default:
+                return newBabysitter;
+        }
     }
 
     public Babysitter getNewBabysitter() {
@@ -57,17 +71,17 @@ public class ResourcesController implements Serializable {
 
     //TODO:Sprobowac uproscic
     public String processNewBabysitter() {
-        conversation.begin();
+//        conversation.begin();
         return "NewBabysitterConfirm";
     }
 
     public String processNewTeachingSitter() {
-        conversation.begin();
+//        conversation.begin();
         return "NewTeachingSitterConfirm";
     }
 
     public String processNewTidingSitter() {
-        conversation.begin();
+//        conversation.begin();
         return "NewTidingSitterConfirm";
     }
 
