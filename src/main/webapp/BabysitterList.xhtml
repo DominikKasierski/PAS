@@ -18,6 +18,7 @@
                         <h:column>
                             <f:facet name="header">Id
                                 <h:selectOneMenu valueChangeListener="#{resourcesController.babysittersManager.valueChanged}" onchange="submit()" >
+                                    <f:selectItem itemLabel="Wybierz id" itemValue="0" />
                                     <f:selectItems value="#{resourcesController.babysittersManager.allBabysittersArray}" var="item"
                                                    itemLabel="#{item.uuid}" itemValue="#{item.uuid}"/>
                                 </h:selectOneMenu>
@@ -48,11 +49,11 @@
                             <f:facet name="header">Currently employed</f:facet>
                             ${babysitter.employed}
                         </h:column>
-                        <h:column rendered="#{resourcesController.babysittersManager.type eq 1}">
+                        <h:column rendered="#{resourcesController.babysittersManager.typeOfBabysitter == 'TEACHING' }">
                             <f:facet name="header">Years of experience in teaching</f:facet>
                             ${babysitter.yearsOfExperienceInTeaching}
                         </h:column>
-                        <h:column rendered="#{resourcesController.babysittersManager.type eq 2}">
+                        <h:column rendered="#{resourcesController.babysittersManager.typeOfBabysitter == 'TIDING'}">
                             <f:facet name="header">Value of cleaning equipment</f:facet>
                             ${babysitter.valueOfCleaningEquipment}
                         </h:column>

@@ -21,7 +21,9 @@ public class BabysittersManager implements Serializable {
 
     private String id;
 
-    private int type;
+    private TypeOfBabysitter typeOfBabysitter = TypeOfBabysitter.NORMAL;
+
+//    private int type;
 
     public BabysittersManager() {
     }
@@ -59,9 +61,12 @@ public class BabysittersManager implements Serializable {
         return babysittersRepository.getNumberOfElements();
     }
 
-    public int getType() {
-        return type;
+    public TypeOfBabysitter getTypeOfBabysitter() {
+        return typeOfBabysitter;
     }
+    //    public int getType() {
+//        return type;
+//    }
 
     public List<Babysitter> getListWithAppropriateBabysitters(int minAge, int numberOfChildren) {
 
@@ -79,8 +84,10 @@ public class BabysittersManager implements Serializable {
     }
 
     public void valueChanged(ValueChangeEvent event) {
-        id = event.getNewValue().toString();
-        showSelectedBabysitter(id);
+        if (!event.getNewValue().toString().equals("0")) {
+            id = event.getNewValue().toString();
+            showSelectedBabysitter(id);
+        }
     }
 
     private void showSelectedBabysitter(String id) {
@@ -91,27 +98,18 @@ public class BabysittersManager implements Serializable {
     }
 
     private void setType() {
-//        for (Babysitter babysitter : currentBabysitters) {
-//            if (babysitter instanceof  TeachingSitter){
-//                type = 1;
-//            } if (babysitter instanceof TidingSitter) {
-//                type = 2;
-//            } else {
-//                type = 3;
-//            }
-//        }
         if (currentBabysitters.get(0) instanceof TeachingSitter) {
-            type = 1;
+            typeOfBabysitter = TypeOfBabysitter.TEACHING;
         } else if (currentBabysitters.get(0) instanceof TidingSitter) {
-            type = 2;
+            typeOfBabysitter = TypeOfBabysitter.TIDING;
         } else {
-            type = 3;
+            typeOfBabysitter = TypeOfBabysitter.NORMAL;
         }
     }
 
     @PostConstruct
     public void initCurrentPersons() {
-        type = 3;
+        typeOfBabysitter = TypeOfBabysitter.NORMAL;
         currentBabysitters = babysittersRepository.getBabysittersList();
     }
 
