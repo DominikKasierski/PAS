@@ -8,7 +8,7 @@
 <body>
 <ui:composition>
 
-    <div class="header-left">
+    <div id="header-left">
         <h:link value="BabysitterCompany" styleClass="logo"/>
             <div class="breadcrumbs">
                 <ui:repeat value="#{breadcrumbController.breadCrumbs}" var="item">
@@ -16,7 +16,7 @@
                 </ui:repeat>
             </div>
     </div>
-    <div class="header-right">
+    <div id="header-right">
         <h:link value="Home" styleClass="active" outcome="main"/>
         <h:link value="Contact"/>
     </div>
