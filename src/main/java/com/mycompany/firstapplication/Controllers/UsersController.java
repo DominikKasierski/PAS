@@ -80,7 +80,7 @@ public class UsersController implements Serializable {
             }
             return backToMain();
         } catch (UserException e) {
-            FacesContext.getCurrentInstance().addMessage("newAdminConfirm:login",
+            FacesContext.getCurrentInstance().addMessage("newUserConfirm:login",
                     new FacesMessage("Taki login już istnieje"));
         }
         return "";

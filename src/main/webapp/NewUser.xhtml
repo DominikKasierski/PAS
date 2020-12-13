@@ -6,7 +6,7 @@
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
-    <title>#{msg.newAdmin}</title>
+    <title>#{msg.newUser}</title>
 </h:head>
 <h:body>
     <ui:composition template="template/commonLayout.xhtml">
@@ -16,39 +16,48 @@
                     <h:inputText pt:placeholder="* #{msg.login}"
                                  value="#{usersController.getSomeUser(usersController.typeOfUser).login}"
                                  required="true"
-                                 validatorMessage="Login">
+                                 requiredMessage="#{msg.requiredLogin}"
+                                 validatorMessage="#{msg.validatorMessageLogin}">
                         <f:validateRegex pattern="[A-Za-z1-9]{2,}"/>
                         <!-- TODO:Walidacja -->
                     </h:inputText>
                     <h:inputText pt:placeholder="* #{msg.name}"
                                  value="#{usersController.getSomeUser(usersController.typeOfUser).name}"
                                  required="true"
-                                 validatorMessage="Name">
+                                 requiredMessage="#{msg.requiredName}"
+                                 validatorMessage="#{msg.validatorMessageName}">
                         <f:validateRegex pattern="[A-Za-z]{2,}"/>
                         <!-- TODO:Walidacja -->
                     </h:inputText>
                     <h:inputText pt:placeholder="* #{msg.surname}"
                                  value="#{usersController.getSomeUser(usersController.typeOfUser).surname}"
                                  required="true"
-                                 validatorMessage="Surname">
+                                 requiredMessage="#{msg.requiredSurname}"
+                                 validatorMessage="#{msg.validatorMessageSurname}">
                         <f:validateRegex pattern="[A-Za-z]{2,}"/>
                         <!-- TODO:Walidacja -->
                     </h:inputText>
                     <h:inputText pt:placeholder="* #{msg.numberOfChildren}"
                                  value="#{usersController.getSomeUser(usersController.typeOfUser).numberOfChildren}"
                                  required="true"
-                                 validatorMessage="Number of children"
+                                 converterMessage="#{msg.converterMessageNumberOfChildren}"
+                                 requiredMessage="#{msg.requiredNumberOfChildren}"
+                                 validatorMessage="#{msg.validatorMessageMaxNumberOfChildren}"
                                  rendered="#{usersController.typeOfUser == 'CLIENT'}">
+                        <f:validateLongRange minimum="0"/>
                         <!-- TODO:Walidacja -->
                     </h:inputText>
                     <h:inputText pt:placeholder="* #{msg.ageOfTheYoungestChild}"
                                  value="#{usersController.getSomeUser(usersController.typeOfUser).ageOfTheYoungestChild}"
                                  required="true"
-                                 validatorMessage="Age of the youngest child"
+                                 converterMessage="#{msg.converterMessageAgeOfTheYoungestChild}"
+                                 requiredMessage="#{msg.requiredAgeOfTheYoungestChild}"
+                                 validatorMessage="#{msg.validatorMessageYoungestChild}"
                                  rendered="#{usersController.typeOfUser == 'CLIENT'}">
+                        <f:validateLongRange minimum="0" maximum="15"/>
                         <!-- TODO:Walidacja -->
                     </h:inputText>
-                    <h:commandButton value="OK" action="#{usersController.processNewUser()}" class="positive_btn"/>
+                    <h:commandButton value="#{msg.add}" action="#{usersController.processNewUser()}" class="positive_btn"/>
                     <h:commandButton value="#{msg.cancel}" action="#{usersController.backToMain}" immediate="true"
                                      class="negative_btn"/>
                 </h:form>

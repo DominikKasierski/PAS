@@ -23,7 +23,7 @@
                             <f:selectItems value="#{resourcesController.babysittersManager.currentBabysitters}" var="babysitter" itemValue="${babysitter}" itemLabel="[#{babysitter.uuid}] #{babysitter.name} #{babysitter.surname}"/>
                         </h:selectOneListbox> <br/>
 
-                        <h:commandButton value="OK" action="#{employmentsController.processNewEmployment()}" class="positive_btn" />
+                        <h:commandButton value="#{msg.add}" action="#{employmentsController.processNewEmployment()}" class="positive_btn" />
                         <h:commandButton value="#{msg.cancel}" action="main" immediate="true" class="negative_btn" />
                     </div>
                 </h:form>
