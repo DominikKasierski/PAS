@@ -43,10 +43,10 @@
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
-        <from-view-id>/NewAdmin.xhtml</from-view-id>
+        <from-view-id>/NewUser.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>NewAdminConfirm</from-outcome>
-            <to-view-id>/NewAdminConfirm.xhtml</to-view-id>
+            <to-view-id>/NewUserConfirm.xhtml</to-view-id>
             <redirect />
         </navigation-case>
     </navigation-rule>

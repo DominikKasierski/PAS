@@ -34,14 +34,14 @@
                         <f:validateRegex pattern="[A-Za-z]{2,}"/>
                         <!-- TODO:Walidacja -->
                     </h:inputText>
-                    <h:inputText pt:placeholder="* Number of children"
+                    <h:inputText pt:placeholder="* #{msg.numberOfChildren}"
                                  value="#{usersController.getSomeUser(usersController.typeOfUser).numberOfChildren}"
                                  required="true"
-                                 validatorMessage="Numer of children"
+                                 validatorMessage="Number of children"
                                  rendered="#{usersController.typeOfUser == 'CLIENT'}">
                         <!-- TODO:Walidacja -->
                     </h:inputText>
-                    <h:inputText pt:placeholder="* Age of the youngest child"
+                    <h:inputText pt:placeholder="* #{msg.ageOfTheYoungestChild}"
                                  value="#{usersController.getSomeUser(usersController.typeOfUser).ageOfTheYoungestChild}"
                                  required="true"
                                  validatorMessage="Age of the youngest child"
@@ -49,7 +49,7 @@
                         <!-- TODO:Walidacja -->
                     </h:inputText>
                     <h:commandButton value="OK" action="#{usersController.processNewUser()}" class="positive_btn"/>
-                    <h:commandButton value="Cancel" action="#{usersController.backToMain}" immediate="true" class="negative_btn"/>
+                    <h:commandButton value="#{msg.cancel}" action="#{usersController.backToMain}" immediate="true" class="negative_btn"/>
                 </h:form>
             </div>
         </ui:define>

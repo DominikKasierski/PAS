@@ -56,11 +56,11 @@ public class UsersController implements Serializable {
         } else {
             this.typeOfUser = TypeOfUser.CLIENT;
         }
-        return "NewAdmin";
+        return "NewUser";
     }
 
     public String processNewUser() {
-        return "NewAdminConfirm";
+        return "NewUserConfirm";
     }
 
     public String confirmNewUser(TypeOfUser typeOfUser) {
@@ -98,6 +98,6 @@ public class UsersController implements Serializable {
 
     public String reject() {
         conversation.end();
-        return "NewAdmin";
+        return "NewUser";
     }
 }
