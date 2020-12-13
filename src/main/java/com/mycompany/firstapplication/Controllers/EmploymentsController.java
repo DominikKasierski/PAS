@@ -33,8 +33,7 @@ public class EmploymentsController implements Serializable {
 
     public String confirmNewEmployment() {
         employmentsManager.employBabysitter(currentClient, currentBabysitter);
-        conversation.end();
-        return "main";
+        return reject();
     }
 
     public EmploymentsManager getEmploymentsManager() {
@@ -59,5 +58,10 @@ public class EmploymentsController implements Serializable {
 
     public void setCurrentClient(Client currentClient) {
         this.currentClient = currentClient;
+    }
+
+    public String reject() {
+        conversation.end();
+        return "main";
     }
 }

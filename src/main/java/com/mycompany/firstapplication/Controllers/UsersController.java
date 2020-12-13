@@ -47,7 +47,7 @@ public class UsersController implements Serializable {
         return typeOfUser;
     }
 
-    public String userType(String string)  {
+    public String userType(String string) {
         conversation.begin();
         if (string.equals("ADMIN")) {
             this.typeOfUser = TypeOfUser.ADMIN;
@@ -63,19 +63,27 @@ public class UsersController implements Serializable {
         return "NewUserConfirm";
     }
 
+    //TODO:Pododawać do kazdego message i odpowiednie przejścia
+
     public String confirmNewUser(TypeOfUser typeOfUser) {
-        switch (typeOfUser) {
-            case ADMIN:
-                usersManager.addUser(newAdmin);
-                break;
-            case SUPERUSER:
-                usersManager.addUser(newSuperUser);
-                break;
-            case CLIENT:
-                usersManager.addUser(newClient);
-                break;
+        try {
+            switch (typeOfUser) {
+                case ADMIN:
+                    usersManager.addUser(newAdmin);
+                    break;
+                case SUPERUSER:
+                    usersManager.addUser(newSuperUser);
+                    break;
+                case CLIENT:
+                    usersManager.addUser(newClient);
+                    break;
+            }
+            return backToMain();
+        } catch (UserException e) {
+            FacesContext.getCurrentInstance().addMessage("newAdminConfirm:login",
+                    new FacesMessage("Taki login już istnieje"));
         }
-        return backToMain();
+        return "";
     }
 
     public String backToMain() {
@@ -83,21 +91,9 @@ public class UsersController implements Serializable {
         return "main";
     }
 
-    //TODO:Pododawać do kazdego message i odpowiednie przejścia
-//    public String confirmNewAdmin() {
-//        try {
-//            usersManager.addUser(newAdmin);
-//            conversation.end();
-//            return "main";
-//        } catch (UserException e) {
-//            FacesContext.getCurrentInstance().addMessage("newAdminConfirm:login",
-//                    new FacesMessage("Taki login już istnieje"));
-//        }
-//        return "";
-//    }
 
     public String reject() {
         conversation.end();
-        return "NewUser";
+        return userType(typeOfUser.toString());
     }
 }

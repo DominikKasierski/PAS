@@ -29,6 +29,11 @@
             <redirect />
         </navigation-case>
         <navigation-case>
+            <from-outcome>NewUser</from-outcome>
+            <to-view-id>/NewUser.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
             <from-outcome>BabysitterList</from-outcome>
             <to-view-id>/BabysitterList.xhtml</to-view-id>
             <redirect />
@@ -45,7 +50,7 @@
     <navigation-rule>
         <from-view-id>/NewUser.xhtml</from-view-id>
         <navigation-case>
-            <from-outcome>NewAdminConfirm</from-outcome>
+            <from-outcome>NewUserConfirm</from-outcome>
             <to-view-id>/NewUserConfirm.xhtml</to-view-id>
             <redirect />
         </navigation-case>

@@ -23,7 +23,7 @@
                     </h:outputLabel>
                     <!--                    TODO: Rzuci wyjątek jak login nie jest unikalny, czy tak powinno być?-->
                     <h:commandButton value="#{msg.confirm}" action="#{employmentsController.confirmNewEmployment()}" class="positive_btn" />
-                    <h:commandButton value="#{msg.reject}" action="main" immediate="true" class="negative_btn" />
+                    <h:commandButton value="#{msg.reject}" action="#{employmentsController.reject}" immediate="true" class="negative_btn" />
                 </h:form>
             </div>
         </ui:define>

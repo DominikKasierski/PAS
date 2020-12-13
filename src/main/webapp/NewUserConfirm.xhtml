@@ -19,7 +19,7 @@
                     <h:outputText value="#{usersController.getSomeUser(usersController.typeOfUser).numberOfChildren}" styleClass="formOutput" rendered="#{usersController.typeOfUser == 'CLIENT'}"/>
                     <h:outputText value="#{usersController.getSomeUser(usersController.typeOfUser).ageOfTheYoungestChild}" styleClass="formOutput" rendered="#{usersController.typeOfUser == 'CLIENT'}"/>
                     <h:commandButton value="#{msg.confirm}" action="#{usersController.confirmNewUser(usersController.typeOfUser)}" class="positive_btn" />
-                    <h:commandButton value="#{msg.reject}" action="#{usersController.backToMain()}" immediate="true" class="negative_btn" />
+                    <h:commandButton value="#{msg.reject}" action="#{usersController.reject}" immediate="true" class="negative_btn" />
                 </h:form>
             </div>
         </ui:define>
