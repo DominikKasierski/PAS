@@ -48,16 +48,27 @@ public class UsersManager implements Serializable {
         return typeOfUser;
     }
 
-    public void valueChanged(ValueChangeEvent event) {
+    public void valueChangedId(ValueChangeEvent event) {
         if (!event.getNewValue().toString().equals("0")) {
             String id = event.getNewValue().toString();
-            showSelectedUser(id);
+            showSelectedUser(id, true);
         }
     }
 
-    private void showSelectedUser(String id) {
+    public void valueChangedLogin(ValueChangeEvent event) {
+        if (!event.getNewValue().toString().equals("0")) {
+            String login = event.getNewValue().toString();
+            showSelectedUser(login, false);
+        }
+    }
+
+    private void showSelectedUser(String key, boolean checkById) {
         List<User> temporaryUsersList = new ArrayList<>();
-        temporaryUsersList.add(usersRepository.findUserByUuid(id));
+        if (checkById) {
+            temporaryUsersList.add(usersRepository.findUserByUuid(key));
+        } else {
+            temporaryUsersList.add(usersRepository.findUserByLogin(key));
+        }
         currentUsers = temporaryUsersList;
         setType();
     }

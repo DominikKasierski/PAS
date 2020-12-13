@@ -15,9 +15,9 @@
                 <div style="overflow-x: auto;">
                     <h:dataTable value="#{usersController.usersManager.currentUsers}" var="client">
                         <h:column>
-                            <f:facet name="header">Id
-                                <h:selectOneMenu valueChangeListener="#{usersController.usersManager.valueChanged}" onchange="submit()" >
-                                    <f:selectItem itemLabel="Wybierz id" itemValue="0" />
+                            <f:facet name="header">#{msg.id}
+                                <h:selectOneMenu valueChangeListener="#{usersController.usersManager.valueChangedId}" onchange="submit()" >
+                                    <f:selectItem itemLabel="#{msg.idlabel}" itemValue="0" />
                                     <f:selectItems value="#{usersController.usersManager.allUsersArray}" var="item"
                                                    itemLabel="#{item.uuid}" itemValue="#{item.uuid}"/>
                                 </h:selectOneMenu>
@@ -25,7 +25,13 @@
                             ${client.uuid}
                         </h:column>
                         <h:column>
-                            <f:facet name="header">#{msg.login}</f:facet>
+                            <f:facet name="header">#{msg.login}
+                                <h:selectOneMenu valueChangeListener="#{usersController.usersManager.valueChangedLogin}" onchange="submit()" >
+                                    <f:selectItem itemLabel="#{msg.loginlabel}" itemValue="0" />
+                                    <f:selectItems value="#{usersController.usersManager.allUsersArray}" var="item"
+                                                   itemLabel="#{item.login}" itemValue="#{item.login}"/>
+                                </h:selectOneMenu>
+                            </f:facet>
                             ${client.login}
                         </h:column>
                         <h:column>
