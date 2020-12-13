@@ -20,9 +20,9 @@
                 </ul>
                 <br/>
                 <ul>
-                    <li><h:link outcome="NewAdmin.xhtml">#{msg.addNewAdmin}</h:link></li>
-                    <li><h:link outcome="NewSuperUser.xhtml">#{msg.addNewSuperUser}</h:link></li>
-                    <li><h:link outcome="NewClient.xhtml">#{msg.addNewClient}</h:link></li>
+                    <li><h:commandLink value="#{msg.addNewAdmin}" action="#{usersController.userType('ADMIN')}"/></li>
+                    <li><h:commandLink value="#{msg.addNewSuperUser}" action="#{usersController.userType('SUPERUSER')}"/></li>
+                    <li><h:commandLink value="#{msg.addNewClient}" action="#{usersController.userType('CLIENT')}"/></li>
                     <li><h:link outcome="ClientList.xhtml">#{msg.showClientsList}</h:link></li>
                 </ul>
                 <br/>

@@ -1,10 +1,8 @@
 package com.mycompany.firstapplication.Controllers;
 
+import com.mycompany.firstapplication.Babysitters.TypeOfBabysitter;
 import com.mycompany.firstapplication.Exceptions.UserException;
-import com.mycompany.firstapplication.Users.Admin;
-import com.mycompany.firstapplication.Users.Client;
-import com.mycompany.firstapplication.Users.SuperUser;
-import com.mycompany.firstapplication.Users.UsersManager;
+import com.mycompany.firstapplication.Users.*;
 
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
@@ -28,61 +26,75 @@ public class UsersController implements Serializable {
     private final SuperUser newSuperUser = new SuperUser();
     private final Admin newAdmin = new Admin();
 
-    public Client getNewClient() {
-        return newClient;
-    }
-
-    public SuperUser getNewSuperUser() {
-        return newSuperUser;
-    }
-
-    public Admin getNewAdmin() {
-        return newAdmin;
-    }
+    private TypeOfUser typeOfUser;
 
     public UsersManager getUsersManager() {
         return usersManager;
     }
 
-    public String processNewClient() {
-        conversation.begin();
-        return "NewClientConfirm";
+    public Object getSomeUser(TypeOfUser type) {
+        switch (type) {
+            case ADMIN:
+                return newAdmin;
+            case SUPERUSER:
+                return newSuperUser;
+            default:
+                return newClient;
+        }
     }
 
-    public String processNewSuperUser() {
-        conversation.begin();
-        return "NewSuperUserConfirm";
+    public TypeOfUser getTypeOfUser() {
+        return typeOfUser;
     }
 
-    public String processNewAdmin() {
+    public String userType(String string)  {
         conversation.begin();
+        if (string.equals("ADMIN")) {
+            this.typeOfUser = TypeOfUser.ADMIN;
+        } else if (string.equals("SUPERUSER")) {
+            this.typeOfUser = TypeOfUser.SUPERUSER;
+        } else {
+            this.typeOfUser = TypeOfUser.CLIENT;
+        }
+        return "NewAdmin";
+    }
+
+    public String processNewUser() {
         return "NewAdminConfirm";
     }
 
-    public String confirmNewClient() {
-        usersManager.addUser(newClient);
-        conversation.end();
-        return "main";
+    public String confirmNewUser(TypeOfUser typeOfUser) {
+        switch (typeOfUser) {
+            case ADMIN:
+                usersManager.addUser(newAdmin);
+                break;
+            case SUPERUSER:
+                usersManager.addUser(newSuperUser);
+                break;
+            case CLIENT:
+                usersManager.addUser(newClient);
+                break;
+        }
+        return backToMain();
     }
 
-    public String confirmNewSuperUser() {
-        usersManager.addUser(newSuperUser);
+    public String backToMain() {
         conversation.end();
         return "main";
     }
 
     //TODO:Pododawać do kazdego message i odpowiednie przejścia
-    public String confirmNewAdmin() {
-        try {
-            usersManager.addUser(newAdmin);
-            conversation.end();
-            return "main";
-        } catch (UserException e) {
-            FacesContext.getCurrentInstance().addMessage("newAdminConfirm:login",
-                    new FacesMessage("Taki login już istnieje"));
-        }
-        return "";
-    }
+//    public String confirmNewAdmin() {
+//        try {
+//            usersManager.addUser(newAdmin);
+//            conversation.end();
+//            return "main";
+//        } catch (UserException e) {
+//            FacesContext.getCurrentInstance().addMessage("newAdminConfirm:login",
+//                    new FacesMessage("Taki login już istnieje"));
+//        }
+//        return "";
+//    }
 
     public String reject() {
         conversation.end();

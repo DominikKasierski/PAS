@@ -4,9 +4,11 @@ import com.mycompany.firstapplication.Exceptions.UserException;
 import com.mycompany.firstapplication.Template.Repository;
 
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.ApplicationScoped;
 import java.util.ArrayList;
 import java.util.List;
 
+@ApplicationScoped
 public class UsersRepository extends Repository<User> {
 
     public List<User> getUsersList() {
