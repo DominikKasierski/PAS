@@ -1,15 +1,12 @@
 package com.mycompany.firstapplication.Babysitters;
 
-import com.mycompany.firstapplication.Users.User;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @ViewScoped
 public class BabysittersManager implements Serializable {

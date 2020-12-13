@@ -19,7 +19,8 @@ public class TeachingSitter extends Babysitter {
     public TeachingSitter() {
     }
 
-    @Override public double priceForHour() {
+    @Override
+    public double priceForHour() {
         return getBasePriceForHour() * (1 + yearsOfExperienceInTeaching / 10.0);
     }
 
@@ -27,11 +28,13 @@ public class TeachingSitter extends Babysitter {
         this.yearsOfExperienceInTeaching = yearsOfExperienceInTeaching;
     }
 
-    @Override public Integer getYearsOfExperienceInTeaching() {
+    @Override
+    public Integer getYearsOfExperienceInTeaching() {
         return yearsOfExperienceInTeaching;
     }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
         return new ToStringBuilder(this)
                 .appendSuper(super.toString())
                 .append("yearsOfExperienceInTeaching", yearsOfExperienceInTeaching)

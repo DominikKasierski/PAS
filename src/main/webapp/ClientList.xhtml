@@ -6,7 +6,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
-    <title>Client List</title>
+    <title>#{msg.clientList}</title>
 </h:head>
 <h:body>
     <ui:composition template="template/commonLayout.xhtml">
@@ -25,31 +25,31 @@
                             ${client.uuid}
                         </h:column>
                         <h:column>
-                            <f:facet name="header">Login</f:facet>
+                            <f:facet name="header">#{msg.login}</f:facet>
                             ${client.login}
                         </h:column>
                         <h:column>
-                            <f:facet name="header">Name</f:facet>
+                            <f:facet name="header">#{msg.name}</f:facet>
                             ${client.name}
                         </h:column>
                         <h:column>
-                            <f:facet name="header">Surname</f:facet>
+                            <f:facet name="header">#{msg.surname}</f:facet>
                             ${client.surname}
                         </h:column>
                         <h:column>
-                            <f:facet name="header">Active</f:facet>
+                            <f:facet name="header">#{msg.active}</f:facet>
                             ${client.active}
                         </h:column>
                         <h:column rendered="#{usersController.usersManager.typeOfUser == 'CLIENT' }">
-                            <f:facet name="header">Number of children</f:facet>
+                            <f:facet name="header">#{msg.numberOfChildren}</f:facet>
                             ${client.numberOfChildren}
                         </h:column>
                         <h:column rendered="#{usersController.usersManager.typeOfUser == 'CLIENT' }">
-                            <f:facet name="header">Age of the youngest child</f:facet>
+                            <f:facet name="header">#{msg.ageOfTheYoungestChild}</f:facet>
                             ${client.ageOfTheYoungestChild}
                         </h:column>
                         <h:column>
-                            <f:facet name="header">Actions</f:facet>
+                            <f:facet name="header">#{msg.actions}</f:facet>
                             <h:commandButton value="Change active" action="#{usersController.usersManager.changeActive(client)}" class="negative_btn"/>
                         </h:column>
                     </h:dataTable>

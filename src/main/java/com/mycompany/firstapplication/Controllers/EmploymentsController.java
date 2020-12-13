@@ -1,19 +1,15 @@
 package com.mycompany.firstapplication.Controllers;
 
 import com.mycompany.firstapplication.Babysitters.Babysitter;
-
 import com.mycompany.firstapplication.Employment.EmploymentsManager;
 import com.mycompany.firstapplication.Users.Client;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
-
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.time.format.DateTimeFormatter;
 
 @ConversationScoped
 @Named

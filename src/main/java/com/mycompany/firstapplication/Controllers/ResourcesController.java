@@ -43,7 +43,7 @@ public class ResourcesController implements Serializable {
         return typeOfBabysitter;
     }
 
-    public String sitterType(String string)  {
+    public String sitterType(String string) {
         conversation.begin();
         if (string.equals("TEACHING")) {
             this.typeOfBabysitter = TypeOfBabysitter.TEACHING;

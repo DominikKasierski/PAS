@@ -8,7 +8,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.time.LocalDateTime;
 
-import static java.time.temporal.ChronoUnit.*;
+import static java.time.temporal.ChronoUnit.SECONDS;
 
 public class Employment {
 
@@ -53,7 +53,8 @@ public class Employment {
         throw new EmploymentException("Employment has not been ended");
     }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
         return new ToStringBuilder(this)
                 .append(System.getProperty("line.separator"))
                 .append("uniqueID", uniqueID)

@@ -6,27 +6,27 @@
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
-    <title>Facelet Title</title>
+    <title>#{msg.newSuperUser}</title>
 </h:head>
 <h:body>
     <ui:composition template="template/commonLayout.xhtml">
         <ui:define name="content">
             <div id="container">
                 <h:form>
-                    <h:inputText pt:placeholder="* Login" value="#{usersController.newSuperUser.login}" required="true" validatorMessage="Login">
-                        <f:validateRegex pattern="[A-Za-z1-9]{2,}"/>
+                    <h:inputText pt:placeholder="* #{msg.login}" value="#{usersController.newSuperUser.login}" required="true" validatorMessage="Login">
+                        <f:validateRegex pattern="\w{2,}"/>
                         <!-- TODO:Walidacja -->
                     </h:inputText>
-                    <h:inputText pt:placeholder="* Name" value="#{usersController.newSuperUser.name}" required="true" validatorMessage="Name">
+                    <h:inputText pt:placeholder="* #{msg.name}" value="#{usersController.newSuperUser.name}" required="true" validatorMessage="Name">
                         <f:validateRegex pattern="[A-Za-z]{2,}"/>
                         <!-- TODO:Walidacja -->
                     </h:inputText>
-                    <h:inputText pt:placeholder="* Surname" value="#{usersController.newSuperUser.surname}" required="true" validatorMessage="Surname">
+                    <h:inputText pt:placeholder="* #{msg.surname}" value="#{usersController.newSuperUser.surname}" required="true" validatorMessage="Surname">
                         <f:validateRegex pattern="[A-Za-z]{2,}"/>
                         <!-- TODO:Walidacja -->
                     </h:inputText>
                     <h:commandButton value="OK" action="#{usersController.processNewSuperUser()}" class="positive_btn" />
-                    <h:commandButton value="Cancel" action="main" immediate="true" class="negative_btn" />
+                    <h:commandButton value="#{msg.cancel}" action="main" immediate="true" class="negative_btn" />
                 </h:form>
             </div>
         </ui:define>

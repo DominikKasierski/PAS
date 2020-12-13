@@ -25,7 +25,8 @@ public class UsersRepository extends Repository<User> {
         return clientList;
     }
 
-    @Override public void addElement(User user) {
+    @Override
+    public void addElement(User user) {
         if (isLoginUnique(user.getLogin())) {
             super.addElement(user);
         } else {

@@ -5,7 +5,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <h:head>
-    <title>Facelet Title</title>
+    <title>#{msg.confirmNewBabysitter}</title>
 </h:head>
 <h:body>
     <ui:composition template="template/commonLayout.xhtml">
@@ -19,8 +19,8 @@
                     <h:outputText value="#{resourcesController.getSomeBabysitter(resourcesController.typeOfBabysitter).maxNumberOfChildrenInTheFamily}" styleClass="formOutput" />
                     <h:outputText value="#{resourcesController.getSomeBabysitter(resourcesController.typeOfBabysitter).yearsOfExperienceInTeaching}" styleClass="formOutput" rendered="#{resourcesController.typeOfBabysitter == 'TEACHING'}" />
                     <h:outputText value="#{resourcesController.getSomeBabysitter(resourcesController.typeOfBabysitter).valueOfCleaningEquipment}" styleClass="formOutput" rendered="#{resourcesController.typeOfBabysitter == 'TIDING'}" />
-                    <h:commandButton value="Confirm" action="#{resourcesController.confirmNewBabysitter(resourcesController.typeOfBabysitter)}" class="positive_btn" />
-                    <h:commandButton value="Reject" action="#{resourcesController.backToMain}" immediate="true" class="negative_btn" />
+                    <h:commandButton value="#{msg.confirm}" action="#{resourcesController.confirmNewBabysitter(resourcesController.typeOfBabysitter)}" class="positive_btn" />
+                    <h:commandButton value="#{msg.reject}" action="#{resourcesController.backToMain}" immediate="true" class="negative_btn" />
                 </h:form>
             </div>
         </ui:define>

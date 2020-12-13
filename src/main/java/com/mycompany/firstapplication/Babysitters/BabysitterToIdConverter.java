@@ -18,8 +18,9 @@ public class BabysitterToIdConverter implements Converter<Babysitter>, Serializa
         return babysittersRepository.findByKey(s);
     }
 
-    @Override public String getAsString(FacesContext facesContext, UIComponent uiComponent,
-                                        Babysitter babysitter) {
+    @Override
+    public String getAsString(FacesContext facesContext, UIComponent uiComponent,
+                              Babysitter babysitter) {
         return babysitter.getUuid();
     }
 }

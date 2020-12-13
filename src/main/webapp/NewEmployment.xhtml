@@ -6,7 +6,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
-    <title>Babysitter List</title>
+    <title>#{msg.newEmployment}</title>
 </h:head>
 <h:body>
     <ui:composition template="template/commonLayout.xhtml">
@@ -24,7 +24,7 @@
                         </h:selectOneListbox> <br/>
 
                         <h:commandButton value="OK" action="#{employmentsController.processNewEmployment()}" class="positive_btn" />
-                        <h:commandButton value="Cancel" action="main" immediate="true" class="negative_btn" />
+                        <h:commandButton value="#{msg.cancel}" action="main" immediate="true" class="negative_btn" />
                     </div>
                 </h:form>
         </ui:define>

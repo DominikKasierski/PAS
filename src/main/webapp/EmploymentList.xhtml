@@ -6,7 +6,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
-    <title>Client List</title>
+    <title>#{msg.employmentList}</title>
 </h:head>
 <h:body>
     <ui:composition template="template/commonLayout.xhtml">
@@ -15,19 +15,19 @@
                 <div style="overflow-x: auto;">
                     <h:dataTable value="#{employmentsController.employmentsManager.employmentsRepository.elements}" var="employment">
                         <h:column>
-                            <f:facet name="header">Employment id</f:facet>
+                            <f:facet name="header">#{msg.employmentId}</f:facet>
                             ${employment.uuid}
                         </h:column>
                         <h:column>
-                            <f:facet name="header">Client</f:facet>
+                            <f:facet name="header">#{msg.client}</f:facet>
                             ${employment.client.name.concat(" ").concat(employment.client.surname)}
                         </h:column>
                         <h:column>
-                            <f:facet name="header">Babysitter</f:facet>
+                            <f:facet name="header">#{msg.babysitter}</f:facet>
                             ${employment.babysitter.name.concat(" ").concat(employment.babysitter.surname)}
                         </h:column>
                         <h:column>
-                            <f:facet name="header">Beginning of Employment</f:facet>
+                            <f:facet name="header">#{msg.beginningOfEmployment}</f:facet>
                             ${employment.beginningOfEmployment.format(employmentsController.formatter)}
                         </h:column>
                     </h:dataTable>

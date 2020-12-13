@@ -4,9 +4,6 @@ import com.mycompany.firstapplication.Exceptions.BabysitterException;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import java.io.Serializable;
-import java.util.UUID;
-
 public class Babysitter {
 
     private String name;
@@ -23,7 +20,7 @@ public class Babysitter {
     }
 
     public Babysitter(String name, String surname, Integer basePriceForHour, Integer minChildAge,
-            int maxNumberOfChildrenInTheFamily) {
+                      int maxNumberOfChildrenInTheFamily) {
         this.name = name;
         this.surname = surname;
         this.basePriceForHour = basePriceForHour;
@@ -43,6 +40,7 @@ public class Babysitter {
     public Integer getYearsOfExperienceInTeaching() {
         return null;
     }
+
     public Double getValueOfCleaningEquipment() {
         return null;
     }

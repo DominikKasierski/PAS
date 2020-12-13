@@ -1,10 +1,5 @@
 package com.mycompany.firstapplication.Users;
 
-import com.mycompany.firstapplication.Babysitters.Babysitter;
-import com.mycompany.firstapplication.Babysitters.TeachingSitter;
-import com.mycompany.firstapplication.Babysitters.TidingSitter;
-import com.mycompany.firstapplication.Babysitters.TypeOfBabysitter;
-
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.faces.event.ValueChangeEvent;

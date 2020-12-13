@@ -6,7 +6,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
-    <title>Babysitter List</title>
+    <title>#{msg.babysittersList}</title>
 </h:head>
 <h:body>
     <ui:composition template="template/commonLayout.xhtml">
@@ -26,39 +26,39 @@
                             ${babysitter.uuid}
                         </h:column>
                         <h:column>
-                            <f:facet name="header">Name</f:facet>
+                            <f:facet name="header">#{msg.name}</f:facet>
                             ${babysitter.name}
                         </h:column>
                         <h:column>
-                            <f:facet name="header">Surname</f:facet>
+                            <f:facet name="header">#{msg.surname}</f:facet>
                             ${babysitter.surname}
                         </h:column>
                         <h:column>
-                            <f:facet name="header">Base price for hour</f:facet>
+                            <f:facet name="header">#{msg.basePriceForHour}</f:facet>
                             ${babysitter.basePriceForHour}
                         </h:column>
                         <h:column>
-                            <f:facet name="header">Minimal child age</f:facet>
+                            <f:facet name="header">#{msg.minimalChildAge}</f:facet>
                             ${babysitter.minChildAge}
                         </h:column>
                         <h:column>
-                            <f:facet name="header">Maximal number of children</f:facet>
+                            <f:facet name="header">#{msg.maximalNumberOfChildren}</f:facet>
                             ${babysitter.maxNumberOfChildrenInTheFamily}
                         </h:column>
                         <h:column>
-                            <f:facet name="header">Currently employed</f:facet>
+                            <f:facet name="header">#{msg.currentlyEmployed}</f:facet>
                             ${babysitter.employed}
                         </h:column>
                         <h:column rendered="#{resourcesController.babysittersManager.typeOfBabysitter == 'TEACHING' }">
-                            <f:facet name="header">Years of experience in teaching</f:facet>
+                            <f:facet name="header">#{msg.yearsOfExperienceInTeaching}</f:facet>
                             ${babysitter.yearsOfExperienceInTeaching}
                         </h:column>
                         <h:column rendered="#{resourcesController.babysittersManager.typeOfBabysitter == 'TIDING'}">
-                            <f:facet name="header">Value of cleaning equipment</f:facet>
+                            <f:facet name="header">#{msg.valueOfCleaningEquipment}</f:facet>
                             ${babysitter.valueOfCleaningEquipment}
                         </h:column>
                         <h:column>
-                            <f:facet name="header">Actions</f:facet>
+                            <f:facet name="header">#{msg.actions}</f:facet>
                             <h:commandButton value="Delete" action="#{resourcesController.babysittersManager.deleteBabysitter(babysitter)}" class="negative_btn"/>
                         </h:column>
                     </h:dataTable>
