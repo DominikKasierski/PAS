@@ -24,7 +24,7 @@ class EmploymentsRepositoryTest {
 
         Babysitter babysitter = new Babysitter("Anna", "Kowalska", 20, 4, 5);
 
-        Client client = new Client("Login", "Szymon", "Dubowski", 5, 10);
+        Client client = new Client("Login", "Haslo", "Szymon", "Dubowski", 5, 10);
 
         Employment employment = new Employment(babysitter, client);
 
@@ -41,7 +41,7 @@ class EmploymentsRepositoryTest {
 
         Babysitter babysitter = new Babysitter("Anna", "Kowalska", 20, 4, 5);
 
-        Client client = new Client("Login", "Szymon", "Dubowski", 5, 10);
+        Client client = new Client("Login", "Haslo", "Szymon", "Dubowski", 5, 10);
 
         Employment employment = new Employment(babysitter, client);
 
@@ -58,7 +58,7 @@ class EmploymentsRepositoryTest {
 
         Babysitter babysitter = new Babysitter("Anna", "Kowalska", 20, 4, 5);
 
-        Client client = new Client("Login", "Szymon", "Dubowski", 5, 10);
+        Client client = new Client("Login", "Haslo", "Szymon", "Dubowski", 5, 10);
 
         Employment employment = new Employment(babysitter, client);
 
@@ -73,7 +73,7 @@ class EmploymentsRepositoryTest {
 
         Babysitter babysitter = new Babysitter("Anna", "Kowalska", 20, 4, 5);
 
-        Client client = new Client("Login", "Szymon", "Dubowski", 5, 10);
+        Client client = new Client("Login", "Haslo", "Szymon", "Dubowski", 5, 10);
 
         Employment employment = new Employment(babysitter, client);
 
@@ -92,7 +92,7 @@ class EmploymentsRepositoryTest {
 
         Babysitter babysitter = new Babysitter("Anna", "Kowalska", 20, 4, 5);
 
-        Client client = new Client("Login", "Szymon", "Dubowski", 5, 10);
+        Client client = new Client("Login", "Haslo", "Szymon", "Dubowski", 5, 10);
 
         Employment employment = new Employment(babysitter, client);
 
@@ -110,7 +110,7 @@ class EmploymentsRepositoryTest {
 
         Babysitter babysitter = new Babysitter("Anna", "Kowalska", 20, 4, 5);
 
-        Client client = new Client("Login", "Szymon", "Dubowski", 5, 10);
+        Client client = new Client("Login", "Haslo", "Szymon", "Dubowski", 5, 10);
 
         Employment employment = new Employment(babysitter, client);
 

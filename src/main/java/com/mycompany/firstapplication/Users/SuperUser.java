@@ -2,10 +2,9 @@ package com.mycompany.firstapplication.Users;
 
 public class SuperUser extends User {
 
-    private final String role = "SuperUser";
-
-    public SuperUser(String login, String name, String surname) {
-        super(login, name, surname);
+    public SuperUser(String login, String password, String name, String surname) {
+        super(login, password, name, surname);
+        this.role = "SuperUser";
     }
 
     public SuperUser() {

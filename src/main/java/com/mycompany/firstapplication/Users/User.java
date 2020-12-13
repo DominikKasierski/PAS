@@ -10,7 +10,9 @@ public abstract class User {
     private boolean isActive = true;
     private String login;
     private String name;
+    private String password;
     private String surname;
+    protected String role;
     private final String uniqueID;
     final int SHORT_ID_LENGTH = 8;
 
@@ -18,11 +20,12 @@ public abstract class User {
         uniqueID = RandomStringUtils.randomNumeric(SHORT_ID_LENGTH);
     }
 
-    public User(String login, String name, String surname) {
-        if (login.isEmpty() || name.isEmpty() || surname.isEmpty()) {
-            throw new UserException("Empty login, name or surname");
+    public User(String login, String password, String name, String surname) {
+        if (login.isEmpty() || password.isEmpty() || name.isEmpty() || surname.isEmpty()) {
+            throw new UserException("Empty login, password, name or surname");
         }
         this.login = login;
+        this.password = password;
         this.name = name;
         this.surname = surname;
         uniqueID = RandomStringUtils.randomNumeric(SHORT_ID_LENGTH);
@@ -74,5 +77,13 @@ public abstract class User {
 
     public String getLogin() {
         return login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getRole() {
+        return role;
     }
 }

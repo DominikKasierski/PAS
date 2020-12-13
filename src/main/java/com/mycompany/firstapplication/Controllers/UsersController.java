@@ -1,5 +1,7 @@
 package com.mycompany.firstapplication.Controllers;
 
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
 import com.mycompany.firstapplication.Exceptions.UserException;
 import com.mycompany.firstapplication.Users.Admin;
 import com.mycompany.firstapplication.Users.Client;
@@ -27,6 +29,7 @@ public class UsersController implements Serializable {
     private final Client newClient = new Client();
     private final SuperUser newSuperUser = new SuperUser();
     private final Admin newAdmin = new Admin();
+
 
     public Client getNewClient() {
         return newClient;
@@ -82,6 +85,13 @@ public class UsersController implements Serializable {
                     new FacesMessage("Taki login już istnieje"));
         }
         return "";
+    }
+
+    public boolean checkAndUseAdminToken(String token) {
+        if (!usersManager.getCurrentAdminTokens().containsValue(token))
+            throw new RuntimeException("Token provided is not a valid Admin token");
+        usersManager.getCurrentAdminTokens().inverse().remove(token); // reversing map view so that values are keys now
+        return true;
     }
 
     public String reject() {

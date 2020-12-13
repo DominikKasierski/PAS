@@ -1,9 +1,7 @@
 package com.mycompany.firstapplication.Users;
 
-import com.mycompany.firstapplication.Babysitters.Babysitter;
-import com.mycompany.firstapplication.Babysitters.TeachingSitter;
-import com.mycompany.firstapplication.Babysitters.TidingSitter;
-import com.mycompany.firstapplication.Babysitters.TypeOfBabysitter;
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
@@ -12,6 +10,7 @@ import javax.inject.Inject;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @ApplicationScoped
 public class UsersManager implements Serializable {
@@ -21,7 +20,10 @@ public class UsersManager implements Serializable {
     private List<User> currentUsers;
     private TypeOfUser typeOfUser = TypeOfUser.USER;
 
+    private final BiMap<Admin, String> currentAdminTokens = HashBiMap.create();
+
     public UsersManager() {
+        currentAdminTokens.put(new Admin("michu", "rysiu", "jako", "jajko2"), "zajebisty token");
     }
 
     public UsersRepository getUsersRepository() {
@@ -74,6 +76,9 @@ public class UsersManager implements Serializable {
         }
     }
 
+    public String getUserRole(User user) {
+        return user.getRole();
+    }
 
     public void addUser(User user) {
         usersRepository.addElement(user);
@@ -95,5 +100,20 @@ public class UsersManager implements Serializable {
     public void initCurrentPersons() {
         typeOfUser = TypeOfUser.USER;
         currentUsers = usersRepository.getUsersList();
+    }
+
+    public BiMap<Admin, String> getCurrentAdminTokens() {
+        return currentAdminTokens;
+    }
+
+    public String requestOneTimeToken(String login, String password) {
+
+        User user = usersRepository.findUserByLogin(login);
+        if (!user.getRole().equals("Admin")) throw new RuntimeException("User is not an admin");
+        if (!password.equals(user.getPassword()))
+            throw new IllegalArgumentException("Password provided does not match actual password");
+        String token = UUID.randomUUID().toString();
+        currentAdminTokens.put((Admin) user, token); // adding token to tokens list, overriding current Admin's token if assigned
+        return token;
     }
 }

@@ -14,7 +14,7 @@
             <div id="container">
                 <h:form>
                     <h:inputText pt:placeholder="* Login" value="#{usersController.newAdmin.login}" required="true" validatorMessage="Login">
-                        <f:validateRegex pattern="[A-Za-z1-9]{2,}"/>
+                        <f:validateRegex pattern="\w{2,}"/>
                         <!-- TODO:Walidacja -->
                     </h:inputText>
                     <h:inputText pt:placeholder="* Name" value="#{usersController.newAdmin.name}" required="true" validatorMessage="Name">
@@ -25,6 +25,7 @@
                         <f:validateRegex pattern="[A-Za-z]{2,}"/>
                         <!-- TODO:Walidacja -->
                     </h:inputText>
+                    <h:inputText pt:placeholder="* Admin token" validator="#{usersController.checkAndUseAdminToken}" required="true" validatorMessage="Admin token"/>
                     <h:commandButton value="OK" action="#{usersController.processNewAdmin()}" class="positive_btn" />
                     <h:commandButton value="Cancel" action="main" immediate="true" class="negative_btn" />
                 </h:form>

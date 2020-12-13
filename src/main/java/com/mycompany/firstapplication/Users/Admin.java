@@ -2,12 +2,13 @@ package com.mycompany.firstapplication.Users;
 
 public class Admin extends User {
 
-    private final String role = "Admin";
-
-    public Admin(String login, String name, String surname) {
-        super(login, name, surname);
+    public Admin(String login, String password, String name, String surname) {
+        super(login, password, name, surname);
+        this.role = "Admin";
     }
+
 
     public Admin() {
     }
+
 }

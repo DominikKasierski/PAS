@@ -1,20 +1,18 @@
 package com.mycompany.firstapplication.Users;
 
 public class Client extends User {
-
-    private final String role = "Client";
-
     private Integer numberOfChildren;
     private Integer ageOfTheYoungestChild;
 
     public Client() {
     }
 
-    public Client(String login, String name, String surname, int numberOfChildren,
+    public Client(String login, String password, String name, String surname, int numberOfChildren,
                   int ageOfTheYoungestChild) {
-        super(login, name, surname);
+        super(login, password, name, surname);
         this.numberOfChildren = numberOfChildren;
         this.ageOfTheYoungestChild = ageOfTheYoungestChild;
+        this.role = "Client";
     }
 
     public void setNumberOfChildren(Integer numberOfChildren) {

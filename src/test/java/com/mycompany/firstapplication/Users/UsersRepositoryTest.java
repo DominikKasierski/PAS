@@ -15,7 +15,7 @@ class UsersRepositoryTest {
 
         UsersRepository usersRepository = new UsersRepository();
 
-        Client client = new Client("Login", "Szymon", "Dubowski", 5, 10);
+        Client client = new Client("Login", "Haslo", "Szymon", "Dubowski", 5, 10);
 
         assertEquals(0, usersRepository.getNumberOfElements());
 

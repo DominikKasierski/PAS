@@ -66,9 +66,9 @@ public class UsersRepository extends Repository<User> {
 
     @PostConstruct
     private void initUsersList() {
-        addElement(new Admin("Admin1", "Adam", "Adamski"));
-        addElement(new SuperUser("Manager1", "Tomek", "Tomkowski"));
-        addElement(new Client("Client1", "Tomasz", "Hajto", 3, 4));
-        addElement(new Client("Client2", "Jan", "Urban", 2, 7));
+        addElement(new Admin("Admin1", "haslo1", "Adam", "Adamski"));
+        addElement(new SuperUser("Manager1", "haslo2",  "Tomek", "Tomkowski"));
+        addElement(new Client("Client1", "haslo3", "Tomasz", "Hajto", 3, 4));
+        addElement(new Client("Client2", "haslo4",  "Jan", "Urban", 2, 7));
     }
 }
