@@ -13,20 +13,43 @@
         <ui:define name="content">
             <div id="container">
                 <h:form>
-                    <h:inputText pt:placeholder="* Login" value="#{usersController.newAdmin.login}" required="true" validatorMessage="Login">
+                    <h:inputText pt:placeholder="* Login"
+                                 value="#{usersController.getSomeUser(usersController.typeOfUser).login}"
+                                 required="true"
+                                 validatorMessage="Login">
                         <f:validateRegex pattern="[A-Za-z1-9]{2,}"/>
                         <!-- TODO:Walidacja -->
                     </h:inputText>
-                    <h:inputText pt:placeholder="* Name" value="#{usersController.newAdmin.name}" required="true" validatorMessage="Name">
+                    <h:inputText pt:placeholder="* Name"
+                                 value="#{usersController.getSomeUser(usersController.typeOfUser).name}"
+                                 required="true"
+                                 validatorMessage="Name">
                         <f:validateRegex pattern="[A-Za-z]{2,}"/>
                         <!-- TODO:Walidacja -->
                     </h:inputText>
-                    <h:inputText pt:placeholder="* Surname" value="#{usersController.newAdmin.surname}" required="true" validatorMessage="Surname">
+                    <h:inputText pt:placeholder="* Surname"
+                                 value="#{usersController.getSomeUser(usersController.typeOfUser).surname}"
+                                 required="true"
+                                 validatorMessage="Surname">
                         <f:validateRegex pattern="[A-Za-z]{2,}"/>
                         <!-- TODO:Walidacja -->
                     </h:inputText>
-                    <h:commandButton value="OK" action="#{usersController.processNewAdmin()}" class="positive_btn" />
-                    <h:commandButton value="Cancel" action="main" immediate="true" class="negative_btn" />
+                    <h:inputText pt:placeholder="* Number of children"
+                                 value="#{usersController.getSomeUser(usersController.typeOfUser).numberOfChildren}"
+                                 required="true"
+                                 validatorMessage="Numer of children"
+                                 rendered="#{usersController.typeOfUser == 'CLIENT'}">
+                        <!-- TODO:Walidacja -->
+                    </h:inputText>
+                    <h:inputText pt:placeholder="* Age of the youngest child"
+                                 value="#{usersController.getSomeUser(usersController.typeOfUser).ageOfTheYoungestChild}"
+                                 required="true"
+                                 validatorMessage="Age of the youngest child"
+                                 rendered="#{usersController.typeOfUser == 'CLIENT'}">
+                        <!-- TODO:Walidacja -->
+                    </h:inputText>
+                    <h:commandButton value="OK" action="#{usersController.processNewUser()}" class="positive_btn"/>
+                    <h:commandButton value="Cancel" action="#{usersController.backToMain}" immediate="true" class="negative_btn"/>
                 </h:form>
             </div>
         </ui:define>

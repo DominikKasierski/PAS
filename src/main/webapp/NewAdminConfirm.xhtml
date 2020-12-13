@@ -12,13 +12,14 @@
         <ui:define name="content">
             <div id="container">
                 <h:form id="newAdminConfirm">
-                    <h:outputText id="login" value="#{usersController.newAdmin.login}" styleClass="formOutput"/>
+                    <h:outputText id="login" value="#{usersController.getSomeUser(usersController.typeOfUser).login}" styleClass="formOutput"/>
                     <h:message for="login"/>
-                    <h:outputText value="#{usersController.newAdmin.name}" styleClass="formOutput"/>
-                    <h:outputText value="#{usersController.newAdmin.surname}" styleClass="formOutput"/>
-                    <h:outputText value="#{msg.message}" styleClass="formOutput"/>
-                    <h:commandButton value="Confirm" action="#{usersController.confirmNewAdmin()}" class="positive_btn" />
-                    <h:commandButton value="Reject" action="#{usersController.reject()}" immediate="true" class="negative_btn" />
+                    <h:outputText value="#{usersController.getSomeUser(usersController.typeOfUser).name}" styleClass="formOutput"/>
+                    <h:outputText value="#{usersController.getSomeUser(usersController.typeOfUser).surname}" styleClass="formOutput"/>
+                    <h:outputText value="#{usersController.getSomeUser(usersController.typeOfUser).numberOfChildren}" styleClass="formOutput" rendered="#{usersController.typeOfUser == 'CLIENT'}"/>
+                    <h:outputText value="#{usersController.getSomeUser(usersController.typeOfUser).ageOfTheYoungestChild}" styleClass="formOutput" rendered="#{usersController.typeOfUser == 'CLIENT'}"/>
+                    <h:commandButton value="Confirm" action="#{usersController.confirmNewUser(usersController.typeOfUser)}" class="positive_btn" />
+                    <h:commandButton value="Reject" action="#{usersController.backToMain()}" immediate="true" class="negative_btn" />
                 </h:form>
             </div>
         </ui:define>

@@ -43,26 +43,10 @@
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
-        <from-view-id>/NewClient.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>NewClientConfirm</from-outcome>
-            <to-view-id>/NewClientConfirm.xhtml</to-view-id>
-            <redirect />
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
         <from-view-id>/NewAdmin.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>NewAdminConfirm</from-outcome>
             <to-view-id>/NewAdminConfirm.xhtml</to-view-id>
-            <redirect />
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>/NewSuperUser.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>NewSuperUserConfirm</from-outcome>
-            <to-view-id>/NewSuperUserConfirm.xhtml</to-view-id>
             <redirect />
         </navigation-case>
     </navigation-rule>
@@ -74,12 +58,5 @@
             <redirect />
         </navigation-case>
     </navigation-rule>
-    <navigation-rule>
-        <from-view-id>/NewAdminConfirm.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>NewAdmin</from-outcome>
-            <to-view-id>/NewAdmin.xhtml</to-view-id>
-            <redirect />
-        </navigation-case>
-    </navigation-rule>
+
 </faces-config>

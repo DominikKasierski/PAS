@@ -1,25 +1,21 @@
 package com.mycompany.firstapplication.Users;
 
-import com.mycompany.firstapplication.Babysitters.Babysitter;
-import com.mycompany.firstapplication.Babysitters.TeachingSitter;
-import com.mycompany.firstapplication.Babysitters.TidingSitter;
-import com.mycompany.firstapplication.Babysitters.TypeOfBabysitter;
-
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.faces.event.ValueChangeEvent;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-@ApplicationScoped
+@ViewScoped
 public class UsersManager implements Serializable {
 
     @Inject
     private UsersRepository usersRepository;
     private List<User> currentUsers;
-    private TypeOfUser typeOfUser = TypeOfUser.USER;
+    private TypeOfUser typeOfUser = TypeOfUser.ADMIN;
 
     public UsersManager() {
     }
@@ -70,7 +66,7 @@ public class UsersManager implements Serializable {
         if (currentUsers.get(0) instanceof Client) {
             typeOfUser = TypeOfUser.CLIENT;
         } else {
-            typeOfUser = TypeOfUser.USER;
+            typeOfUser = TypeOfUser.ADMIN;
         }
     }
 
@@ -93,7 +89,7 @@ public class UsersManager implements Serializable {
 
     @PostConstruct
     public void initCurrentPersons() {
-        typeOfUser = TypeOfUser.USER;
+        typeOfUser = TypeOfUser.ADMIN;
         currentUsers = usersRepository.getUsersList();
     }
 }

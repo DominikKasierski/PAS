@@ -20,9 +20,9 @@
                 </ul>
                 <br/>
                 <ul>
-                    <li><h:link outcome="NewAdmin.xhtml">Add new admin</h:link></li>
-                    <li><h:link outcome="NewSuperUser.xhtml">Add new super user</h:link></li>
-                    <li><h:link outcome="NewClient.xhtml">Add new client</h:link></li>
+                    <li><h:commandLink value="Add new admin" action="#{usersController.userType('ADMIN')}"/></li>
+                    <li><h:commandLink value="Add new super user" action="#{usersController.userType('SUPERUSER')}"/></li>
+                    <li><h:commandLink value="Add new client" action="#{usersController.userType('CLIENT')}"/></li>
                     <li><h:link outcome="ClientList.xhtml">Show clients list</h:link></li>
                 </ul>
                 <br/>
