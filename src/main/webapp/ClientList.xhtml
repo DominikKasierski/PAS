@@ -50,12 +50,12 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header">#{msg.actions}</f:facet>
-                            <h:commandButton value="Change active" action="#{usersController.usersManager.changeActive(client)}" class="negative_btn"/>
+                            <h:commandButton value="#{msg.changeActive}" action="#{usersController.usersManager.changeActive(client)}" class="negative_btn"/>
                         </h:column>
                     </h:dataTable>
                 </div>
-                <h:commandButton value="Refresh" action="#{usersController.usersManager.initCurrentPersons()}" immediate="true" class="positive_btn"/>
-                <h:commandButton value="Cancel" action="main" immediate="true" class="negative_btn"/>
+                <h:commandButton value="#{msg.refresh}" action="#{usersController.usersManager.initCurrentPersons()}" immediate="true" class="positive_btn"/>
+                <h:commandButton value="#{msg.cancel}" action="main" immediate="true" class="negative_btn"/>
             </h:form>
         </ui:define>
     </ui:composition>
