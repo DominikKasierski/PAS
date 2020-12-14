@@ -8,7 +8,7 @@
 <ui:composition>
 
     <div id="header-left">
-        <h:link value="#{msg.babysitterCompany}" styleClass="logo"/>
+        <h:link value="#{msg.babysitterCompany}" styleClass="logo" outcome="main"/>
         <div class="breadcrumbs">
             <ui:repeat value="#{breadcrumbController.breadCrumbs}" var="item">
                 #{item.concat("/")}
@@ -17,7 +17,7 @@
     </div>
     <div id="header-right">
         <h:link value="#{msg.home}" styleClass="active" outcome="main"/>
-        <h:link value="#{msg.contact}"/>
+        <h:link value="#{msg.contact}" outcome="main"/>
     </div>
 
 </ui:composition>
