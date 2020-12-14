@@ -16,7 +16,6 @@ public class BabysittersManager implements Serializable {
     @Inject
     private BabysittersRepository babysittersRepository;
 
-
     public BabysittersManager() {
     }
 
@@ -58,7 +57,6 @@ public class BabysittersManager implements Serializable {
                 appropriateBabysitters.add(babysitter);
             }
         }
-
         return appropriateBabysitters;
     }
 

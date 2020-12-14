@@ -13,10 +13,10 @@
         <ui:define name="content">
             <h:form>
                 <div style="overflow-x: auto;">
-                    <h:dataTable value="#{usersController.usersManager.currentUsers}" var="client">
+                    <h:dataTable value="#{usersController.currentUsers}" var="client">
                         <h:column>
                             <f:facet name="header">#{msg.id}
-                                <h:selectOneMenu valueChangeListener="#{usersController.usersManager.valueChangedId}" onchange="submit()" >
+                                <h:selectOneMenu valueChangeListener="#{usersController.valueChangedId}" onchange="submit()" >
                                     <f:selectItem itemLabel="#{msg.idlabel}" itemValue="0" />
                                     <f:selectItems value="#{usersController.usersManager.allUsersArray}" var="item"
                                                    itemLabel="#{item.uuid}" itemValue="#{item.uuid}"/>
@@ -26,7 +26,7 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header">#{msg.login}
-                                <h:selectOneMenu valueChangeListener="#{usersController.usersManager.valueChangedLogin}" onchange="submit()" >
+                                <h:selectOneMenu valueChangeListener="#{usersController.valueChangedLogin}" onchange="submit()" >
                                     <f:selectItem itemLabel="#{msg.loginlabel}" itemValue="0" />
                                     <f:selectItems value="#{usersController.usersManager.allUsersArray}" var="item"
                                                    itemLabel="#{item.login}" itemValue="#{item.login}"/>
@@ -46,11 +46,11 @@
                             <f:facet name="header">#{msg.active}</f:facet>
                             ${client.active}
                         </h:column>
-                        <h:column rendered="#{usersController.usersManager.typeOfUser == 'CLIENT' }">
+                        <h:column rendered="#{usersController.typeOfUser == 'CLIENT' }">
                             <f:facet name="header">#{msg.numberOfChildren}</f:facet>
                             ${client.numberOfChildren}
                         </h:column>
-                        <h:column rendered="#{usersController.usersManager.typeOfUser == 'CLIENT' }">
+                        <h:column rendered="#{usersController.typeOfUser == 'CLIENT' }">
                             <f:facet name="header">#{msg.ageOfTheYoungestChild}</f:facet>
                             ${client.ageOfTheYoungestChild}
                         </h:column>
@@ -60,7 +60,7 @@
                         </h:column>
                     </h:dataTable>
                 </div>
-                <h:commandButton value="#{msg.refresh}" action="#{usersController.usersManager.initCurrentPersons()}" immediate="true" class="positive_btn"/>
+                <h:commandButton value="#{msg.refresh}" action="#{usersController.initCurrentPersons()}" immediate="true" class="positive_btn"/>
                 <h:commandButton value="#{msg.cancel}" action="main" immediate="true" class="negative_btn"/>
             </h:form>
         </ui:define>
