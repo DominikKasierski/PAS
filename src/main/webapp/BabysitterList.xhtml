@@ -14,10 +14,10 @@
             <h:form>
                 <div style="overflow-x: auto;">
 
-                    <h:dataTable value="#{resourcesController.babysittersManager.currentBabysitters}" var="babysitter">
+                    <h:dataTable value="#{resourcesController.currentBabysitters}" var="babysitter">
                         <h:column>
                             <f:facet name="header">Id
-                                <h:selectOneMenu valueChangeListener="#{resourcesController.babysittersManager.valueChanged}" onchange="submit()" >
+                                <h:selectOneMenu valueChangeListener="#{resourcesController.valueChanged}" onchange="submit()" >
                                     <f:selectItem itemLabel="#{msg.idlabel}" itemValue="0" />
                                     <f:selectItems value="#{resourcesController.babysittersManager.allBabysittersArray}" var="item"
                                                    itemLabel="#{item.uuid}" itemValue="#{item.uuid}"/>
@@ -49,11 +49,11 @@
                             <f:facet name="header">#{msg.currentlyEmployed}</f:facet>
                             ${babysitter.employed}
                         </h:column>
-                        <h:column rendered="#{resourcesController.babysittersManager.typeOfBabysitter == 'TEACHING' }">
+                        <h:column rendered="#{resourcesController.typeOfBabysitter == 'TEACHING' }">
                             <f:facet name="header">#{msg.yearsOfExperienceInTeaching}</f:facet>
                             ${babysitter.yearsOfExperienceInTeaching}
                         </h:column>
-                        <h:column rendered="#{resourcesController.babysittersManager.typeOfBabysitter == 'TIDING'}">
+                        <h:column rendered="#{resourcesController.typeOfBabysitter == 'TIDING'}">
                             <f:facet name="header">#{msg.valueOfCleaningEquipment}</f:facet>
                             ${babysitter.valueOfCleaningEquipment}
                         </h:column>
@@ -63,7 +63,7 @@
                         </h:column>
                     </h:dataTable>
                 </div>
-                <h:commandButton value="#{msg.refresh}" action="#{resourcesController.babysittersManager.initCurrentPersons()}" immediate="true" class="positive_btn"/>
+                <h:commandButton value="#{msg.refresh}" action="#{resourcesController.initCurrentPersons()}" immediate="true" class="positive_btn"/>
                 <h:commandButton value="#{msg.cancel}" action="main" immediate="true" class="negative_btn"/>
             </h:form>
         </ui:define>

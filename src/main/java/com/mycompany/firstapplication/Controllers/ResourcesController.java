@@ -2,11 +2,15 @@ package com.mycompany.firstapplication.Controllers;
 
 import com.mycompany.firstapplication.Babysitters.*;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
+import javax.faces.event.ValueChangeEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @ConversationScoped
 @Named
@@ -22,10 +26,35 @@ public class ResourcesController implements Serializable {
     private final TeachingSitter newTeachingSitter = new TeachingSitter();
     private final TidingSitter newTidingSitter = new TidingSitter();
 
-    private TypeOfBabysitter typeOfBabysitter;
+    private List<Babysitter> currentBabysitters;
+    private TypeOfBabysitter typeOfBabysitter = TypeOfBabysitter.NORMAL;
 
     public BabysittersManager getBabysittersManager() {
         return babysittersManager;
+    }
+
+    public void valueChanged(ValueChangeEvent event) {
+        if (!event.getNewValue().toString().equals("0")) {
+            String id = event.getNewValue().toString();
+            showSelectedBabysitter(id);
+        }
+    }
+
+    private void showSelectedBabysitter(String id) {
+        List<Babysitter> temporaryBabysittersList = new ArrayList<>();
+        temporaryBabysittersList.add(babysittersManager.getBabysittersRepository().findByKey(id));
+        currentBabysitters = temporaryBabysittersList;
+        setType();
+    }
+
+    private void setType() {
+        if (currentBabysitters.get(0) instanceof TeachingSitter) {
+            typeOfBabysitter = TypeOfBabysitter.TEACHING;
+        } else if (currentBabysitters.get(0) instanceof TidingSitter) {
+            typeOfBabysitter = TypeOfBabysitter.TIDING;
+        } else {
+            typeOfBabysitter = TypeOfBabysitter.NORMAL;
+        }
     }
 
     public Object getSomeBabysitter(TypeOfBabysitter type) {
@@ -77,5 +106,15 @@ public class ResourcesController implements Serializable {
     public String backToMain() {
         conversation.end();
         return "main";
+    }
+
+        public List<Babysitter> getCurrentBabysitters() {
+        return currentBabysitters;
+    }
+
+    @PostConstruct
+    public void initCurrentPersons() {
+        typeOfBabysitter = TypeOfBabysitter.NORMAL;
+        currentBabysitters = babysittersManager.getBabysittersRepository().getBabysittersList();
     }
 }
