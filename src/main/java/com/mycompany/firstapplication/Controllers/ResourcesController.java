@@ -1,11 +1,15 @@
 package com.mycompany.firstapplication.Controllers;
 
 import com.mycompany.firstapplication.Babysitters.*;
+import com.mycompany.firstapplication.Exceptions.BabysitterException;
+import com.mycompany.firstapplication.Exceptions.RepositoryException;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 import javax.faces.event.ValueChangeEvent;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
@@ -101,6 +105,17 @@ public class ResourcesController implements Serializable {
                 break;
         }
         return backToMain();
+    }
+
+    public String deleteBabysitter(Babysitter babysitter) {
+        try {
+            babysittersManager.deleteBabysitter(babysitter);
+            return "BabysitterList";
+        } catch (BabysitterException | RepositoryException exception) {
+            FacesContext.getCurrentInstance().addMessage("BabysitterList:delete",
+                    new FacesMessage("Opiekunka jest zatrudniona"));
+        }
+        return "";
     }
 
     public String backToMain() {

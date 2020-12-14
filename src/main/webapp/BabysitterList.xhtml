@@ -11,7 +11,7 @@
 <h:body>
     <ui:composition template="template/commonLayout.xhtml">
         <ui:define name="content">
-            <h:form>
+            <h:form id="BabysitterList">
                 <div style="overflow-x: auto;">
 
                     <h:dataTable value="#{resourcesController.currentBabysitters}" var="babysitter">
@@ -59,7 +59,8 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header">#{msg.actions}</f:facet>
-                            <h:commandButton value="Delete" action="#{resourcesController.babysittersManager.deleteBabysitter(babysitter)}" class="negative_btn"/>
+                            <h:commandButton id="delete" value="Delete" action="#{resourcesController.deleteBabysitter(babysitter)}" class="negative_btn"/>
+                            <h:message for="delete" />
                         </h:column>
                     </h:dataTable>
                 </div>

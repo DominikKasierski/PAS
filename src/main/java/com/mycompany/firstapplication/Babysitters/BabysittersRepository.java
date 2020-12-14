@@ -39,6 +39,11 @@ public class BabysittersRepository extends Repository<Babysitter> {
         return stringBuilder.toString();
     }
 
+    @Override
+    public void deleteElement(Babysitter babysitter) {
+        super.deleteElement(babysitter);
+    }
+
     @PostConstruct
     private void initBabysittersList() {
         addElement(new Babysitter("Anna", "Kwiatkowska", 123, 12, 4));
