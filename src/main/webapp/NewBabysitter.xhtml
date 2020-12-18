@@ -13,50 +13,55 @@
         <ui:define name="content">
             <div id="container">
                 <h:form>
-                    <h:inputText pt:placeholder="* #{msg.name}"
+                    <h:inputText id="name" pt:placeholder="* #{msg.name}"
                                  value="#{resourcesController.getSomeBabysitter(resourcesController.typeOfBabysitter).name}"
                                  required="true"
                                  requiredMessage="#{msg.requiredName}"
                                  validatorMessage="#{msg.validatorMessageName}">
-                        <f:validateRegex pattern="[A-Za-z]{2,}"/>
-                        <!-- TODO:ąćęłńóśżźĄĆĘŁŃÓŚŻŹ -->
+                        <f:validateRegex pattern="[A-Za-ząćęłńóśżźĄĆĘŁŃÓŚŻŹ]{2,}"/>
                     </h:inputText>
-                    <h:inputText pt:placeholder="* #{msg.surname}"
+                    <h:message for="name"/>
+
+                    <h:inputText id="surname" pt:placeholder="* #{msg.surname}"
                                  value="#{resourcesController.getSomeBabysitter(resourcesController.typeOfBabysitter).surname}"
                                  required="true"
                                  requiredMessage="#{msg.requiredSurname}"
                                  validatorMessage="#{msg.validatorMessageSurname}">
-                        <f:validateRegex pattern="[A-Za-z]{2,}"/>
-                        <!-- TODO:ąćęłńóśżźĄĆĘŁŃÓŚŻŹ -->
+                        <f:validateRegex pattern="[A-Za-ząćęłńóśżźĄĆĘŁŃÓŚŻŹ]{2,}"/>
                     </h:inputText>
-                    <h:inputText pt:placeholder="* #{msg.basePriceForHour}"
+                    <h:message for="surname"/>
+
+                    <h:inputText id="basePriceForHour" pt:placeholder="* #{msg.basePriceForHour}"
                                  value="#{resourcesController.getSomeBabysitter(resourcesController.typeOfBabysitter).basePriceForHour}"
                                  required="true"
                                  converterMessage="#{msg.converterMessageBasePrice}"
                                  requiredMessage="#{msg.requiredBasePrice}"
                                  validatorMessage="#{msg.validatorMessageBasePriceForHour}">
                         <f:validateLongRange minimum="0"/>
-                        <!-- TODO:Validate number -->
                     </h:inputText>
-                    <h:inputText pt:placeholder="* #{msg.minimalChildAge}"
+                    <h:message for="basePriceForHour"/>
+
+                    <h:inputText id="minChildAge" pt:placeholder="* #{msg.minimalChildAge}"
                                  value="#{resourcesController.getSomeBabysitter(resourcesController.typeOfBabysitter).minChildAge}"
                                  required="true"
                                  converterMessage="#{msg.converterMessageMinimalChildAge}"
                                  requiredMessage="#{msg.requiredChildAge}"
                                  validatorMessage="#{msg.validatorMessageMinimalChildAge}">
                         <f:validateLongRange minimum="0" maximum="15"/>
-                        <!-- TODO:Validate number -->
                     </h:inputText>
-                    <h:inputText pt:placeholder="* #{msg.maximalNumberOfChildren}"
+                    <h:message for ="minChildAge"/>
+
+                    <h:inputText id="maximalNumberOfChildren" pt:placeholder="* #{msg.maximalNumberOfChildren}"
                                  value="#{resourcesController.getSomeBabysitter(resourcesController.typeOfBabysitter).maxNumberOfChildrenInTheFamily}"
                                  required="true"
                                  converterMessage="#{msg.converterMessageMaxNumberOfChildren}"
                                  requiredMessage="#{msg.requiredMaxNumberOfChildren}"
                                  validatorMessage="#{msg.validatorMessageMaxNumberOfChildren}">
                         <f:validateLongRange minimum="0"/>
-                        <!-- TODO:Validate number -->
                     </h:inputText>
-                    <h:inputText pt:placeholder="* #{msg.yearsOfExperience}"
+                    <h:message for="maximalNumberOfChildren"/>
+
+                    <h:inputText id="yearsOfExperience" pt:placeholder="* #{msg.yearsOfExperience}"
                                  value="#{resourcesController.getSomeBabysitter(resourcesController.typeOfBabysitter).yearsOfExperienceInTeaching}"
                                  required="true"
                                  converterMessage="#{msg.converterMessageYearsOfExperience}"
@@ -64,9 +69,10 @@
                                  validatorMessage="#{msg.validatorMessageYearsOfExperience}"
                                  rendered="#{resourcesController.typeOfBabysitter == 'TEACHING'}">
                         <f:validateLongRange minimum="0" maximum="70"/>
-                        <!-- TODO:Validate number -->
                     </h:inputText>
-                    <h:inputText pt:placeholder="* #{msg.valueOfCleaningEquipment}"
+                    <h:message for="yearsOfExperience"/>
+
+                    <h:inputText id="valueOfCleaningEquipment" pt:placeholder="* #{msg.valueOfCleaningEquipment}"
                                  value="#{resourcesController.getSomeBabysitter(resourcesController.typeOfBabysitter).valueOfCleaningEquipment}"
                                  required="true"
                                  converterMessage="#{msg.converterMessageValueOfEquipment}"
@@ -74,8 +80,9 @@
                                  validatorMessage="#{msg.validatorMessageValueOfEquipment}"
                                  rendered="#{resourcesController.typeOfBabysitter == 'TIDING'}">
                         <f:validateLongRange minimum="0"/>
-                        <!-- TODO:Validate number -->
                     </h:inputText>
+                    <h:message for="valueOfCleaningEquipment"/>
+
                     <h:commandButton value="#{msg.add}" action="#{resourcesController.processNewBabysitter()}"
                                      class="positive_btn"/>
                     <h:commandButton value="#{msg.cancel}" action="#{resourcesController.backToMain}" immediate="true"
