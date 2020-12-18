@@ -81,6 +81,7 @@ body {
     margin-left: 10px;
     float: right;
     width: 85%;
+    padding: 5px;
     /*border: 1px solid #000;*/
     height: inherit;
 }

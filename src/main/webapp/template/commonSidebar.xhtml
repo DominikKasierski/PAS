@@ -10,18 +10,18 @@
 
 <!--    <h1>This is default sidebar</h1>-->
     <h:form>
-            <h:commandLink value="Add new babysitter" action="#{resourcesController.sitterType('NORMAL')}"/>
-            <h:commandLink value="Add new teaching babysitter" action="#{resourcesController.sitterType('TEACHING')}"/>
-            <h:commandLink value="Add new tiding babysitter" action="#{resourcesController.sitterType('TIDING')}"/>
-            <h:link outcome="BabysitterList.xhtml">Show babysitters list</h:link>
+            <h:commandLink value="#{msg.addNewBabysitter}" action="#{resourcesController.sitterType('NORMAL')}"/>
+            <h:commandLink value="#{msg.addNewTeachingSitter}" action="#{resourcesController.sitterType('TEACHING')}"/>
+            <h:commandLink value="#{msg.addNewTidingSitter}" action="#{resourcesController.sitterType('TIDING')}"/>
+            <h:link outcome="BabysitterList.xhtml">#{msg.showBabysittersList}</h:link>
         <br/>
             <h:commandLink value="#{msg.addNewAdmin}" action="#{usersController.userType('ADMIN')}"/>
             <h:commandLink value="#{msg.addNewSuperUser}" action="#{usersController.userType('SUPERUSER')}"/>
             <h:commandLink value="#{msg.addNewClient}" action="#{usersController.userType('CLIENT')}"/>
-            <h:link outcome="ClientList.xhtml">Show clients list</h:link>
+            <h:link outcome="ClientList.xhtml">#{msg.showUsersList}</h:link>
         <br/>
-            <h:link outcome="NewEmployment.xhtml">Add new employment</h:link>
-            <h:link outcome="EmploymentList.xhtml">Show employments list</h:link>
+            <h:link outcome="NewEmployment.xhtml">#{msg.addNewEmployment}</h:link>
+            <h:link outcome="EmploymentList.xhtml">#{msg.showEmploymentList}</h:link>
     </h:form>
 
 </ui:composition>
