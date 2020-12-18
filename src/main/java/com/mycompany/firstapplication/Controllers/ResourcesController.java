@@ -18,13 +18,10 @@ import java.util.List;
 
 @ConversationScoped
 @Named
-public class ResourcesController implements Serializable {
+public class ResourcesController extends Conversational implements Serializable {
 
     @Inject
     private BabysittersManager babysittersManager;
-
-    @Inject
-    private Conversation conversation;
 
     private final Babysitter newBabysitter = new Babysitter();
     private final TeachingSitter newTeachingSitter = new TeachingSitter();
@@ -77,7 +74,7 @@ public class ResourcesController implements Serializable {
     }
 
     public String sitterType(String string) {
-        conversation.begin();
+        beginNewConversation();
         if (string.equals("TEACHING")) {
             this.typeOfBabysitter = TypeOfBabysitter.TEACHING;
         } else if (string.equals("TIDING")) {
@@ -119,7 +116,7 @@ public class ResourcesController implements Serializable {
     }
 
     public String backToMain() {
-        conversation.end();
+        endCurrentConversation();
         return "main";
     }
 

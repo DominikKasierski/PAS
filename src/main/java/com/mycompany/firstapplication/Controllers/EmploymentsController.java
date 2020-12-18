@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter;
 
 @ConversationScoped
 @Named
-public class EmploymentsController implements Serializable {
+public class EmploymentsController extends Conversational implements Serializable {
 
     @Inject
     private EmploymentsManager employmentsManager;
@@ -23,11 +23,8 @@ public class EmploymentsController implements Serializable {
     private Babysitter currentBabysitter;
     private Client currentClient;
 
-    @Inject
-    private Conversation conversation;
-
     public String processNewEmployment() {
-        conversation.begin();
+        beginNewConversation();
         return "NewEmploymentConfirm";
     }
 
@@ -61,7 +58,7 @@ public class EmploymentsController implements Serializable {
     }
 
     public String reject() {
-        conversation.end();
+        endCurrentConversation();
         return "main";
     }
 }

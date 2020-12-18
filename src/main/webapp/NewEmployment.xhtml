@@ -20,7 +20,7 @@
 
                         <h:selectOneListbox value="#{employmentsController.currentBabysitter}" required="true" size="1">
                             <f:converter binding="#{babysitterToIdConverter}" />
-                            <f:selectItems value="#{resourcesController.babysittersManager.currentBabysitters}" var="babysitter" itemValue="${babysitter}" itemLabel="[#{babysitter.uuid}] #{babysitter.name} #{babysitter.surname}"/>
+                            <f:selectItems value="#{resourcesController.currentBabysitters}" var="babysitter" itemValue="${babysitter}" itemLabel="[#{babysitter.uuid}] #{babysitter.name} #{babysitter.surname}"/>
                         </h:selectOneListbox> <br/>
 
                         <h:commandButton value="#{msg.add}" action="#{employmentsController.processNewEmployment()}" class="positive_btn" />

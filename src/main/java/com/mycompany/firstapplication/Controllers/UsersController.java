@@ -18,13 +18,10 @@ import java.util.List;
 
 @ConversationScoped
 @Named
-public class UsersController implements Serializable {
+public class UsersController extends Conversational implements Serializable {
 
     @Inject
     private UsersManager usersManager;
-
-    @Inject
-    private Conversation conversation;
 
     private final Client newClient = new Client();
     private final SuperUser newSuperUser = new SuperUser();
@@ -53,7 +50,7 @@ public class UsersController implements Serializable {
     }
 
     public String userType(String string) {
-        conversation.begin();
+        beginNewConversation();
         if (string.equals("ADMIN")) {
             this.typeOfUser = TypeOfUser.ADMIN;
         } else if (string.equals("SUPERUSER")) {
@@ -92,13 +89,13 @@ public class UsersController implements Serializable {
     }
 
     public String backToMain() {
-        conversation.end();
+        endCurrentConversation();
         return "main";
     }
 
 
     public String reject() {
-        conversation.end();
+        endCurrentConversation();
         return userType(typeOfUser.toString());
     }
 
