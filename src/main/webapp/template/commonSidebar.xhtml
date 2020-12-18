@@ -8,7 +8,21 @@
 <body>
 <ui:composition>
 
-    <h1>This is default sidebar</h1>
+<!--    <h1>This is default sidebar</h1>-->
+    <h:form>
+            <h:commandLink value="Add new babysitter" action="#{resourcesController.sitterType('NORMAL')}"/>
+            <h:commandLink value="Add new teaching babysitter" action="#{resourcesController.sitterType('TEACHING')}"/>
+            <h:commandLink value="Add new tiding babysitter" action="#{resourcesController.sitterType('TIDING')}"/>
+            <h:link outcome="BabysitterList.xhtml">Show babysitters list</h:link>
+        <br/>
+            <h:link outcome="NewAdmin.xhtml">Add new admin</h:link>
+            <h:link outcome="NewSuperUser.xhtml">Add new super user</h:link>
+            <h:link outcome="NewClient.xhtml">Add new client</h:link>
+            <h:link outcome="ClientList.xhtml">Show clients list</h:link>
+        <br/>
+            <h:link outcome="NewEmployment.xhtml">Add new employment</h:link>
+            <h:link outcome="EmploymentList.xhtml">Show employments list</h:link>
+    </h:form>
 
 </ui:composition>
 </body>
