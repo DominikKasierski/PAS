@@ -15,9 +15,8 @@
                     <h:inputText id="login"
                                  value="#{usersController.copyOfUser.login}"
                                  required="true"
-                                 requiredMessage="#{msg.requiredLogin}"
-                                 validatorMessage="#{msg.validatorMessageLogin}">
-                        <f:validateRegex pattern="\w{2,}"/>
+                                 validator="#{usersController.loginValidator}"
+                                 requiredMessage="#{msg.requiredLogin}">
                     </h:inputText>
                     <h:message for="login"/>
 

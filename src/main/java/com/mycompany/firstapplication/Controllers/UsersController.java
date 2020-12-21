@@ -10,10 +10,13 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
+import javax.faces.validator.ValidatorException;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.validation.Valid;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +49,7 @@ public class UsersController extends Conversational implements Serializable {
     public String modifyUser(User user) {
         beginNewConversation();
         try {
-            copyOfUser = (User)user.clone();
+            copyOfUser = (User) user.clone();
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
         }
@@ -82,23 +85,23 @@ public class UsersController extends Conversational implements Serializable {
         return "NewUser";
     }
 
+
+    public void loginValidator(FacesContext context, UIComponent component, Object value) {
+        String login = (String) value;
+        if (!login.matches("\\w{2,}"))
+            throw new ValidatorException(new FacesMessage(resourceBundle.getString("validatorMessageLogin")));
+        if (!usersManager.getUsersRepository().isLoginUnique(login)) {
+            throw new ValidatorException(new FacesMessage(resourceBundle.getString("validatorMessageLoginUsed")));
+        }
+    }
+
     public String processNewUser() {
         return "NewUserConfirm";
     }
 
     public String processModifiedUser() {
-
-        for (User user : usersManager.getUsersList()) {
-            if (user.getLogin().equals(copyOfUser.getLogin()) && user != originalUser) {
-                FacesContext.getCurrentInstance().addMessage("Modification:login", new FacesMessage("Given login already exists"));
-                return "";
-            }
-        }
-
         return "ModifyUserConfirm";
     }
-
-    //TODO:Pododawać do kazdego message i odpowiednie przejścia
 
     public String confirmNewUser(TypeOfUser typeOfUser) {
         try {
@@ -115,18 +118,15 @@ public class UsersController extends Conversational implements Serializable {
             }
             return backToMain();
         } catch (UserException e) {
-            FacesContext.getCurrentInstance().addMessage("newUserConfirm:login",
-                    new FacesMessage(resourceBundle.getString("validatorMessageLoginExists")));
+            throw new ValidatorException(new FacesMessage(resourceBundle.getString("validatorMessageLoginUsed")));
         }
-        return "";
     }
 
     public String deleteUser(User user) {
         try {
             usersManager.deleteUser(user);
             return "ClientList";
-        }
-        catch (RepositoryException exception) {
+        } catch (RepositoryException exception) {
             FacesContext.getCurrentInstance().addMessage("ClientList:delete", new FacesMessage("Error deleting client"));
         }
         return "";

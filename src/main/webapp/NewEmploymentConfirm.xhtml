@@ -12,18 +12,23 @@
         <ui:define name="content">
             <div id="container">
                 <h:form>
-<!--                    TODO:Dodać padding dla outputlabela zamiast br i cssem ogarnąć-->
+                    <!--                    TODO:Dodać padding dla outputlabela zamiast br i cssem ogarnąć-->
                     <h:outputLabel value="Client">
-                    <h:outputText value="#{employmentsController.currentClient.name}" styleClass="formOutput"/>
-                    <h:outputText value="#{employmentsController.currentClient.surname}" styleClass="formOutput"/>
+                        <h:outputText value="#{employmentsController.currentClient.name}" styleClass="formOutput"/>
+                        <h:outputText value="#{employmentsController.currentClient.surname}" styleClass="formOutput"/>
                     </h:outputLabel><br/>
                     <h:outputLabel value="#{msg.babysitter}">
-                    <h:outputText value="#{employmentsController.currentBabysitter.name}" styleClass="formOutput"/>
-                    <h:outputText value="#{employmentsController.currentBabysitter.surname}" styleClass="formOutput"/>
+                        <h:outputText value="#{employmentsController.currentBabysitter.name}" styleClass="formOutput"/>
+                        <h:outputText value="#{employmentsController.currentBabysitter.surname}"
+                                      styleClass="formOutput"/>
                     </h:outputLabel>
+
                     <!--                    TODO: Rzuci wyjątek jak login nie jest unikalny, czy tak powinno być?-->
-                    <h:commandButton value="#{msg.confirm}" action="#{employmentsController.confirmNewEmployment()}" class="positive_btn" />
-                    <h:commandButton value="#{msg.reject}" action="#{employmentsController.reject}" immediate="true" class="negative_btn" />
+                    <h:commandButton value="#{msg.confirm}" action="#{employmentsController.confirmNewEmployment()}"
+                                     validator="#{employmentsController.employmentValidation}"
+                                     class="positive_btn"/>
+                    <h:commandButton value="#{msg.reject}" action="#{employmentsController.reject}" immediate="true"
+                                     class="negative_btn"/>
                 </h:form>
             </div>
         </ui:define>

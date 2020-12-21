@@ -9,11 +9,13 @@ import javax.enterprise.context.ConversationScoped;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.validator.ValidatorException;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 @ConversationScoped
 @Named
@@ -31,6 +33,10 @@ public class ResourcesController extends Conversational implements Serializable 
 
     private Babysitter copyOfBabysitter;
     private Babysitter originalBabysitter;
+
+    private final ResourceBundle resourceBundle = ResourceBundle.getBundle(
+            "bundles/messages", FacesContext.getCurrentInstance().getViewRoot().getLocale()); //getting current locale from FacesContext
+
 
     public BabysittersManager getBabysittersManager() {
         return babysittersManager;
@@ -135,10 +141,8 @@ public class ResourcesController extends Conversational implements Serializable 
             babysittersManager.deleteBabysitter(babysitter);
             return "BabysitterList";
         } catch (BabysitterException | RepositoryException exception) {
-            FacesContext.getCurrentInstance().addMessage("BabysitterList:delete",
-                    new FacesMessage("Opiekunka jest zatrudniona"));
+            throw new ValidatorException(new FacesMessage(resourceBundle.getString("babysitterOccupied")));
         }
-        return "";
     }
 
     public String modificationBackToMain() {

@@ -27,7 +27,7 @@ public class EmploymentsManager implements Serializable {
     public void employBabysitter(Client client, Babysitter babysitter) {
 
         checkIfUserIsActive(client);
-        checkIfBabysitterMeetRequires(babysitter, client.getAgeOfTheYoungestChild(),
+        checkIfBabysitterMeetRequirements(babysitter, client.getAgeOfTheYoungestChild(),
                 client.getNumberOfChildren());
         checkIfBabysitterIsCurrentlyEmployed(babysitter);
 
@@ -42,8 +42,8 @@ public class EmploymentsManager implements Serializable {
         }
     }
 
-    private void checkIfBabysitterMeetRequires(Babysitter babysitter, int minAge,
-                                               int numberOfChildren) {
+    public void checkIfBabysitterMeetRequirements(Babysitter babysitter, int minAge,
+                                                   int numberOfChildren) {
         if (babysitter.getMinChildAge() > minAge) {
             throw new EmploymentException("Babysitter does not meet requirements");
         }
@@ -52,7 +52,7 @@ public class EmploymentsManager implements Serializable {
         }
     }
 
-    private void checkIfBabysitterIsCurrentlyEmployed(Babysitter babysitter) {
+    public void checkIfBabysitterIsCurrentlyEmployed(Babysitter babysitter) {
         if (babysitter.isEmployed()) {
             throw new EmploymentException("Babysitter already employed");
         }

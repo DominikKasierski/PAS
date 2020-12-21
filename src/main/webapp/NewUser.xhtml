@@ -17,8 +17,7 @@
                                  value="#{usersController.getSomeUser(usersController.typeOfUser).login}"
                                  required="true"
                                  requiredMessage="#{msg.requiredLogin}"
-                                 validatorMessage="#{msg.validatorMessageLogin}">
-                        <f:validateRegex pattern="\w{2,}"/>
+                                 validator="#{usersController.loginValidator}">
                     </h:inputText>
                     <h:message for="login"/>
 

@@ -11,22 +11,29 @@
 <h:body>
     <ui:composition template="template/commonLayout.xhtml">
         <ui:define name="content">
-                <h:form>
-                    <div style="overflow-x: auto;">
-                        <h:selectOneListbox value="#{employmentsController.currentClient}" required="true" size="1">
-                            <f:converter binding="#{userToIdConverter}" />
-                            <f:selectItems value="#{usersController.usersManager.clientList}" var="client" itemValue="${client}" itemDisabled="#{!client.active}" itemLabel="[#{client.uuid}] #{client.name} #{client.surname}"/>
-                        </h:selectOneListbox> <br/>
+            <h:form>
+                <div style="overflow-x: auto;">
+                    <h:selectOneListbox value="#{employmentsController.currentClient}" required="true" size="1">
+                        <f:converter binding="#{userToIdConverter}"/>
+                        <f:selectItems value="#{usersController.usersManager.clientList}" var="client"
+                                       itemValue="${client}" itemDisabled="#{!client.active}"
+                                       itemLabel="[#{client.uuid}] #{client.name} #{client.surname}"/>
+                    </h:selectOneListbox> <br/>
 
-                        <h:selectOneListbox value="#{employmentsController.currentBabysitter}" required="true" size="1">
-                            <f:converter binding="#{babysitterToIdConverter}" />
-                            <f:selectItems value="#{resourcesController.currentBabysitters}" var="babysitter" itemValue="${babysitter}" itemLabel="[#{babysitter.uuid}] #{babysitter.name} #{babysitter.surname}"/>
-                        </h:selectOneListbox> <br/>
+                    <h:selectOneListbox value="#{employmentsController.currentBabysitter}"
+                                        required="true"
+                                        size="1">
+                        <f:converter binding="#{babysitterToIdConverter}"/>
+                        <f:selectItems value="#{resourcesController.currentBabysitters}" var="babysitter"
+                                       itemValue="${babysitter}"
+                                       itemLabel="[#{babysitter.uuid}] #{babysitter.name} #{babysitter.surname}"/>
+                    </h:selectOneListbox> <br/>
 
-                        <h:commandButton value="#{msg.add}" action="#{employmentsController.processNewEmployment()}" class="positive_btn" />
-                        <h:commandButton value="#{msg.cancel}" action="main" immediate="true" class="negative_btn" />
-                    </div>
-                </h:form>
+                    <h:commandButton value="#{msg.add}" action="#{employmentsController.processNewEmployment()}"
+                                     class="positive_btn"/>
+                    <h:commandButton value="#{msg.cancel}" action="main" immediate="true" class="negative_btn"/>
+                </div>
+            </h:form>
         </ui:define>
     </ui:composition>
 </h:body>
