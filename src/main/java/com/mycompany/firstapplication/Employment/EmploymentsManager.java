@@ -1,8 +1,10 @@
 package com.mycompany.firstapplication.Employment;
 
 import com.mycompany.firstapplication.Babysitters.Babysitter;
+import com.mycompany.firstapplication.Babysitters.BabysittersManager;
 import com.mycompany.firstapplication.Exceptions.EmploymentException;
 import com.mycompany.firstapplication.Users.Client;
+import com.mycompany.firstapplication.Users.User;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -16,6 +18,9 @@ public class EmploymentsManager implements Serializable {
     @Inject
     private EmploymentsRepository employmentsRepository;
 
+    @Inject
+    private BabysittersManager babysittersManager;
+
     public EmploymentsManager(EmploymentsRepository employmentsRepository) {
         this.employmentsRepository = employmentsRepository;
     }
@@ -25,7 +30,6 @@ public class EmploymentsManager implements Serializable {
 
 
     public void employBabysitter(Client client, Babysitter babysitter) {
-
         checkIfUserIsActive(client);
         checkIfBabysitterMeetRequires(babysitter, client.getAgeOfTheYoungestChild(),
                 client.getNumberOfChildren());
@@ -34,6 +38,10 @@ public class EmploymentsManager implements Serializable {
         babysitter.setEmployed(true);
         Employment employment = new Employment(babysitter, client);
         employmentsRepository.addElement(employment);
+    }
+
+    public void checkIfBabysitterExist(Babysitter babysitter) {
+        babysittersManager.getBabysittersRepository().findByKey(babysitter.getUuid());
     }
 
     private void checkIfUserIsActive(Client client) {
@@ -142,5 +150,18 @@ public class EmploymentsManager implements Serializable {
         }
         return allEmploymentsForFamilyList;
     }
+
+    public void deleteEmployment(Employment employment) {
+        employment.getBabysitter().setEmployed(false);
+        getEmploymentsRepository().deleteElement(employment);
+    }
+
+    public Employment[] getAllEmploymentArray() {
+        return employmentsRepository.getElements().toArray(new Employment[0]);
+    }
+
+//    public List[] getAllUsersArray() {
+//        return usersRepository.getUsersList().toArray(new User[0]);
+//    }
 
 }

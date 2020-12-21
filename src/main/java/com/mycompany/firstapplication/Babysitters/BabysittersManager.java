@@ -1,9 +1,9 @@
 package com.mycompany.firstapplication.Babysitters;
 
+import com.mycompany.firstapplication.Employment.Employment;
+import com.mycompany.firstapplication.Employment.EmploymentsManager;
 import com.mycompany.firstapplication.Exceptions.BabysitterException;
 
-import javax.annotation.PostConstruct;
-import javax.faces.event.ValueChangeEvent;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import java.io.Serializable;
@@ -15,6 +15,9 @@ public class BabysittersManager implements Serializable {
 
     @Inject
     private BabysittersRepository babysittersRepository;
+
+    @Inject
+    private EmploymentsManager employmentsManager;
 
     public BabysittersManager() {
     }
@@ -35,6 +38,12 @@ public class BabysittersManager implements Serializable {
         if(!babysitter.isEmployed()) {
             babysittersRepository.deleteElement(babysitter);
         } else throw new BabysitterException("An employed babysitter cannot be removed");
+    }
+
+    public void deleteBabysitterFromEmploymentList(Babysitter babysitter) {
+        for (Employment employment : employmentsManager.getAllEmploymentsForBabysitter(babysitter)) {
+            employment.setBabysitter(null);
+        }
     }
 
     public Babysitter[] getAllBabysittersArray() {

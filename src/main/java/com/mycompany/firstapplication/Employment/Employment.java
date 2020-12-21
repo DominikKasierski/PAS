@@ -89,6 +89,10 @@ public class Employment {
         return uniqueID;
     }
 
+    public void setBabysitter(Babysitter babysitter) {
+        this.babysitter = babysitter;
+    }
+
     public LocalDateTime getBeginningOfEmployment() {
         return beginningOfEmployment;
     }

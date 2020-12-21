@@ -3,6 +3,7 @@ package com.mycompany.firstapplication.Controllers;
 import com.mycompany.firstapplication.Babysitters.*;
 import com.mycompany.firstapplication.Exceptions.BabysitterException;
 import com.mycompany.firstapplication.Exceptions.RepositoryException;
+import org.apache.commons.beanutils.BeanUtils;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ConversationScoped;
@@ -12,6 +13,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +43,6 @@ public class ResourcesController extends Conversational implements Serializable 
         beginNewConversation();
         try {
             copyOfBabysitter = (Babysitter)babysitter.clone();
-
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
         }
@@ -135,6 +136,7 @@ public class ResourcesController extends Conversational implements Serializable 
     public String deleteBabysitter(Babysitter babysitter) {
         try {
             babysittersManager.deleteBabysitter(babysitter);
+            babysittersManager.deleteBabysitterFromEmploymentList(babysitter);
             return "BabysitterList";
         } catch (BabysitterException | RepositoryException exception) {
             FacesContext.getCurrentInstance().addMessage("BabysitterList:delete",
@@ -144,7 +146,12 @@ public class ResourcesController extends Conversational implements Serializable 
     }
 
     public String modificationBackToMain() {
-        babysittersManager.getBabysittersRepository().setElements(index, copyOfBabysitter);
+        try {
+            BeanUtils.copyProperties(originalBabysitter, copyOfBabysitter);
+        } catch (IllegalAccessException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        //babysittersManager.getBabysittersRepository().setElements(index, copyOfBabysitter);
         endCurrentConversation();
         return "main";
     }
