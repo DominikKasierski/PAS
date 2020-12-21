@@ -11,7 +11,7 @@
 <h:body>
     <ui:composition template="template/commonLayout.xhtml">
         <ui:define name="content">
-            <h:form>
+            <h:form id="ClientList">
                 <div style="overflow-x: auto;">
                     <h:dataTable value="#{usersController.currentUsers}" var="client">
                         <h:column>
@@ -59,8 +59,7 @@
                             <h:commandButton value="#{msg.changeActive}" action="#{usersController.usersManager.changeActive(client)}" class="negative_btn"/>
                             <h:commandButton id="delete" value="#{msg.delete}" action="#{usersController.deleteUser(client)}" class="negative_btn"/>
                             <h:message for="delete" />
-                            <h:commandButton id="modify" value="#{msg.modify}" action="#{usersController.modifyUser(client)}" class="negative_btn"/>
-                            <h:message for="modify" />
+                            <h:commandButton value="#{msg.modify}" action="#{usersController.modifyUser(client)}" class="negative_btn"/>
                         </h:column>
                     </h:dataTable>
                 </div>

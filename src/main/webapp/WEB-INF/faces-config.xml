@@ -81,5 +81,21 @@
             <redirect />
         </navigation-case>
     </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/ModifyUserConfirm.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>ModifyUser</from-outcome>
+            <to-view-id>/ModifyUser.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/ModifyUser.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>ModifyUserConfirm</from-outcome>
+            <to-view-id>/ModifyUserConfirm.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
 
 </faces-config>

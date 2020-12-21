@@ -87,6 +87,14 @@ public class UsersController extends Conversational implements Serializable {
     }
 
     public String processModifiedUser() {
+
+        for (User user : usersManager.getUsersList()) {
+            if (user.getLogin().equals(copyOfUser.getLogin()) && user != originalUser) {
+                FacesContext.getCurrentInstance().addMessage("Modification:login", new FacesMessage("Given login already exists"));
+                return "";
+            }
+        }
+
         return "ModifyUserConfirm";
     }
 
@@ -118,7 +126,7 @@ public class UsersController extends Conversational implements Serializable {
             usersManager.deleteUser(user);
             return "ClientList";
         }
-        catch (UserException | RepositoryException excpetion) {
+        catch (RepositoryException exception) {
             FacesContext.getCurrentInstance().addMessage("ClientList:delete", new FacesMessage("Error deleting client"));
         }
         return "";
@@ -126,6 +134,7 @@ public class UsersController extends Conversational implements Serializable {
 
     public String modificationBackToMain() {
         int index = usersManager.getUsersRepository().getUsersList().indexOf(originalUser);
+
         usersManager.getUsersRepository().setElements(index, copyOfUser);
         endCurrentConversation();
         return "main";
