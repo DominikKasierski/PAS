@@ -32,4 +32,8 @@ public class Client extends User {
     public Integer getAgeOfTheYoungestChild() {
         return ageOfTheYoungestChild;
     }
+
+    public String getRole() {
+        return role;
+    }
 }

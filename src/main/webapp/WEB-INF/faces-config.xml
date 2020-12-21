@@ -54,6 +54,11 @@
             <to-view-id>/NewUserConfirm.xhtml</to-view-id>
             <redirect />
         </navigation-case>
+        <navigation-case>
+            <from-outcome>ModifyUserConfirm</from-outcome>
+            <to-view-id>/ModifyUserConfirm.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
     </navigation-rule>
     <navigation-rule>
         <from-view-id>/NewEmployment.xhtml</from-view-id>

@@ -31,7 +31,6 @@ public class ResourcesController extends Conversational implements Serializable 
 
     private Babysitter copyOfBabysitter;
     private Babysitter originalBabysitter;
-    int index;
 
     public BabysittersManager getBabysittersManager() {
         return babysittersManager;
@@ -45,7 +44,6 @@ public class ResourcesController extends Conversational implements Serializable 
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
         }
-        index = babysittersManager.getBabysittersRepository().getBabysittersList().indexOf(babysitter);
         originalBabysitter = babysitter;
         return "ModifyBabysitter";
     }
@@ -144,6 +142,7 @@ public class ResourcesController extends Conversational implements Serializable 
     }
 
     public String modificationBackToMain() {
+        int index = babysittersManager.getBabysittersRepository().getBabysittersList().indexOf(originalBabysitter);
         babysittersManager.getBabysittersRepository().setElements(index, copyOfBabysitter);
         endCurrentConversation();
         return "main";

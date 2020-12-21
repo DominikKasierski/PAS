@@ -4,7 +4,7 @@ package com.mycompany.firstapplication.Users;
 import com.mycompany.firstapplication.Exceptions.UserException;
 import org.apache.commons.lang3.RandomStringUtils;
 
-public abstract class User {
+public abstract class User implements Cloneable {
 
     private boolean isActive = true;
     private String login;
@@ -73,5 +73,10 @@ public abstract class User {
 
     public String getLogin() {
         return login;
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 }

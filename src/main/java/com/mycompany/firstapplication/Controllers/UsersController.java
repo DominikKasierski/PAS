@@ -1,6 +1,8 @@
 package com.mycompany.firstapplication.Controllers;
 
+import com.mycompany.firstapplication.Babysitters.Babysitter;
 import com.mycompany.firstapplication.Babysitters.TypeOfBabysitter;
+import com.mycompany.firstapplication.Exceptions.RepositoryException;
 import com.mycompany.firstapplication.Exceptions.UserException;
 import com.mycompany.firstapplication.Users.*;
 
@@ -15,6 +17,8 @@ import javax.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 @ConversationScoped
 @Named
@@ -29,10 +33,27 @@ public class UsersController extends Conversational implements Serializable {
 
     private TypeOfUser typeOfUser = TypeOfUser.ADMIN;
     private List<User> currentUsers;
+    private final ResourceBundle resourceBundle = ResourceBundle.getBundle(
+            "bundles/messages", FacesContext.getCurrentInstance().getViewRoot().getLocale()); //getting current locale from FacesContext
+
+    private User copyOfUser;
+    private User originalUser;
 
     public UsersManager getUsersManager() {
         return usersManager;
     }
+
+    public String modifyUser(User user) {
+        beginNewConversation();
+        try {
+            copyOfUser = (User)user.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        originalUser = user;
+        return "ModifyUser";
+    }
+
 
     public Object getSomeUser(TypeOfUser type) {
         switch (type) {
@@ -65,6 +86,10 @@ public class UsersController extends Conversational implements Serializable {
         return "NewUserConfirm";
     }
 
+    public String processModifiedUser() {
+        return "ModifyUserConfirm";
+    }
+
     //TODO:Pododawać do kazdego message i odpowiednie przejścia
 
     public String confirmNewUser(TypeOfUser typeOfUser) {
@@ -83,9 +108,27 @@ public class UsersController extends Conversational implements Serializable {
             return backToMain();
         } catch (UserException e) {
             FacesContext.getCurrentInstance().addMessage("newUserConfirm:login",
-                    new FacesMessage("Taki login już istnieje"));
+                    new FacesMessage(resourceBundle.getString("validatorMessageLoginExists")));
         }
         return "";
+    }
+
+    public String deleteUser(User user) {
+        try {
+            usersManager.deleteUser(user);
+            return "ClientList";
+        }
+        catch (UserException | RepositoryException excpetion) {
+            FacesContext.getCurrentInstance().addMessage("ClientList:delete", new FacesMessage("Error deleting client"));
+        }
+        return "";
+    }
+
+    public String modificationBackToMain() {
+        int index = usersManager.getUsersRepository().getUsersList().indexOf(originalUser);
+        usersManager.getUsersRepository().setElements(index, copyOfUser);
+        endCurrentConversation();
+        return "main";
     }
 
     public String backToMain() {
@@ -141,4 +184,14 @@ public class UsersController extends Conversational implements Serializable {
         typeOfUser = TypeOfUser.ADMIN;
         currentUsers = usersManager.getUsersRepository().getUsersList();
     }
+
+    public User getCopyOfUser() {
+        return copyOfUser;
+    }
+
+    public User getOriginalUser() {
+        return originalUser;
+    }
+
+
 }
