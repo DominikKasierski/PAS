@@ -14,15 +14,15 @@
             <h:form>
                 <div style="overflow-x: auto;">
                     <h:panelGrid columns="2">
-                            <f:facet name="header"><h:outputText value="Tworzenie wypozycznia"/></f:facet>
-                        <h:outputLabel value="Uzytkownik" />
+                            <f:facet name="header"><h:outputText value="#{msg.newEmployment}"/></f:facet>
+                        <h:outputLabel value="#{msg.user}" />
                             <h:selectOneListbox value="#{employmentsController.currentClient}" required="true" size="1">
                                 <f:converter binding="#{userToIdConverter}"/>
                                 <f:selectItems value="#{usersController.usersManager.clientList}" var="client"
                                                itemValue="${client}" itemDisabled="#{!client.active}"
                                                itemLabel="[#{client.uuid}] #{client.name} #{client.surname}"/>
                             </h:selectOneListbox>
-                        <h:outputLabel value="Opiekunka" />
+                        <h:outputLabel value="#{msg.babysitter}" />
                         <h:selectOneListbox value="#{employmentsController.currentBabysitter}" required="true"
                                                 size="1">
                                 <f:converter binding="#{babysitterToIdConverter}"/>

@@ -30,6 +30,17 @@
                             <f:facet name="header">#{msg.beginningOfEmployment}</f:facet>
                             ${employment.beginningOfEmployment.format(employmentsController.formatter)}
                         </h:column>
+                        <h:column>
+                            <f:facet name="header">#{msg.endOfEmployment}</f:facet>
+                            ${employment.endOfEmployment.format(employmentsController.formatter)}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">#{msg.actions}</f:facet>
+                            <h:commandButton id="delete" value="#{msg.delete}" action="main" class="negative_btn"/>
+                            <h:message for="delete" />
+                            <h:commandButton id="endEmplyment" value="#{msg.endOfEmployment}" action="main" class="negative_btn"/>
+                            <h:message for="endEmplyment" />
+                        </h:column>
                     </h:dataTable>
                 </div>
                 <h:commandButton value="Cancel" action="main" immediate="true" class="negative_btn"/>
