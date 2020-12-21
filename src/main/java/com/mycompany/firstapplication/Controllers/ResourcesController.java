@@ -31,6 +31,7 @@ public class ResourcesController extends Conversational implements Serializable 
     private TypeOfBabysitter typeOfBabysitter = TypeOfBabysitter.NORMAL;
 
     private Babysitter copyOfModifiedBabysitter;
+    private Babysitter babysitterToChange;
     int index;
 
     public BabysittersManager getBabysittersManager() {
@@ -39,11 +40,14 @@ public class ResourcesController extends Conversational implements Serializable 
 
     public String modifyBabysitter(Babysitter babysitter) {
         beginNewConversation();
+        try {
+            copyOfModifiedBabysitter = (Babysitter)babysitter.clone();
 
-        copyOfModifiedBabysitter = babysitter;
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
         index = babysittersManager.getBabysittersRepository().getBabysittersList().indexOf(babysitter);
-
-        showSelectedBabysitter(babysitter.getUuid());
+        babysitterToChange = babysitter;
         return "ModifyBabysitter";
     }
 
@@ -107,18 +111,22 @@ public class ResourcesController extends Conversational implements Serializable 
     }
 
     public String confirmNewBabysitter(TypeOfBabysitter typeOfBabysitter) {
-            switch (typeOfBabysitter) {
-                case NORMAL:
-                    babysittersManager.addBabysitter(newBabysitter);
-                    break;
-                case TEACHING:
-                    babysittersManager.addBabysitter(newTeachingSitter);
-                    break;
-                case TIDING:
-                    babysittersManager.addBabysitter(newTidingSitter);
-                    break;
-            }
+        switch (typeOfBabysitter) {
+            case NORMAL:
+                babysittersManager.addBabysitter(newBabysitter);
+                break;
+            case TEACHING:
+                babysittersManager.addBabysitter(newTeachingSitter);
+                break;
+            case TIDING:
+                babysittersManager.addBabysitter(newTidingSitter);
+                break;
+        }
         return backToMain();
+    }
+
+    public Babysitter getBabysitterToChange() {
+        return babysitterToChange;
     }
 
     public String deleteBabysitter(Babysitter babysitter) {
@@ -133,7 +141,7 @@ public class ResourcesController extends Conversational implements Serializable 
     }
 
     public String modificationBackToMain() {
-        babysittersManager.getBabysittersRepository().getBabysittersList().set(index, copyOfModifiedBabysitter);
+        babysittersManager.getBabysittersRepository().setElements(index, copyOfModifiedBabysitter);
         endCurrentConversation();
         return "main";
     }
@@ -143,7 +151,7 @@ public class ResourcesController extends Conversational implements Serializable 
         return "main";
     }
 
-        public List<Babysitter> getCurrentBabysitters() {
+    public List<Babysitter> getCurrentBabysitters() {
         return currentBabysitters;
     }
 

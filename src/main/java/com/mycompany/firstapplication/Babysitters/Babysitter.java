@@ -4,7 +4,7 @@ import com.mycompany.firstapplication.Exceptions.BabysitterException;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-public class Babysitter {
+public class Babysitter implements Cloneable {
 
     private String name;
     private String surname;
@@ -17,6 +17,11 @@ public class Babysitter {
 
     public Babysitter() {
         uniqueID = RandomStringUtils.randomNumeric(SHORT_ID_LENGTH);
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 
     public Babysitter(String name, String surname, Integer basePriceForHour, Integer minChildAge,

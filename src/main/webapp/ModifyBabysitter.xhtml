@@ -15,7 +15,7 @@
             <div id="container">
                 <h:form>
                     <h:inputText id="name"
-                                 value="#{resourcesController.currentBabysitters.get(0).name}"
+                                 value="#{resourcesController.babysitterToChange.name}"
                                  required="true"
                                  requiredMessage="#{msg.requiredName}"
                                  validatorMessage="#{msg.validatorMessageName}">
@@ -24,7 +24,7 @@
                     <h:message for="name"/>
 
                     <h:inputText id="surname"
-                                 value="#{resourcesController.currentBabysitters.get(0).surname}"
+                                 value="#{resourcesController.babysitterToChange.surname}"
                                  required="true"
                                  requiredMessage="#{msg.requiredSurname}"
                                  validatorMessage="#{msg.validatorMessageSurname}">
@@ -33,7 +33,7 @@
                     <h:message for="surname"/>
 
                     <h:inputText id="basePriceForHour"
-                                 value="#{resourcesController.currentBabysitters.get(0).basePriceForHour}"
+                                 value="#{resourcesController.babysitterToChange.basePriceForHour}"
                                  required="true"
                                  converterMessage="#{msg.converterMessageBasePrice}"
                                  requiredMessage="#{msg.requiredBasePrice}"
@@ -43,7 +43,7 @@
                     <h:message for="basePriceForHour"/>
 
                     <h:inputText id="minChildAge"
-                                 value="#{resourcesController.currentBabysitters.get(0).minChildAge}"
+                                 value="#{resourcesController.babysitterToChange.minChildAge}"
                                  required="true"
                                  converterMessage="#{msg.converterMessageMinimalChildAge}"
                                  requiredMessage="#{msg.requiredChildAge}"
@@ -53,7 +53,7 @@
                     <h:message for ="minChildAge"/>
 
                     <h:inputText id="maximalNumberOfChildren"
-                                 value="#{resourcesController.currentBabysitters.get(0).maxNumberOfChildrenInTheFamily}"
+                                 value="#{resourcesController.babysitterToChange.maxNumberOfChildrenInTheFamily}"
                                  required="true"
                                  converterMessage="#{msg.converterMessageMaxNumberOfChildren}"
                                  requiredMessage="#{msg.requiredMaxNumberOfChildren}"
@@ -63,7 +63,7 @@
                     <h:message for="maximalNumberOfChildren"/>
 
                     <h:inputText id="yearsOfExperience"
-                                 value="#{resourcesController.currentBabysitters.get(0).yearsOfExperienceInTeaching}"
+                                 value="#{resourcesController.babysitterToChange.yearsOfExperienceInTeaching}"
                                  required="true"
                                  converterMessage="#{msg.converterMessageYearsOfExperience}"
                                  requiredMessage="#{msg.requiredYearsOfExperience}"
@@ -74,7 +74,7 @@
                     <h:message for="yearsOfExperience"/>
 
                     <h:inputText id="valueOfCleaningEquipment"
-                                 value="#{resourcesController.currentBabysitters.get(0).valueOfCleaningEquipment}"
+                                 value="#{resourcesController.babysitterToChange.valueOfCleaningEquipment}"
                                  required="true"
                                  converterMessage="#{msg.converterMessageValueOfEquipment}"
                                  requiredMessage="#{msg.requiredValueOfEquipment}"
