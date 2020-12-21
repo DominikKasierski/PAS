@@ -38,12 +38,25 @@
             <to-view-id>/BabysitterList.xhtml</to-view-id>
             <redirect />
         </navigation-case>
+        <navigation-case>
+            <from-outcome>ModifyBabysitter</from-outcome>
+            <to-view-id>/ModifyBabysitter.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
     </navigation-rule>
     <navigation-rule>
         <from-view-id>/NewBabysitter.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>NewBabysitterConfirm</from-outcome>
             <to-view-id>/NewBabysitterConfirm.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/ModifyBabysitter.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>ModifyBabysitterConfirm</from-outcome>
+            <to-view-id>/ModifyBabysitterConfirm.xhtml</to-view-id>
             <redirect />
         </navigation-case>
     </navigation-rule>
