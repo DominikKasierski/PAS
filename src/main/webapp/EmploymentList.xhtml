@@ -30,6 +30,18 @@
                             <f:facet name="header">#{msg.beginningOfEmployment}</f:facet>
                             ${employment.beginningOfEmployment.format(employmentsController.formatter)}
                         </h:column>
+                        <h:column>
+                            <f:facet name="header">#{msg.endOfEmployment}</f:facet>
+                            ${employment.endOfEmployment.format(employmentsController.formatter)}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">#{msg.actions}</f:facet>
+                            <h:commandButton id="delete" value="#{msg.delete}" action="#{employmentsController.deleteEmployment(employment)}" rendered="#{employment.endOfEmployment == null}" class="negative_btn"/>
+                            <h:message for="delete" />
+<!--                            TODO:Usuniecie opiekunki NIE powoduje ustawienie nulla na liscie wypozyczen, a powinno-->
+                            <h:commandButton id="endEmplyment" value="#{msg.endOfEmployment}" action="#{employmentsController.employmentsManager.endEmployment(employment)}" rendered="#{employment.endOfEmployment == null}" class="negative_btn"/>
+                            <h:message for="endEmplyment" />
+                        </h:column>
                     </h:dataTable>
                 </div>
                 <h:commandButton value="Cancel" action="main" immediate="true" class="negative_btn"/>

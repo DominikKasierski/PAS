@@ -3,6 +3,7 @@ package com.mycompany.firstapplication.Controllers;
 import com.mycompany.firstapplication.Babysitters.*;
 import com.mycompany.firstapplication.Exceptions.BabysitterException;
 import com.mycompany.firstapplication.Exceptions.RepositoryException;
+import org.apache.commons.beanutils.BeanUtils;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ConversationScoped;
@@ -13,6 +14,7 @@ import javax.faces.validator.ValidatorException;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -46,7 +48,6 @@ public class ResourcesController extends Conversational implements Serializable 
         beginNewConversation();
         try {
             copyOfBabysitter = (Babysitter)babysitter.clone();
-
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
         }
@@ -139,6 +140,7 @@ public class ResourcesController extends Conversational implements Serializable 
     public String deleteBabysitter(Babysitter babysitter) {
         try {
             babysittersManager.deleteBabysitter(babysitter);
+            babysittersManager.deleteBabysitterFromEmploymentList(babysitter);
             return "BabysitterList";
         } catch (BabysitterException | RepositoryException exception) {
             throw new ValidatorException(new FacesMessage(resourceBundle.getString("babysitterOccupied")));
@@ -146,8 +148,11 @@ public class ResourcesController extends Conversational implements Serializable 
     }
 
     public String modificationBackToMain() {
-        int index = babysittersManager.getBabysittersRepository().getBabysittersList().indexOf(originalBabysitter);
-        babysittersManager.getBabysittersRepository().setElements(index, copyOfBabysitter);
+        try {
+            BeanUtils.copyProperties(originalBabysitter, copyOfBabysitter);
+        } catch (IllegalAccessException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
         endCurrentConversation();
         return "main";
     }

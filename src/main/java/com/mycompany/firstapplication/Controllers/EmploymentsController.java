@@ -1,6 +1,7 @@
 package com.mycompany.firstapplication.Controllers;
 
 import com.mycompany.firstapplication.Babysitters.Babysitter;
+import com.mycompany.firstapplication.Employment.Employment;
 import com.mycompany.firstapplication.Employment.EmploymentsManager;
 import com.mycompany.firstapplication.Exceptions.EmploymentException;
 import com.mycompany.firstapplication.Users.Client;
@@ -37,6 +38,8 @@ public class EmploymentsController extends Conversational implements Serializabl
     }
 
     public String confirmNewEmployment() {
+        employmentsManager.checkIfBabysitterExist(currentBabysitter);
+        employmentsManager.employBabysitter(currentClient, currentBabysitter);
         try {
             employmentsManager.employBabysitter(currentClient, currentBabysitter);
         } catch (EmploymentException exception) {
@@ -82,6 +85,10 @@ public class EmploymentsController extends Conversational implements Serializabl
 
             throw new ValidatorException(new FacesMessage(resourceBundle.getString("ValidatorMessageBabysitterAlreadyEmployed")));
         }
+    }
+
+    public void deleteEmployment(Employment employment) {
+        employmentsManager.deleteEmployment(employment);
     }
 
     public String reject() {
