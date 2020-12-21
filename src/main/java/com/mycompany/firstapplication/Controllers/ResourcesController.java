@@ -30,8 +30,21 @@ public class ResourcesController extends Conversational implements Serializable 
     private List<Babysitter> currentBabysitters;
     private TypeOfBabysitter typeOfBabysitter = TypeOfBabysitter.NORMAL;
 
+    private Babysitter copyOfModifiedBabysitter;
+    int index;
+
     public BabysittersManager getBabysittersManager() {
         return babysittersManager;
+    }
+
+    public String modifyBabysitter(Babysitter babysitter) {
+        beginNewConversation();
+
+        copyOfModifiedBabysitter = babysitter;
+        index = babysittersManager.getBabysittersRepository().getBabysittersList().indexOf(babysitter);
+
+        showSelectedBabysitter(babysitter.getUuid());
+        return "ModifyBabysitter";
     }
 
     public void valueChanged(ValueChangeEvent event) {
@@ -89,18 +102,22 @@ public class ResourcesController extends Conversational implements Serializable 
         return "NewBabysitterConfirm";
     }
 
+    public String processModifiedBabysitter() {
+        return "ModifyBabysitterConfirm";
+    }
+
     public String confirmNewBabysitter(TypeOfBabysitter typeOfBabysitter) {
-        switch (typeOfBabysitter) {
-            case NORMAL:
-                babysittersManager.addBabysitter(newBabysitter);
-                break;
-            case TEACHING:
-                babysittersManager.addBabysitter(newTeachingSitter);
-                break;
-            case TIDING:
-                babysittersManager.addBabysitter(newTidingSitter);
-                break;
-        }
+            switch (typeOfBabysitter) {
+                case NORMAL:
+                    babysittersManager.addBabysitter(newBabysitter);
+                    break;
+                case TEACHING:
+                    babysittersManager.addBabysitter(newTeachingSitter);
+                    break;
+                case TIDING:
+                    babysittersManager.addBabysitter(newTidingSitter);
+                    break;
+            }
         return backToMain();
     }
 
@@ -113,6 +130,12 @@ public class ResourcesController extends Conversational implements Serializable 
                     new FacesMessage("Opiekunka jest zatrudniona"));
         }
         return "";
+    }
+
+    public String modificationBackToMain() {
+        babysittersManager.getBabysittersRepository().getBabysittersList().set(index, copyOfModifiedBabysitter);
+        endCurrentConversation();
+        return "main";
     }
 
     public String backToMain() {

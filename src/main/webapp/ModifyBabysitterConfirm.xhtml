@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+    <!--    TODO:Zmienić-->
+    <title>#{msg.confirmNewBabysitter}</title>
+</h:head>
+<h:body>
+    <ui:composition template="template/commonLayout.xhtml">
+        <ui:define name="content">
+            <div id="container">
+                <h:form>
+                    <h:outputText value="#{resourcesController.currentBabysitters.get(0).name}" styleClass="formOutput"/>
+                    <h:outputText value="#{resourcesController.currentBabysitters.get(0).surname}" styleClass="formOutput"/>
+                    <h:outputText value="#{resourcesController.currentBabysitters.get(0).basePriceForHour}" styleClass="formOutput"/>
+                    <h:outputText value="#{resourcesController.currentBabysitters.get(0).minChildAge}" styleClass="formOutput"/>
+                    <h:outputText value="#{resourcesController.currentBabysitters.get(0).maxNumberOfChildrenInTheFamily}" styleClass="formOutput" />
+                    <h:outputText value="#{resourcesController.currentBabysitters.get(0).yearsOfExperienceInTeaching}" styleClass="formOutput" rendered="#{resourcesController.typeOfBabysitter == 'TEACHING'}" />
+                    <h:outputText value="#{resourcesController.currentBabysitters.get(0).valueOfCleaningEquipment}" styleClass="formOutput" rendered="#{resourcesController.typeOfBabysitter == 'TIDING'}" />
+                    <h:commandButton value="#{msg.confirm}" action="#{resourcesController.backToMain}" class="positive_btn" />
+                    <h:commandButton value="#{msg.reject}" action="#{resourcesController.modificationBackToMain}" immediate="true" class="negative_btn" />
+                </h:form>
+            </div>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>
