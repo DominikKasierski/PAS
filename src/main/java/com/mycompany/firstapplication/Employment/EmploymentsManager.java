@@ -4,7 +4,6 @@ import com.mycompany.firstapplication.Babysitters.Babysitter;
 import com.mycompany.firstapplication.Babysitters.BabysittersManager;
 import com.mycompany.firstapplication.Exceptions.EmploymentException;
 import com.mycompany.firstapplication.Users.Client;
-import com.mycompany.firstapplication.Users.User;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -31,7 +30,7 @@ public class EmploymentsManager implements Serializable {
 
     public void employBabysitter(Client client, Babysitter babysitter) {
         checkIfUserIsActive(client);
-        checkIfBabysitterMeetRequirements(babysitter, client.getAgeOfTheYoungestChild(),
+        checkIfBabysitterMeetsRequirements(babysitter, client.getAgeOfTheYoungestChild(),
                 client.getNumberOfChildren());
         checkIfBabysitterIsCurrentlyEmployed(babysitter);
 
@@ -40,7 +39,7 @@ public class EmploymentsManager implements Serializable {
         employmentsRepository.addElement(employment);
     }
 
-    public void checkIfBabysitterExist(Babysitter babysitter) {
+    public void checkIfBabysitterExists(Babysitter babysitter) {
         babysittersManager.getBabysittersRepository().findByKey(babysitter.getUuid());
     }
 
@@ -50,7 +49,7 @@ public class EmploymentsManager implements Serializable {
         }
     }
 
-    public void checkIfBabysitterMeetRequirements(Babysitter babysitter, int minAge,
+    public void checkIfBabysitterMeetsRequirements(Babysitter babysitter, int minAge,
                                                    int numberOfChildren) {
         if (babysitter.getMinChildAge() > minAge) {
             throw new EmploymentException("Babysitter does not meet requirements");
