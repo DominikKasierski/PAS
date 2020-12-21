@@ -5,7 +5,6 @@ import com.mycompany.firstapplication.Exceptions.BabysitterException;
 import com.mycompany.firstapplication.Exceptions.RepositoryException;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.application.FacesMessage;
@@ -30,8 +29,8 @@ public class ResourcesController extends Conversational implements Serializable 
     private List<Babysitter> currentBabysitters;
     private TypeOfBabysitter typeOfBabysitter = TypeOfBabysitter.NORMAL;
 
-    private Babysitter copyOfModifiedBabysitter;
-    private Babysitter babysitterToChange;
+    private Babysitter copyOfBabysitter;
+    private Babysitter originalBabysitter;
     int index;
 
     public BabysittersManager getBabysittersManager() {
@@ -41,13 +40,13 @@ public class ResourcesController extends Conversational implements Serializable 
     public String modifyBabysitter(Babysitter babysitter) {
         beginNewConversation();
         try {
-            copyOfModifiedBabysitter = (Babysitter)babysitter.clone();
+            copyOfBabysitter = (Babysitter)babysitter.clone();
 
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
         }
         index = babysittersManager.getBabysittersRepository().getBabysittersList().indexOf(babysitter);
-        babysitterToChange = babysitter;
+        originalBabysitter = babysitter;
         return "ModifyBabysitter";
     }
 
@@ -125,8 +124,12 @@ public class ResourcesController extends Conversational implements Serializable 
         return backToMain();
     }
 
-    public Babysitter getBabysitterToChange() {
-        return babysitterToChange;
+    public Babysitter getOriginalBabysitter() {
+        return originalBabysitter;
+    }
+
+    public Babysitter getCopyOfBabysitter() {
+        return copyOfBabysitter;
     }
 
     public String deleteBabysitter(Babysitter babysitter) {
@@ -141,7 +144,7 @@ public class ResourcesController extends Conversational implements Serializable 
     }
 
     public String modificationBackToMain() {
-        babysittersManager.getBabysittersRepository().setElements(index, copyOfModifiedBabysitter);
+        babysittersManager.getBabysittersRepository().setElements(index, copyOfBabysitter);
         endCurrentConversation();
         return "main";
     }

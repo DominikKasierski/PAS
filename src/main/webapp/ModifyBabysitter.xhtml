@@ -15,7 +15,7 @@
             <div id="container">
                 <h:form>
                     <h:inputText id="name"
-                                 value="#{resourcesController.babysitterToChange.name}"
+                                 value="#{resourcesController.copyOfBabysitter.name}"
                                  required="true"
                                  requiredMessage="#{msg.requiredName}"
                                  validatorMessage="#{msg.validatorMessageName}">
@@ -24,7 +24,7 @@
                     <h:message for="name"/>
 
                     <h:inputText id="surname"
-                                 value="#{resourcesController.babysitterToChange.surname}"
+                                 value="#{resourcesController.copyOfBabysitter.surname}"
                                  required="true"
                                  requiredMessage="#{msg.requiredSurname}"
                                  validatorMessage="#{msg.validatorMessageSurname}">
@@ -33,7 +33,7 @@
                     <h:message for="surname"/>
 
                     <h:inputText id="basePriceForHour"
-                                 value="#{resourcesController.babysitterToChange.basePriceForHour}"
+                                 value="#{resourcesController.copyOfBabysitter.basePriceForHour}"
                                  required="true"
                                  converterMessage="#{msg.converterMessageBasePrice}"
                                  requiredMessage="#{msg.requiredBasePrice}"
@@ -43,7 +43,7 @@
                     <h:message for="basePriceForHour"/>
 
                     <h:inputText id="minChildAge"
-                                 value="#{resourcesController.babysitterToChange.minChildAge}"
+                                 value="#{resourcesController.copyOfBabysitter.minChildAge}"
                                  required="true"
                                  converterMessage="#{msg.converterMessageMinimalChildAge}"
                                  requiredMessage="#{msg.requiredChildAge}"
@@ -53,7 +53,7 @@
                     <h:message for ="minChildAge"/>
 
                     <h:inputText id="maximalNumberOfChildren"
-                                 value="#{resourcesController.babysitterToChange.maxNumberOfChildrenInTheFamily}"
+                                 value="#{resourcesController.copyOfBabysitter.maxNumberOfChildrenInTheFamily}"
                                  required="true"
                                  converterMessage="#{msg.converterMessageMaxNumberOfChildren}"
                                  requiredMessage="#{msg.requiredMaxNumberOfChildren}"
@@ -63,7 +63,7 @@
                     <h:message for="maximalNumberOfChildren"/>
 
                     <h:inputText id="yearsOfExperience"
-                                 value="#{resourcesController.babysitterToChange.yearsOfExperienceInTeaching}"
+                                 value="#{resourcesController.copyOfBabysitter.yearsOfExperienceInTeaching}"
                                  required="true"
                                  converterMessage="#{msg.converterMessageYearsOfExperience}"
                                  requiredMessage="#{msg.requiredYearsOfExperience}"
@@ -74,7 +74,7 @@
                     <h:message for="yearsOfExperience"/>
 
                     <h:inputText id="valueOfCleaningEquipment"
-                                 value="#{resourcesController.babysitterToChange.valueOfCleaningEquipment}"
+                                 value="#{resourcesController.copyOfBabysitter.valueOfCleaningEquipment}"
                                  required="true"
                                  converterMessage="#{msg.converterMessageValueOfEquipment}"
                                  requiredMessage="#{msg.requiredValueOfEquipment}"
@@ -86,7 +86,7 @@
 
                     <h:commandButton value="#{msg.change}" action="#{resourcesController.processModifiedBabysitter}"
                                      class="positive_btn"/>
-                    <h:commandButton value="#{msg.cancel}" action="#{resourcesController.modificationBackToMain}" immediate="true"
+                    <h:commandButton value="#{msg.cancel}" action="#{resourcesController.backToMain}" immediate="true"
                                      class="negative_btn"/>
                 </h:form>
             </div>
