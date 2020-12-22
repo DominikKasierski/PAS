@@ -39,7 +39,7 @@ public class UsersController extends Conversational implements Serializable {
     private TypeOfUser typeOfUser = TypeOfUser.ADMIN;
     private List<User> currentUsers;
     private final ResourceBundle resourceBundle = ResourceBundle.getBundle(
-            "bundles/messages", FacesContext.getCurrentInstance().getViewRoot().getLocale()); //getting current locale from FacesContext
+            "bundles/messages", FacesContext.getCurrentInstance().getViewRoot().getLocale());
 
     private User copyOfUser;
     private User originalUser;
@@ -124,20 +124,7 @@ public class UsersController extends Conversational implements Serializable {
         }
     }
 
-    public String deleteUser(User user) {
-        try {
-            usersManager.deleteUser(user);
-            return "ClientList";
-        } catch (RepositoryException exception) {
-            FacesContext.getCurrentInstance().addMessage("ClientList:delete", new FacesMessage("Error deleting client"));
-        }
-        return "";
-    }
-
     public String modificationBackToMain() {
-//        int index = usersManager.getUsersRepository().getUsersList().indexOf(originalUser);
-//
-//        usersManager.getUsersRepository().setElements(index, copyOfUser);
         try {
             BeanUtils.copyProperties(originalUser, copyOfUser);
         } catch (IllegalAccessException | InvocationTargetException e) {
@@ -197,7 +184,6 @@ public class UsersController extends Conversational implements Serializable {
 
     @PostConstruct
     public void initCurrentPersons() {
-        typeOfUser = TypeOfUser.ADMIN;
         currentUsers = usersManager.getUsersRepository().getUsersList();
     }
 
@@ -208,6 +194,4 @@ public class UsersController extends Conversational implements Serializable {
     public User getOriginalUser() {
         return originalUser;
     }
-
-
 }

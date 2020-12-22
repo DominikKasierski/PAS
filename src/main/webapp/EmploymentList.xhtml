@@ -13,18 +13,40 @@
         <ui:define name="content">
             <h:form>
                 <div style="overflow-x: auto;">
-                    <h:dataTable value="#{employmentsController.employmentsManager.employmentsRepository.elements}" var="employment">
+                    <h:dataTable
+                            value="#{employmentsController.employmentsManager.employmentsRepository.elements}"
+                            var="employment">
                         <h:column>
                             <f:facet name="header">#{msg.employmentId}</f:facet>
                             ${employment.uuid}
                         </h:column>
                         <h:column>
-                            <f:facet name="header">#{msg.client}</f:facet>
-                            ${employment.client.name.concat(" ").concat(employment.client.surname)}
+                            <f:facet name="header">#{msg.client}
+                                <h:selectOneMenu
+                                    valueChangeListener="#{employmentsController.valueChangedUser}"
+                                    onchange="submit()">
+                                <f:selectItem itemLabel="#{msg.idlabel}" itemValue="0"/>
+                                <f:selectItems
+                                        value="#{employmentsController.employmentsManager.allUsersWithEmploymentArray}"
+                                        var="item"
+                                        itemLabel="#{item.uuid}" itemValue="#{item.uuid}"/>
+                            </h:selectOneMenu>
+                            </f:facet>
+                            ${employment.client.uuid.concat(" ").concat(employment.client.name.concat(" ").concat(employment.client.surname))}
                         </h:column>
                         <h:column>
-                            <f:facet name="header">#{msg.babysitter}</f:facet>
-                            ${employment.babysitter.name.concat(" ").concat(employment.babysitter.surname)}
+                            <f:facet name="header">#{msg.babysitter}
+                                <h:selectOneMenu
+                                        valueChangeListener="#{employmentsController.valueChangedBabysitter}"
+                                        onchange="submit()">
+                                    <f:selectItem itemLabel="#{msg.idlabel}" itemValue="0"/>
+                                    <f:selectItems
+                                            value="#{employmentsController.employmentsManager.allBabysittersConnectedToEmploymentArray}"
+                                            var="item"
+                                            itemLabel="#{item.uuid}" itemValue="#{item.uuid}"/>
+                                </h:selectOneMenu>
+                            </f:facet>
+                            ${employment.babysitter.uuid.concat(" ").concat(employment.babysitter.name.concat(" ").concat(employment.babysitter.surname))}
                         </h:column>
                         <h:column>
                             <f:facet name="header">#{msg.beginningOfEmployment}</f:facet>
@@ -36,15 +58,24 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header">#{msg.actions}</f:facet>
-                            <h:commandButton id="delete" value="#{msg.delete}" action="#{employmentsController.deleteEmployment(employment)}" rendered="#{employment.endOfEmployment == null}" class="negative_btn"/>
-                            <h:message for="delete" />
-<!--                            TODO:Usuniecie opiekunki NIE powoduje ustawienie nulla na liscie wypozyczen, a powinno-->
-                            <h:commandButton id="endEmplyment" value="#{msg.endOfEmployment}" action="#{employmentsController.employmentsManager.endEmployment(employment)}" rendered="#{employment.endOfEmployment == null}" class="negative_btn"/>
-                            <h:message for="endEmplyment" />
+                            <h:commandButton id="delete" value="#{msg.delete}"
+                                             action="#{employmentsController.deleteEmployment(employment)}"
+                                             rendered="#{employment.endOfEmployment == null}"
+                                             class="negative_btn"/>
+                            <h:message for="delete"/>
+                            <h:commandButton id="endEmplyment" value="#{msg.endOfEmployment}"
+                                             action="#{employmentsController.employmentsManager.endEmployment(employment)}"
+                                             rendered="#{employment.endOfEmployment == null}"
+                                             class="negative_btn"/>
+                            <h:message for="endEmplyment"/>
                         </h:column>
                     </h:dataTable>
                 </div>
-                <h:commandButton value="Cancel" action="main" immediate="true" class="negative_btn"/>
+                <h:commandButton value="#{msg.refresh}"
+                                 action="#{employmentsController.refreshCurrent()}" immediate="true"
+                                 class="positive_btn"/>
+                <h:commandButton value="Cancel" action="main" immediate="true"
+                                 class="negative_btn"/>
             </h:form>
         </ui:define>
     </ui:composition>

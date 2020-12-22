@@ -4,6 +4,7 @@ import com.mycompany.firstapplication.Babysitters.Babysitter;
 import com.mycompany.firstapplication.Babysitters.BabysittersManager;
 import com.mycompany.firstapplication.Exceptions.EmploymentException;
 import com.mycompany.firstapplication.Users.Client;
+import com.mycompany.firstapplication.Users.User;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -155,12 +156,24 @@ public class EmploymentsManager implements Serializable {
         getEmploymentsRepository().deleteElement(employment);
     }
 
-    public Employment[] getAllEmploymentArray() {
-        return employmentsRepository.getElements().toArray(new Employment[0]);
+    public Babysitter[] getAllBabysittersConnectedToEmploymentArray() {
+        List<Babysitter> babysittersList = new ArrayList<>();
+        for (Employment employment : employmentsRepository.getElements()) {
+            if (!babysittersList.contains(employment.getBabysitter())) {
+                babysittersList.add(employment.getBabysitter());
+            }
+        }
+        return babysittersList.toArray(new Babysitter[0]);
     }
 
-//    public List[] getAllUsersArray() {
-//        return usersRepository.getUsersList().toArray(new User[0]);
-//    }
+    public User[] getAllUsersWithEmploymentArray() {
+        List<User> userList = new ArrayList<>();
+        for (Employment employment : employmentsRepository.getElements()) {
+            if (!userList.contains(employment.getClient())) {
+                userList.add(employment.getClient());
+            }
+        }
+        return userList.toArray(new User[0]);
+    }
 
 }

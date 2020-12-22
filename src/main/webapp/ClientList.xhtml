@@ -16,20 +16,28 @@
                     <h:dataTable value="#{usersController.currentUsers}" var="client">
                         <h:column>
                             <f:facet name="header">#{msg.id}
-                                <h:selectOneMenu valueChangeListener="#{usersController.valueChangedId}" onchange="submit()" >
-                                    <f:selectItem itemLabel="#{msg.idlabel}" itemValue="0" />
-                                    <f:selectItems value="#{usersController.usersManager.allUsersArray}" var="item"
-                                                   itemLabel="#{item.uuid}" itemValue="#{item.uuid}"/>
+                                <h:selectOneMenu
+                                        valueChangeListener="#{usersController.valueChangedId}"
+                                        onchange="submit()">
+                                    <f:selectItem itemLabel="#{msg.idlabel}" itemValue="0"/>
+                                    <f:selectItems
+                                            value="#{usersController.usersManager.allUsersArray}"
+                                            var="item"
+                                            itemLabel="#{item.uuid}" itemValue="#{item.uuid}"/>
                                 </h:selectOneMenu>
                             </f:facet>
                             ${client.uuid}
                         </h:column>
                         <h:column>
                             <f:facet name="header">#{msg.login}
-                                <h:selectOneMenu valueChangeListener="#{usersController.valueChangedLogin}" onchange="submit()" >
-                                    <f:selectItem itemLabel="#{msg.loginlabel}" itemValue="0" />
-                                    <f:selectItems value="#{usersController.usersManager.allUsersArray}" var="item"
-                                                   itemLabel="#{item.login}" itemValue="#{item.login}"/>
+                                <h:selectOneMenu
+                                        valueChangeListener="#{usersController.valueChangedLogin}"
+                                        onchange="submit()">
+                                    <f:selectItem itemLabel="#{msg.loginlabel}" itemValue="0"/>
+                                    <f:selectItems
+                                            value="#{usersController.usersManager.allUsersArray}"
+                                            var="item"
+                                            itemLabel="#{item.login}" itemValue="#{item.login}"/>
                                 </h:selectOneMenu>
                             </f:facet>
                             ${client.login}
@@ -60,14 +68,21 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header">#{msg.actions}</f:facet>
-                            <h:commandButton value="#{msg.changeActive}" action="#{usersController.usersManager.changeActive(client)}" class="negative_btn"/>
-                            <h:commandButton value="#{msg.modify}" action="#{usersController.modifyUser(client)}" class="negative_btn"/>
+                            <h:commandButton value="#{msg.changeActive}"
+                                             action="#{usersController.usersManager.changeActive(client)}"
+                                             class="negative_btn"/>
+                            <h:commandButton value="#{msg.modify}"
+                                             action="#{usersController.modifyUser(client)}"
+                                             class="negative_btn"/>
                         </h:column>
 
                     </h:dataTable>
                 </div>
-                <h:commandButton value="#{msg.refresh}" action="#{usersController.initCurrentPersons()}" immediate="true" class="positive_btn"/>
-                <h:commandButton value="#{msg.cancel}" action="main" immediate="true" class="negative_btn"/>
+                <h:commandButton value="#{msg.refresh}"
+                                 action="#{usersController.initCurrentPersons()}" immediate="true"
+                                 class="positive_btn"/>
+                <h:commandButton value="#{msg.cancel}" action="main" immediate="true"
+                                 class="negative_btn"/>
             </h:form>
         </ui:define>
     </ui:composition>

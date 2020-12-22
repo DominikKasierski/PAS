@@ -30,7 +30,6 @@ public class ResourcesController extends Conversational implements Serializable 
     private final TeachingSitter newTeachingSitter = new TeachingSitter();
     private final TidingSitter newTidingSitter = new TidingSitter();
 
-//    private List<Babysitter> currentBabysitters;
     private TypeOfBabysitter typeOfBabysitter = TypeOfBabysitter.NORMAL;
 
     private Babysitter copyOfBabysitter;

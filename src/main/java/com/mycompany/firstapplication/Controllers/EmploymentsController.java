@@ -6,16 +6,21 @@ import com.mycompany.firstapplication.Employment.EmploymentsManager;
 import com.mycompany.firstapplication.Exceptions.EmploymentException;
 import com.mycompany.firstapplication.Exceptions.RepositoryException;
 import com.mycompany.firstapplication.Users.Client;
+import com.mycompany.firstapplication.Users.User;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.ConversationScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ValueChangeEvent;
 import javax.faces.validator.ValidatorException;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 @ConversationScoped
@@ -29,8 +34,11 @@ public class EmploymentsController extends Conversational implements Serializabl
 
     private Babysitter currentBabysitter;
     private Client currentClient;
+
+    private List<Employment> currentEmployments;
+
     private final ResourceBundle resourceBundle = ResourceBundle.getBundle(
-            "bundles/messages", FacesContext.getCurrentInstance().getViewRoot().getLocale()); //getting current locale from FacesContext
+            "bundles/messages", FacesContext.getCurrentInstance().getViewRoot().getLocale());
 
     public String processNewEmployment() {
         beginNewConversation();
@@ -42,18 +50,45 @@ public class EmploymentsController extends Conversational implements Serializabl
             employmentsManager.checkIfBabysitterExists(currentBabysitter);
             employmentsManager.employBabysitter(currentClient, currentBabysitter);
         } catch (EmploymentException e) {
-//            throw new ValidatorException(new FacesMessage(resourceBundle.getString("ValidatorMessageEmploymentRequirements")));
             FacesContext.getCurrentInstance().addMessage(
                     "newEmploymentConfirm:validationLabel",
-                    new FacesMessage(resourceBundle.getString("ValidatorMessageEmploymentRequirements")));
+                    new FacesMessage(
+                            resourceBundle.getString("ValidatorMessageEmploymentRequirements")));
             return "";
         } catch (RepositoryException e) {
             FacesContext.getCurrentInstance().addMessage(
                     "newEmploymentConfirm:validationLabel",
-                    new FacesMessage(resourceBundle.getString("ValidatorMessageBabysitterDoesNotExist")));
+                    new FacesMessage(
+                            resourceBundle.getString("ValidatorMessageBabysitterDoesNotExist")));
             return "";
         }
         return reject();
+    }
+
+    public void valueChangedUser(ValueChangeEvent event) {
+        if (!event.getNewValue().toString().equals("0")) {
+            String id = event.getNewValue().toString();
+            showSelected(id);
+        }
+    }
+
+    public void valueChangedBabysitter(ValueChangeEvent event) {
+        if (!event.getNewValue().toString().equals("0")) {
+            String id = event.getNewValue().toString();
+            showSelected(id);
+        }
+    }
+
+    private void showSelected(String id) {
+        List<Employment> temporaryEmploymentList = new ArrayList<>();
+        for (Employment employment : employmentsManager.getEmploymentsRepository()
+                .getElements()) {
+            if (employment.getClient().getUuid().equals(id) || employment.getBabysitter().getUuid().equals(id)) {
+                temporaryEmploymentList.add(employment);
+                break;
+            }
+        }
+        currentEmployments = temporaryEmploymentList;
     }
 
     public EmploymentsManager getEmploymentsManager() {
@@ -83,15 +118,18 @@ public class EmploymentsController extends Conversational implements Serializabl
     public void employmentValidation(FacesContext context, UIComponent component, Object value) {
         int errorNumber = 1;
         try {
-            employmentsManager.checkIfBabysitterMeetsRequirements(currentBabysitter, currentClient.getAgeOfTheYoungestChild(),
+            employmentsManager.checkIfBabysitterMeetsRequirements(currentBabysitter,
+                    currentClient.getAgeOfTheYoungestChild(),
                     currentClient.getNumberOfChildren());
             errorNumber++;
             employmentsManager.checkIfBabysitterIsCurrentlyEmployed(currentBabysitter);
         } catch (EmploymentException exception) {
             if (errorNumber == 1)
-                throw new ValidatorException(new FacesMessage(resourceBundle.getString("ValidatorMessageEmploymentRequirements")));
+                throw new ValidatorException(new FacesMessage(
+                        resourceBundle.getString("ValidatorMessageEmploymentRequirements")));
 
-            throw new ValidatorException(new FacesMessage(resourceBundle.getString("ValidatorMessageBabysitterAlreadyEmployed")));
+            throw new ValidatorException(new FacesMessage(
+                    resourceBundle.getString("ValidatorMessageBabysitterAlreadyEmployed")));
         }
     }
 
@@ -118,5 +156,9 @@ public class EmploymentsController extends Conversational implements Serializabl
         } catch (EmploymentException e) {
             return null;
         }
+    }
+
+    public void refreshCurrent() {
+        currentEmployments = getEmploymentsManager().getEmploymentsRepository().getElements();
     }
 }
