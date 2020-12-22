@@ -68,27 +68,15 @@ public class EmploymentsController extends Conversational implements Serializabl
     public void valueChangedUser(ValueChangeEvent event) {
         if (!event.getNewValue().toString().equals("0")) {
             String id = event.getNewValue().toString();
-            showSelected(id);
+            currentEmployments = employmentsManager.getEmploymentsRepository().showSelected(id);
         }
     }
 
     public void valueChangedBabysitter(ValueChangeEvent event) {
         if (!event.getNewValue().toString().equals("0")) {
             String id = event.getNewValue().toString();
-            showSelected(id);
+            currentEmployments = employmentsManager.getEmploymentsRepository().showSelected(id);
         }
-    }
-
-    private void showSelected(String id) {
-        List<Employment> temporaryEmploymentList = new ArrayList<>();
-        for (Employment employment : employmentsManager.getEmploymentsRepository()
-                .getElements()) {
-            if (employment.getClient().getUuid().equals(id) || employment.getBabysitter().getUuid().equals(id)) {
-                temporaryEmploymentList.add(employment);
-                break;
-            }
-        }
-        currentEmployments = temporaryEmploymentList;
     }
 
     public EmploymentsManager getEmploymentsManager() {

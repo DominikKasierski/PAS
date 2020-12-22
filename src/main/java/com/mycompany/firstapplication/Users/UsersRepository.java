@@ -58,6 +58,16 @@ public class UsersRepository extends Repository<User> {
         return true;
     }
 
+    public List<User> showSelectedUser(String key, boolean checkById) {
+        List<User> temporaryUsersList = new ArrayList<>();
+        if (checkById) {
+            temporaryUsersList.add(findUserByUuid(key));
+        } else {
+            temporaryUsersList.add(findUserByLogin(key));
+        }
+        return temporaryUsersList;
+    }
+
     public User findUserByUuid(String uuid) {
         for (User user : getElements()) {
             if (user.getUuid().equals(uuid)) {

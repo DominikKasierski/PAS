@@ -57,15 +57,9 @@ public class ResourcesController extends Conversational implements Serializable 
     public void valueChanged(ValueChangeEvent event) {
         if (!event.getNewValue().toString().equals("0")) {
             String id = event.getNewValue().toString();
-            showSelectedBabysitter(id);
+            babysittersManager.setCurrentBabysitters(babysittersManager.getBabysittersRepository().showSelectedBabysitter(id));;
+            setType();
         }
-    }
-
-    private void showSelectedBabysitter(String id) {
-        List<Babysitter> temporaryBabysittersList = new ArrayList<>();
-        temporaryBabysittersList.add(babysittersManager.getBabysittersRepository().findByKey(id));
-        babysittersManager.setCurrentBabysitters(temporaryBabysittersList);
-        setType();
     }
 
     private void setType() {

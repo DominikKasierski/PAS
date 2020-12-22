@@ -148,26 +148,17 @@ public class UsersController extends Conversational implements Serializable {
     public void valueChangedId(ValueChangeEvent event) {
         if (!event.getNewValue().toString().equals("0")) {
             String id = event.getNewValue().toString();
-            showSelectedUser(id, true);
+            currentUsers = getUsersManager().getUsersRepository().showSelectedUser(id, true);
+            setType();
         }
     }
 
     public void valueChangedLogin(ValueChangeEvent event) {
         if (!event.getNewValue().toString().equals("0")) {
             String login = event.getNewValue().toString();
-            showSelectedUser(login, false);
+            currentUsers = getUsersManager().getUsersRepository().showSelectedUser(login, false);
+            setType();
         }
-    }
-
-    private void showSelectedUser(String key, boolean checkById) {
-        List<User> temporaryUsersList = new ArrayList<>();
-        if (checkById) {
-            temporaryUsersList.add(usersManager.getUsersRepository().findUserByUuid(key));
-        } else {
-            temporaryUsersList.add(usersManager.getUsersRepository().findUserByLogin(key));
-        }
-        currentUsers = temporaryUsersList;
-        setType();
     }
 
     private void setType() {

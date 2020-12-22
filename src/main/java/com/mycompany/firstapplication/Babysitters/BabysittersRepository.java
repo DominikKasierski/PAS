@@ -8,6 +8,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
+import java.util.ArrayList;
 import java.util.List;
 
 @ApplicationScoped
@@ -45,6 +46,12 @@ public class BabysittersRepository extends Repository<Babysitter> {
         }
 
         return stringBuilder.toString();
+    }
+
+    public List<Babysitter> showSelectedBabysitter(String id) {
+        List<Babysitter> temporaryBabysittersList = new ArrayList<>();
+        temporaryBabysittersList.add(findByKey(id));
+        return temporaryBabysittersList;
     }
 
     @Override
