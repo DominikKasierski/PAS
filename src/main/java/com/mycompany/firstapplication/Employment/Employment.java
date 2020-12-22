@@ -52,20 +52,29 @@ public class Employment {
         throw new EmploymentException("Employment has not been ended");
     }
 
+//    @Override
+//    public String toString() {
+//        return new ToStringBuilder(this)
+//                .append(System.getProperty("line.separator"))
+//                .append("uniqueID", uniqueID)
+//                .append(System.getProperty("line.separator"))
+//                .append("babysitter", babysitter)
+//                .append(System.getProperty("line.separator"))
+//                .append("user", client)
+//                .append(System.getProperty("line.separator"))
+//                .append("beginningOfEmployment", beginningOfEmployment)
+//                .append(System.getProperty("line.separator"))
+//                .append("endOfEmployment", endOfEmployment)
+//                .toString();
+//    }
+
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .append(System.getProperty("line.separator"))
-                .append("uniqueID", uniqueID)
-                .append(System.getProperty("line.separator"))
-                .append("babysitter", babysitter)
-                .append(System.getProperty("line.separator"))
-                .append("user", client)
-                .append(System.getProperty("line.separator"))
-                .append("beginningOfEmployment", beginningOfEmployment)
-                .append(System.getProperty("line.separator"))
-                .append("endOfEmployment", endOfEmployment)
-                .toString();
+        return "uniqueID: " + uniqueID +
+                "\nbabysitter: " + babysitter.getName() + " " + babysitter.getSurname() +
+                "\nuser: " + client.getLogin() +
+                "\nbeginningOfEmployment: " + beginningOfEmployment +
+                "\nendOfEmployment: " + endOfEmployment;
     }
 
     public void setEndOfEmployment(LocalDateTime endOfEmployment) {

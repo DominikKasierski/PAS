@@ -103,12 +103,10 @@ public class Babysitter implements Cloneable {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .append("name", name)
-                .append("surname", surname)
-                .append("basePrice", basePriceForHour)
-                .append("minChildAge", minChildAge)
-                .append("maxNumberOfChildrenInTheFamily", maxNumberOfChildrenInTheFamily)
-                .toString();
+        return "name: " + name +
+                "\nsurname: " + surname +
+                "\nbasePrice: " + basePriceForHour +
+                "\nminChildAge: " + minChildAge +
+                "\nmaxNumberOfChildrenInTheFamily: " + minChildAge;
     }
 }

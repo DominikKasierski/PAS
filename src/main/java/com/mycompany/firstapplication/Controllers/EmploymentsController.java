@@ -103,4 +103,12 @@ public class EmploymentsController extends Conversational implements Serializabl
         endCurrentConversation();
         return "main";
     }
+
+    public Employment getActualEmploymentForClientOrNull (Client client) {
+        try {
+            return employmentsManager.getActualEmploymentForClient(client);
+        } catch (EmploymentException e) {
+            return null;
+        }
+    }
 }
