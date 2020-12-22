@@ -60,6 +60,10 @@
                             ${babysitter.valueOfCleaningEquipment}
                         </h:column>
                         <h:column>
+                            <f:facet name="header">#{msg.currentEmploments}</f:facet>
+                            ${employmentsController.getActualEmploymentForBabysitterOrNull(babysitter)}
+                        </h:column>
+                        <h:column>
                             <f:facet name="header">#{msg.actions}</f:facet>
                             <h:commandButton id="delete" value="#{msg.delete}" action="#{resourcesController.deleteBabysitter(babysitter)}" class="negative_btn"/>
                             <h:message for="delete" />

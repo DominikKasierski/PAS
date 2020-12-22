@@ -111,4 +111,12 @@ public class EmploymentsController extends Conversational implements Serializabl
             return null;
         }
     }
+
+    public Employment getActualEmploymentForBabysitterOrNull (Babysitter babysitter) {
+        try {
+            return employmentsManager.getActualEmploymentForBabysitter(babysitter);
+        } catch (EmploymentException e) {
+            return null;
+        }
+    }
 }
