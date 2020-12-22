@@ -14,7 +14,7 @@
             <h:form>
                 <div style="overflow-x: auto;">
                     <h:dataTable
-                            value="#{employmentsController.employmentsManager.employmentsRepository.elements}"
+                            value="#{employmentsController.currentEmployments}"
                             var="employment">
                         <h:column>
                             <f:facet name="header">#{msg.employmentId}</f:facet>

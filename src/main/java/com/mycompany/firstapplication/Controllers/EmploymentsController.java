@@ -158,6 +158,15 @@ public class EmploymentsController extends Conversational implements Serializabl
         }
     }
 
+    @PostConstruct
+    public void initCurrentPersons() {
+        currentEmployments = employmentsManager.getEmploymentsRepository().getElements();
+    }
+
+    public List<Employment> getCurrentEmployments() {
+        return currentEmployments;
+    }
+
     public void refreshCurrent() {
         currentEmployments = getEmploymentsManager().getEmploymentsRepository().getElements();
     }
