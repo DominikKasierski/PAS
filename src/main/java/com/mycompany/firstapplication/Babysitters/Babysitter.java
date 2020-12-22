@@ -1,7 +1,6 @@
 package com.mycompany.firstapplication.Babysitters;
 
 import com.mycompany.firstapplication.Exceptions.BabysitterException;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class Babysitter implements Cloneable {
@@ -12,11 +11,9 @@ public class Babysitter implements Cloneable {
     private Integer minChildAge;
     private Integer maxNumberOfChildrenInTheFamily;
     private boolean isEmployed;
-    private final String uniqueID;
-    final int SHORT_ID_LENGTH = 8;
+    private String uniqueID;
 
     public Babysitter() {
-        uniqueID = RandomStringUtils.randomNumeric(SHORT_ID_LENGTH);
     }
 
     @Override
@@ -31,7 +28,6 @@ public class Babysitter implements Cloneable {
         this.basePriceForHour = basePriceForHour;
         this.minChildAge = minChildAge;
         this.maxNumberOfChildrenInTheFamily = maxNumberOfChildrenInTheFamily;
-        uniqueID = RandomStringUtils.randomNumeric(SHORT_ID_LENGTH);
         if (basePriceForHour <= 0 || minChildAge < 0 || maxNumberOfChildrenInTheFamily <= 0) {
             throw new BabysitterException("Invalid argument");
         }
@@ -41,7 +37,6 @@ public class Babysitter implements Cloneable {
         return basePriceForHour;
     }
 
-    //TODO: Zastanowić się nad tym
     public Integer getYearsOfExperienceInTeaching() {
         return null;
     }
@@ -49,7 +44,6 @@ public class Babysitter implements Cloneable {
     public Double getValueOfCleaningEquipment() {
         return null;
     }
-    //
 
     public void setName(String name) {
         this.name = name;
@@ -101,6 +95,10 @@ public class Babysitter implements Cloneable {
 
     public String getUuid() {
         return uniqueID;
+    }
+
+    public void setUniqueID(String uniqueID) {
+        this.uniqueID = uniqueID;
     }
 
     @Override

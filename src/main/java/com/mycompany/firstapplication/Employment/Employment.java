@@ -12,21 +12,20 @@ import static java.time.temporal.ChronoUnit.SECONDS;
 
 public class Employment {
 
-    private final String uniqueID;
+    private String uniqueID;
     private Babysitter babysitter;
     private Client client;
     private LocalDateTime beginningOfEmployment;
     private LocalDateTime endOfEmployment;
-    final int SHORT_ID_LENGTH = 8;
+
 
     public Employment() {
-        uniqueID = RandomStringUtils.randomNumeric(SHORT_ID_LENGTH);
+
     }
 
     public Employment(Babysitter babysitter, Client client) {
         this.babysitter = babysitter;
         this.client = client;
-        uniqueID = RandomStringUtils.randomNumeric(SHORT_ID_LENGTH);
         beginningOfEmployment = LocalDateTime.now();
     }
 
@@ -87,6 +86,10 @@ public class Employment {
 
     public String getUuid() {
         return uniqueID;
+    }
+
+    public void setUniqueID(String uniqueID) {
+        this.uniqueID = uniqueID;
     }
 
     public void setBabysitter(Babysitter babysitter) {

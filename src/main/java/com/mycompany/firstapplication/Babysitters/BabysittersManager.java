@@ -48,8 +48,6 @@ public class BabysittersManager implements Serializable {
     public void deleteBabysitter(Babysitter babysitter) {
         if(!babysitter.isEmployed()) {
             babysittersRepository.deleteElement(babysitter);
-            babysitter = null;
-            System.out.println("test");
         } else throw new BabysitterException("An employed babysitter cannot be removed");
     }
 

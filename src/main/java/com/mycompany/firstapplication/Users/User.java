@@ -10,11 +10,9 @@ public abstract class User implements Cloneable {
     private String login;
     private String name;
     private String surname;
-    private final String uniqueID;
-    final int SHORT_ID_LENGTH = 8;
+    private String uniqueID;
 
     public User() {
-        uniqueID = RandomStringUtils.randomNumeric(SHORT_ID_LENGTH);
     }
 
     public User(String login, String name, String surname) {
@@ -24,7 +22,6 @@ public abstract class User implements Cloneable {
         this.login = login;
         this.name = name;
         this.surname = surname;
-        uniqueID = RandomStringUtils.randomNumeric(SHORT_ID_LENGTH);
     }
 
     public void changeActive() {
@@ -73,6 +70,10 @@ public abstract class User implements Cloneable {
 
     public String getLogin() {
         return login;
+    }
+
+    public void setUniqueID(String uniqueID) {
+        this.uniqueID = uniqueID;
     }
 
     @Override

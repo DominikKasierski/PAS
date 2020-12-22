@@ -7,6 +7,9 @@ public class TeachingSitter extends Babysitter {
 
     private Integer yearsOfExperienceInTeaching;
 
+    public TeachingSitter() {
+    }
+
     public TeachingSitter(String name, String surname, Integer basePriceForHour, Integer minChildAge,
                           Integer maxNumberOfChildrenInTheFamily, Integer yearsOfExperienceInTeaching) {
         super(name, surname, basePriceForHour, minChildAge, maxNumberOfChildrenInTheFamily);
@@ -14,9 +17,6 @@ public class TeachingSitter extends Babysitter {
         if (yearsOfExperienceInTeaching < 0) {
             throw new BabysitterException("Invalid argument");
         }
-    }
-
-    public TeachingSitter() {
     }
 
     @Override
