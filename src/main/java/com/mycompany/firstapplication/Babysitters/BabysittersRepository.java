@@ -3,6 +3,7 @@ package com.mycompany.firstapplication.Babysitters;
 
 import com.mycompany.firstapplication.Exceptions.RepositoryException;
 import com.mycompany.firstapplication.Template.Repository;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.annotation.PostConstruct;
@@ -11,6 +12,13 @@ import java.util.List;
 
 @ApplicationScoped
 public class BabysittersRepository extends Repository<Babysitter> {
+
+    final int SHORT_ID_LENGTH = 8;
+
+    @Override public void addElement(Babysitter element) {
+        element.setUniqueID(RandomStringUtils.randomNumeric(SHORT_ID_LENGTH));
+        super.addElement(element);
+    }
 
     public List<Babysitter> getBabysittersList() {
         return getElements();

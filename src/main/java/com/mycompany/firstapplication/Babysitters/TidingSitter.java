@@ -7,6 +7,9 @@ public class TidingSitter extends Babysitter {
 
     private Double valueOfCleaningEquipment;
 
+    public TidingSitter() {
+    }
+
     public TidingSitter(String name, String surname, Integer basePriceForHour, Integer minChildAge,
                         Integer maxNumberOfChildrenInTheFamily, double valueOfCleaningEquipment) {
         super(name, surname, basePriceForHour, minChildAge, maxNumberOfChildrenInTheFamily);
@@ -14,9 +17,6 @@ public class TidingSitter extends Babysitter {
         if (valueOfCleaningEquipment < 0) {
             throw new BabysitterException("Invalid argument");
         }
-    }
-
-    public TidingSitter() {
     }
 
     @Override

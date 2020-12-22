@@ -2,6 +2,7 @@ package com.mycompany.firstapplication.Users;
 
 import com.mycompany.firstapplication.Exceptions.UserException;
 import com.mycompany.firstapplication.Template.Repository;
+import org.apache.commons.lang3.RandomStringUtils;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
@@ -10,6 +11,8 @@ import java.util.List;
 
 @ApplicationScoped
 public class UsersRepository extends Repository<User> {
+
+    final int SHORT_ID_LENGTH = 8;
 
     public List<User> getUsersList() {
         return getElements();
@@ -30,6 +33,7 @@ public class UsersRepository extends Repository<User> {
     @Override
     public void addElement(User user) {
         if (isLoginUnique(user.getLogin())) {
+            user.setUniqueID(RandomStringUtils.randomNumeric(SHORT_ID_LENGTH));
             super.addElement(user);
         } else {
             throw new UserException("Login is not unique");

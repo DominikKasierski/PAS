@@ -44,8 +44,4 @@ public abstract class Repository<T> {
     public List<T> getElements() {
         return new ArrayList<>(elements);
     }
-
-    public void setElements(int index, T element) {
-        elements.set(index, element);
-    }
 }
