@@ -13,7 +13,9 @@
         <ui:define name="content">
             <h:form id="BabysitterList">
                 <div style="overflow-x: auto;">
-
+                    <h:outputText id="errorLabel"/>
+                    <h:message for="errorLabel" style="color:red;"/>
+                    <br/>
                     <h:dataTable value="#{resourcesController.currentBabysitters}" var="babysitter">
                         <h:column>
                             <f:facet name="header">Id

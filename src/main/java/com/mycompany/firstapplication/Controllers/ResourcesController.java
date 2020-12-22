@@ -142,9 +142,14 @@ public class ResourcesController extends Conversational implements Serializable 
             babysittersManager.deleteBabysitter(babysitter);
             babysittersManager.deleteBabysitterFromEmploymentList(babysitter);
             return "BabysitterList";
-        } catch (BabysitterException | RepositoryException exception) {
-            throw new ValidatorException(new FacesMessage(resourceBundle.getString("babysitterOccupied")));
+        } catch (BabysitterException exception) {
+            FacesContext.getCurrentInstance().addMessage("BabysitterList:errorLabel", new FacesMessage(resourceBundle.getString("babysitterOccupied")));
+//            throw new ValidatorException(new FacesMessage(resourceBundle.getString("babysitterOccupied")));
+        } catch (RepositoryException exception) {
+//            throw new ValidatorException(new FacesMessage(resourceBundle.getString("ValidatorMessageBabysitterDoesNotExist")));
+            FacesContext.getCurrentInstance().addMessage("BabysitterList:errorLabel", new FacesMessage(resourceBundle.getString("ValidatorMessageBabysitterDoesNotExist")));
         }
+        return "";
     }
 
     public String modificationBackToMain() {
