@@ -128,7 +128,7 @@ public class EmploymentsManager implements Serializable {
 
     public List<Employment> getAllEmploymentsForBabysitter(Babysitter babysitter) {
         List<Employment> allEmploymentsList = employmentsRepository.getElements();
-        List<Employment> allEmploymentsForBabysitterList = new ArrayList<Employment>();
+        List<Employment> allEmploymentsForBabysitterList = new ArrayList<>();
 
         for (Employment employment : allEmploymentsList) {
             if (employment.getBabysitter() == babysitter) {
@@ -161,7 +161,7 @@ public class EmploymentsManager implements Serializable {
 
     public List<Employment> getAllEmploymentsForClient(Client client) {
         List<Employment> allEmploymentsList = employmentsRepository.getElements();
-        List<Employment> allEmploymentsForFamilyList = new ArrayList<Employment>();
+        List<Employment> allEmploymentsForFamilyList = new ArrayList<>();
 
         for (Employment employment : allEmploymentsList) {
             if (employment.getClient() == client) {

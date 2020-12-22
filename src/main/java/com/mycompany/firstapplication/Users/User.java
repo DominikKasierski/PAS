@@ -2,7 +2,6 @@ package com.mycompany.firstapplication.Users;
 
 
 import com.mycompany.firstapplication.Exceptions.UserException;
-import org.apache.commons.lang3.RandomStringUtils;
 
 public abstract class User implements Cloneable {
 

@@ -1,7 +1,5 @@
 package com.mycompany.firstapplication.Users;
 
-import javax.annotation.PostConstruct;
-import javax.faces.event.ValueChangeEvent;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import java.io.Serializable;

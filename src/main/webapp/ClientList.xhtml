@@ -64,7 +64,7 @@
                         </h:column>
                         <h:column rendered="#{usersController.typeOfUser == 'CLIENT' }">
                             <f:facet name="header">#{msg.currentEmployments}</f:facet>
-                            ${employmentsController.getActualEmploymentForClientOrNull(client)}
+                            ${employmentsController.employmentsManager.getActualEmploymentsForClient(client)}
                         </h:column>
                         <h:column>
                             <f:facet name="header">#{msg.actions}</f:facet>

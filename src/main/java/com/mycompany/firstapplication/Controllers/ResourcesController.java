@@ -5,17 +5,14 @@ import com.mycompany.firstapplication.Exceptions.BabysitterException;
 import com.mycompany.firstapplication.Exceptions.RepositoryException;
 import org.apache.commons.beanutils.BeanUtils;
 
-import javax.annotation.PostConstruct;
 import javax.enterprise.context.ConversationScoped;
-import javax.faces.event.ValueChangeEvent;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.faces.validator.ValidatorException;
+import javax.faces.event.ValueChangeEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -57,7 +54,7 @@ public class ResourcesController extends Conversational implements Serializable 
     public void valueChanged(ValueChangeEvent event) {
         if (!event.getNewValue().toString().equals("0")) {
             String id = event.getNewValue().toString();
-            babysittersManager.setCurrentBabysitters(babysittersManager.getBabysittersRepository().showSelectedBabysitter(id));;
+            babysittersManager.setCurrentBabysitters(babysittersManager.getBabysittersRepository().showSelectedBabysitter(id));
             setType();
         }
     }

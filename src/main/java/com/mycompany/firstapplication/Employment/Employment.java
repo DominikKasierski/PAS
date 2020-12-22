@@ -3,8 +3,6 @@ package com.mycompany.firstapplication.Employment;
 import com.mycompany.firstapplication.Babysitters.Babysitter;
 import com.mycompany.firstapplication.Exceptions.EmploymentException;
 import com.mycompany.firstapplication.Users.Client;
-import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.time.LocalDateTime;
 
@@ -51,22 +49,6 @@ public class Employment {
         }
         throw new EmploymentException("Employment has not been ended");
     }
-
-//    @Override
-//    public String toString() {
-//        return new ToStringBuilder(this)
-//                .append(System.getProperty("line.separator"))
-//                .append("uniqueID", uniqueID)
-//                .append(System.getProperty("line.separator"))
-//                .append("babysitter", babysitter)
-//                .append(System.getProperty("line.separator"))
-//                .append("user", client)
-//                .append(System.getProperty("line.separator"))
-//                .append("beginningOfEmployment", beginningOfEmployment)
-//                .append(System.getProperty("line.separator"))
-//                .append("endOfEmployment", endOfEmployment)
-//                .toString();
-//    }
 
     @Override
     public String toString() {
