@@ -1,14 +1,10 @@
 package com.mycompany.firstapplication.Controllers;
 
-import com.mycompany.firstapplication.Babysitters.Babysitter;
-import com.mycompany.firstapplication.Babysitters.TypeOfBabysitter;
-import com.mycompany.firstapplication.Exceptions.RepositoryException;
 import com.mycompany.firstapplication.Exceptions.UserException;
 import com.mycompany.firstapplication.Users.*;
 import org.apache.commons.beanutils.BeanUtils;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
@@ -17,12 +13,9 @@ import javax.faces.event.ValueChangeEvent;
 import javax.faces.validator.ValidatorException;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.validation.Valid;
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 @ConversationScoped
