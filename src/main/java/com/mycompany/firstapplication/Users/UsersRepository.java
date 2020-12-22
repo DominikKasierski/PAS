@@ -45,6 +45,15 @@ public class UsersRepository extends Repository<User> {
         return true;
     }
 
+    public boolean isLoginUnique(String login, User user1) {
+        for (User user : getElements()) {
+            if (user.getLogin().equals(login) && user != user1) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public User findUserByUuid(String uuid) {
         for (User user : getElements()) {
             if (user.getUuid().equals(uuid)) {

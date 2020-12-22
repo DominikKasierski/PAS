@@ -66,7 +66,7 @@
                         </h:column>
                     </h:dataTable>
                 </div>
-                <h:commandButton value="#{msg.refresh}" action="#{resourcesController.initCurrentPersons()}" immediate="true" class="positive_btn"/>
+                <h:commandButton value="#{msg.refresh}" action="#{resourcesController.refreshCurrent}" immediate="true" class="positive_btn"/>
                 <h:commandButton value="#{msg.cancel}" action="main" immediate="true" class="negative_btn"/>
             </h:form>
         </ui:define>

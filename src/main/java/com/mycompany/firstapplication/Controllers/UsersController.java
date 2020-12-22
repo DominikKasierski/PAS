@@ -5,6 +5,7 @@ import com.mycompany.firstapplication.Babysitters.TypeOfBabysitter;
 import com.mycompany.firstapplication.Exceptions.RepositoryException;
 import com.mycompany.firstapplication.Exceptions.UserException;
 import com.mycompany.firstapplication.Users.*;
+import org.apache.commons.beanutils.BeanUtils;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.Conversation;
@@ -18,6 +19,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.Valid;
 import java.io.Serializable;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -90,7 +92,7 @@ public class UsersController extends Conversational implements Serializable {
         String login = (String) value;
         if (!login.matches("\\w{2,}"))
             throw new ValidatorException(new FacesMessage(resourceBundle.getString("validatorMessageLogin")));
-        if (!usersManager.getUsersRepository().isLoginUnique(login)) {
+        if (!usersManager.getUsersRepository().isLoginUnique(login, originalUser)) {
             throw new ValidatorException(new FacesMessage(resourceBundle.getString("validatorMessageLoginUsed")));
         }
     }
@@ -133,9 +135,14 @@ public class UsersController extends Conversational implements Serializable {
     }
 
     public String modificationBackToMain() {
-        int index = usersManager.getUsersRepository().getUsersList().indexOf(originalUser);
-
-        usersManager.getUsersRepository().setElements(index, copyOfUser);
+//        int index = usersManager.getUsersRepository().getUsersList().indexOf(originalUser);
+//
+//        usersManager.getUsersRepository().setElements(index, copyOfUser);
+        try {
+            BeanUtils.copyProperties(originalUser, copyOfUser);
+        } catch (IllegalAccessException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
         endCurrentConversation();
         return "main";
     }

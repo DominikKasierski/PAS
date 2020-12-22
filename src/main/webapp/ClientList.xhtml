@@ -57,8 +57,6 @@
                         <h:column>
                             <f:facet name="header">#{msg.actions}</f:facet>
                             <h:commandButton value="#{msg.changeActive}" action="#{usersController.usersManager.changeActive(client)}" class="negative_btn"/>
-                            <h:commandButton id="delete" value="#{msg.delete}" action="#{usersController.deleteUser(client)}" class="negative_btn"/>
-                            <h:message for="delete" />
                             <h:commandButton value="#{msg.modify}" action="#{usersController.modifyUser(client)}" class="negative_btn"/>
                         </h:column>
                     </h:dataTable>

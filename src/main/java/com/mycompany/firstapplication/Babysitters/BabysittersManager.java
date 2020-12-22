@@ -4,6 +4,7 @@ import com.mycompany.firstapplication.Employment.Employment;
 import com.mycompany.firstapplication.Employment.EmploymentsManager;
 import com.mycompany.firstapplication.Exceptions.BabysitterException;
 
+import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import java.io.Serializable;
@@ -18,6 +19,16 @@ public class BabysittersManager implements Serializable {
 
     @Inject
     private EmploymentsManager employmentsManager;
+
+    private List<Babysitter> currentBabysitters;
+
+    public List<Babysitter> getCurrentBabysitters() {
+        return currentBabysitters;
+    }
+
+    public void setCurrentBabysitters(List<Babysitter> currentBabysitters) {
+        this.currentBabysitters = currentBabysitters;
+    }
 
     public BabysittersManager() {
     }
@@ -71,5 +82,8 @@ public class BabysittersManager implements Serializable {
         return appropriateBabysitters;
     }
 
-
+    @PostConstruct
+    public void initCurrentPersons() {
+        currentBabysitters = getBabysittersRepository().getBabysittersList();
+    }
 }
