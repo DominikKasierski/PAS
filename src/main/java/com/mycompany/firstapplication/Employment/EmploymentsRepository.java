@@ -45,9 +45,16 @@ public class EmploymentsRepository extends Repository<Employment> {
     public List<Employment> showSelected(String id) {
         List<Employment> temporaryEmploymentList = new ArrayList<>();
         for (Employment employment : getElements()) {
-            if (employment.getClient().getUuid().equals(id) || employment.getBabysitter().getUuid().equals(id)) {
-                temporaryEmploymentList.add(employment);
-                break;
+            if (employment.getBabysitter() != null) {
+                if (employment.getClient().getUuid().equals(id) || employment.getBabysitter().getUuid().equals(id)) {
+                    temporaryEmploymentList.add(employment);
+                    break;
+                }
+            } else {
+                if (employment.getClient().getUuid().equals(id)) {
+                    temporaryEmploymentList.add(employment);
+                    break;
+                }
             }
         }
         return temporaryEmploymentList;

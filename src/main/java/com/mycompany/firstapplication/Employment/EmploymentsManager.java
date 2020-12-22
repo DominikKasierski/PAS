@@ -179,7 +179,7 @@ public class EmploymentsManager implements Serializable {
     public Babysitter[] getAllBabysittersConnectedToEmploymentArray() {
         List<Babysitter> babysittersList = new ArrayList<>();
         for (Employment employment : employmentsRepository.getElements()) {
-            if (!babysittersList.contains(employment.getBabysitter())) {
+            if (!babysittersList.contains(employment.getBabysitter()) && employment.getBabysitter() != null) {
                 babysittersList.add(employment.getBabysitter());
             }
         }
