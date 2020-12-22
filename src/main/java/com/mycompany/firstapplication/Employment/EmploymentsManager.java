@@ -146,7 +146,17 @@ public class EmploymentsManager implements Serializable {
                 return employment;
             }
         }
-        throw new EmploymentException("Client has not any actual employment");
+        throw new EmploymentException("Client does not have any actual employment");
+    }
+
+    public List<Employment> getActualEmploymentsForClient(Client client) {
+        List<Employment> actualEmploymentList = new ArrayList<>();
+        List<Employment> allEmploymentsList = employmentsRepository.getElements();
+        for (Employment employment : allEmploymentsList) {
+            if (employment.getClient() == client && employment.getEndOfEmployment() == null)
+                actualEmploymentList.add(employment);
+        }
+        return actualEmploymentList;
     }
 
     public List<Employment> getAllEmploymentsForClient(Client client) {

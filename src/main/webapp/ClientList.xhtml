@@ -63,7 +63,7 @@
                             ${client.ageOfTheYoungestChild}
                         </h:column>
                         <h:column rendered="#{usersController.typeOfUser == 'CLIENT' }">
-                            <f:facet name="header">#{msg.currentEmploments}</f:facet>
+                            <f:facet name="header">#{msg.currentEmployments}</f:facet>
                             ${employmentsController.getActualEmploymentForClientOrNull(client)}
                         </h:column>
                         <h:column>

@@ -11,8 +11,11 @@
 <h:body>
     <ui:composition template="template/commonLayout.xhtml">
         <ui:define name="content">
-            <h:form>
+            <h:form id="EmploymentList">
                 <div style="overflow-x: auto;">
+                    <h:outputText id="errorLabel"/>
+                    <h:message for="errorLabel" style="color:red;"/>
+                    <br/>
                     <h:dataTable
                             value="#{employmentsController.currentEmployments}"
                             var="employment">

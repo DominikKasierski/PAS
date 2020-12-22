@@ -133,7 +133,13 @@ public class EmploymentsController extends Conversational implements Serializabl
 
 
     public String deleteEmployment(Employment employment) {
-        employmentsManager.deleteEmployment(employment);
+        try {
+            employmentsManager.deleteEmployment(employment);
+        } catch (RepositoryException exception) {
+            FacesContext.getCurrentInstance().addMessage(
+                    "EmploymentList:errorLabel", new FacesMessage(resourceBundle.getString("employmentDoesNotExist")));
+            return "";
+        }
         return "EmploymentList";
     }
 
@@ -149,6 +155,14 @@ public class EmploymentsController extends Conversational implements Serializabl
             return null;
         }
     }
+
+//    public List<Employment> getActualEmploymentsForClientOrNull(Client client) {
+//        try {
+//            return employmentsManager.getActualEmploymentsForClient(client);
+//        } catch (EmploymentException e) {
+//            return null;
+//        }
+//    }
 
     public Employment getActualEmploymentForBabysitterOrNull(Babysitter babysitter) {
         try {
