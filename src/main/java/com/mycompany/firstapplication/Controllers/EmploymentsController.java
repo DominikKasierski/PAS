@@ -116,22 +116,21 @@ public class EmploymentsController extends Conversational implements Serializabl
     }
 
     public void employmentValidation(FacesContext context, UIComponent component, Object value) {
-        int errorNumber = 1;
         try {
             employmentsManager.checkIfBabysitterMeetsRequirements(currentBabysitter,
                     currentClient.getAgeOfTheYoungestChild(),
                     currentClient.getNumberOfChildren());
-            errorNumber++;
-            employmentsManager.checkIfBabysitterIsCurrentlyEmployed(currentBabysitter);
         } catch (EmploymentException exception) {
-            if (errorNumber == 1)
-                throw new ValidatorException(new FacesMessage(
-                        resourceBundle.getString("ValidatorMessageEmploymentRequirements")));
 
             throw new ValidatorException(new FacesMessage(
-                    resourceBundle.getString("ValidatorMessageBabysitterAlreadyEmployed")));
+                    resourceBundle.getString("ValidatorMessageEmploymentRequirements")));
         }
+
+        if (currentBabysitter.isEmployed())
+            throw new ValidatorException(new FacesMessage(
+                    resourceBundle.getString("ValidatorMessageBabysitterAlreadyEmployed")));
     }
+
 
     public String deleteEmployment(Employment employment) {
         employmentsManager.deleteEmployment(employment);
