@@ -46,14 +46,24 @@ public class EmploymentsController extends Conversational implements Serializabl
     }
 
     public String confirmNewEmployment() {
+        int errorNo = 0;
         try {
             employmentsManager.checkIfBabysitterExists(currentBabysitter);
+            employmentsManager.checkIfBabysitterIsCurrentlyEmployed(currentBabysitter);
+            errorNo++;
             employmentsManager.employBabysitter(currentClient, currentBabysitter);
         } catch (EmploymentException e) {
-            FacesContext.getCurrentInstance().addMessage(
-                    "newEmploymentConfirm:validationLabel",
-                    new FacesMessage(
-                            resourceBundle.getString("ValidatorMessageEmploymentRequirements")));
+            if (errorNo == 0) {
+                FacesContext.getCurrentInstance().addMessage(
+                        "newEmploymentConfirm:validationLabel",
+                        new FacesMessage(
+                                resourceBundle.getString("ValidatorMessageBabysitterAlreadyEmployed")));
+            } else {
+                FacesContext.getCurrentInstance().addMessage(
+                        "newEmploymentConfirm:validationLabel",
+                        new FacesMessage(
+                                resourceBundle.getString("ValidatorMessageEmploymentRequirements")));
+            }
             return "";
         } catch (RepositoryException e) {
             FacesContext.getCurrentInstance().addMessage(
@@ -143,7 +153,7 @@ public class EmploymentsController extends Conversational implements Serializabl
         return "main";
     }
 
-    public Employment getActualEmploymentForClientOrNull (Client client) {
+    public Employment getActualEmploymentForClientOrNull(Client client) {
         try {
             return employmentsManager.getActualEmploymentForClient(client);
         } catch (EmploymentException e) {
@@ -151,7 +161,7 @@ public class EmploymentsController extends Conversational implements Serializabl
         }
     }
 
-    public Employment getActualEmploymentForBabysitterOrNull (Babysitter babysitter) {
+    public Employment getActualEmploymentForBabysitterOrNull(Babysitter babysitter) {
         try {
             return employmentsManager.getActualEmploymentForBabysitter(babysitter);
         } catch (EmploymentException e) {
