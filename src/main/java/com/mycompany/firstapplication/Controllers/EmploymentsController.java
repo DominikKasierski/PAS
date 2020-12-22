@@ -35,8 +35,6 @@ public class EmploymentsController extends Conversational implements Serializabl
     private Babysitter currentBabysitter;
     private Client currentClient;
 
-    private List<Employment> currentEmployments;
-
     private final ResourceBundle resourceBundle = ResourceBundle.getBundle(
             "bundles/messages", FacesContext.getCurrentInstance().getViewRoot().getLocale());
 
@@ -78,14 +76,14 @@ public class EmploymentsController extends Conversational implements Serializabl
     public void valueChangedUser(ValueChangeEvent event) {
         if (!event.getNewValue().toString().equals("0")) {
             String id = event.getNewValue().toString();
-            currentEmployments = employmentsManager.getEmploymentsRepository().showSelected(id);
+            employmentsManager.setCurrentEmployments(employmentsManager.getEmploymentsRepository().showSelected(id));
         }
     }
 
     public void valueChangedBabysitter(ValueChangeEvent event) {
         if (!event.getNewValue().toString().equals("0")) {
             String id = event.getNewValue().toString();
-            currentEmployments = employmentsManager.getEmploymentsRepository().showSelected(id);
+            employmentsManager.setCurrentEmployments(employmentsManager.getEmploymentsRepository().showSelected(id));
         }
     }
 
@@ -111,6 +109,10 @@ public class EmploymentsController extends Conversational implements Serializabl
 
     public void setCurrentClient(Client currentClient) {
         this.currentClient = currentClient;
+    }
+
+    public void setCurrentEmployments(List<Employment> currentEmployments) {
+        employmentsManager.setCurrentEmployments(currentEmployments);
     }
 
     public void employmentValidation(FacesContext context, UIComponent component, Object value) {
@@ -157,16 +159,11 @@ public class EmploymentsController extends Conversational implements Serializabl
         }
     }
 
-    @PostConstruct
-    public void initCurrentPersons() {
-        currentEmployments = employmentsManager.getEmploymentsRepository().getElements();
-    }
-
     public List<Employment> getCurrentEmployments() {
-        return currentEmployments;
+        return employmentsManager.getCurrentEmployments();
     }
 
     public void refreshCurrent() {
-        currentEmployments = getEmploymentsManager().getEmploymentsRepository().getElements();
+        employmentsManager.initCurrentPersons();
     }
 }

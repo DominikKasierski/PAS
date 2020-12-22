@@ -6,6 +6,7 @@ import com.mycompany.firstapplication.Exceptions.EmploymentException;
 import com.mycompany.firstapplication.Users.Client;
 import com.mycompany.firstapplication.Users.User;
 
+import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import java.io.Serializable;
@@ -28,6 +29,15 @@ public class EmploymentsManager implements Serializable {
     public EmploymentsManager() {
     }
 
+    private List<Employment> currentEmployments;
+
+    public List<Employment> getCurrentEmployments() {
+        return currentEmployments;
+    }
+
+    public void setCurrentEmployments(List<Employment> currentEmployments) {
+        this.currentEmployments = currentEmployments;
+    }
 
     public void employBabysitter(Client client, Babysitter babysitter) {
         checkIfUserIsActive(client);
@@ -174,6 +184,11 @@ public class EmploymentsManager implements Serializable {
             }
         }
         return userList.toArray(new User[0]);
+    }
+
+    @PostConstruct
+    public void initCurrentPersons() {
+        currentEmployments = getEmploymentsRepository().getElements();
     }
 
 }
