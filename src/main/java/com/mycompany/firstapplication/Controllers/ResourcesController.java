@@ -30,7 +30,6 @@ public class ResourcesController extends Conversational implements Serializable 
     private final TeachingSitter newTeachingSitter = new TeachingSitter();
     private final TidingSitter newTidingSitter = new TidingSitter();
 
-    private List<Babysitter> currentBabysitters;
     private TypeOfBabysitter typeOfBabysitter = TypeOfBabysitter.NORMAL;
 
     private Babysitter copyOfBabysitter;
@@ -65,14 +64,14 @@ public class ResourcesController extends Conversational implements Serializable 
     private void showSelectedBabysitter(String id) {
         List<Babysitter> temporaryBabysittersList = new ArrayList<>();
         temporaryBabysittersList.add(babysittersManager.getBabysittersRepository().findByKey(id));
-        currentBabysitters = temporaryBabysittersList;
+        babysittersManager.setCurrentBabysitters(temporaryBabysittersList);
         setType();
     }
 
     private void setType() {
-        if (currentBabysitters.get(0) instanceof TeachingSitter) {
+        if (getCurrentBabysitters().get(0) instanceof TeachingSitter) {
             typeOfBabysitter = TypeOfBabysitter.TEACHING;
-        } else if (currentBabysitters.get(0) instanceof TidingSitter) {
+        } else if (getCurrentBabysitters().get(0) instanceof TidingSitter) {
             typeOfBabysitter = TypeOfBabysitter.TIDING;
         } else {
             typeOfBabysitter = TypeOfBabysitter.NORMAL;
@@ -139,8 +138,8 @@ public class ResourcesController extends Conversational implements Serializable 
 
     public String deleteBabysitter(Babysitter babysitter) {
         try {
-            babysittersManager.deleteBabysitter(babysitter);
             babysittersManager.deleteBabysitterFromEmploymentList(babysitter);
+            babysittersManager.deleteBabysitter(babysitter);
             return "BabysitterList";
         } catch (BabysitterException | RepositoryException exception) {
             throw new ValidatorException(new FacesMessage(resourceBundle.getString("babysitterOccupied")));
@@ -162,13 +161,17 @@ public class ResourcesController extends Conversational implements Serializable 
         return "main";
     }
 
-    public List<Babysitter> getCurrentBabysitters() {
-        return currentBabysitters;
-    }
+//    public List<Babysitter> getCurrentBabysitters() {
+//        return currentBabysitters;
+//    }
 
     @PostConstruct
     public void initCurrentPersons() {
         typeOfBabysitter = TypeOfBabysitter.NORMAL;
-        currentBabysitters = babysittersManager.getBabysittersRepository().getBabysittersList();
+        babysittersManager.setCurrentBabysitters(babysittersManager.getBabysittersRepository().getBabysittersList());
+    }
+    
+    public List<Babysitter> getCurrentBabysitters() {
+        return babysittersManager.getCurrentBabysitters();
     }
 }

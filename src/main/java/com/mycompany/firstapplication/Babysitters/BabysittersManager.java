@@ -19,6 +19,16 @@ public class BabysittersManager implements Serializable {
     @Inject
     private EmploymentsManager employmentsManager;
 
+    private List<Babysitter> currentBabysitters;
+
+    public void setCurrentBabysitters(List<Babysitter> currentBabysitters) {
+        this.currentBabysitters = currentBabysitters;
+    }
+
+    public List<Babysitter> getCurrentBabysitters() {
+        return currentBabysitters;
+    }
+
     public BabysittersManager() {
     }
 
@@ -37,8 +47,6 @@ public class BabysittersManager implements Serializable {
     public void deleteBabysitter(Babysitter babysitter) {
         if(!babysitter.isEmployed()) {
             babysittersRepository.deleteElement(babysitter);
-            babysitter = null;
-            System.out.println("test");
         } else throw new BabysitterException("An employed babysitter cannot be removed");
     }
 
