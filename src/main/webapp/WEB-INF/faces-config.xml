@@ -39,6 +39,11 @@
             <redirect />
         </navigation-case>
         <navigation-case>
+            <from-outcome>EmploymentList</from-outcome>
+            <to-view-id>/EmploymentList.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
             <from-outcome>ModifyBabysitter</from-outcome>
             <to-view-id>/ModifyBabysitter.xhtml</to-view-id>
             <redirect />

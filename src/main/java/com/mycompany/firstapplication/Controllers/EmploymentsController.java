@@ -133,8 +133,9 @@ public class EmploymentsController extends Conversational implements Serializabl
         }
     }
 
-    public void deleteEmployment(Employment employment) {
+    public String deleteEmployment(Employment employment) {
         employmentsManager.deleteEmployment(employment);
+        return "EmploymentList";
     }
 
     public String reject() {
