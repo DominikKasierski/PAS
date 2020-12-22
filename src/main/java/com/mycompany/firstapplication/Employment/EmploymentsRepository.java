@@ -67,9 +67,9 @@ public class EmploymentsRepository extends Repository<Employment> {
 
     @PostConstruct
     public void initEmploymentList() {
-
+        babysittersRepository.getBabysittersList().get(1).setEmployed(true);
+        babysittersRepository.getBabysittersList().get(2).setEmployed(true);
         addElement(new Employment(babysittersRepository.getBabysittersList().get(1), (Client) usersRepository.getElements().get(2)));
         addElement(new Employment(babysittersRepository.getBabysittersList().get(2), (Client) usersRepository.getElements().get(3)));
-
     }
 }

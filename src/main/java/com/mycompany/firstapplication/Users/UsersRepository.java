@@ -96,5 +96,7 @@ public class UsersRepository extends Repository<User> {
         addElement(new SuperUser("Manager1", "Tomek", "Tomkowski"));
         addElement(new Client("Client1", "Tomasz", "Hajto", 3, 4));
         addElement(new Client("Client2", "Jan", "Urban", 2, 7));
+        addElement(new Client("Client3", "Janina", "Kwiatkowska", 2, 5));
+        addElement(new Client("Client4", "Agata", "Wiadro", 1, 13));
     }
 }
