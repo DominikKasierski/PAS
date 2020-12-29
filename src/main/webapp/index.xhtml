@@ -12,6 +12,7 @@
         <ui:define name="content">
             <h1>#{identityUtils.myLogin}</h1>
             <h2>#{identityUtils.userRole()}</h2>
+            <h:outputText value="#{msg.getMorePossibilities}" rendered="#{!identityUtils.loggedIn}"/>
         </ui:define>
     </ui:composition>
 </h:body>

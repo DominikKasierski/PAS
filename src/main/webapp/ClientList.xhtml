@@ -54,19 +54,19 @@
                             <f:facet name="header">#{msg.active}</f:facet>
                             ${client.active}
                         </h:column>
-                        <h:column rendered="#{usersController.typeOfUser == 'CLIENT' }">
+                        <h:column rendered="#{usersController.typeOfUser == 'CLIENT'}">
                             <f:facet name="header">#{msg.numberOfChildren}</f:facet>
                             ${client.numberOfChildren}
                         </h:column>
-                        <h:column rendered="#{usersController.typeOfUser == 'CLIENT' }">
+                        <h:column rendered="#{usersController.typeOfUser == 'CLIENT'}">
                             <f:facet name="header">#{msg.ageOfTheYoungestChild}</f:facet>
                             ${client.ageOfTheYoungestChild}
                         </h:column>
-                        <h:column rendered="#{usersController.typeOfUser == 'CLIENT' }">
+                        <h:column rendered="#{usersController.typeOfUser == 'CLIENT' and identityUtils.inAdminRole}">
                             <f:facet name="header">#{msg.currentEmployments}</f:facet>
                             ${employmentsController.employmentsManager.getActualEmploymentsForClient(client)}
                         </h:column>
-                        <h:column>
+                        <h:column rendered="#{identityUtils.inAdminRole}">
                             <f:facet name="header">#{msg.actions}</f:facet>
                             <h:commandButton value="#{msg.changeActive}"
                                              action="#{usersController.usersManager.changeActive(client)}"

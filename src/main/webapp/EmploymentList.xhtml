@@ -63,7 +63,7 @@
                             <f:facet name="header">#{msg.actions}</f:facet>
                             <h:commandButton id="delete" value="#{msg.delete}"
                                              action="#{employmentsController.deleteEmployment(employment)}"
-                                             rendered="#{employment.endOfEmployment == null}"
+                                             rendered="#{employment.endOfEmployment == null and identityUtils.inAdminRole}"
                                              class="negative_btn"/>
                             <h:message for="delete"/>
                             <h:commandButton id="endEmplyment" value="#{msg.endOfEmployment}"

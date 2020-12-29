@@ -8,21 +8,35 @@
 <body>
 <ui:composition>
 
-<!--TODO: DODAC RENDERED W ZALEZNOSCI OD ROLI-->
-<!--TODO: DODAC RENDERED DO PRZYCISKOW W ZALEZNOSCI OD ROLI-->
+    <!--TODO: DODAC BANY DO STRON W ZALEZNOSCI OD ROLI-->
+    <!--TODO: ZMIENIC UZYTKOWNIKOW W KONTENERZE,ZEBY ODOWIADALI TYM W APLIKACJI-->
     <h:form>
-            <h:commandLink value="#{msg.addNewBabysitter}" action="#{resourcesController.sitterType('NORMAL')}"/>
-            <h:commandLink value="#{msg.addNewTeachingSitter}" action="#{resourcesController.sitterType('TEACHING')}"/>
-            <h:commandLink value="#{msg.addNewTidingSitter}" action="#{resourcesController.sitterType('TIDING')}"/>
-            <h:link outcome="BabysitterList">#{msg.showBabysittersList}</h:link>
+        <h:commandLink value="#{msg.addNewBabysitter}"
+                       action="#{resourcesController.sitterType('NORMAL')}"
+                       rendered="#{identityUtils.inAdminRole || identityUtils.inSuperUserRole}"/>
+        <h:commandLink value="#{msg.addNewTeachingSitter}"
+                       action="#{resourcesController.sitterType('TEACHING')}"
+                       rendered="#{identityUtils.inAdminRole || identityUtils.inSuperUserRole}"/>
+        <h:commandLink value="#{msg.addNewTidingSitter}"
+                       action="#{resourcesController.sitterType('TIDING')}"
+                       rendered="#{identityUtils.inAdminRole || identityUtils.inSuperUserRole}"/>
+        <h:link outcome="BabysitterList" value="#{msg.showBabysittersList}"
+                rendered="#{identityUtils.loggedIn}"/>
         <br/>
-            <h:commandLink value="#{msg.addNewAdmin}" action="#{usersController.userType('ADMIN')}"/>
-            <h:commandLink value="#{msg.addNewSuperUser}" action="#{usersController.userType('SUPERUSER')}"/>
-            <h:commandLink value="#{msg.addNewClient}" action="#{usersController.userType('CLIENT')}" rendered="#{identityUtils.inAdminRole}"/>
-            <h:link outcome="ClientList">#{msg.showUsersList}</h:link>
+        <h:commandLink value="#{msg.addNewAdmin}" action="#{usersController.userType('ADMIN')}"
+                       rendered="#{identityUtils.inAdminRole}"/>
+        <h:commandLink value="#{msg.addNewSuperUser}"
+                       action="#{usersController.userType('SUPERUSER')}"
+                       rendered="#{identityUtils.inAdminRole}"/>
+        <h:commandLink value="#{msg.addNewClient}" action="#{usersController.userType('CLIENT')}"
+                       rendered="#{identityUtils.inAdminRole || identityUtils.inSuperUserRole}"/>
+        <h:link outcome="ClientList" value="#{msg.showUsersList}"
+                rendered="#{identityUtils.inAdminRole || identityUtils.inSuperUserRole}"/>
         <br/>
-            <h:link outcome="NewEmployment">#{msg.addNewEmployment}</h:link>
-            <h:link outcome="EmploymentList">#{msg.showEmploymentList}</h:link>
+        <h:link outcome="NewEmployment" value="#{msg.addNewEmployment}"
+                rendered="#{identityUtils.loggedIn}"/>
+        <h:link outcome="EmploymentList" value="#{msg.showEmploymentList}"
+                rendered="#{identityUtils.inAdminRole || identityUtils.inSuperUserRole}"/>
     </h:form>
 
 </ui:composition>

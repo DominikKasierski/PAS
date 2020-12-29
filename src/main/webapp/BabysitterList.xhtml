@@ -59,11 +59,11 @@
                             <f:facet name="header">#{msg.valueOfCleaningEquipment}</f:facet>
                             ${babysitter.valueOfCleaningEquipment}
                         </h:column>
-                        <h:column>
+                        <h:column rendered="#{identityUtils.inAdminRole}">
                             <f:facet name="header">#{msg.currentEmployments}</f:facet>
                             ${employmentsController.getActualEmploymentForBabysitterOrNull(babysitter)}
                         </h:column>
-                        <h:column>
+                        <h:column rendered="#{identityUtils.inAdminRole || identityUtils.inSuperUserRole}">
                             <f:facet name="header">#{msg.actions}</f:facet>
                             <h:commandButton id="delete" value="#{msg.delete}" action="#{resourcesController.deleteBabysitter(babysitter)}" class="negative_btn"/>
                             <h:message for="delete" />
