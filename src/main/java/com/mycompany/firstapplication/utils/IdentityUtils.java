@@ -20,9 +20,9 @@ public class IdentityUtils {
         return (null == request.getUserPrincipal()) ? resourceBundle.getString("guest") : request.getUserPrincipal().getName();
     }
 
-//    public boolean isLogIn() {
-//        return request.getUserPrincipal() != null;
-//    }
+    public boolean isLogIn() {
+        return request.getUserPrincipal() != null;
+    }
 
     public boolean isInAdminRole() {
         return request.isUserInRole("Admin");

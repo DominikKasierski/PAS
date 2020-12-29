@@ -63,6 +63,11 @@
             <to-view-id>/auth/LoginPage.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
+        <navigation-case>
+            <from-outcome>LogoutPage</from-outcome>
+            <to-view-id>/auth/LogoutPage.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
     </navigation-rule>
     <navigation-rule>
         <from-view-id>/NewBabysitter.xhtml</from-view-id>

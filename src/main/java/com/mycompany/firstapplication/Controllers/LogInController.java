@@ -39,6 +39,7 @@ public class LogInController {
                 context.getExternalContext().getRequest();
         try {
             request.logout();
+            request.getSession().invalidate();
         } catch (ServletException e) {
             e.printStackTrace();
         }
