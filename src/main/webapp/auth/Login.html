@@ -1,0 +1,24 @@
+<html lang="en" xmlns:ui="http://java.sun.com/jsf/facelets">
+<head>
+    <title>Login</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+<ui:composition template="../template/commonLayout.xhtml">
+    <ui:define name="content">
+        <div>Login form</div>
+        <form action="j_security_check" method="POST">
+            Login: *<label>
+            <input type="text" name="j_username"/>
+        </label> <br/>
+            Password: *<label>
+            <input type="password" name="j_password"/>
+        </label> <br/>
+            <input type="submit" value="OK"/>
+        </form>
+    </ui:define>
+</ui:composition>
+</body>
+</html>
+
