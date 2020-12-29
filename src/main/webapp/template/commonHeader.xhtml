@@ -17,8 +17,8 @@
     </div>
     <div id="header-right">
         <h:link value="#{msg.home}" styleClass="active" outcome="main"/>
-        <h:link value="#{msg.logIn}" styleClass="active" outcome="LoginPage" rendered="#{!identityUtils.logIn}"/>
-        <h:link value="#{msg.logOut}" styleClass="active" outcome="LogoutPage" rendered="#{identityUtils.logIn}"/>
+        <h:link value="#{msg.logIn}" styleClass="active" outcome="LoginPage" rendered="#{!identityUtils.loggedIn}"/>
+        <h:link value="#{msg.logOut}" styleClass="active" outcome="LogoutPage" rendered="#{identityUtils.loggedIn}"/>
     </div>
 
 </ui:composition>

@@ -5,6 +5,8 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
 
 @ApplicationScoped
@@ -13,14 +15,17 @@ public class IdentityUtils {
     @Inject
     private HttpServletRequest request;
 
-    private final ResourceBundle resourceBundle = ResourceBundle.getBundle(
-            "bundles/messages", FacesContext.getCurrentInstance().getViewRoot().getLocale());
+    private ResourceBundle resourceBundle;
+
 
     public String getMyLogin() {
-        return (null == request.getUserPrincipal()) ? resourceBundle.getString("guest") : request.getUserPrincipal().getName();
+        loadBundles();
+        return (null == request.getUserPrincipal()) ?
+                resourceBundle.getString("welcome").concat(resourceBundle.getString("guest")) :
+                resourceBundle.getString("welcome").concat(request.getUserPrincipal().getName());
     }
 
-    public boolean isLogIn() {
+    public boolean isLoggedIn() {
         return request.getUserPrincipal() != null;
     }
 
@@ -34,5 +39,20 @@ public class IdentityUtils {
 
     public boolean isInClientRole() {
         return request.isUserInRole("Client");
+    }
+
+    public String userRole() {
+        List<String> roles = Arrays.asList("Admin", "SuperUser", "Client");
+        for (String role : roles) {
+            if (request.isUserInRole(role)) {
+                return resourceBundle.getString("role").concat(role);
+            }
+        }
+        return "";
+    }
+
+    private void loadBundles() {
+        resourceBundle = ResourceBundle.getBundle(
+                "bundles/messages", FacesContext.getCurrentInstance().getViewRoot().getLocale());
     }
 }

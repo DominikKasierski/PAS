@@ -1,10 +1,7 @@
 package com.mycompany.firstapplication.Controllers;
 
-import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +14,7 @@ import java.util.logging.Logger;
 public class LogInController {
     private String username;
     private String password;
+    private final Logger logger = Logger.getLogger(getClass().getName());
     private final ResourceBundle resourceBundle = ResourceBundle.getBundle(
             "bundles/messages", FacesContext.getCurrentInstance().getViewRoot().getLocale());
 
@@ -26,8 +24,9 @@ public class LogInController {
                 context.getExternalContext().getRequest();
         try {
             request.login(username, password);
+            logger.log(Level.INFO, resourceBundle.getString("correctLogIn"));
         } catch (ServletException e) {
-            e.printStackTrace();
+            logger.log(Level.WARNING, resourceBundle.getString("incorrectLogIn"));
             return "ErrorPage";
         }
         return "main";
@@ -39,9 +38,9 @@ public class LogInController {
                 context.getExternalContext().getRequest();
         try {
             request.logout();
-            request.getSession().invalidate();
+            logger.log(Level.INFO, resourceBundle.getString("correctLogOut"));
         } catch (ServletException e) {
-            e.printStackTrace();
+            logger.log(Level.WARNING, resourceBundle.getString("incorrectLogOut"));
         }
         return "main";
     }

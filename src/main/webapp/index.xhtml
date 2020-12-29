@@ -10,28 +10,8 @@
 <h:body>
     <ui:composition template="template/commonLayout.xhtml">
         <ui:define name="content">
-            <h1>#{msg.indexTitle}</h1>
-            <h3>#{msg.welcome} #{identityUtils.myLogin}</h3>
-            <h:form>
-                <ul>
-                    <li><h:commandLink value="#{msg.addNewBabysitter}" action="#{resourcesController.sitterType('NORMAL')}"/></li>
-                    <li><h:commandLink value="#{msg.addNewTeachingSitter}" action="#{resourcesController.sitterType('TEACHING')}"/></li>
-                    <li><h:commandLink value="#{msg.addNewTidingSitter}" action="#{resourcesController.sitterType('TIDING')}" rendered="#{identityUtils.inAdminRole}"/></li>
-                    <li><h:link outcome="BabysitterList.xhtml">#{msg.showBabysittersList}</h:link></li>
-                </ul>
-                <br/>
-                <ul>
-                    <li><h:commandLink value="#{msg.addNewAdmin}" action="#{usersController.userType('ADMIN')}"/></li>
-                    <li><h:commandLink value="#{msg.addNewSuperUser}" action="#{usersController.userType('SUPERUSER')}"/></li>
-                    <li><h:commandLink value="#{msg.addNewClient}" action="#{usersController.userType('CLIENT')}"/></li>
-                    <li><h:link outcome="ClientList.xhtml">#{msg.showUsersList}</h:link></li>
-                </ul>
-                <br/>
-                <ul>
-                    <li><h:link outcome="NewEmployment.xhtml">#{msg.addNewEmployment}</h:link></li>
-                    <li><h:link outcome="EmploymentList.xhtml">#{msg.showEmploymentList}</h:link></li>
-                </ul>
-            </h:form>
+            <h1>#{identityUtils.myLogin}</h1>
+            <h2>#{identityUtils.userRole()}</h2>
         </ui:define>
     </ui:composition>
 </h:body>
