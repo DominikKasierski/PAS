@@ -1,5 +1,8 @@
 package com.mycompany.firstapplication.Controllers;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -9,6 +12,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+@RequestScoped
 @Named
 public class LogInController {
     private String username;
