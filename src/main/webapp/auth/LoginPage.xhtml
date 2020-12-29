@@ -14,13 +14,13 @@
     <ui:composition template="../template/commonLayout.xhtml">
         <ui:define name="content">
             <div id="container">
-                <h:form>
-<!--                    <form action="j_security_check" method="POST">-->
+<!--                <h:form>-->
+                    <form action="j_security_check" method="POST">
                         <h:inputText pt:placeholder="* #{msg.login}" id="j_username"/> <br/>
                         <h:inputSecret pt:placeholder="* #{msg.password}" id="j_password"/> <br/>
-                        <h:commandButton type="submit" value="#{msg.logInBtn}" action="j_security_check"/>
-<!--                    </form>-->
-                </h:form>
+                        <h:commandButton type="submit" value="#{msg.logInBtn}"/>
+                    </form>
+<!--                </h:form>-->
             </div>
         </ui:define>
     </ui:composition>
