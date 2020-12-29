@@ -33,7 +33,7 @@ public class LogInController {
         return "main";
     }
 
-    public void logOut() {
+    public String logOut() {
         FacesContext context = FacesContext.getCurrentInstance();
         HttpServletRequest request = (HttpServletRequest)
                 context.getExternalContext().getRequest();
@@ -42,6 +42,7 @@ public class LogInController {
         } catch (ServletException e) {
             e.printStackTrace();
         }
+        return "main";
     }
 
     public String backToMain() {

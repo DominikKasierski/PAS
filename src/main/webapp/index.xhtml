@@ -11,7 +11,7 @@
     <ui:composition template="template/commonLayout.xhtml">
         <ui:define name="content">
             <h1>#{msg.indexTitle}</h1>
-            <h3>Welcome, #{identityUtils.myLogin}</h3>
+            <h3>#{msg.welcome} #{identityUtils.myLogin}</h3>
             <h:form>
                 <ul>
                     <li><h:commandLink value="#{msg.addNewBabysitter}" action="#{resourcesController.sitterType('NORMAL')}"/></li>

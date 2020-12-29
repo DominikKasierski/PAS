@@ -17,7 +17,7 @@
         <br/>
             <h:commandLink value="#{msg.addNewAdmin}" action="#{usersController.userType('ADMIN')}"/>
             <h:commandLink value="#{msg.addNewSuperUser}" action="#{usersController.userType('SUPERUSER')}"/>
-            <h:commandLink value="#{msg.addNewClient}" action="#{usersController.userType('CLIENT')}"/>
+            <h:commandLink value="#{msg.addNewClient}" action="#{usersController.userType('CLIENT')}" rendered="#{identityUtils.inAdminRole}"/>
             <h:link outcome="ClientList">#{msg.showUsersList}</h:link>
         <br/>
             <h:link outcome="NewEmployment">#{msg.addNewEmployment}</h:link>
