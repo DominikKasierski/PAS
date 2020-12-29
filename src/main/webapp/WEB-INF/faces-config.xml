@@ -5,48 +5,58 @@
               xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_3.xsd">
 
 
-<application>
-    <locale-config>
-        <default-locale>pl</default-locale>
-        <supported-locale>en</supported-locale>
-    </locale-config>
-    <resource-bundle>
-        <base-name>bundles/messages</base-name>
-        <var>msg</var>
-    </resource-bundle>
-</application>
+    <application>
+        <locale-config>
+            <default-locale>pl</default-locale>
+            <supported-locale>en</supported-locale>
+        </locale-config>
+        <resource-bundle>
+            <base-name>bundles/messages</base-name>
+            <var>msg</var>
+        </resource-bundle>
+    </application>
 
     <navigation-rule>
         <from-view-id/>
         <navigation-case>
             <from-outcome>main</from-outcome>
             <to-view-id>/index.xhtml</to-view-id>
-            <redirect />
+            <redirect/>
         </navigation-case>
         <navigation-case>
             <from-outcome>NewBabysitter</from-outcome>
             <to-view-id>/NewBabysitter.xhtml</to-view-id>
-            <redirect />
+            <redirect/>
         </navigation-case>
         <navigation-case>
             <from-outcome>NewUser</from-outcome>
             <to-view-id>/NewUser.xhtml</to-view-id>
-            <redirect />
+            <redirect/>
         </navigation-case>
         <navigation-case>
             <from-outcome>BabysitterList</from-outcome>
             <to-view-id>/BabysitterList.xhtml</to-view-id>
-            <redirect />
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>ClientList</from-outcome>
+            <to-view-id>/ClientList.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>NewEmployment</from-outcome>
+            <to-view-id>/NewEmployment.xhtml</to-view-id>
+            <redirect/>
         </navigation-case>
         <navigation-case>
             <from-outcome>EmploymentList</from-outcome>
             <to-view-id>/EmploymentList.xhtml</to-view-id>
-            <redirect />
+            <redirect/>
         </navigation-case>
         <navigation-case>
             <from-outcome>ModifyBabysitter</from-outcome>
             <to-view-id>/ModifyBabysitter.xhtml</to-view-id>
-            <redirect />
+            <redirect/>
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
@@ -54,7 +64,7 @@
         <navigation-case>
             <from-outcome>NewBabysitterConfirm</from-outcome>
             <to-view-id>/NewBabysitterConfirm.xhtml</to-view-id>
-            <redirect />
+            <redirect/>
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
@@ -62,7 +72,7 @@
         <navigation-case>
             <from-outcome>ModifyBabysitterConfirm</from-outcome>
             <to-view-id>/ModifyBabysitterConfirm.xhtml</to-view-id>
-            <redirect />
+            <redirect/>
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
@@ -70,12 +80,12 @@
         <navigation-case>
             <from-outcome>NewUserConfirm</from-outcome>
             <to-view-id>/NewUserConfirm.xhtml</to-view-id>
-            <redirect />
+            <redirect/>
         </navigation-case>
         <navigation-case>
             <from-outcome>ModifyUserConfirm</from-outcome>
             <to-view-id>/ModifyUserConfirm.xhtml</to-view-id>
-            <redirect />
+            <redirect/>
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
@@ -83,7 +93,7 @@
         <navigation-case>
             <from-outcome>NewEmploymentConfirm</from-outcome>
             <to-view-id>/NewEmploymentConfirm.xhtml</to-view-id>
-            <redirect />
+            <redirect/>
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
@@ -91,7 +101,7 @@
         <navigation-case>
             <from-outcome>ModifyUser</from-outcome>
             <to-view-id>/ModifyUser.xhtml</to-view-id>
-            <redirect />
+            <redirect/>
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
@@ -99,7 +109,7 @@
         <navigation-case>
             <from-outcome>ModifyUserConfirm</from-outcome>
             <to-view-id>/ModifyUserConfirm.xhtml</to-view-id>
-            <redirect />
+            <redirect/>
         </navigation-case>
     </navigation-rule>
 

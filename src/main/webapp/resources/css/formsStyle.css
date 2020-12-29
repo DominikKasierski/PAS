@@ -8,7 +8,7 @@
     box-shadow: 3px 3px 30px 5px rgba(204, 204, 204, 0.9);
 }
 
-.formOutput, input[type=text] {
+.formOutput, input[type=text], input[type=password] {
     width: 100%;
     background-color: #efefef;
     color: #666;
