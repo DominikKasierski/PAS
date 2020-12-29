@@ -82,7 +82,7 @@
         <realm-name>file</realm-name>
         <form-login-config>
             <form-login-page>/auth/LoginPage.xhtml</form-login-page>
-            <form-error-page>/auth/Error.html</form-error-page>
+            <form-error-page>/auth/ErrorPage.xhtml</form-error-page>
         </form-login-config>
     </login-config>
 

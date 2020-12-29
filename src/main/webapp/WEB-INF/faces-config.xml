@@ -58,6 +58,11 @@
             <to-view-id>/ModifyBabysitter.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
+        <navigation-case>
+            <from-outcome>LoginPage</from-outcome>
+            <to-view-id>/auth/LoginPage.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
     </navigation-rule>
     <navigation-rule>
         <from-view-id>/NewBabysitter.xhtml</from-view-id>
@@ -112,5 +117,14 @@
             <redirect/>
         </navigation-case>
     </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/auth/LoginPage.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>ErrorPage</from-outcome>
+            <to-view-id>/auth/ErrorPage.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+
 
 </faces-config>

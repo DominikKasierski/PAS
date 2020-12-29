@@ -1,17 +1,51 @@
 package com.mycompany.firstapplication.Controllers;
 
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.inject.Named;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+@Named
 public class LogInController {
     private String username;
     private String password;
-
-    @Inject
-    private HttpServletRequest request;
+    private final ResourceBundle resourceBundle = ResourceBundle.getBundle(
+            "bundles/messages", FacesContext.getCurrentInstance().getViewRoot().getLocale());
 
     public String logIn() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        HttpServletRequest request = (HttpServletRequest)
+                context.getExternalContext().getRequest();
+        try {
+            request.login(username, password);
+        } catch (ServletException e) {
+            e.printStackTrace();
+            return "ErrorPage";
+        }
         return "main";
+    }
+
+    public void logOut() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        HttpServletRequest request = (HttpServletRequest)
+                context.getExternalContext().getRequest();
+        try {
+            request.logout();
+        } catch (ServletException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String backToMain() {
+        return "main";
+    }
+
+    public String tryAgain() {
+        return "LoginPage";
     }
 
     public String getUsername() {
