@@ -13,17 +13,18 @@
     <ui:composition template="../template/commonLayout.xhtml">
         <ui:define name="content">
             <div id="container">
-                <h:form id="logIn">
-<!--                    TODO: WALIDACJA SIE BRZYDKO WYSWIETLA-->
+                <h:form>
                     <h:inputText id="username" pt:placeholder="* #{msg.login}"
                                  required="true"
                                  value="#{logInController.username}"
                                  requiredMessage="#{msg.requiredLogin}"/>
+                    <h:message for="username"/>
 
                     <h:inputSecret id="password" pt:placeholder="* #{msg.password}"
                                    required="true"
                                    value="#{logInController.password}"
                                    requiredMessage="#{msg.requiredPassword}"/>
+                    <h:message for="password"/>
 
                     <h:commandButton type="submit" value="#{msg.logIn}"
                                      action="#{logInController.logIn}"/>
