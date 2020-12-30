@@ -21,11 +21,15 @@ public class IdentityUtils implements Serializable {
     private ResourceBundle resourceBundle;
 
 
-    public String getMyLogin() {
+    public String getWelcomeSentence() {
         loadBundles();
         return (null == request.getUserPrincipal()) ?
                 resourceBundle.getString("welcome").concat(resourceBundle.getString("guest")) :
                 resourceBundle.getString("welcome").concat(request.getUserPrincipal().getName());
+    }
+
+    public String getUserLogin() {
+        return request.getUserPrincipal().getName();
     }
 
     public boolean isLoggedIn() {

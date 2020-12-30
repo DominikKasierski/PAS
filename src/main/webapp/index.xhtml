@@ -10,7 +10,7 @@
 <h:body>
     <ui:composition template="template/commonLayout.xhtml">
         <ui:define name="content">
-            <h1>#{identityUtils.myLogin}</h1>
+            <h1>#{identityUtils.welcomeSentence}</h1>
             <h2>#{identityUtils.userRole()}</h2>
             <h:outputText value="#{msg.getMorePossibilities}" rendered="#{!identityUtils.loggedIn}"/>
         </ui:define>

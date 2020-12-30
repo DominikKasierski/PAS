@@ -6,6 +6,8 @@ import com.mycompany.firstapplication.Employment.EmploymentsManager;
 import com.mycompany.firstapplication.Exceptions.EmploymentException;
 import com.mycompany.firstapplication.Exceptions.RepositoryException;
 import com.mycompany.firstapplication.Users.Client;
+import com.mycompany.firstapplication.Users.UsersManager;
+import com.mycompany.firstapplication.utils.IdentityUtils;
 
 import javax.enterprise.context.ConversationScoped;
 import javax.faces.application.FacesMessage;
@@ -27,6 +29,12 @@ public class EmploymentsController extends Conversational implements Serializabl
     @Inject
     private EmploymentsManager employmentsManager;
 
+    @Inject
+    private UsersManager usersManager;
+
+    @Inject
+    private IdentityUtils identityUtils;
+
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     private Babysitter currentBabysitter;
@@ -36,6 +44,10 @@ public class EmploymentsController extends Conversational implements Serializabl
             "bundles/messages", FacesContext.getCurrentInstance().getViewRoot().getLocale());
 
     public String processNewEmployment() {
+        if (identityUtils.isInClientRole()) {
+            setCurrentClient((Client) usersManager.getUsersRepository()
+                    .findUserByLogin(identityUtils.getUserLogin()));
+        }
         beginNewConversation();
         return "NewEmploymentConfirm";
     }
@@ -52,12 +64,14 @@ public class EmploymentsController extends Conversational implements Serializabl
                 FacesContext.getCurrentInstance().addMessage(
                         "newEmploymentConfirm:validationLabel",
                         new FacesMessage(
-                                resourceBundle.getString("ValidatorMessageBabysitterAlreadyEmployed")));
+                                resourceBundle
+                                        .getString("ValidatorMessageBabysitterAlreadyEmployed")));
             } else {
                 FacesContext.getCurrentInstance().addMessage(
                         "newEmploymentConfirm:validationLabel",
                         new FacesMessage(
-                                resourceBundle.getString("ValidatorMessageEmploymentRequirements")));
+                                resourceBundle
+                                        .getString("ValidatorMessageEmploymentRequirements")));
             }
             return "";
         } catch (RepositoryException e) {
@@ -73,14 +87,16 @@ public class EmploymentsController extends Conversational implements Serializabl
     public void valueChangedUser(ValueChangeEvent event) {
         if (!event.getNewValue().toString().equals("0")) {
             String id = event.getNewValue().toString();
-            employmentsManager.setCurrentEmployments(employmentsManager.getEmploymentsRepository().showSelected(id));
+            employmentsManager.setCurrentEmployments(
+                    employmentsManager.getEmploymentsRepository().showSelected(id));
         }
     }
 
     public void valueChangedBabysitter(ValueChangeEvent event) {
         if (!event.getNewValue().toString().equals("0")) {
             String id = event.getNewValue().toString();
-            employmentsManager.setCurrentEmployments(employmentsManager.getEmploymentsRepository().showSelected(id));
+            employmentsManager.setCurrentEmployments(
+                    employmentsManager.getEmploymentsRepository().showSelected(id));
         }
     }
 
@@ -134,7 +150,8 @@ public class EmploymentsController extends Conversational implements Serializabl
             employmentsManager.deleteEmployment(employment);
         } catch (RepositoryException exception) {
             FacesContext.getCurrentInstance().addMessage(
-                    "EmploymentList:errorLabel", new FacesMessage(resourceBundle.getString("employmentDoesNotExist")));
+                    "EmploymentList:errorLabel",
+                    new FacesMessage(resourceBundle.getString("employmentDoesNotExist")));
             return "";
         }
         return "EmploymentList";

@@ -13,29 +13,40 @@
         <ui:define name="content">
             <h:form>
                 <div style="overflow-x: auto;">
-<!--                    TODO:ZALOGOWANY KLIENT MOZE ALOKOWAC ZASOBY TYLKO DLA SIEBIE, TRZEBA TO ZROBIC NIE POWTARZAJAC KODU-->
+                    <!--                    TODO:LISTA ZAJETYCH OPIEKUNEK NIE AKTUALIZUJE SIE OD RAZU (WYSZARZENIE NIE DZIALA), JAK STARCZY CZASU SPROBOWAC-->
                     <h:panelGrid columns="2">
-                            <f:facet name="header"><h:outputText value="#{msg.newEmployment}"/></f:facet>
-                        <h:outputLabel value="#{msg.user}" />
-                            <h:selectOneListbox value="#{employmentsController.currentClient}" required="true" size="1">
-                                <f:converter binding="#{userToIdConverter}"/>
-                                <f:selectItems value="#{usersController.usersManager.clientList}" var="client"
-                                               itemValue="${client}" itemDisabled="#{!client.active}"
-                                               itemLabel="[#{client.uuid}] #{client.name} #{client.surname}"/>
-                            </h:selectOneListbox>
-                        <h:outputLabel value="#{msg.babysitter}" />
-                        <h:selectOneListbox value="#{employmentsController.currentBabysitter}" required="true"
-                                                size="1">
-                                <f:converter binding="#{babysitterToIdConverter}"/>
-                                <f:selectItems value="#{resourcesController.currentBabysitters}" var="babysitter"
-                                               itemValue="${babysitter}" itemDisabled="#{babysitter.isEmployed()}"
-                                               itemLabel="[#{babysitter.uuid}] #{babysitter.name} #{babysitter.surname}"/>
-                            </h:selectOneListbox>
+                        <f:facet name="header"><h:outputText
+                                value="#{msg.newEmployment}"/></f:facet>
+                        <h:outputLabel value="#{msg.user}"
+                                       rendered="#{identityUtils.inAdminRole || identityUtils.inSuperUserRole}"/>
+                        <h:selectOneListbox
+                                rendered="#{identityUtils.inAdminRole || identityUtils.inSuperUserRole}"
+                                value="#{employmentsController.currentClient}" required="true"
+                                size="1">
+                            <f:converter binding="#{userToIdConverter}"/>
+                            <f:selectItems value="#{usersController.usersManager.clientList}"
+                                           var="client"
+                                           itemValue="${client}" itemDisabled="#{!client.active}"
+                                           itemLabel="[#{client.uuid}] #{client.name} #{client.surname}"/>
+                        </h:selectOneListbox>
+                        <h:outputLabel value="#{msg.babysitter}"/>
+                        <h:selectOneListbox value="#{employmentsController.currentBabysitter}"
+                                            required="true"
+                                            size="1">
+                            <f:converter binding="#{babysitterToIdConverter}"/>
+                            <f:selectItems value="#{resourcesController.currentBabysitters}"
+                                           var="babysitter"
+                                           itemValue="${babysitter}"
+                                           itemDisabled="#{babysitter.isEmployed()}"
+                                           itemLabel="[#{babysitter.uuid}] #{babysitter.name} #{babysitter.surname}"/>
+                        </h:selectOneListbox>
                     </h:panelGrid>
                 </div>
-                <h:commandButton value="#{msg.add}" action="#{employmentsController.processNewEmployment()}"
+                <h:commandButton value="#{msg.add}"
+                                 action="#{employmentsController.processNewEmployment()}"
                                  class="positive_btn"/>
-                <h:commandButton value="#{msg.cancel}" action="main" immediate="true" class="negative_btn"/>
+                <h:commandButton value="#{msg.cancel}" action="main" immediate="true"
+                                 class="negative_btn"/>
             </h:form>
         </ui:define>
     </ui:composition>
