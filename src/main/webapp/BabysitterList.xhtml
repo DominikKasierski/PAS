@@ -11,7 +11,8 @@
 <h:body>
     <ui:composition template="template/commonLayout.xhtml">
         <ui:define name="content">
-            <h:form id="BabysitterList">
+            <h:outputScript name="js/scripts.js" target="head"/>
+            <h:form id="BabysitterListForm">
                 <div style="overflow-x: auto;">
                     <h:outputText id="errorLabel"/>
                     <h:message for="errorLabel" style="color:red;"/>
@@ -19,10 +20,14 @@
                     <h:dataTable value="#{resourcesController.currentBabysitters}" var="babysitter">
                         <h:column>
                             <f:facet name="header">Id
-                                <h:selectOneMenu valueChangeListener="#{resourcesController.valueChanged}" onchange="submit()" >
-                                    <f:selectItem itemLabel="#{msg.idlabel}" itemValue="0" />
-                                    <f:selectItems value="#{resourcesController.babysittersManager.allBabysittersArray}" var="item"
-                                                   itemLabel="#{item.uuid}" itemValue="#{item.uuid}"/>
+                                <h:selectOneMenu
+                                        valueChangeListener="#{resourcesController.valueChanged}"
+                                        onchange="submit()">
+                                    <f:selectItem itemLabel="#{msg.idlabel}" itemValue="0"/>
+                                    <f:selectItems
+                                            value="#{resourcesController.babysittersManager.allBabysittersArray}"
+                                            var="item"
+                                            itemLabel="#{item.uuid}" itemValue="#{item.uuid}"/>
                                 </h:selectOneMenu>
                             </f:facet>
                             ${babysitter.uuid}
@@ -63,17 +68,34 @@
                             <f:facet name="header">#{msg.currentEmployments}</f:facet>
                             ${employmentsController.getActualEmploymentForBabysitterOrNull(babysitter)}
                         </h:column>
-                        <h:column rendered="#{identityUtils.inAdminRole || identityUtils.inSuperUserRole}">
+                        <h:column
+                                rendered="#{identityUtils.inAdminRole || identityUtils.inSuperUserRole}">
                             <f:facet name="header">#{msg.actions}</f:facet>
-                            <h:commandButton id="delete" value="#{msg.delete}" action="#{resourcesController.deleteBabysitter(babysitter)}" class="negative_btn"/>
-                            <h:message for="delete" />
-                            <h:commandButton id="modify" value="#{msg.modify}" action="#{resourcesController.modifyBabysitter(babysitter)}" class="positive_btn"/>
-                            <h:message for="modify" />
+
+                            <h:commandButton id="delete" value="#{msg.delete}"
+                                             class="negative_btn">
+                                <f:ajax execute="@form" onevent="showConfirmBabysitter('#{msg.confirmDeleting}', #{resourcesController.currentBabysitters.indexOf(babysitter)})"/>
+                            </h:commandButton>
+                            <h:message for="delete"/>
+
+                            <h:commandButton id="modify" value="#{msg.modify}"
+                                             action="#{resourcesController.modifyBabysitter(babysitter)}"
+                                             class="positive_btn"/>
+                            <h:message for="modify"/>
+
+                            <h:commandButton id="hdnBtn"
+                                             action="#{resourcesController.deleteBabysitter(babysitter)}"
+                                             style="display: none;">
+                                <f:ajax render="@form"/>
+                            </h:commandButton>
                         </h:column>
                     </h:dataTable>
                 </div>
-                <h:commandButton value="#{msg.refresh}" action="#{resourcesController.refreshCurrent}" immediate="true" class="positive_btn"/>
-                <h:commandButton value="#{msg.cancel}" action="main" immediate="true" class="negative_btn"/>
+                <h:commandButton value="#{msg.refresh}"
+                                 action="#{resourcesController.refreshCurrent}" immediate="true"
+                                 class="positive_btn"/>
+                <h:commandButton value="#{msg.cancel}" action="main" immediate="true"
+                                 class="negative_btn"/>
             </h:form>
         </ui:define>
     </ui:composition>

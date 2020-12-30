@@ -11,14 +11,7 @@
 <h:body>
     <ui:composition template="template/commonLayout.xhtml">
         <ui:define name="content">
-            <script type="text/javascript">
-                function myFunction() {
-                    let r = confirm("Are you sure?");
-                    if (r === true) {
-                        document.getElementById('EmploymentListForm:j_idt39:1:hdnBtn').click();
-                    }
-                }
-            </script>
+            <h:outputScript name="js/scripts.js" target="head"/>
             <h:form id="EmploymentListForm">
                 <div style="overflow-x: auto;">
                     <h:outputText id="errorLabel"/>
@@ -72,7 +65,7 @@
                             <h:commandButton id="delete" value="#{msg.delete}"
                                              rendered="#{employment.endOfEmployment == null and identityUtils.inAdminRole}"
                                              class="negative_btn">
-                                <f:ajax execute="@form" onevent="myFunction()"/>
+                                <f:ajax execute="@form" onevent="showConfirmEmployment('#{msg.confirmDeleting}', #{employmentsController.currentEmployments.indexOf(employment)})"/>
                             </h:commandButton>
                             <h:message for="delete"/>
 
