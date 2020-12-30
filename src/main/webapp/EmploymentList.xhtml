@@ -11,7 +11,15 @@
 <h:body>
     <ui:composition template="template/commonLayout.xhtml">
         <ui:define name="content">
-            <h:form id="EmploymentList">
+            <script type="text/javascript">
+                function myFunction() {
+                    let r = confirm("Are you sure?");
+                    if (r === true) {
+                        document.getElementById('EmploymentListForm:j_idt39:1:hdnBtn').click();
+                    }
+                }
+            </script>
+            <h:form id="EmploymentListForm">
                 <div style="overflow-x: auto;">
                     <h:outputText id="errorLabel"/>
                     <h:message for="errorLabel" style="color:#ff0000;"/>
@@ -62,15 +70,22 @@
                         <h:column>
                             <f:facet name="header">#{msg.actions}</f:facet>
                             <h:commandButton id="delete" value="#{msg.delete}"
-                                             action="#{employmentsController.deleteEmployment(employment)}"
                                              rendered="#{employment.endOfEmployment == null and identityUtils.inAdminRole}"
-                                             class="negative_btn"/>
+                                             class="negative_btn">
+                                <f:ajax execute="@form" onevent="myFunction()"/>
+                            </h:commandButton>
                             <h:message for="delete"/>
+
                             <h:commandButton id="endEmplyment" value="#{msg.endOfEmployment}"
                                              action="#{employmentsController.employmentsManager.endEmployment(employment)}"
                                              rendered="#{employment.endOfEmployment == null}"
                                              class="positive_btn"/>
                             <h:message for="endEmplyment"/>
+
+                            <h:commandButton id="hdnBtn" action="#{employmentsController.deleteEmployment(employment)}" style="display: none;">
+                                <f:ajax render="@form" />
+                            </h:commandButton>
+
                         </h:column>
                     </h:dataTable>
                 </div>
