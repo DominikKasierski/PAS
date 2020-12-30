@@ -18,7 +18,7 @@
 
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>/faces/*</url-pattern>
+        <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
 
     <session-config>
@@ -28,7 +28,7 @@
     </session-config>
 
     <welcome-file-list>
-        <welcome-file>faces/index.xhtml</welcome-file>
+        <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
 
     <security-role>
@@ -52,14 +52,13 @@
     </security-constraint>
 
 <!--    TODO: PRZETESTOWAC CZY NA PEWNO TO WSZYSTKO DZIALA POPRAWNIE-->
-<!--    TODO: JAK KTOS W URL WPISZE FACES/FACES/ ZAMIAST FACES TO I TAK PRZEJDZIE, POPRAWIC JAK SIE UDA-->
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>AdminPages</web-resource-name>
-            <url-pattern>/faces/NewUser.xhtml</url-pattern>
-            <url-pattern>/faces/NewUserConfirm.xhtml</url-pattern>
-            <url-pattern>/faces/ModifyUser.xhtml</url-pattern>
-            <url-pattern>/faces/ModifyUserConfirm.xhtml</url-pattern>
+            <url-pattern>/NewUser.xhtml</url-pattern>
+            <url-pattern>/NewUserConfirm.xhtml</url-pattern>
+            <url-pattern>/ModifyUser.xhtml</url-pattern>
+            <url-pattern>/ModifyUserConfirm.xhtml</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <role-name>Admin</role-name>
@@ -69,12 +68,12 @@
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>AdminAndSuperUserPages</web-resource-name>
-            <url-pattern>/faces/NewBabysitter.xhtml</url-pattern>
-            <url-pattern>/faces/NewBabysitterConfirm.xhtml</url-pattern>
-            <url-pattern>/faces/ModifyBabysitter.xhtml</url-pattern>
-            <url-pattern>/faces/ModifyBabysitterConfirm.xhtml</url-pattern>
-            <url-pattern>/faces/ClientList.xhtml</url-pattern>
-            <url-pattern>/faces/EmploymentList.xhtml</url-pattern>
+            <url-pattern>/NewBabysitter.xhtml</url-pattern>
+            <url-pattern>/NewBabysitterConfirm.xhtml</url-pattern>
+            <url-pattern>/ModifyBabysitter.xhtml</url-pattern>
+            <url-pattern>/ModifyBabysitterConfirm.xhtml</url-pattern>
+            <url-pattern>/ClientList.xhtml</url-pattern>
+            <url-pattern>/EmploymentList.xhtml</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <role-name>Admin</role-name>
@@ -85,10 +84,10 @@
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>LoggedInUserPages</web-resource-name>
-            <url-pattern>/faces/BabysitterList.xhtml</url-pattern>
-            <url-pattern>/faces/NewEmployment.xhtml</url-pattern>
-            <url-pattern>/faces/NewEmploymentConfirm.xhtml</url-pattern>
-            <url-pattern>/faces/auth/LogoutPage.xhtml</url-pattern>
+            <url-pattern>/BabysitterList.xhtml</url-pattern>
+            <url-pattern>/NewEmployment.xhtml</url-pattern>
+            <url-pattern>/NewEmploymentConfirm.xhtml</url-pattern>
+            <url-pattern>/auth/LogoutPage.xhtml</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <role-name>Admin</role-name>
