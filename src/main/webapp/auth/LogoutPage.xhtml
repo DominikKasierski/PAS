@@ -12,7 +12,7 @@
         <ui:define name="content">
             <div id="container">
                 <h:form>
-                    <h:outputText value="#{msg.confirmLogout}" styleClass="formOutput"/>
+                    <h:outputText value="#{msg.confirmLogout}" styleClass="formLogoutOutput"/>
                     <h:commandButton value="#{msg.logOut}" action="#{logInController.logOut}" class="positive_btn" />
                     <h:commandButton value="#{msg.home}" action="#{logInController.backToMain}" immediate="true" class="negative_btn" />
                 </h:form>

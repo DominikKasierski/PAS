@@ -8,7 +8,6 @@
 <body>
 <ui:composition>
 
-    <!--TODO: DODAC BANY DO STRON W ZALEZNOSCI OD ROLI-->
     <!--TODO: ZMIENIC UZYTKOWNIKOW W KONTENERZE,ZEBY ODOWIADALI TYM W APLIKACJI-->
     <h:form>
         <h:commandLink value="#{msg.addNewBabysitter}"
@@ -29,7 +28,7 @@
                        action="#{usersController.userType('SUPERUSER')}"
                        rendered="#{identityUtils.inAdminRole}"/>
         <h:commandLink value="#{msg.addNewClient}" action="#{usersController.userType('CLIENT')}"
-                       rendered="#{identityUtils.inAdminRole || identityUtils.inSuperUserRole}"/>
+                       rendered="#{identityUtils.inAdminRole}"/>
         <h:link outcome="ClientList" value="#{msg.showUsersList}"
                 rendered="#{identityUtils.inAdminRole || identityUtils.inSuperUserRole}"/>
         <br/>

@@ -7,21 +7,26 @@
         <param-name>javax.faces.PROJECT_STAGE</param-name>
         <param-value>Development</param-value>
     </context-param>
+
     <default-context-path>PAS</default-context-path>
+
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
+
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
     </servlet-mapping>
+
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
+
     <welcome-file-list>
         <welcome-file>faces/index.xhtml</welcome-file>
     </welcome-file-list>
@@ -46,10 +51,14 @@
         </user-data-constraint>
     </security-constraint>
 
+<!--    TODO: PRZETESTOWAC CZY NA PEWNO TO WSZYSTKO DZIALA POPRAWNIE-->
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>AdminPages</web-resource-name>
-            <url-pattern>/admin/*</url-pattern>
+            <url-pattern>/faces/NewUser.xhtml</url-pattern>
+            <url-pattern>/faces/NewUserConfirm.xhtml</url-pattern>
+            <url-pattern>/faces/ModifyUser.xhtml</url-pattern>
+            <url-pattern>/faces/ModifyUserConfirm.xhtml</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <role-name>Admin</role-name>
@@ -58,22 +67,37 @@
 
     <security-constraint>
         <web-resource-collection>
-            <web-resource-name>SuperUserPages</web-resource-name>
-            <url-pattern>/superuser/*</url-pattern>
+            <web-resource-name>AdminAndSuperUserPages</web-resource-name>
+            <url-pattern>/faces/NewBabysitter.xhtml</url-pattern>
+            <url-pattern>/faces/NewBabysitterConfirm.xhtml</url-pattern>
+            <url-pattern>/faces/ModifyBabysitter.xhtml</url-pattern>
+            <url-pattern>/faces/ModifyBabysitterConfirm.xhtml</url-pattern>
+            <url-pattern>/faces/ClientList.xhtml</url-pattern>
+            <url-pattern>/faces/EmploymentList.xhtml</url-pattern>
         </web-resource-collection>
         <auth-constraint>
+            <role-name>Admin</role-name>
             <role-name>SuperUser</role-name>
         </auth-constraint>
     </security-constraint>
 
     <security-constraint>
         <web-resource-collection>
-            <web-resource-name>ClientPages</web-resource-name>
-            <url-pattern>/index</url-pattern>
+            <web-resource-name>LoggedInUserPages</web-resource-name>
+            <url-pattern>/faces/BabysitterList.xhtml</url-pattern>
+            <url-pattern>/faces/NewEmployment.xhtml</url-pattern>
+            <url-pattern>/faces/NewEmploymentConfirm.xhtml</url-pattern>
+            <url-pattern>/faces/auth/LogoutPage.xhtml</url-pattern>
         </web-resource-collection>
         <auth-constraint>
+            <role-name>Admin</role-name>
+            <role-name>SuperUser</role-name>
             <role-name>Client</role-name>
         </auth-constraint>
     </security-constraint>
+
+
+
+
 
 </web-app>
