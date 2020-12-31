@@ -68,7 +68,7 @@
                     </h:inputText>
                     <h:message for="ageOfTheYoungestChild"/>
 
-                    <h:commandButton value="#{msg.add}" action="checkAll(login, imie, nazwisko)"
+                    <h:commandButton value="#{msg.add}"
                                      class="positive_btn"
                                      rendered="#{usersController.typeOfUser == 'ADMIN' || usersController.typeOfUser == 'SUPERUSER'}">
                         <f:ajax execute="@form"
