@@ -4,10 +4,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <h:head>
     <title>#{msg.newUser}</title>
 </h:head>
+<!--TODO:WYSTYLIZOWAC DIVY!-->
 <h:body>
     <ui:composition template="template/commonLayout.xhtml">
         <ui:define name="content">
@@ -17,82 +18,66 @@
                     <h:inputText id="login" pt:placeholder="* #{msg.login}"
                                  value="#{usersController.getSomeUser(usersController.typeOfUser).login}"
                                  required="true"
-                                 onchange="checkLogin(this.value)"
-                                 requiredMessage="#{msg.requiredLogin}">
-                        validator="#{usersController.loginValidator}">
-                    </h:inputText>
+                                 requiredMessage="#{msg.requiredLogin}"
+                                 onchange="checkLogin(this.value, '#{msg.validatorMessageLogin}')"/>
                     <h:message for="login"/>
+                    <div id="loginDiv"></div>
+
 
                     <h:inputText id="name" pt:placeholder="* #{msg.name}"
                                  value="#{usersController.getSomeUser(usersController.typeOfUser).name}"
                                  required="true"
-                                 onchange="checkName(this.value)"
                                  requiredMessage="#{msg.requiredName}"
-                                 validatorMessage="#{msg.validatorMessageName}">
-                        <f:validateRegex pattern="[A-Za-ząćęłńóśżźĄĆĘŁŃÓŚŻŹ]{2,}"/>
-                    </h:inputText>
+                                 onchange="checkName(this.value, '#{msg.validatorMessageName}')"/>
                     <h:message for="name"/>
+                    <div id="nameDiv"></div>
+
 
                     <h:inputText id="surname" pt:placeholder="* #{msg.surname}"
                                  value="#{usersController.getSomeUser(usersController.typeOfUser).surname}"
                                  required="true"
-                                 onchange="checkSurname(this.value)"
                                  requiredMessage="#{msg.requiredSurname}"
-                                 validatorMessage="#{msg.validatorMessageSurname}">
-                        <f:validateRegex pattern="[A-Za-ząćęłńóśżźĄĆĘŁŃÓŚŻŹ]{2,}"/>
-                    </h:inputText>
+                                 onchange="checkSurname(this.value, '#{msg.validatorMessageSurname}')"/>
                     <h:message for="surname"/>
+                    <div id="surnameDiv"></div>
+
 
                     <h:inputText id="numberOfChildren" pt:placeholder="* #{msg.numberOfChildren}"
                                  value="#{usersController.getSomeUser(usersController.typeOfUser).numberOfChildren}"
                                  required="true"
-                                 onchange="checkNumberOfChildren(this.value)"
-                                 converterMessage="#{msg.converterMessageNumberOfChildren}"
                                  requiredMessage="#{msg.requiredNumberOfChildren}"
-                                 validatorMessage="#{msg.validatorMessageMaxNumberOfChildren}"
-                                 rendered="#{usersController.typeOfUser == 'CLIENT'}">
-                        <f:validateLongRange minimum="0"/>
-                    </h:inputText>
+                                 onchange="checkNumberOfChildren(this.value, '#{msg.validatorMessageMaxNumberOfChildren}')"
+                                 rendered="#{usersController.typeOfUser == 'CLIENT'}"/>
                     <h:message for="numberOfChildren"/>
+                    <div id="numberDiv"></div>
+
 
                     <h:inputText id="ageOfTheYoungestChild"
                                  pt:placeholder="* #{msg.ageOfTheYoungestChild}"
                                  value="#{usersController.getSomeUser(usersController.typeOfUser).ageOfTheYoungestChild}"
                                  required="true"
-                                 onchange="checkAgeOfTheYoungestChild(this.value)"
-                                 converterMessage="#{msg.converterMessageAgeOfTheYoungestChild}"
                                  requiredMessage="#{msg.requiredAgeOfTheYoungestChild}"
-                                 validatorMessage="#{msg.validatorMessageYoungestChild}"
-                                 rendered="#{usersController.typeOfUser == 'CLIENT'}">
-                        <f:validateLongRange minimum="0" maximum="15"/>
-                    </h:inputText>
+                                 onchange="checkAgeOfTheYoungestChild(this.value, '#{msg.validatorMessageYoungestChild}')"
+                                 rendered="#{usersController.typeOfUser == 'CLIENT'}"/>
                     <h:message for="ageOfTheYoungestChild"/>
+                    <div id="ageDiv"></div>
 
-                    <h:commandButton value="#{msg.add}"
-                                     class="positive_btn"
-                                     rendered="#{usersController.typeOfUser == 'ADMIN' || usersController.typeOfUser == 'SUPERUSER'}">
-                        <f:ajax execute="@form"
-                                onevent="checkAll1(this)"/>
-<!--                                onevent="checkAll1('login, imie, nazwisko')"/>-->
+
+                    <h:commandButton value="#{msg.add}" onclick="return checkAdminSuperUser();"
+                                     action="#{usersController.processNewUser()}"
+                                     rendered="#{usersController.typeOfUser == 'ADMIN' || usersController.typeOfUser == 'SUPERUSER'}"
+                                     class="positive_btn">
                     </h:commandButton>
 
-                    <h:commandButton value="#{msg.add}"
-                                     class="positive_btn"
-                                     rendered="#{usersController.typeOfUser == 'CLIENT'}">
-                        <f:ajax execute="@form"
-                                onevent="checkAll2(this.value)"/>
-<!--                                onevent="checkAll1('login, imie, nazwisko, liczbe, wiek')"/>-->
+                    <h:commandButton value="#{msg.add}" onclick="return checkClient();"
+                                     action="#{usersController.processNewUser()}"
+                                     rendered="#{usersController.typeOfUser == 'CLIENT'}"
+                                     class="positive_btn">
                     </h:commandButton>
 
                     <h:commandButton value="#{msg.cancel}" action="#{usersController.backToMain}"
                                      immediate="true"
                                      class="negative_btn"/>
-
-                    <h:commandButton value="#{msg.add}" action="#{usersController.processNewUser()}"
-                                     class="positive_btn" style="display: none;">
-                        <f:ajax render="@form"/>
-                    </h:commandButton>
-
                 </h:form>
             </div>
         </ui:define>
