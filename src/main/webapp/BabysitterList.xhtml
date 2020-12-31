@@ -74,7 +74,8 @@
 
                             <h:commandButton id="delete" value="#{msg.delete}"
                                              class="negative_btn">
-                                <f:ajax execute="@form" onevent="showConfirmBabysitter('#{msg.confirmDeleting}', #{resourcesController.currentBabysitters.indexOf(babysitter)})"/>
+                                <f:ajax execute="@form"
+                                        onevent="showConfirmBabysitter('#{msg.confirmDeleting}', #{resourcesController.currentBabysitters.indexOf(babysitter)})"/>
                             </h:commandButton>
                             <h:message for="delete"/>
 
