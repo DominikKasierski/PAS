@@ -72,7 +72,7 @@
                                      class="positive_btn"
                                      rendered="#{usersController.typeOfUser == 'ADMIN' || usersController.typeOfUser == 'SUPERUSER'}">
                         <f:ajax execute="@form"
-                                onevent="checkAll1(this.value)"/>
+                                onevent="checkAll1(this)"/>
 <!--                                onevent="checkAll1('login, imie, nazwisko')"/>-->
                     </h:commandButton>
 
@@ -80,7 +80,7 @@
                                      class="positive_btn"
                                      rendered="#{usersController.typeOfUser == 'CLIENT'}">
                         <f:ajax execute="@form"
-                                onevent="checkAll1(this.value)"/>
+                                onevent="checkAll2(this.value)"/>
 <!--                                onevent="checkAll1('login, imie, nazwisko, liczbe, wiek')"/>-->
                     </h:commandButton>
 

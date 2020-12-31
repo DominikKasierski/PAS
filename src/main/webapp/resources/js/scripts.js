@@ -32,7 +32,8 @@ function checkAgeOfTheYoungestChild(age) {
     console.log(age);
 }
 
-function checkAll1(login, name, surname) {
+function checkAll1(login) {
+    return false;
     // checkLogin(login);
     // checkName(imie);
     // checkSurname(nazwisko);
