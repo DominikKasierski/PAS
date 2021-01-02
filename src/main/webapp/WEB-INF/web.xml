@@ -51,7 +51,6 @@
         </user-data-constraint>
     </security-constraint>
 
-<!--    TODO: PRZETESTOWAC CZY NA PEWNO TO WSZYSTKO DZIALA POPRAWNIE-->
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>AdminPages</web-resource-name>
