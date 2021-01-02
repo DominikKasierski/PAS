@@ -44,9 +44,10 @@
 
                     <h:inputText id="numberOfChildren" pt:placeholder="* #{msg.numberOfChildren}"
                                  value="#{usersController.getSomeUser(usersController.typeOfUser).numberOfChildren}"
+                                 converterMessage="#{msg.converterMessageNumberOfChildren}"
                                  required="true"
                                  requiredMessage="#{msg.requiredNumberOfChildren}"
-                                 onkeyup="checkNumberOfChildren(this.value, '#{msg.validatorMessageMaxNumberOfChildren}')"
+                                 onkeyup="checkNumber(this.value, '#{msg.validatorMessageMaxNumberOfChildren}', 'numberDiv')"
                                  rendered="#{usersController.typeOfUser == 'CLIENT'}"/>
                     <h:message for="numberOfChildren"/>
                     <div id="numberDiv"></div>
@@ -55,9 +56,10 @@
                     <h:inputText id="ageOfTheYoungestChild"
                                  pt:placeholder="* #{msg.ageOfTheYoungestChild}"
                                  value="#{usersController.getSomeUser(usersController.typeOfUser).ageOfTheYoungestChild}"
+                                 converterMessage="#{msg.converterMessageAgeOfTheYoungestChild}"
                                  required="true"
                                  requiredMessage="#{msg.requiredAgeOfTheYoungestChild}"
-                                 onkeyup="checkAgeOfTheYoungestChild(this.value, '#{msg.validatorMessageYoungestChild}')"
+                                 onkeyup="checkNumber(this.value, '#{msg.validatorMessageYoungestChild}', 'ageDiv')"
                                  rendered="#{usersController.typeOfUser == 'CLIENT'}"/>
                     <h:message for="ageOfTheYoungestChild"/>
                     <div id="ageDiv"></div>

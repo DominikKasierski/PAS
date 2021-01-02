@@ -13,7 +13,6 @@ function showConfirmBabysitter(text, number) {
 }
 
 function checkLogin(login, message) {
-    // TODO: SPRAWDZIC CZY NIE JEST PUSTY, SPRAWDZIC CZY MA MINIMUM 2 ZNAKI
     let notEmpty = login !== '';
     let minLength = login.length > 2;
     if (notEmpty && minLength) {
@@ -26,10 +25,10 @@ function checkLogin(login, message) {
 }
 
 function checkName(name, message) {
-    // TODO:SPRAWDZIC CZY NIE JEST PUSTY, SPRAWDZIC CZY MA MINIMUM 2 ZNAKI
     let notEmpty = name !== '';
     let minLength = name.length > 2;
-    if (notEmpty && minLength) {
+    let onlyLetters = (/\d/.test(name));
+    if (notEmpty && minLength && !onlyLetters) {
         document.getElementById('nameDiv').innerHTML = "";
         return true;
     } else {
@@ -39,10 +38,10 @@ function checkName(name, message) {
 }
 
 function checkSurname(surname, message) {
-    // TODO:SPRAWDZIC CZY NIE JEST PUSTY, SPRAWDZIC CZY MA MINIMUM 2 ZNAKI
     let notEmpty = surname !== '';
     let minLength = surname.length > 2;
-    if (notEmpty && minLength) {
+    let onlyLetters = (/\d/.test(name));
+    if (notEmpty && minLength && !onlyLetters) {
         document.getElementById('surnameDiv').innerHTML = "";
         return true;
     } else {
@@ -51,53 +50,33 @@ function checkSurname(surname, message) {
     }
 }
 
-function checkNumberOfChildren(numberOfChildren, message) {
-    // TODO:SPRAWDZIC CZY JEST LICZBA I CZY DODATNIA
-    let parseToInt = parseInt(numberOfChildren);
-    let isNumber = (typeof(parseToInt) === "number" && !isNaN(parseToInt));
-    let isPositive = false;
-    if(isNumber) {
-        isPositive = parseToInt > 0
-    }
-
-    if (isNumber && isPositive) {
-        document.getElementById('numberDiv').innerHTML = "";
-    } else {
-        document.getElementById('numberDiv').innerHTML = message;
-        return false;
-    }
-}
-
-function checkAgeOfTheYoungestChild(age, message) {
-    // TODO:SPRAWDZIC CZY JEST LICZBA I CZY Z ZAKRESU 0 - 15
-    let parseToInt = parseInt(age); //czy w js czy w javie parsowac
-    let isNumber = (typeof(parseToInt) === "number" && !isNaN(parseToInt));
+function checkNumber(number, message, outputDiv) {
+    let isNumber = /^\d+$/.test(number);
     let isInRange = false;
     if(isNumber) {
+        let parseToInt = parseInt(number);
         isInRange = parseToInt > 0 && parseToInt < 15
     }
 
     if (isNumber && isInRange) {
-        document.getElementById('ageDiv').innerHTML = "";
+        document.getElementById(outputDiv).innerHTML = "";
+        return true;
     } else {
-        document.getElementById('ageDiv').innerHTML = message;
+        document.getElementById(outputDiv).innerHTML = message;
         return false;
     }
 }
 
 function checkAdminSuperUser(msgLogin, msgName, msgSurname) {
-    let one = checkLogin(document.getElementById('j_idt37:login').value, msgLogin);
-    let two = checkName(document.getElementById('j_idt37:name').value, msgName);
-    let three = checkSurname(document.getElementById('j_idt37:surname').value, msgSurname);
-    return (one && two && three);
-    // return (checkLogin(document.getElementById('j_idt37:login').value, 'dupa')
-    //     && checkName(document.getElementById('j_idt37:name').value, 'dupa')
-    //     && checkSurname(document.getElementById('j_idt37:surname').value, 'dupa')); //jak któryś będzie false to przerywa => dupa sie nie wyswietli
+    let loginCheck = checkLogin(document.getElementById('j_idt37:login').value, msgLogin);
+    let nameCheck = checkName(document.getElementById('j_idt37:name').value, msgName);
+    let surnameCheck = checkSurname(document.getElementById('j_idt37:surname').value, msgSurname);
+    return (loginCheck && nameCheck && surnameCheck);
 }
 
 function checkClient(msgLogin, msgName, msgSurname, msgNumOfChildren, msgAgeOfTheYoungestChild) {
-    let one = checkAdminSuperUser(msgLogin, msgName, msgSurname);
-    let two = checkNumberOfChildren(document.getElementById('j_idt37:numberOfChildren').value, msgNumOfChildren);
-    let three = checkAgeOfTheYoungestChild(document.getElementById('j_idt37:ageOfTheYoungestChild').value, msgAgeOfTheYoungestChild);
-    return (one && two && three);
+    let loginNameSurnameCheck = checkAdminSuperUser(msgLogin, msgName, msgSurname);
+    let numberOfChildrenCheck = checkNumber(document.getElementById('j_idt37:numberOfChildren').value, msgNumOfChildren, 'numberDiv');
+    let ageCheck = checkNumber(document.getElementById('j_idt37:ageOfTheYoungestChild').value, msgAgeOfTheYoungestChild, 'ageDiv');
+    return (loginNameSurnameCheck && numberOfChildrenCheck && ageCheck);
 }
