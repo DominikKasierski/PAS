@@ -22,7 +22,6 @@
                                  onkeyup="checkLogin(this.value, '#{msg.validatorMessageLogin}')"/>
                     <h:message for="login"/>
                     <div id="loginDiv"></div>
-                    <!--TODO:Problem z onkeyup gdy wybierze się z autouzupełniania-->
 
                     <h:inputText id="name" pt:placeholder="* #{msg.name}"
                                  value="#{usersController.getSomeUser(usersController.typeOfUser).name}"
@@ -47,7 +46,7 @@
                                  converterMessage="#{msg.converterMessageNumberOfChildren}"
                                  required="true"
                                  requiredMessage="#{msg.requiredNumberOfChildren}"
-                                 onkeyup="checkNumber(this.value, '#{msg.validatorMessageMaxNumberOfChildren}', 'numberDiv')"
+                                 onkeyup="checkNumber(this.value, '#{msg.validatorMessageMaxNumberOfChildren}', 'numberDiv', 0, 15)"
                                  rendered="#{usersController.typeOfUser == 'CLIENT'}"/>
                     <h:message for="numberOfChildren"/>
                     <div id="numberDiv"></div>
@@ -59,7 +58,7 @@
                                  converterMessage="#{msg.converterMessageAgeOfTheYoungestChild}"
                                  required="true"
                                  requiredMessage="#{msg.requiredAgeOfTheYoungestChild}"
-                                 onkeyup="checkNumber(this.value, '#{msg.validatorMessageYoungestChild}', 'ageDiv')"
+                                 onkeyup="checkNumber(this.value, '#{msg.validatorMessageYoungestChild}', 'ageDiv', 0, 15)"
                                  rendered="#{usersController.typeOfUser == 'CLIENT'}"/>
                     <h:message for="ageOfTheYoungestChild"/>
                     <div id="ageDiv"></div>
