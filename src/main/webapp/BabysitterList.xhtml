@@ -16,9 +16,18 @@
                 <div style="overflow-x: auto;">
                     <h:outputText id="errorLabel"/>
                     <h:message for="errorLabel" style="color:red;"/>
+
+                    <p id="gowno">sratatata</p>
+                    <div>
+                        <h:inputText id="search-input" placeholder="search" class="search-bar" type="text"
+                                     onkeyup="buildFilteredTable(this.value)"/>
+                        <span id="gowno2">elo ziomki</span>
+                    </div>
+
                     <br/>
-                    <h:dataTable value="#{resourcesController.currentBabysitters}" var="babysitter">
-                        <h:column>
+                    <h:dataTable id="babysittersTable" value="#{resourcesController.currentBabysitters}"
+                                 var="babysitter">
+                        <h:column data-colname="Id">
                             <f:facet name="header">Id
                                 <h:selectOneMenu
                                         valueChangeListener="#{resourcesController.valueChanged}"
@@ -32,27 +41,27 @@
                             </f:facet>
                             ${babysitter.uuid}
                         </h:column>
-                        <h:column>
+                        <h:column data-colname="name">
                             <f:facet name="header">#{msg.name}</f:facet>
                             ${babysitter.name}
                         </h:column>
-                        <h:column>
+                        <h:column data-colname="surname">
                             <f:facet name="header">#{msg.surname}</f:facet>
                             ${babysitter.surname}
                         </h:column>
-                        <h:column>
+                        <h:column data-colname="basePriceForHour">
                             <f:facet name="header">#{msg.basePriceForHour}</f:facet>
                             ${babysitter.basePriceForHour}
                         </h:column>
-                        <h:column>
+                        <h:column data-colname="minChildAge">
                             <f:facet name="header">#{msg.minimalChildAge}</f:facet>
                             ${babysitter.minChildAge}
                         </h:column>
-                        <h:column>
+                        <h:column data-colname="maxNumberOfChildrenInTheFamily">
                             <f:facet name="header">#{msg.maximalNumberOfChildren}</f:facet>
                             ${babysitter.maxNumberOfChildrenInTheFamily}
                         </h:column>
-                        <h:column>
+                        <h:column data-colname="employed">
                             <f:facet name="header">#{msg.currentlyEmployed}</f:facet>
                             ${babysitter.employed}
                         </h:column>
