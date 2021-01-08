@@ -39,8 +39,9 @@
                         <p:column data-colname="Id">
                             <f:facet name="header">Id
                                 <h:selectOneMenu
+                                        id="babysitterIDSelect"
                                         valueChangeListener="#{resourcesController.valueChanged}"
-                                        onchange="submit()">
+                                        >
                                     <f:selectItem itemLabel="#{msg.idlabel}" itemValue="0"/>
                                     <f:selectItems
                                             value="#{resourcesController.babysittersManager.allBabysittersArray}"
