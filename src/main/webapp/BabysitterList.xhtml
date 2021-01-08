@@ -3,6 +3,7 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
@@ -17,15 +18,25 @@
                     <h:outputText id="errorLabel"/>
                     <h:message for="errorLabel" style="color:red;"/>
 
-                    <div>
-                        <h:inputText id="search-input" placeholder="search" class="search-bar" type="text"
-                                     onkeyup="buildFilteredTable(this.value)"/>
-                    </div>
-
-                    <br/>
-                    <h:dataTable id="babysittersTable" value="#{resourcesController.currentBabysitters}"
-                                 var="babysitter">
-                        <h:column data-colname="Id">
+                    <!--                    <div>-->
+                    <!--                        <h:inputText id="search-input" placeholder="search" class="search-bar" type="text"-->
+                    <!--                                     onkeyup="buildFilteredTable(this.value)"/>-->
+                    <!--                    </div>-->
+                    <!--                    <br/>-->
+<!--                    <div class="pagination_container">-->
+<!--                        <div class="first">#{msg.firstPage}</div>-->
+<!--                        <div class="previous">#{msg.previousPage}</div>-->
+<!--                        <div class="next">#{msg.nextPage}</div>-->
+<!--                        <div class="last">#{msg.lastPage}</div>-->
+<!--                    </div>-->
+                    <p:dataTable id="babysittersTable" value="#{resourcesController.currentBabysitters}"
+                                 var="babysitter" class="babysittersTable"
+                                 rows="5"
+                                 paginator="true"
+                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                                 rowsPerPageTemplate="5,10,15">>
+                        <p:column data-colname="Id">
                             <f:facet name="header">Id
                                 <h:selectOneMenu
                                         valueChangeListener="#{resourcesController.valueChanged}"
@@ -38,44 +49,44 @@
                                 </h:selectOneMenu>
                             </f:facet>
                             ${babysitter.uuid}
-                        </h:column>
-                        <h:column data-colname="name">
+                        </p:column>
+                        <p:column data-colname="name">
                             <f:facet name="header">#{msg.name}</f:facet>
                             ${babysitter.name}
-                        </h:column>
-                        <h:column data-colname="surname">
+                        </p:column>
+                        <p:column data-colname="surname">
                             <f:facet name="header">#{msg.surname}</f:facet>
                             ${babysitter.surname}
-                        </h:column>
-                        <h:column data-colname="basePriceForHour">
+                        </p:column>
+                        <p:column data-colname="basePriceForHour">
                             <f:facet name="header">#{msg.basePriceForHour}</f:facet>
                             ${babysitter.basePriceForHour}
-                        </h:column>
-                        <h:column data-colname="minChildAge">
+                        </p:column>
+                        <p:column data-colname="minChildAge">
                             <f:facet name="header">#{msg.minimalChildAge}</f:facet>
                             ${babysitter.minChildAge}
-                        </h:column>
-                        <h:column data-colname="maxNumberOfChildrenInTheFamily">
+                        </p:column>
+                        <p:column data-colname="maxNumberOfChildrenInTheFamily">
                             <f:facet name="header">#{msg.maximalNumberOfChildren}</f:facet>
                             ${babysitter.maxNumberOfChildrenInTheFamily}
-                        </h:column>
-                        <h:column data-colname="employed">
+                        </p:column>
+                        <p:column data-colname="employed">
                             <f:facet name="header">#{msg.currentlyEmployed}</f:facet>
                             ${babysitter.employed}
-                        </h:column>
-                        <h:column rendered="#{resourcesController.typeOfBabysitter == 'TEACHING' }">
+                        </p:column>
+                        <p:column rendered="#{resourcesController.typeOfBabysitter == 'TEACHING' }">
                             <f:facet name="header">#{msg.yearsOfExperienceInTeaching}</f:facet>
                             ${babysitter.yearsOfExperienceInTeaching}
-                        </h:column>
-                        <h:column rendered="#{resourcesController.typeOfBabysitter == 'TIDING'}">
+                        </p:column>
+                        <p:column rendered="#{resourcesController.typeOfBabysitter == 'TIDING'}">
                             <f:facet name="header">#{msg.valueOfCleaningEquipment}</f:facet>
                             ${babysitter.valueOfCleaningEquipment}
-                        </h:column>
-                        <h:column rendered="#{identityUtils.inAdminRole}">
+                        </p:column>
+                        <p:column rendered="#{identityUtils.inAdminRole}">
                             <f:facet name="header">#{msg.currentEmployments}</f:facet>
                             ${employmentsController.getActualEmploymentForBabysitterOrNull(babysitter)}
-                        </h:column>
-                        <h:column
+                        </p:column>
+                        <p:column
                                 rendered="#{identityUtils.inAdminRole || identityUtils.inSuperUserRole}">
                             <f:facet name="header">#{msg.actions}</f:facet>
 
@@ -96,8 +107,8 @@
                                              style="display: none;">
                                 <f:ajax render="@form"/>
                             </h:commandButton>
-                        </h:column>
-                    </h:dataTable>
+                        </p:column>
+                    </p:dataTable>
                 </div>
                 <h:commandButton value="#{msg.refresh}"
                                  action="#{resourcesController.refreshCurrent}" immediate="true"
