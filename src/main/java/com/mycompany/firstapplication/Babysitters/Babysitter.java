@@ -2,10 +2,7 @@ package com.mycompany.firstapplication.Babysitters;
 
 import com.mycompany.firstapplication.Exceptions.BabysitterException;
 
-import javax.validation.constraints.AssertFalse;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 
 public class Babysitter implements Cloneable {
 

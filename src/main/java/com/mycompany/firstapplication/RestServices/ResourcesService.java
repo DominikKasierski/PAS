@@ -34,7 +34,7 @@ public class ResourcesService {
 
     @GET
     public Response getAllBabysitters() {
-        return Response.status(200).entity(babysittersManager.getCurrentBabysitters()).build();
+        return Response.status(200).entity(babysittersManager.getBabysittersList()).build();
     }
 
     @PUT
@@ -48,7 +48,7 @@ public class ResourcesService {
             e.printStackTrace();
             return Response.status(422).build();
         }
-        return Response.status(200).entity(babysitter).build();
+        return Response.status(200).build();
     }
 
     @PUT
@@ -62,7 +62,7 @@ public class ResourcesService {
         } catch (IllegalArgumentException | InvocationTargetException | IllegalAccessException e) {
             return Response.status(422).build();
         }
-        return Response.status(200).entity(teachingSitter).build();
+        return Response.status(200).build();
     }
 
     @PUT
@@ -75,12 +75,17 @@ public class ResourcesService {
         } catch (IllegalArgumentException | InvocationTargetException | IllegalAccessException e) {
             return Response.status(422).build();
         }
-        return Response.status(200).entity(tidingSitter).build();
+        return Response.status(200).build();
     }
 
     @POST
     @Path("/standard")
     public Response createBabysitter(Babysitter babysitter) {
+        try {
+            validation(babysitter);
+        } catch (IllegalArgumentException e) {
+            return Response.status(422).build();
+        }
         babysittersManager.addBabysitter(babysitter);
         return Response.status(201).build();
     }
@@ -88,6 +93,11 @@ public class ResourcesService {
     @POST
     @Path("/teaching")
     public Response createTeachingSitter(TeachingSitter teachingSitter) {
+        try {
+            validation(teachingSitter);
+        } catch (IllegalArgumentException e) {
+            return Response.status(422).build();
+        }
         babysittersManager.addBabysitter(teachingSitter);
         return Response.status(201).build();
     }
@@ -95,6 +105,11 @@ public class ResourcesService {
     @POST
     @Path("/tiding")
     public Response createTidingSitter(TidingSitter tidingSitter) {
+        try {
+            validation(tidingSitter);
+        } catch (IllegalArgumentException e) {
+            return Response.status(422).build();
+        }
         babysittersManager.addBabysitter(tidingSitter);
         return Response.status(201).build();
     }

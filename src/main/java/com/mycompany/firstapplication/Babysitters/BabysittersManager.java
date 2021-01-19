@@ -34,6 +34,10 @@ public class BabysittersManager implements Serializable {
     public BabysittersManager() {
     }
 
+    public List<Babysitter> getBabysittersList() {
+        return babysittersRepository.getElements();
+    }
+
     public BabysittersRepository getBabysittersRepository() {
         return babysittersRepository;
     }
