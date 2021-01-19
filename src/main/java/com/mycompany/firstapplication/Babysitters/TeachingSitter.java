@@ -3,8 +3,15 @@ package com.mycompany.firstapplication.Babysitters;
 import com.mycompany.firstapplication.Exceptions.BabysitterException;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 public class TeachingSitter extends Babysitter {
 
+    @NotNull
+    @Min(0)
+    @Max(70)
     private Integer yearsOfExperienceInTeaching;
 
     public TeachingSitter() {

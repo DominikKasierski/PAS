@@ -3,8 +3,15 @@ package com.mycompany.firstapplication.Babysitters;
 import com.mycompany.firstapplication.Exceptions.BabysitterException;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
+
 public class TidingSitter extends Babysitter {
 
+    @NotNull
+    @DecimalMin("0.00")
+    @DecimalMax("20000.00")
     private Double valueOfCleaningEquipment;
 
     public TidingSitter() {

@@ -7,10 +7,14 @@ import com.mycompany.firstapplication.Babysitters.TidingSitter;
 import org.apache.commons.beanutils.BeanUtils;
 
 import javax.inject.Inject;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Set;
 
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
@@ -19,6 +23,8 @@ public class ResourcesService {
 
     @Inject
     private BabysittersManager babysittersManager;
+
+    Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
     @GET
     @Path("{uuid}")
@@ -32,17 +38,44 @@ public class ResourcesService {
     }
 
     @PUT
-    @Path("{uuid}")
+    @Path("/standard/{uuid}")
     public Response updateBabysitter(@PathParam("uuid") String uuid, Babysitter babysitter) {
         try {
+            validation(babysitter);
             BeanUtils.copyProperties(babysittersManager.getBabysittersRepository().findByKey(uuid),
                     babysitter);
-        } catch (InvocationTargetException | IllegalAccessException e) {
+        } catch (IllegalArgumentException | InvocationTargetException | IllegalAccessException e) {
             e.printStackTrace();
             return Response.status(422).build();
         }
-        return Response.status(200).build();
-        //TODO: CZY WALIDUJEMY DANE?
+        return Response.status(200).entity(babysitter).build();
+    }
+
+    @PUT
+    @Path("/teaching/{uuid}")
+    public Response updateTeachingSitter(@PathParam("uuid") String uuid,
+                                         TeachingSitter teachingSitter) {
+        try {
+            validation(teachingSitter);
+            BeanUtils.copyProperties(babysittersManager.getBabysittersRepository().findByKey(uuid),
+                    teachingSitter);
+        } catch (IllegalArgumentException | InvocationTargetException | IllegalAccessException e) {
+            return Response.status(422).build();
+        }
+        return Response.status(200).entity(teachingSitter).build();
+    }
+
+    @PUT
+    @Path("/tiding/{uuid}")
+    public Response updateTidingSitter(@PathParam("uuid") String uuid, TidingSitter tidingSitter) {
+        try {
+            validation(tidingSitter);
+            BeanUtils.copyProperties(babysittersManager.getBabysittersRepository().findByKey(uuid),
+                    tidingSitter);
+        } catch (IllegalArgumentException | InvocationTargetException | IllegalAccessException e) {
+            return Response.status(422).build();
+        }
+        return Response.status(200).entity(tidingSitter).build();
     }
 
     @POST
@@ -72,5 +105,12 @@ public class ResourcesService {
         babysittersManager.deleteBabysitter(babysittersManager.getBabysittersRepository()
                 .findByKey(uuid));
         return Response.status(204).build();
+    }
+
+    public <T> void validation(T babysitter) {
+        Set<ConstraintViolation<T>> errors = validator.validate(babysitter);
+        if (!errors.isEmpty()) {
+            throw new IllegalArgumentException("Bean validation error");
+        }
     }
 }

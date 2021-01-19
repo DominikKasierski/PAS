@@ -33,7 +33,7 @@ public class ResourcesController extends Conversational implements Serializable 
     private Babysitter originalBabysitter;
 
     private final ResourceBundle resourceBundle = ResourceBundle.getBundle(
-            "bundles/messages", FacesContext.getCurrentInstance().getViewRoot().getLocale()); //getting current locale from FacesContext
+            "bundles/messages", FacesContext.getCurrentInstance().getViewRoot().getLocale());
 
 
     public BabysittersManager getBabysittersManager() {

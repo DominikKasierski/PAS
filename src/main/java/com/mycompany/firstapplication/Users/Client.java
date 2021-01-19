@@ -10,9 +10,9 @@ public class Client extends User {
     public Client() {
     }
 
-    public Client(String login, String name, String surname, int numberOfChildren,
+    public Client(String login, String name, String surname, String password, int numberOfChildren,
                   int ageOfTheYoungestChild) {
-        super(login, name, surname);
+        super(login, name, surname, password);
         this.numberOfChildren = numberOfChildren;
         this.ageOfTheYoungestChild = ageOfTheYoungestChild;
     }

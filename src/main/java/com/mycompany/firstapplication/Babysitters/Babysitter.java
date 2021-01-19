@@ -2,14 +2,37 @@ package com.mycompany.firstapplication.Babysitters;
 
 import com.mycompany.firstapplication.Exceptions.BabysitterException;
 
+import javax.validation.constraints.AssertFalse;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 public class Babysitter implements Cloneable {
 
+    @NotNull
     private String name;
+
+    @NotNull
     private String surname;
+
+    @NotNull
+    @Min(0)
+    @Max(1000)
     private Integer basePriceForHour;
+
+    @NotNull
+    @Min(0)
+    @Max(15)
     private Integer minChildAge;
+
+    @NotNull
+    @Min(0)
+    @Max(15)
     private Integer maxNumberOfChildrenInTheFamily;
+
+    @AssertFalse
     private boolean employed;
+
     private String uniqueID;
 
     public Babysitter() {

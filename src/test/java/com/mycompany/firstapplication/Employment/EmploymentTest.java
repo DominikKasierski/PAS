@@ -20,7 +20,7 @@ class EmploymentTest {
     void endEmployment() {
         Babysitter babysitter = new Babysitter("Anna", "Kowalska", 20, 4, 5);
 
-        Client client = new Client("Login", "Szymon", "Dubowski", 5, 10);
+        Client client = new Client("Login", "Szymon", "Dubowski", "dubowski", 5, 10);
 
         Employment employment = new Employment(babysitter, client);
 
@@ -35,7 +35,7 @@ class EmploymentTest {
     void isEnded() {
         Babysitter babysitter = new Babysitter("Anna", "Kowalska", 20, 4, 5);
 
-        Client client = new Client("Login", "Szymon", "Dubowski", 5, 10);
+        Client client = new Client("Login", "Szymon", "Dubowski", "dubowski", 5, 10);
 
         Employment employment = new Employment(babysitter, client);
 
@@ -50,7 +50,7 @@ class EmploymentTest {
     void employmentDurationInHours() {
         Babysitter babysitter = new Babysitter("Anna", "Kowalska", 20, 4, 5);
 
-        Client client = new Client("Login", "Szymon", "Dubowski", 5, 10);
+        Client client = new Client("Login", "Szymon", "Dubowski", "dubowski", 5, 10);
 
         Employment employment = new Employment(babysitter, client);
         employment.endEmployment();
@@ -63,7 +63,7 @@ class EmploymentTest {
     void employmentDurationInHours_NotEndedEmployment() {
         Babysitter babysitter = new Babysitter("Anna", "Kowalska", 20, 4, 5);
 
-        Client client = new Client("Login", "Szymon", "Dubowski", 5, 10);
+        Client client = new Client("Login", "Szymon", "Dubowski", "dubowski", 5, 10);
 
         Employment employment = new Employment(babysitter, client);
 
@@ -74,7 +74,7 @@ class EmploymentTest {
     void employmentCost_Case1() {
         Babysitter babysitter = new Babysitter("Anna", "Kowalska", 15, 4, 5);
 
-        Client client = new Client("Login", "Szymon", "Dubowski", 5, 10);
+        Client client = new Client("Login", "Szymon", "Dubowski", "dubowski", 5, 10);
 
         Employment employment = new Employment(babysitter, client);
 
@@ -91,7 +91,7 @@ class EmploymentTest {
     void employmentCost_Case2() {
         Babysitter babysitter = new TeachingSitter("Anna", "Kowalska", 10, 4, 5, 10);
 
-        Client client = new Client("Login", "Szymon", "Dubowski", 5, 10);
+        Client client = new Client("Login", "Szymon", "Dubowski", "dubowski", 5, 10);
 
         Employment employment = new Employment(babysitter, client);
 
@@ -108,7 +108,7 @@ class EmploymentTest {
     void employmentCost_Case3() {
         Babysitter babysitter = new TidingSitter("Anna", "Kowalska", 20, 4, 5, 500);
 
-        Client client = new Client("Login", "Szymon", "Dubowski", 5, 10);
+        Client client = new Client("Login", "Szymon", "Dubowski", "dubowski", 5, 10);
 
         Employment employment = new Employment(babysitter, client);
 
@@ -126,7 +126,7 @@ class EmploymentTest {
 
         Babysitter babysitter = new TidingSitter("Anna", "Kowalska", 20, 4, 5, 500);
 
-        Client client = new Client("Login", "Szymon", "Dubowski", 5, 10);
+        Client client = new Client("Login", "Szymon", "Dubowski", "dubowski", 5, 10);
 
         Employment employment = new Employment(babysitter, client);
         employment.endEmployment();

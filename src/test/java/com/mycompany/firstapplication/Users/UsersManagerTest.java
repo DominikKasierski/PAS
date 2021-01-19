@@ -11,7 +11,7 @@ public class UsersManagerTest {
 
         assertEquals(0, usersManager.getNumberOfClients());
 
-        Client client = new Client("Login", "Szymon", "Dubowski", 5, 10);
+        Client client = new Client("Login", "Szymon", "Dubowski", "dubowski", 5, 10);
 
         usersManager.addUser(client);
 
@@ -24,7 +24,7 @@ public class UsersManagerTest {
 
         assertEquals(0, usersManager.getNumberOfClients());
 
-        Client client = new Client("Login", "Szymon", "Dubowski", 5, 10);
+        Client client = new Client("Login", "Szymon", "Dubowski", "dubowski", 5, 10);
 
         usersManager.addUser(client);
 

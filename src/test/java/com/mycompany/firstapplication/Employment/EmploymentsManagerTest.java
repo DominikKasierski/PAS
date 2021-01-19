@@ -17,7 +17,7 @@ class EmploymentsManagerTest {
 
         Babysitter babysitter = new Babysitter("Anna", "Kowalska", 20, 4, 5);
 
-        Client client = new Client("Login", "Szymon", "Dubowski", 5, 10);
+        Client client = new Client("Login", "Szymon", "Dubowski", "dubowski", 5, 10);
 
         assertEquals(0, employmentsManager.numberOfCurrentClientEmployment(client));
 
@@ -31,11 +31,11 @@ class EmploymentsManagerTest {
 
         Babysitter babysitter = new Babysitter("Anna", "Kowalska", 20, 4, 5);
 
-        Client client1 = new Client("Login", "Szymon", "Dubowski", 5, 10);
+        Client client1 = new Client("Login", "Szymon", "Dubowski", "dubowski", 5, 10);
 
         employmentsManager.employBabysitter(client1, babysitter);
 
-        Client client2 = new Client("Login", "InnySzymon", "Dubowski", 5, 10);
+        Client client2 = new Client("Login", "InnySzymon", "Dubowski", "dubowski", 5, 10);
 
         assertThrows(EmploymentException.class,
                 () -> employmentsManager.employBabysitter(client2, babysitter));
@@ -47,7 +47,7 @@ class EmploymentsManagerTest {
 
         Babysitter babysitter = new Babysitter("Anna", "Kowalska", 20, 4, 5);
 
-        Client client = new Client("Login", "Szymon", "Dubowski", 6, 10);
+        Client client = new Client("Login", "Szymon", "Dubowski", "dubowski", 5, 3);
 
         assertThrows(EmploymentException.class,
                 () -> employmentsManager.employBabysitter(client, babysitter));
@@ -59,7 +59,7 @@ class EmploymentsManagerTest {
 
         Babysitter babysitter = new Babysitter("Anna", "Kowalska", 20, 4, 5);
 
-        Client client = new Client("Login", "Szymon", "Dubowski", 4, 10);
+        Client client = new Client("Login", "Szymon", "Dubowski", "dubowski", 5, 10);
 
         assertEquals(0, employmentsManager.numberOfCurrentClientEmployment(client));
 
@@ -79,7 +79,7 @@ class EmploymentsManagerTest {
 
         Babysitter babysitter = new Babysitter("Anna", "Kowalska", 20, 4, 5);
 
-        Client client = new Client("Login", "Szymon", "Dubowski", 4, 10);
+        Client client = new Client("Login", "Szymon", "Dubowski", "dubowski", 5, 10);
 
         assertEquals(0, employmentsManager.numberOfCurrentClientEmployment(client));
 
@@ -100,7 +100,7 @@ class EmploymentsManagerTest {
 
         Babysitter babysitter = new Babysitter("Anna", "Kowalska", 20, 4, 5);
 
-        Client client = new Client("Login", "Szymon", "Dubowski", 4, 10);
+        Client client = new Client("Login", "Szymon", "Dubowski", "dubowski", 5, 10);
 
         assertEquals(0, employmentsManager.numberOfCurrentClientEmployment(client));
         assertEquals(0, employmentsManager.numberOfEndedClientEmployment(client));

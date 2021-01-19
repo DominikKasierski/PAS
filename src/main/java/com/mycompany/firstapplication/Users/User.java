@@ -9,18 +9,20 @@ public abstract class User implements Cloneable {
     private String login;
     private String name;
     private String surname;
+    private String password;
     private String uniqueID;
 
     public User() {
     }
 
-    public User(String login, String name, String surname) {
-        if (login.isEmpty() || name.isEmpty() || surname.isEmpty()) {
-            throw new UserException("Empty login, name or surname");
+    public User(String login, String name, String surname, String password) {
+        if (login.isEmpty() || name.isEmpty() || surname.isEmpty() || password.isEmpty()) {
+            throw new UserException("Empty login, name, surname or password");
         }
         this.login = login;
         this.name = name;
         this.surname = surname;
+        this.password = password;
     }
 
     public void changeActive() {
@@ -69,6 +71,14 @@ public abstract class User implements Cloneable {
 
     public String getLogin() {
         return login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public void setUniqueID(String uniqueID) {
