@@ -1,4 +1,4 @@
-package com.mycompany.firstapplication.Rest;
+package com.mycompany.firstapplication.RestServices;
 
 import com.mycompany.firstapplication.Users.UsersManager;
 
