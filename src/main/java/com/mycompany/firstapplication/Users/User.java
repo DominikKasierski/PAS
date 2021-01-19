@@ -1,16 +1,30 @@
 package com.mycompany.firstapplication.Users;
 
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.mycompany.firstapplication.Exceptions.UserException;
+
+import javax.validation.constraints.NotNull;
 
 public abstract class User implements Cloneable {
 
     private boolean isActive = true;
+
+    @NotNull
     private String login;
+
+    @NotNull
     private String name;
+
+    @NotNull
     private String surname;
+
+    @NotNull
+    @JsonIgnore
     private String password;
+
     private String uniqueID;
+    private String role;
 
     public User() {
     }
@@ -73,16 +87,26 @@ public abstract class User implements Cloneable {
         return login;
     }
 
+    @JsonIgnore
     public String getPassword() {
         return password;
     }
 
+    @JsonProperty
     public void setPassword(String password) {
         this.password = password;
     }
 
     public void setUniqueID(String uniqueID) {
         this.uniqueID = uniqueID;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     @Override

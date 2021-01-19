@@ -29,7 +29,7 @@ public class ResourcesService {
     @GET
     @Path("{uuid}")
     public Response getBabysitter(@PathParam("uuid") String uuid) {
-        return Response.status(200).build();
+        return Response.status(200).entity(babysittersManager.findByKey(uuid)).build();
     }
 
     @GET
@@ -42,8 +42,7 @@ public class ResourcesService {
     public Response updateBabysitter(@PathParam("uuid") String uuid, Babysitter babysitter) {
         try {
             validation(babysitter);
-            BeanUtils.copyProperties(babysittersManager.getBabysittersRepository().findByKey(uuid),
-                    babysitter);
+            BeanUtils.copyProperties(babysittersManager.findByKey(uuid), babysitter);
         } catch (IllegalArgumentException | InvocationTargetException | IllegalAccessException e) {
             e.printStackTrace();
             return Response.status(422).build();
@@ -57,8 +56,7 @@ public class ResourcesService {
                                          TeachingSitter teachingSitter) {
         try {
             validation(teachingSitter);
-            BeanUtils.copyProperties(babysittersManager.getBabysittersRepository().findByKey(uuid),
-                    teachingSitter);
+            BeanUtils.copyProperties(babysittersManager.findByKey(uuid), teachingSitter);
         } catch (IllegalArgumentException | InvocationTargetException | IllegalAccessException e) {
             return Response.status(422).build();
         }
@@ -70,8 +68,7 @@ public class ResourcesService {
     public Response updateTidingSitter(@PathParam("uuid") String uuid, TidingSitter tidingSitter) {
         try {
             validation(tidingSitter);
-            BeanUtils.copyProperties(babysittersManager.getBabysittersRepository().findByKey(uuid),
-                    tidingSitter);
+            BeanUtils.copyProperties(babysittersManager.findByKey(uuid), tidingSitter);
         } catch (IllegalArgumentException | InvocationTargetException | IllegalAccessException e) {
             return Response.status(422).build();
         }
@@ -117,8 +114,7 @@ public class ResourcesService {
     @DELETE
     @Path("{uuid}")
     public Response deleteBabysitter(@PathParam("uuid") String uuid) {
-        babysittersManager.deleteBabysitter(babysittersManager.getBabysittersRepository()
-                .findByKey(uuid));
+        babysittersManager.deleteBabysitter(babysittersManager.findByKey(uuid));
         return Response.status(204).build();
     }
 

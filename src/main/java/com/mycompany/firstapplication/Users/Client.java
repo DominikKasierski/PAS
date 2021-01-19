@@ -1,10 +1,19 @@
 package com.mycompany.firstapplication.Users;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 public class Client extends User {
 
-    private final String role = "Client";
-
+    @NotNull
+    @Min(0)
+    @Max(15)
     private Integer numberOfChildren;
+
+    @NotNull
+    @Min(0)
+    @Max(15)
     private Integer ageOfTheYoungestChild;
 
     public Client() {
@@ -15,6 +24,7 @@ public class Client extends User {
         super(login, name, surname, password);
         this.numberOfChildren = numberOfChildren;
         this.ageOfTheYoungestChild = ageOfTheYoungestChild;
+        super.setRole("Client");
     }
 
     public void setNumberOfChildren(Integer numberOfChildren) {
@@ -33,7 +43,4 @@ public class Client extends User {
         return ageOfTheYoungestChild;
     }
 
-    public String getRole() {
-        return role;
-    }
 }

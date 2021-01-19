@@ -1,11 +1,11 @@
 package com.mycompany.firstapplication.Users;
 
-import javax.faces.view.ViewScoped;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.io.Serializable;
 import java.util.List;
 
-@ViewScoped
+@ApplicationScoped
 public class UsersManager implements Serializable {
 
     @Inject
@@ -48,5 +48,9 @@ public class UsersManager implements Serializable {
 
     public int getNumberOfClients() {
         return usersRepository.getNumberOfElements();
+    }
+
+    public User findByKey(String uuid) {
+        return usersRepository.findUserByUuid(uuid);
     }
 }

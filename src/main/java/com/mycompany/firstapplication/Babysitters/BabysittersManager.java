@@ -89,4 +89,8 @@ public class BabysittersManager implements Serializable {
     public void initCurrentPersons() {
         currentBabysitters = getBabysittersRepository().getBabysittersList();
     }
+
+    public Babysitter findByKey(String uuid) {
+        return babysittersRepository.findByKey(uuid);
+    }
 }
