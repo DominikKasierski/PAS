@@ -8,6 +8,11 @@
         <param-value>Development</param-value>
     </context-param>
 
+    <context-param>
+        <param-name>jersey.config.jsonFeature</param-name>
+        <param-value>JacksonFeature</param-value>
+    </context-param>
+
     <default-context-path>PAS</default-context-path>
 
     <servlet>
@@ -94,9 +99,4 @@
             <role-name>Client</role-name>
         </auth-constraint>
     </security-constraint>
-
-
-
-
-
 </web-app>

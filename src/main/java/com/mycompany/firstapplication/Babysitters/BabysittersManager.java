@@ -5,13 +5,14 @@ import com.mycompany.firstapplication.Employment.EmploymentsManager;
 import com.mycompany.firstapplication.Exceptions.BabysitterException;
 
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.ApplicationScoped;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-@ViewScoped
+@ApplicationScoped
 public class BabysittersManager implements Serializable {
 
     @Inject

@@ -9,7 +9,7 @@ public class Babysitter implements Cloneable {
     private Integer basePriceForHour;
     private Integer minChildAge;
     private Integer maxNumberOfChildrenInTheFamily;
-    private boolean isEmployed;
+    private boolean employed;
     private String uniqueID;
 
     public Babysitter() {
@@ -65,11 +65,11 @@ public class Babysitter implements Cloneable {
     }
 
     public boolean isEmployed() {
-        return isEmployed;
+        return employed;
     }
 
     public void setEmployed(boolean employed) {
-        isEmployed = employed;
+        this.employed = employed;
     }
 
     public String getName() {
