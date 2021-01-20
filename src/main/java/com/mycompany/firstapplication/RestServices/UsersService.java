@@ -1,8 +1,5 @@
 package com.mycompany.firstapplication.RestServices;
 
-import com.mycompany.firstapplication.Babysitters.Babysitter;
-import com.mycompany.firstapplication.Babysitters.TeachingSitter;
-import com.mycompany.firstapplication.Babysitters.TidingSitter;
 import com.mycompany.firstapplication.Users.*;
 
 import javax.inject.Inject;
