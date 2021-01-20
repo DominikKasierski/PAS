@@ -61,13 +61,12 @@ public class UsersManager implements Serializable {
         return usersRepository.findUserByLogin(login);
     }
 
-    //TODO: SPRAWDZIC CZY DZIALA JAK NIE MA TAKIEGO LOGINU
     public User findByLoginPasswordActive(String login, String password) {
         User user = null;
         try {
-           user = findByLogin(login);
-           if (user.getPassword().equals(password) && user.isActive()) {
-               return user;
+           User tmpUser = findByLogin(login);
+           if (tmpUser.getPassword().equals(password) && tmpUser.isActive()) {
+               user = tmpUser;
            }
         } catch (UserException e) {
             e.printStackTrace();
