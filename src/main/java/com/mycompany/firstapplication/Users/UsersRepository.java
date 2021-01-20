@@ -33,7 +33,7 @@ public class UsersRepository extends Repository<User> {
     @Override
     public void addElement(User user) {
         if (isLoginUnique(user.getLogin())) {
-            user.setUniqueID(RandomStringUtils.randomNumeric(SHORT_ID_LENGTH));
+            user.setUuid(RandomStringUtils.randomNumeric(SHORT_ID_LENGTH));
             super.addElement(user);
         } else {
             throw new UserException("Login is not unique");

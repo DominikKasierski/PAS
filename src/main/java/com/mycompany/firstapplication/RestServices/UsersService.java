@@ -27,6 +27,7 @@ public class UsersService {
     @GET
     @Path("{uuid}")
     public Response getClient(@PathParam("uuid") String uuid) {
+        UserDTO userDTO = UserDTOWrapper.wrap(usersManager.findByKey(uuid));
         return Response.status(200).entity(UserDTOWrapper.wrap(usersManager.findByKey(uuid))).build();
     }
 
