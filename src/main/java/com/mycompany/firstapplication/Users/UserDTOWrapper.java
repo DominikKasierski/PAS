@@ -18,24 +18,20 @@ public class UserDTOWrapper {
                 user.getAgeOfTheYoungestChild());
     }
 
+    public static List<UserDTO> listWrapper(List<User> userList) {
+        List<UserDTO> wrappedList = new ArrayList<>();
+        for (User user : userList) {
+            wrappedList.add(wrap(user));
+        }
+        return wrappedList;
+    }
+
     public static UserDTO wrap(User user) {
         if (user instanceof Client) {
             return userWrapper(createClientFromUser(user));
         } else {
             return userWrapper(user);
         }
-    }
-
-    public static List<UserDTO> listWrapper(List<User> userList) {
-        List<UserDTO> wrappedList = new ArrayList<>();
-        for (User user : userList) {
-            if (user instanceof Client) {
-                wrappedList.add(wrap(createClientFromUser(user)));
-            } else {
-                wrappedList.add(wrap(user));
-            }
-        }
-        return wrappedList;
     }
 
     private static Client createClientFromUser(User user) {
