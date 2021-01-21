@@ -28,7 +28,7 @@ public class AuthenticationIdentityStore implements IdentityStore {
                             usernamePasswordCredential.getPasswordAsString());
             if (user != null) {
                 return new CredentialValidationResult(user.getLogin(), new HashSet<>(
-                        Arrays.asList(user.getRole(), user.getUuid())));
+                        Arrays.asList(user.getRole())));
             }
         }
         return CredentialValidationResult.INVALID_RESULT;
