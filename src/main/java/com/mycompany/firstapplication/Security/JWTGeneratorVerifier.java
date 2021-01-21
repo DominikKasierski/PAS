@@ -12,6 +12,7 @@ import java.util.Date;
 
 public class JWTGeneratorVerifier {
 
+//    TODO: zmienic czas wygasania tokenu
     private static final String SECRET = "09SEVheeEsOTYLDZAJylVmlHb4XadBtgABGKZB5wmKVexgWU-006mSwGPlkWUCN0d75bfYtpsqecmsIGVtoCrPcN1h7MEAmH5HlisCPGuAlaBQRJtrMNM5uZRWaTRoXEhDchSqcAtl0hk_Fsb3VjlziIobgtbMs0DC8xctSW0eUqJ8W7hPyMllosTeb085sL26nmmWpQRC9ImYedx9FxYQFdr4XsNiU3l8Y5yMXVeFq6NqDL5BTcG2ximw2uHtHoIqtxYcggE6S2yKfeGQW7BMLsaBY6flym11zzezgeOO8NC2yJlZbvA2aHdLw7v-Dz-6TLzKjbCE5r8oWUFXoraA";
     private static final long JWT_EXPIRE_TIMEOUT = 5 * 60 * 1000;
 
@@ -34,7 +35,7 @@ public class JWTGeneratorVerifier {
         }
     }
 
-    public boolean validateJWT(String tokenToValidate) {
+    public static boolean validateJWT(String tokenToValidate) {
         try {
             JWSObject jwsObject = JWSObject.parse(tokenToValidate);
             JWSVerifier jwsVerifier = new MACVerifier(SECRET);
