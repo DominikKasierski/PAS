@@ -1,14 +1,13 @@
 package com.mycompany.firstapplication.Security;
 
-import com.nimbusds.jose.JOSEException;
-import com.nimbusds.jose.JWSAlgorithm;
-import com.nimbusds.jose.JWSHeader;
-import com.nimbusds.jose.JWSSigner;
+import com.nimbusds.jose.*;
 import com.nimbusds.jose.crypto.MACSigner;
+import com.nimbusds.jose.crypto.MACVerifier;
 import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.SignedJWT;
 
 import javax.security.enterprise.identitystore.CredentialValidationResult;
+import java.text.ParseException;
 import java.util.Date;
 
 public class JWTGeneratorVerifier {
@@ -22,7 +21,7 @@ public class JWTGeneratorVerifier {
 
             final JWTClaimsSet claimsSet = new JWTClaimsSet.Builder()
                     .subject(result.getCallerPrincipal().getName())
-                    .claim("role", result.getCallerGroups())
+                    .claim("role", String.join("," ,result.getCallerGroups()))
                     .expirationTime(new Date(new Date().getTime() + JWT_EXPIRE_TIMEOUT))
                     .build();
 
@@ -33,5 +32,16 @@ public class JWTGeneratorVerifier {
             e.printStackTrace();
             return "JWT error";
         }
+    }
+
+    public boolean validateJWT(String tokenToValidate) {
+        try {
+            JWSObject jwsObject = JWSObject.parse(tokenToValidate);
+            JWSVerifier jwsVerifier = new MACVerifier(SECRET);
+            return jwsObject.verify(jwsVerifier);
+        } catch (ParseException | JOSEException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

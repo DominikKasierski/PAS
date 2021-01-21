@@ -1,6 +1,5 @@
 package com.mycompany.firstapplication.RestServices;
 
-import com.mycompany.firstapplication.Security.AuthenticationIdentityStore;
 import com.mycompany.firstapplication.Security.JWTGeneratorVerifier;
 import com.mycompany.firstapplication.Security.LoginData;
 
@@ -9,6 +8,7 @@ import javax.security.enterprise.credential.Credential;
 import javax.security.enterprise.credential.Password;
 import javax.security.enterprise.credential.UsernamePasswordCredential;
 import javax.security.enterprise.identitystore.CredentialValidationResult;
+import javax.security.enterprise.identitystore.IdentityStoreHandler;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -23,13 +23,13 @@ import javax.ws.rs.core.Response;
 public class LogInService {
 
     @Inject
-    AuthenticationIdentityStore authenticationIdentityStore;
+    IdentityStoreHandler identityStoreHandler;
 
     @POST
     public Response logIn(LoginData loginData) {
         Credential credential = new UsernamePasswordCredential(loginData.getLogin(),
                 new Password(loginData.getPassword()));
-        CredentialValidationResult result = authenticationIdentityStore.validate(credential);
+        CredentialValidationResult result = identityStoreHandler.validate(credential);
         if (result.getStatus() == CredentialValidationResult.Status.VALID) {
             return Response.status(202)
                     .type("application/jwt")
