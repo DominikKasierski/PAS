@@ -51,15 +51,61 @@
         <role-name>Client</role-name>
     </security-role>
 
+<!--    <security-constraint>-->
+<!--        <web-resource-collection>-->
+<!--            <web-resource-name>SecuredPages</web-resource-name>-->
+<!--            <url-pattern>/*</url-pattern>-->
+<!--        </web-resource-collection>-->
+<!--        <user-data-constraint>-->
+<!--            <transport-guarantee>CONFIDENTIAL</transport-guarantee>-->
+<!--        </user-data-constraint>-->
+<!--    </security-constraint>-->
+
+<!--REST-->
+
     <security-constraint>
         <web-resource-collection>
-            <web-resource-name>SecuredPages</web-resource-name>
-            <url-pattern>/*</url-pattern>
+            <web-resource-name>AdminPages</web-resource-name>
+            <url-pattern>/rest/resources</url-pattern>
         </web-resource-collection>
+        <auth-constraint>
+            <role-name>Admin</role-name>
+        </auth-constraint>
         <user-data-constraint>
             <transport-guarantee>CONFIDENTIAL</transport-guarantee>
         </user-data-constraint>
     </security-constraint>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>AdminAndSuperUserPages</web-resource-name>
+            <url-pattern></url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>Admin</role-name>
+            <role-name>SuperUser</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>LoggedInUserPages</web-resource-name>
+            <url-pattern></url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>Admin</role-name>
+            <role-name>SuperUser</role-name>
+            <role-name>Client</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+
+<!--MVC    -->
 
     <security-constraint>
         <web-resource-collection>

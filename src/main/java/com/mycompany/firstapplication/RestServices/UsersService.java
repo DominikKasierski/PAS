@@ -1,6 +1,7 @@
 package com.mycompany.firstapplication.RestServices;
 
 import com.mycompany.firstapplication.Users.*;
+import org.apache.commons.beanutils.BeanUtils;
 
 import javax.inject.Inject;
 import javax.validation.ConstraintViolation;
@@ -9,6 +10,7 @@ import javax.validation.Validator;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Set;
 
 @Produces(MediaType.APPLICATION_JSON)
@@ -32,6 +34,43 @@ public class UsersService {
     public Response getAllUsers() {
         return Response.status(200).entity(UserDTOWrapper.listWrapper(usersManager.getUsersList())).build();
     }
+
+    @PUT
+    @Path("/admin/{uuid}")
+    public Response updateAdmin(@PathParam("uuid") String uuid, Admin admin) {
+        try {
+            validation(admin);
+            BeanUtils.copyProperties(usersManager.findByKey(uuid), admin);
+        } catch (IllegalArgumentException | InvocationTargetException | IllegalAccessException e) {
+            return Response.status(422).build();
+        }
+        return Response.status(200).build();
+    }
+
+    @PUT
+    @Path("/superUser/{uuid}")
+    public Response updateSuperUser(@PathParam("uuid") String uuid, SuperUser superUser) {
+        try {
+            validation(superUser);
+            BeanUtils.copyProperties(usersManager.findByKey(uuid), superUser);
+        } catch (IllegalArgumentException | InvocationTargetException | IllegalAccessException e) {
+            return Response.status(422).build();
+        }
+        return Response.status(200).build();
+    }
+
+    @PUT
+    @Path("/client/{uuid}")
+    public Response updateClient(@PathParam("uuid") String uuid, Client client) {
+        try {
+            validation(client);
+            BeanUtils.copyProperties(usersManager.findByKey(uuid), client);
+        } catch (IllegalArgumentException | InvocationTargetException | IllegalAccessException e) {
+            return Response.status(422).build();
+        }
+        return Response.status(200).build();
+    }
+
 
     @POST
     @Path("/admin")
@@ -75,4 +114,8 @@ public class UsersService {
             throw new IllegalArgumentException("Bean validation error");
         }
     }
+
+
+
+
 }
