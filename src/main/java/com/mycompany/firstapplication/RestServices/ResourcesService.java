@@ -4,6 +4,9 @@ import com.mycompany.firstapplication.Babysitters.Babysitter;
 import com.mycompany.firstapplication.Babysitters.BabysittersManager;
 import com.mycompany.firstapplication.Babysitters.TeachingSitter;
 import com.mycompany.firstapplication.Babysitters.TidingSitter;
+import com.mycompany.firstapplication.Filters.EntitySignatureValidatorFilterBinding;
+import com.mycompany.firstapplication.Interfaces.EntityToSign;
+import com.mycompany.firstapplication.utils.EntityIdentitySignerVerifier;
 import org.apache.commons.beanutils.BeanUtils;
 
 import javax.inject.Inject;
@@ -29,7 +32,9 @@ public class ResourcesService {
     @GET
     @Path("{uuid}")
     public Response getBabysitter(@PathParam("uuid") String uuid) {
-        return Response.status(200).entity(babysittersManager.findByKey(uuid)).build();
+        return Response.status(200)
+                .header("ETag", EntityIdentitySignerVerifier.calculateETag((babysittersManager.findByKey(uuid))))
+                .entity(babysittersManager.findByKey(uuid)).build();
     }
 
     @GET
@@ -39,7 +44,12 @@ public class ResourcesService {
 
     @PUT
     @Path("/standard/{uuid}")
-    public Response updateBabysitter(@PathParam("uuid") String uuid, Babysitter babysitter) {
+    @EntitySignatureValidatorFilterBinding
+    public Response updateBabysitter(@PathParam("uuid") String uuid, @HeaderParam("If-Match") String header,
+                                     Babysitter babysitter) {
+        if (!EntityIdentitySignerVerifier.verifyEntityIntegrity(header, babysitter)) {
+            return Response.status(406).build();
+        }
         try {
             validation(babysitter);
             BeanUtils.copyProperties(babysittersManager.findByKey(uuid), babysitter);
@@ -51,8 +61,12 @@ public class ResourcesService {
 
     @PUT
     @Path("/teaching/{uuid}")
-    public Response updateTeachingSitter(@PathParam("uuid") String uuid,
+    @EntitySignatureValidatorFilterBinding
+    public Response updateTeachingSitter(@PathParam("uuid") String uuid, @HeaderParam("If-Match") String header,
                                          TeachingSitter teachingSitter) {
+        if (!EntityIdentitySignerVerifier.verifyEntityIntegrity(header, teachingSitter)) {
+            return Response.status(406).build();
+        }
         try {
             validation(teachingSitter);
             BeanUtils.copyProperties(babysittersManager.findByKey(uuid), teachingSitter);
@@ -64,7 +78,12 @@ public class ResourcesService {
 
     @PUT
     @Path("/tiding/{uuid}")
-    public Response updateTidingSitter(@PathParam("uuid") String uuid, TidingSitter tidingSitter) {
+    @EntitySignatureValidatorFilterBinding
+    public Response updateTidingSitter(@PathParam("uuid") String uuid, @HeaderParam("If-Match") String header,
+                                       TidingSitter tidingSitter) {
+        if (!EntityIdentitySignerVerifier.verifyEntityIntegrity(header, tidingSitter)) {
+            return Response.status(406).build();
+        }
         try {
             validation(tidingSitter);
             BeanUtils.copyProperties(babysittersManager.findByKey(uuid), tidingSitter);
@@ -117,7 +136,7 @@ public class ResourcesService {
         return Response.status(204).build();
     }
 
-    public <T> void validation(T babysitter) {
+    private <T> void validation(T babysitter) {
         Set<ConstraintViolation<T>> errors = validator.validate(babysitter);
         if (!errors.isEmpty()) {
             throw new IllegalArgumentException("Bean validation error");

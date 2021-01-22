@@ -1,10 +1,13 @@
 package com.mycompany.firstapplication.Babysitters;
 
 import com.mycompany.firstapplication.Exceptions.BabysitterException;
+import com.mycompany.firstapplication.Interfaces.EntityToSign;
 
 import javax.validation.constraints.*;
+import java.util.HashMap;
+import java.util.Map;
 
-public class Babysitter implements Cloneable {
+public class Babysitter implements Cloneable, EntityToSign {
 
     @NotNull
     @Size(min=2, max=20)
@@ -129,5 +132,13 @@ public class Babysitter implements Cloneable {
                 "\nbasePrice: " + basePriceForHour +
                 "\nminChildAge: " + minChildAge +
                 "\nmaxNumberOfChildrenInTheFamily: " + minChildAge;
+    }
+
+    @Override
+    public Map<String, String> getPayload() {
+        Map<String, String> map = new HashMap<>();
+        map.put("uuid", getUuid());
+        map.put("employed", String.valueOf(isEmployed()));
+        return map;
     }
 }

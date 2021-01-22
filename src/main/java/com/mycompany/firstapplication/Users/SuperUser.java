@@ -1,7 +1,10 @@
 package com.mycompany.firstapplication.Users;
 
+import com.nimbusds.jose.shaded.json.JSONObject;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.util.Map;
 
 public class SuperUser extends User {
 
@@ -25,4 +28,8 @@ public class SuperUser extends User {
         this.role = role;
     }
 
+    @Override
+    public Map<String, String> getPayload() {
+        return super.getPayload();
+    }
 }

@@ -1,11 +1,13 @@
 package com.mycompany.firstapplication.Babysitters;
 
 import com.mycompany.firstapplication.Exceptions.BabysitterException;
+import com.mycompany.firstapplication.Interfaces.EntityToSign;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import java.util.Map;
 
 public class TeachingSitter extends Babysitter {
 

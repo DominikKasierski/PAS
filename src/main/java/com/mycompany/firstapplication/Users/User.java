@@ -1,28 +1,33 @@
 package com.mycompany.firstapplication.Users;
 
 import com.mycompany.firstapplication.Exceptions.UserException;
+import com.mycompany.firstapplication.Interfaces.EntityToSign;
+import com.nimbusds.jose.shaded.json.JSONObject;
+import org.apache.commons.codec.digest.DigestUtils;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.HashMap;
+import java.util.Map;
 
-public abstract class User implements Cloneable {
+public abstract class User implements Cloneable, EntityToSign {
 
     private boolean isActive = true;
 
     @NotNull
-    @Size(min=2, max=20)
+    @Size(min = 2, max = 20)
     private String login;
 
     @NotNull
-    @Size(min=2, max=20)
+    @Size(min = 2, max = 20)
     private String name;
 
     @NotNull
-    @Size(min=2, max=20)
+    @Size(min = 2, max = 20)
     private String surname;
 
     @NotNull
-    @Size(min=8, max=20)
+    @Size(min = 8, max = 20)
     private String password;
 
     private String uniqueID;
@@ -107,5 +112,11 @@ public abstract class User implements Cloneable {
     @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
+    }
+
+    public Map<String, String> getPayload() {
+        Map<String, String> map = new HashMap<>();
+        map.put("uuid", getUuid());
+        return map;
     }
 }

@@ -2,6 +2,7 @@ package com.mycompany.firstapplication.Users;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.util.Map;
 
 public class Admin extends User {
 
@@ -23,5 +24,10 @@ public class Admin extends User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    @Override
+    public Map<String, String> getPayload() {
+        return super.getPayload();
     }
 }

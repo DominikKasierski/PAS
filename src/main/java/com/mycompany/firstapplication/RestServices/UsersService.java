@@ -1,6 +1,8 @@
 package com.mycompany.firstapplication.RestServices;
 
+import com.mycompany.firstapplication.Filters.EntitySignatureValidatorFilterBinding;
 import com.mycompany.firstapplication.Users.*;
+import com.mycompany.firstapplication.utils.EntityIdentitySignerVerifier;
 import org.apache.commons.beanutils.BeanUtils;
 
 import javax.inject.Inject;
@@ -37,17 +39,25 @@ public class UsersService {
     @GET
     @Path("{uuid}")
     public Response getClient(@PathParam("uuid") String uuid) {
-        return Response.status(200).entity(UserDTOWrapper.wrap(usersManager.findByKey(uuid))).build();
+        return Response.status(200)
+                .header("ETag", EntityIdentitySignerVerifier.calculateETag((usersManager.findByKey(uuid))))
+                .entity(UserDTOWrapper.wrap(usersManager.findByKey(uuid)))
+                .build();
     }
 
     @GET
     public Response getAllUsers() {
-        return Response.status(200).entity(UserDTOWrapper.listWrapper(usersManager.getUsersList())).build();
+        return Response.status(200).entity(UserDTOWrapper.listWrapper(usersManager.getUsersList()))
+                .build();
     }
 
     @PUT
     @Path("/admin/{uuid}")
-    public Response updateAdmin(@PathParam("uuid") String uuid, Admin admin) {
+    @EntitySignatureValidatorFilterBinding
+    public Response updateAdmin(@PathParam("uuid") String uuid, @HeaderParam("If-Match") String header, Admin admin) {
+        if (!EntityIdentitySignerVerifier.verifyEntityIntegrity(header, admin)) {
+            return Response.status(406).build();
+        }
         try {
             validation(admin);
             BeanUtils.copyProperties(usersManager.findByKey(uuid), admin);
@@ -59,7 +69,12 @@ public class UsersService {
 
     @PUT
     @Path("/superUser/{uuid}")
-    public Response updateSuperUser(@PathParam("uuid") String uuid, SuperUser superUser) {
+    @EntitySignatureValidatorFilterBinding
+    public Response updateSuperUser(@PathParam("uuid") String uuid,
+                                    @HeaderParam("If-Match") String header, SuperUser superUser) {
+        if (!EntityIdentitySignerVerifier.verifyEntityIntegrity(header, superUser)) {
+            return Response.status(406).build();
+        }
         try {
             validation(superUser);
             BeanUtils.copyProperties(usersManager.findByKey(uuid), superUser);
@@ -71,7 +86,12 @@ public class UsersService {
 
     @PUT
     @Path("/client/{uuid}")
-    public Response updateClient(@PathParam("uuid") String uuid, Client client) {
+    @EntitySignatureValidatorFilterBinding
+    public Response updateClient(@PathParam("uuid") String uuid, @HeaderParam("If-Match") String header,
+                                 Client client) {
+        if (!EntityIdentitySignerVerifier.verifyEntityIntegrity(header, client)) {
+            return Response.status(406).build();
+        }
         try {
             validation(client);
             BeanUtils.copyProperties(usersManager.findByKey(uuid), client);
