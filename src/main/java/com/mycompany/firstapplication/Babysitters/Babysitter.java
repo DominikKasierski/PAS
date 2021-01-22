@@ -7,9 +7,11 @@ import javax.validation.constraints.*;
 public class Babysitter implements Cloneable {
 
     @NotNull
+    @Size(min=2, max=20)
     private String name;
 
     @NotNull
+    @Size(min=2, max=20)
     private String surname;
 
     @NotNull
