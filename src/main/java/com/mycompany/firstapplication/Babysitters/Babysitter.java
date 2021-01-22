@@ -116,7 +116,7 @@ public class Babysitter implements Cloneable {
         return uniqueID;
     }
 
-    public void setUniqueID(String uniqueID) {
+    public void setUuid(String uniqueID) {
         this.uniqueID = uniqueID;
     }
 

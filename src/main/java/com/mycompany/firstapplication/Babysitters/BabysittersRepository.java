@@ -17,7 +17,7 @@ public class BabysittersRepository extends Repository<Babysitter> {
     final int SHORT_ID_LENGTH = 8;
 
     @Override public void addElement(Babysitter element) {
-        element.setUniqueID(RandomStringUtils.randomNumeric(SHORT_ID_LENGTH));
+        element.setUuid(RandomStringUtils.randomNumeric(SHORT_ID_LENGTH));
         super.addElement(element);
     }
 
