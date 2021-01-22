@@ -29,7 +29,9 @@ public class EntityIdentitySignerVerifier {
 
     public static boolean verifyEntityIntegrity(String tagValue, EntityToSign entity) {
         try {
-            String tagValueFromHeader = JWSObject.parse(tagValue).getPayload().toString();
+            String tagValueFromHeader = JWSObject.parse(tagValue).getPayload().toString()
+                    .replaceAll("\"", "")
+                    .replaceAll(":", "=");
             String tagValueFromEntityToSign = entity.getPayload().toString();
             return tagValueFromEntityToSign.equals(tagValueFromHeader) && validateEntitySignature(tagValue);
         } catch (ParseException e) {
@@ -41,7 +43,7 @@ public class EntityIdentitySignerVerifier {
     public static String calculateETag(EntityToSign entity) {
         try {
             JWSSigner signer = new MACSigner(SECRET);
-            String jsonObject = new JSONObject(entity.getPayload()).toJSONString();
+            String jsonObject = new JSONObject(entity.getPayload()).toString();
             JWSObject jwsObject = new JWSObject(new JWSHeader(JWSAlgorithm.HS256), new Payload(jsonObject));
             jwsObject.sign(signer);
 

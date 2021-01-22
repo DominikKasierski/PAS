@@ -3,7 +3,6 @@ package com.mycompany.firstapplication.Users;
 import com.mycompany.firstapplication.Exceptions.UserException;
 import com.mycompany.firstapplication.Interfaces.EntityToSign;
 import com.nimbusds.jose.shaded.json.JSONObject;
-import org.apache.commons.codec.digest.DigestUtils;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
