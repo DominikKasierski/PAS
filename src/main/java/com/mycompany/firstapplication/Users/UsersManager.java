@@ -49,6 +49,10 @@ public class UsersManager implements Serializable {
         usersRepository.changeActiveForUser(user);
     }
 
+    public boolean checkIfActive(String login) {
+        return findByLogin(login).isActive();
+    }
+
     public int getNumberOfClients() {
         return usersRepository.getNumberOfElements();
     }

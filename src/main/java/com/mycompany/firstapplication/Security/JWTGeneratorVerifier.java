@@ -12,8 +12,10 @@ import java.util.Date;
 
 public class JWTGeneratorVerifier {
 
-//    TODO: zmienic czas wygasania tokenu
-    private static final String SECRET = "09SEVheeEsOTYLDZAJylVmlHb4XadBtgABGKZB5wmKVexgWU-006mSwGPlkWUCN0d75bfYtpsqecmsIGVtoCrPcN1h7MEAmH5HlisCPGuAlaBQRJtrMNM5uZRWaTRoXEhDchSqcAtl0hk_Fsb3VjlziIobgtbMs0DC8xctSW0eUqJ8W7hPyMllosTeb085sL26nmmWpQRC9ImYedx9FxYQFdr4XsNiU3l8Y5yMXVeFq6NqDL5BTcG2ximw2uHtHoIqtxYcggE6S2yKfeGQW7BMLsaBY6flym11zzezgeOO8NC2yJlZbvA2aHdLw7v-Dz-6TLzKjbCE5r8oWUFXoraA";
+    //    TODO: zmienic czas wygasania tokenu
+    private static final String SECRET =
+            "09SEVheeEsOTYLDZAJylVmlHb4XadBtgABGKZB5wmKVexgWU" +
+                    "-006mSwGPlkWUCN0d75bfYtpsqecmsIGVtoCrPcN1h7MEAmH5HlisCPGuAlaBQRJtrMNM5uZRWaTRoXEhDchSqcAtl0hk_Fsb3VjlziIobgtbMs0DC8xctSW0eUqJ8W7hPyMllosTeb085sL26nmmWpQRC9ImYedx9FxYQFdr4XsNiU3l8Y5yMXVeFq6NqDL5BTcG2ximw2uHtHoIqtxYcggE6S2yKfeGQW7BMLsaBY6flym11zzezgeOO8NC2yJlZbvA2aHdLw7v-Dz-6TLzKjbCE5r8oWUFXoraA";
     private static final long JWT_EXPIRE_TIMEOUT = 60 * 60 * 1000;
 
     public static String generateJWTString(CredentialValidationResult result) {
@@ -22,7 +24,7 @@ public class JWTGeneratorVerifier {
 
             final JWTClaimsSet claimsSet = new JWTClaimsSet.Builder()
                     .subject(result.getCallerPrincipal().getName())
-                    .claim("role", String.join("," ,result.getCallerGroups()))
+                    .claim("role", String.join(",", result.getCallerGroups()))
                     .expirationTime(new Date(new Date().getTime() + JWT_EXPIRE_TIMEOUT))
                     .build();
 
@@ -30,6 +32,28 @@ public class JWTGeneratorVerifier {
             signedJWT.sign(signer);
             return signedJWT.serialize();
         } catch (JOSEException e) {
+            e.printStackTrace();
+            return "JWT error";
+        }
+    }
+
+    public static String updateJWTString(String tokenToUpdate) {
+        try {
+            final JWSSigner signer = new MACSigner(SECRET);
+            SignedJWT oldToken = SignedJWT.parse(tokenToUpdate);
+            JWTClaimsSet oldClaimSet = oldToken.getJWTClaimsSet();
+
+            final JWTClaimsSet newClaimsSet = new JWTClaimsSet.Builder()
+                    .subject(oldClaimSet.getSubject())
+                    .claim("role", oldClaimSet.getClaim("role"))
+                    .expirationTime(new Date(new Date().getTime() + JWT_EXPIRE_TIMEOUT))
+                    .build();
+
+            final SignedJWT newSignedJWT =
+                    new SignedJWT(new JWSHeader(JWSAlgorithm.HS256), newClaimsSet);
+            newSignedJWT.sign(signer);
+            return newSignedJWT.serialize();
+        } catch (ParseException | JOSEException e) {
             e.printStackTrace();
             return "JWT error";
         }

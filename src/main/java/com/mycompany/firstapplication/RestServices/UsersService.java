@@ -20,7 +20,7 @@ import java.util.Set;
 @Path("/users")
 public class UsersService {
 
-    //TODO: SPRAWDZIC CZY KODY ODPOWIEDZI HTTP SĄ ODPOWIEDNIE
+    //TODO: SPRAWDZIC CZY KODY ODPOWIEDZI HTTP SĄ ODPOWIEDNIO DOBRANE
     @Inject
     private UsersManager usersManager;
 
