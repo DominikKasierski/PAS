@@ -8,8 +8,10 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.SecurityContext;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Set;
 
@@ -18,15 +20,23 @@ import java.util.Set;
 @Path("/users")
 public class UsersService {
 
+    //TODO: SPRAWDZIC CZY KODY ODPOWIEDZI HTTP SĄ ODPOWIEDNIE
     @Inject
     private UsersManager usersManager;
 
     Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
     @GET
+    @Path("_self")
+    public Response findSelf(@Context SecurityContext securityContext) {
+        return Response.status(200)
+                .entity(UserDTOWrapper.wrap(usersManager.findByLogin(securityContext.getUserPrincipal().getName())))
+                .build();
+    }
+
+    @GET
     @Path("{uuid}")
     public Response getClient(@PathParam("uuid") String uuid) {
-        UserDTO userDTO = UserDTOWrapper.wrap(usersManager.findByKey(uuid));
         return Response.status(200).entity(UserDTOWrapper.wrap(usersManager.findByKey(uuid))).build();
     }
 
@@ -114,8 +124,6 @@ public class UsersService {
             throw new IllegalArgumentException("Bean validation error");
         }
     }
-
-
 
 
 }

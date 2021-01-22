@@ -9,11 +9,11 @@ import java.util.List;
 public class UserDTOWrapper {
 
     private static UserDTO userWrapper(User user) {
-        return new UserDTO(user.getUuid(), user.getLogin(), user.getName(), user.getSurname());
+        return new UserDTO(user.getUuid(), user.getLogin(), user.getRole(), user.getName(), user.getSurname());
     }
 
     private static UserDTO userWrapper(Client user) {
-        return new UserDTO(user.getUuid(), user.getLogin(), user.getName(), user.getSurname(),
+        return new UserDTO(user.getUuid(), user.getLogin(), user.getRole(), user.getName(), user.getSurname(),
                 user.getNumberOfChildren(),
                 user.getAgeOfTheYoungestChild());
     }

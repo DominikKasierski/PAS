@@ -7,13 +7,14 @@ import com.mycompany.firstapplication.Users.Client;
 import com.mycompany.firstapplication.Users.User;
 
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.ApplicationScoped;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-@ViewScoped
+@ApplicationScoped
 public class EmploymentsManager implements Serializable {
 
     @Inject

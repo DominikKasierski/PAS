@@ -44,7 +44,6 @@ public class ResourcesService {
             validation(babysitter);
             BeanUtils.copyProperties(babysittersManager.findByKey(uuid), babysitter);
         } catch (IllegalArgumentException | InvocationTargetException | IllegalAccessException e) {
-            e.printStackTrace();
             return Response.status(422).build();
         }
         return Response.status(200).build();

@@ -43,8 +43,9 @@ public class JWTAuthenticationMechanism implements HttpAuthenticationMechanism {
                     if (new Date().after(expirationTime)) {
                         return httpMessageContext.responseUnauthorized();
                     }
-
-                    return httpMessageContext.notifyContainerAboutLogin(login, new HashSet<>(Arrays.asList(role.split(","))));
+                    //TODO:SPRAWDZIC CZY BEZ TEGO WIDZI ROLE
+                    return httpMessageContext
+                            .notifyContainerAboutLogin(login, new HashSet<>(Arrays.asList(role.split(","))));
                 } catch (ParseException e) {
                     return httpMessageContext.responseUnauthorized();
                 }

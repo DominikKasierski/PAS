@@ -4,21 +4,24 @@ public class UserDTO {
 
     private final String uuid;
     private final String login;
+    private final String role;
     private final String name;
     private final String surname;
     private Integer numberOfChildren;
     private Integer ageOfTheYoungestChild;
 
-    public UserDTO(String uuid, String login, String name, String surname) {
+    public UserDTO(String uuid, String login, String role, String name, String surname) {
         this.uuid = uuid;
         this.login = login;
+        this.role = role;
         this.name = name;
         this.surname = surname;
     }
 
-    public UserDTO(String uuid, String login, String name, String surname, int numberOfChildren, int ageOfTheYoungestChild) {
+    public UserDTO(String uuid, String login, String role, String name, String surname, int numberOfChildren, int ageOfTheYoungestChild) {
         this.uuid = uuid;
         this.login = login;
+        this.role = role;
         this.name = name;
         this.surname = surname;
         this.numberOfChildren = numberOfChildren;
@@ -31,6 +34,10 @@ public class UserDTO {
 
     public String getLogin() {
         return login;
+    }
+
+    public String getRole() {
+        return role;
     }
 
     public String getName() {
