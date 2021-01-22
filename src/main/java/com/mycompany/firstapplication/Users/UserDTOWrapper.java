@@ -8,7 +8,11 @@ import java.util.List;
 
 public class UserDTOWrapper {
 
-    private static UserDTO userWrapper(User user) {
+    private static UserDTO userWrapper(Admin user) {
+        return new UserDTO(user.getUuid(), user.getLogin(), user.getRole(), user.getName(), user.getSurname());
+    }
+
+    private static UserDTO userWrapper(SuperUser user) {
         return new UserDTO(user.getUuid(), user.getLogin(), user.getRole(), user.getName(), user.getSurname());
     }
 
@@ -29,8 +33,10 @@ public class UserDTOWrapper {
     public static UserDTO wrap(User user) {
         if (user instanceof Client) {
             return userWrapper(createClientFromUser(user));
+        } else if (user instanceof Admin){
+            return userWrapper((Admin)user);
         } else {
-            return userWrapper(user);
+            return userWrapper((SuperUser) user);
         }
     }
 

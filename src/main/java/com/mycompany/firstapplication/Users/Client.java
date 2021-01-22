@@ -3,6 +3,7 @@ package com.mycompany.firstapplication.Users;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 public class Client extends User {
 
@@ -16,15 +17,19 @@ public class Client extends User {
     @Max(15)
     private Integer ageOfTheYoungestChild;
 
+    @NotNull
+    @Pattern(regexp = "Client")
+    private String role;
+
     public Client() {
     }
 
-    public Client(String login, String name, String surname, String password, int numberOfChildren,
+    public Client(String login, String name, String surname, String password, String role, int numberOfChildren,
                   int ageOfTheYoungestChild) {
         super(login, name, surname, password);
+        this.role = role;
         this.numberOfChildren = numberOfChildren;
         this.ageOfTheYoungestChild = ageOfTheYoungestChild;
-        super.setRole("Client");
     }
 
     public void setNumberOfChildren(Integer numberOfChildren) {
@@ -41,6 +46,14 @@ public class Client extends User {
 
     public Integer getAgeOfTheYoungestChild() {
         return ageOfTheYoungestChild;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
 }

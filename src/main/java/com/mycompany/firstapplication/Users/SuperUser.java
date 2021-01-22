@@ -1,12 +1,28 @@
 package com.mycompany.firstapplication.Users;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 public class SuperUser extends User {
 
-    public SuperUser(String login, String name, String surname, String password) {
-        super(login, name, surname, password);
-        super.setRole("SuperUser");
-    }
+    @NotNull
+    @Pattern(regexp = "SuperUser")
+    private String role;
 
     public SuperUser() {
     }
+
+    public SuperUser(String login, String name, String surname, String password, String role) {
+        super(login, name, surname, password);
+        this.role = role;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
 }

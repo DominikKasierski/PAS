@@ -92,11 +92,12 @@ public class UsersRepository extends Repository<User> {
 
     @PostConstruct
     private void initUsersList() {
-        addElement(new Admin("aAdamski", "Adam", "Adamski", "adamski"));
-        addElement(new SuperUser("tTomkowski", "Tomek", "Tomkowski", "tomkowski"));
-        addElement(new Client("tHajto", "Tomasz", "Hajto", "hajto", 3, 4));
-        addElement(new Client("jUrban", "Jan", "Urban", "urban", 2, 7));
-        addElement(new Client("jKwiatkowska", "Janina", "Kwiatkowska", "kwiatkowska", 2, 5));
-        addElement(new Client("aWiadro", "Agata", "Wiadro","wiadro", 1, 13));
+        addElement(new Admin("aAdamski", "Adam", "Adamski", "adamski", "Admin"));
+        addElement(new SuperUser("tTomkowski", "Tomek", "Tomkowski", "tomkowski", "SuperUser"));
+        addElement(new Client("tHajto", "Tomasz", "Hajto", "hajto", "Client", 3, 4));
+        addElement(new Client("jUrban", "Jan", "Urban", "urban", "Client", 2, 7));
+        addElement(
+                new Client("jKwiatkowska", "Janina", "Kwiatkowska", "kwiatkowska", "Client", 2, 5));
+        addElement(new Client("aWiadro", "Agata", "Wiadro", "wiadro", "Client", 1, 13));
     }
 }

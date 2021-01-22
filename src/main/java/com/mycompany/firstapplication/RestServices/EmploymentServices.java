@@ -6,20 +6,15 @@ import com.mycompany.firstapplication.Employment.EmploymentsManager;
 import com.mycompany.firstapplication.Exceptions.EmploymentException;
 import com.mycompany.firstapplication.Exceptions.RepositoryException;
 import com.mycompany.firstapplication.Exceptions.UserException;
-import com.mycompany.firstapplication.Users.*;
-import org.apache.commons.beanutils.BeanUtils;
+import com.mycompany.firstapplication.Users.Client;
+import com.mycompany.firstapplication.Users.UsersManager;
 
 import javax.inject.Inject;
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
-import java.lang.reflect.InvocationTargetException;
-import java.util.Set;
 
 
 @Produces(MediaType.APPLICATION_JSON)
@@ -36,21 +31,6 @@ public class EmploymentServices {
     @Inject
     private EmploymentsManager employmentsManager;
 
-    //TODO: TYLKO KLIENT MOZE TU WEJSC
-    //TODO: SKAD WIE JAKA ROLA?
-    @POST
-    @Path("{uuid}")
-    public Response employ(@Context SecurityContext securityContext, @PathParam("uuid") String uuid) {
-        try {
-            Client client = (Client) usersManager.findByLogin(securityContext.getUserPrincipal().getName());
-            Babysitter babysitter = babysitterManager.findByKey(uuid);
-            employmentsManager.employBabysitter(client, babysitter);
-        } catch (UserException | RepositoryException | EmploymentException e) {
-            return Response.status(422).build();
-        }
-        return Response.status(201).build();
-    }
-
     @GET
     public Response getAllEmployments(@Context SecurityContext securityContext) {
         return Response.status(200)
@@ -59,6 +39,20 @@ public class EmploymentServices {
                 .build();
     }
 
-
+    //TODO: SKAD WIE JAKA ROLA?
+    @POST
+    @Path("{uuid}")
+    public Response employ(@Context SecurityContext securityContext,
+                           @PathParam("uuid") String uuid) {
+        try {
+            Client client =
+                    (Client) usersManager.findByLogin(securityContext.getUserPrincipal().getName());
+            Babysitter babysitter = babysitterManager.findByKey(uuid);
+            employmentsManager.employBabysitter(client, babysitter);
+        } catch (UserException | RepositoryException | EmploymentException e) {
+            return Response.status(422).build();
+        }
+        return Response.status(201).build();
+    }
 }
 

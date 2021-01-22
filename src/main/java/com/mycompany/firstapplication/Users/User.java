@@ -21,7 +21,6 @@ public abstract class User implements Cloneable {
     private String password;
 
     private String uniqueID;
-    private String role;
 
     public User() {
     }
@@ -97,11 +96,7 @@ public abstract class User implements Cloneable {
     }
 
     public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
+        return "Client";
     }
 
     @Override

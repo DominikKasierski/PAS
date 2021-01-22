@@ -66,7 +66,13 @@
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>AdminPages</web-resource-name>
-            <url-pattern></url-pattern>
+            <url-pattern>/rest/users/*</url-pattern>
+            <url-pattern>/rest/users/_self</url-pattern>
+            <url-pattern>/rest/resources/*</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>PUT</http-method>
+            <http-method>POST</http-method>
+            <http-method>DELETE</http-method>
         </web-resource-collection>
         <auth-constraint>
             <role-name>Admin</role-name>
@@ -78,11 +84,18 @@
 
     <security-constraint>
         <web-resource-collection>
-            <web-resource-name>AdminAndSuperUserPages</web-resource-name>
-            <url-pattern></url-pattern>
+            <web-resource-name>SuperUserResourcePages</web-resource-name>
+            <url-pattern>/rest/resources/*</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>PUT</http-method>
+            <http-method>POST</http-method>
+        </web-resource-collection>
+        <web-resource-collection>
+            <web-resource-name>SuperUserUsersPages</web-resource-name>
+            <url-pattern>/rest/users/*</url-pattern>
+            <http-method>GET</http-method>
         </web-resource-collection>
         <auth-constraint>
-            <role-name>Admin</role-name>
             <role-name>SuperUser</role-name>
         </auth-constraint>
         <user-data-constraint>
@@ -92,12 +105,22 @@
 
     <security-constraint>
         <web-resource-collection>
-            <web-resource-name>LoggedInUserPages</web-resource-name>
-            <url-pattern></url-pattern>
+            <web-resource-name>ClientInfoPages</web-resource-name>
+            <url-pattern>/rest/users/_self</url-pattern>
+            <http-method>GET</http-method>
+        </web-resource-collection>
+        <web-resource-collection>
+            <web-resource-name>ClientResourcePages</web-resource-name>
+            <url-pattern>/rest/resources/*</url-pattern>
+            <http-method>GET</http-method>
+        </web-resource-collection>
+        <web-resource-collection>
+            <web-resource-name>ClientEmploymentPages</web-resource-name>
+            <url-pattern>/rest/employment/*</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
         </web-resource-collection>
         <auth-constraint>
-            <role-name>Admin</role-name>
-            <role-name>SuperUser</role-name>
             <role-name>Client</role-name>
         </auth-constraint>
         <user-data-constraint>
