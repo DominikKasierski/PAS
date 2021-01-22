@@ -39,7 +39,6 @@ public class EmploymentServices {
                 .build();
     }
 
-    //TODO: SKAD WIE JAKA ROLA?
     @POST
     @Path("{uuid}")
     public Response employ(@Context SecurityContext securityContext,

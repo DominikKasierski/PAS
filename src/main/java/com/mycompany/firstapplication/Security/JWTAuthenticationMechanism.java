@@ -19,7 +19,6 @@ public class JWTAuthenticationMechanism implements HttpAuthenticationMechanism {
     public static final String AUTHORIZATION = "Authorization";
     public static final String BEARER = "Bearer ";
 
-
     @Override
     public AuthenticationStatus validateRequest(HttpServletRequest httpServletRequest,
                                                 HttpServletResponse httpServletResponse,
@@ -43,7 +42,6 @@ public class JWTAuthenticationMechanism implements HttpAuthenticationMechanism {
                     if (new Date().after(expirationTime)) {
                         return httpMessageContext.responseUnauthorized();
                     }
-                    //TODO:SPRAWDZIC CZY BEZ TEGO WIDZI ROLE
                     return httpMessageContext
                             .notifyContainerAboutLogin(login, new HashSet<>(Arrays.asList(role.split(","))));
                 } catch (ParseException e) {
