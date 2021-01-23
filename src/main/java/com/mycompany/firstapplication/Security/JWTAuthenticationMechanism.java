@@ -45,6 +45,7 @@ public class JWTAuthenticationMechanism implements HttpAuthenticationMechanism {
                     return httpMessageContext
                             .notifyContainerAboutLogin(login, new HashSet<>(Arrays.asList(role.split(","))));
                 } catch (ParseException e) {
+                    e.printStackTrace();
                     return httpMessageContext.responseUnauthorized();
                 }
             }

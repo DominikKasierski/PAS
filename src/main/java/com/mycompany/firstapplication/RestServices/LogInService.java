@@ -59,6 +59,7 @@ public class LogInService {
                         .build();
             }
         } catch (ParseException e) {
+            e.printStackTrace();
             return Response.status(401).build();
         }
         return Response.status(401).build();

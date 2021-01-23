@@ -58,7 +58,7 @@ public class Client extends User {
     }
 
     @Override
-    public Map<String, String> getPayload() {
-        return super.getPayload();
+    public Map<String, String> takePayload() {
+        return super.takePayload();
     }
 }

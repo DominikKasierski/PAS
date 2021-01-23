@@ -49,6 +49,7 @@ public class EmploymentServices {
             Babysitter babysitter = babysitterManager.findByKey(uuid);
             employmentsManager.employBabysitter(client, babysitter);
         } catch (UserException | RepositoryException | EmploymentException e) {
+            e.printStackTrace();
             return Response.status(422).build();
         }
         return Response.status(201).build();

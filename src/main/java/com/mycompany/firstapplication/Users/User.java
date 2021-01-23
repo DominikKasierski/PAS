@@ -113,7 +113,7 @@ public abstract class User implements Cloneable, EntityToSign {
         return super.clone();
     }
 
-    public Map<String, String> getPayload() {
+    public Map<String, String> takePayload() {
         Map<String, String> map = new HashMap<>();
         map.put("uuid", getUuid());
         return map;

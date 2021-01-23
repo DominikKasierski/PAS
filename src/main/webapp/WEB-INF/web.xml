@@ -124,7 +124,7 @@
 
     <security-constraint>
         <web-resource-collection>
-            <web-resource-name>AccountInfo</web-resource-name>
+            <web-resource-name>Common</web-resource-name>
             <url-pattern>/rest/users/_self</url-pattern>
             <url-pattern>/rest/auth/update</url-pattern>
             <http-method>GET</http-method>

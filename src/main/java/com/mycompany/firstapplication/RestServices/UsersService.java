@@ -1,5 +1,6 @@
 package com.mycompany.firstapplication.RestServices;
 
+import com.mycompany.firstapplication.Exceptions.UserException;
 import com.mycompany.firstapplication.Filters.EntitySignatureValidatorFilterBinding;
 import com.mycompany.firstapplication.Users.*;
 import com.mycompany.firstapplication.utils.EntityIdentitySignerVerifier;
@@ -22,7 +23,6 @@ import java.util.Set;
 @Path("/users")
 public class UsersService {
 
-    //TODO: SPRAWDZIC CZY KODY ODPOWIEDZI HTTP SĄ ODPOWIEDNIO DOBRANE
     @Inject
     private UsersManager usersManager;
 
@@ -39,10 +39,15 @@ public class UsersService {
     @GET
     @Path("{uuid}")
     public Response getClient(@PathParam("uuid") String uuid) {
-        return Response.status(200)
-                .header("ETag", EntityIdentitySignerVerifier.calculateETag((usersManager.findByKey(uuid))))
-                .entity(UserDTOWrapper.wrap(usersManager.findByKey(uuid)))
-                .build();
+        try {
+            return Response.status(200)
+                    .header("ETag", EntityIdentitySignerVerifier.calculateETag((usersManager.findByKey(uuid))))
+                    .entity(UserDTOWrapper.wrap(usersManager.findByKey(uuid)))
+                    .build();
+        } catch (UserException e) {
+            e.printStackTrace();
+            return Response.status(400).build();
+        }
     }
 
     @GET
@@ -62,6 +67,7 @@ public class UsersService {
             validation(admin);
             BeanUtils.copyProperties(usersManager.findByKey(uuid), admin);
         } catch (IllegalArgumentException | InvocationTargetException | IllegalAccessException e) {
+            e.printStackTrace();
             return Response.status(422).build();
         }
         return Response.status(200).build();
@@ -70,8 +76,8 @@ public class UsersService {
     @PUT
     @Path("/superUser/{uuid}")
     @EntitySignatureValidatorFilterBinding
-    public Response updateSuperUser(@PathParam("uuid") String uuid,
-                                    @HeaderParam("If-Match") String header, SuperUser superUser) {
+    public Response updateSuperUser(@PathParam("uuid") String uuid, @HeaderParam("If-Match") String header,
+                                    SuperUser superUser) {
         if (!EntityIdentitySignerVerifier.verifyEntityIntegrity(header, superUser)) {
             return Response.status(406).build();
         }
@@ -79,6 +85,7 @@ public class UsersService {
             validation(superUser);
             BeanUtils.copyProperties(usersManager.findByKey(uuid), superUser);
         } catch (IllegalArgumentException | InvocationTargetException | IllegalAccessException e) {
+            e.printStackTrace();
             return Response.status(422).build();
         }
         return Response.status(200).build();
@@ -96,6 +103,7 @@ public class UsersService {
             validation(client);
             BeanUtils.copyProperties(usersManager.findByKey(uuid), client);
         } catch (IllegalArgumentException | InvocationTargetException | IllegalAccessException e) {
+            e.printStackTrace();
             return Response.status(422).build();
         }
         return Response.status(200).build();
@@ -108,6 +116,7 @@ public class UsersService {
         try {
             validation(admin);
         } catch (IllegalArgumentException e) {
+            e.printStackTrace();
             return Response.status(422).build();
         }
         usersManager.addUser(admin);
@@ -120,6 +129,7 @@ public class UsersService {
         try {
             validation(superUser);
         } catch (IllegalArgumentException e) {
+            e.printStackTrace();
             return Response.status(422).build();
         }
         usersManager.addUser(superUser);
@@ -132,6 +142,7 @@ public class UsersService {
         try {
             validation(client);
         } catch (IllegalArgumentException e) {
+            e.printStackTrace();
             return Response.status(422).build();
         }
         usersManager.addUser(client);

@@ -65,7 +65,7 @@ public class JWTGeneratorVerifier {
             return jwsObject.verify(jwsVerifier);
         } catch (ParseException | JOSEException e) {
             e.printStackTrace();
+            return false;
         }
-        return false;
     }
 }

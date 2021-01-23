@@ -135,7 +135,7 @@ public class Babysitter implements Cloneable, EntityToSign {
     }
 
     @Override
-    public Map<String, String> getPayload() {
+    public Map<String, String> takePayload() {
         Map<String, String> map = new HashMap<>();
         map.put("uuid", getUuid());
         map.put("employed", String.valueOf(isEmployed()));

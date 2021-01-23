@@ -4,6 +4,7 @@ import com.mycompany.firstapplication.Babysitters.Babysitter;
 import com.mycompany.firstapplication.Babysitters.BabysittersManager;
 import com.mycompany.firstapplication.Babysitters.TeachingSitter;
 import com.mycompany.firstapplication.Babysitters.TidingSitter;
+import com.mycompany.firstapplication.Exceptions.RepositoryException;
 import com.mycompany.firstapplication.Filters.EntitySignatureValidatorFilterBinding;
 import com.mycompany.firstapplication.Interfaces.EntityToSign;
 import com.mycompany.firstapplication.utils.EntityIdentitySignerVerifier;
@@ -32,9 +33,14 @@ public class ResourcesService {
     @GET
     @Path("{uuid}")
     public Response getBabysitter(@PathParam("uuid") String uuid) {
-        return Response.status(200)
-                .header("ETag", EntityIdentitySignerVerifier.calculateETag((babysittersManager.findByKey(uuid))))
-                .entity(babysittersManager.findByKey(uuid)).build();
+        try {
+            return Response.status(200)
+                    .header("ETag", EntityIdentitySignerVerifier.calculateETag((babysittersManager.findByKey(uuid))))
+                    .entity(babysittersManager.findByKey(uuid)).build();
+        } catch (RepositoryException e) {
+            e.printStackTrace();
+            return Response.status(400).build();
+        }
     }
 
     @GET
@@ -54,6 +60,7 @@ public class ResourcesService {
             validation(babysitter);
             BeanUtils.copyProperties(babysittersManager.findByKey(uuid), babysitter);
         } catch (IllegalArgumentException | InvocationTargetException | IllegalAccessException e) {
+            e.printStackTrace();
             return Response.status(422).build();
         }
         return Response.status(200).build();
@@ -71,6 +78,7 @@ public class ResourcesService {
             validation(teachingSitter);
             BeanUtils.copyProperties(babysittersManager.findByKey(uuid), teachingSitter);
         } catch (IllegalArgumentException | InvocationTargetException | IllegalAccessException e) {
+            e.printStackTrace();
             return Response.status(422).build();
         }
         return Response.status(200).build();
@@ -88,6 +96,7 @@ public class ResourcesService {
             validation(tidingSitter);
             BeanUtils.copyProperties(babysittersManager.findByKey(uuid), tidingSitter);
         } catch (IllegalArgumentException | InvocationTargetException | IllegalAccessException e) {
+            e.printStackTrace();
             return Response.status(422).build();
         }
         return Response.status(200).build();
@@ -99,6 +108,7 @@ public class ResourcesService {
         try {
             validation(babysitter);
         } catch (IllegalArgumentException e) {
+            e.printStackTrace();
             return Response.status(422).build();
         }
         babysittersManager.addBabysitter(babysitter);
@@ -111,6 +121,7 @@ public class ResourcesService {
         try {
             validation(teachingSitter);
         } catch (IllegalArgumentException e) {
+            e.printStackTrace();
             return Response.status(422).build();
         }
         babysittersManager.addBabysitter(teachingSitter);
@@ -123,6 +134,7 @@ public class ResourcesService {
         try {
             validation(tidingSitter);
         } catch (IllegalArgumentException e) {
+            e.printStackTrace();
             return Response.status(422).build();
         }
         babysittersManager.addBabysitter(tidingSitter);
