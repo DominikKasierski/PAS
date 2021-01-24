@@ -22,10 +22,6 @@ import java.util.regex.Pattern;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-//TODO: PRZEJRZEC CZY W TYM TESCIE NIE MA STATUSOW, ZROBIC COS, ZEBY NIE BYLO BLEDOW PO USUNIECIU ORDER()
-
-
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class UsersCRUTest {
     private final String token = JWTGeneratorVerifier.generateJWTString(new CredentialValidationResult("aAdamski", new HashSet<>(
             Arrays.asList("Admin"))));
@@ -49,7 +45,7 @@ public class UsersCRUTest {
         Admin admin = new Admin("aAdamski", "Adam", "Adamski", "adamski", "Admin");
 
         RequestSpecification request = getBasicRequest();
-        String firstUUID = getUUID(1);
+        String firstUUID = getUUID();
         Response response = request.get(new URI("https://localhost:8181/PAS/rest/users/" + firstUUID));
 
         admin.setUuid(firstUUID);
@@ -156,7 +152,7 @@ public class UsersCRUTest {
 
     @Test
     public void updateClient() throws URISyntaxException {
-        String firstUUID = getUUID(5);
+        String firstUUID = getUUID();
         RequestSpecification requestGet = getBasicRequest();
         Response getResponse = requestGet.get(new URI("https://localhost:8181/PAS/rest/users/" + firstUUID));
 
@@ -194,7 +190,7 @@ public class UsersCRUTest {
         return request;
     }
 
-    private String getUUID(int number) throws URISyntaxException {
+    private String getUUID() throws URISyntaxException {
         RequestSpecification request = getBasicRequest();
 
         Response getAllResponse = request.get(new URI("https://localhost:8181/PAS/rest/users"));

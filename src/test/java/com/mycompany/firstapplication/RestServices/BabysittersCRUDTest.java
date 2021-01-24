@@ -21,7 +21,6 @@ import java.util.regex.Pattern;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-//TODO: PRZEJRZEC CZY W TYM TESCIE NIE MA STATUSOW, ZROBIC COS, ZEBY NIE BYLO BLEDOW PO USUNIECIU ORDER()
 
 public class BabysittersCRUDTest {
     private final String token = JWTGeneratorVerifier.generateJWTString(new CredentialValidationResult("aAdamski", new HashSet<>(
@@ -69,7 +68,7 @@ public class BabysittersCRUDTest {
                 "        \"basePriceForHour\": 123,\n" +
                 "        \"maxNumberOfChildrenInTheFamily\": 5,\n" +
                 "        \"minChildAge\": 1,\n" +
-                "        \"name\": \"ZTatiana\",\n" +
+                "        \"name\": \"Zofia\",\n" +
                 "        \"surname\": \"Alabaster\"\n" +
                 "    }";
 
@@ -87,7 +86,7 @@ public class BabysittersCRUDTest {
         getAllResponseString = requestAll.get(new URI("https://localhost:8181/PAS/rest/resources")).asString();
         assertEquals(initialSize + 1, getAllResponseString.split("},").length);
 
-        assertTrue(getAllResponseString.contains("\"name\":\"ZTatiana\""));
+        assertTrue(getAllResponseString.contains("\"name\":\"Zofia\""));
     }
 
     @Test
@@ -96,7 +95,7 @@ public class BabysittersCRUDTest {
                 "        \"basePriceForHour\": 123,\n" +
                 "        \"maxNumberOfChildrenInTheFamily\": 3,\n" +
                 "        \"minChildAge\": 1,\n" +
-                "        \"name\": \"ZGrażyna\",\n" +
+                "        \"name\": \"Zuzanna\",\n" +
                 "        \"yearsOfExperienceInTeaching\": 10,\n" +
                 "        \"surname\": \"Chryzantema\"\n" +
                 "    }";
@@ -124,7 +123,7 @@ public class BabysittersCRUDTest {
                 "        \"basePriceForHour\": 123,\n" +
                 "        \"maxNumberOfChildrenInTheFamily\": 6,\n" +
                 "        \"minChildAge\": 1,\n" +
-                "        \"name\": \"ZMarzena\",\n" +
+                "        \"name\": \"Zuzanna\",\n" +
                 "        \"valueOfCleaningEquipment\": 40.0,\n" +
                 "        \"surname\": \"Rozmarzona\"\n" +
                 "    }";

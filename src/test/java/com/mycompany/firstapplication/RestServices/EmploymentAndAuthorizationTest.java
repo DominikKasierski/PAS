@@ -21,7 +21,6 @@ import java.util.regex.Pattern;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-//TODO: PRZEJRZEC CZY W TYM TESCIE NIE MA STATUSOW, ZROBIC COS, ZEBY NIE BYLO BLEDOW PO USUNIECIU ORDER()
 
 public class EmploymentAndAuthorizationTest {
     @Test
