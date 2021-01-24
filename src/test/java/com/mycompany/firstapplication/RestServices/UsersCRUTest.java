@@ -9,7 +9,6 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
@@ -32,7 +31,6 @@ public class UsersCRUTest {
             Arrays.asList("Admin"))));
 
     @Test
-    @Order(1)
     public void getAllUsersTest() throws URISyntaxException {
         RequestSpecification request = getBasicRequest();
         Response response = request.get(new URI("https://localhost:8181/PAS/rest/users"));
@@ -47,12 +45,11 @@ public class UsersCRUTest {
     }
 
     @Test
-    @Order(2)
     public void getUserTest() throws URISyntaxException {
         Admin admin = new Admin("aAdamski", "Adam", "Adamski", "adamski", "Admin");
 
         RequestSpecification request = getBasicRequest();
-        String firstUUID = getFirstUUID();
+        String firstUUID = getUUID(1);
         Response response = request.get(new URI("https://localhost:8181/PAS/rest/users/" + firstUUID));
 
         admin.setUuid(firstUUID);
@@ -71,7 +68,6 @@ public class UsersCRUTest {
     }
 
     @Test
-    @Order(3)
     public void createClientTest() throws URISyntaxException {
         String randomLogin = RandomStringUtils.randomAlphanumeric(8);
         String JSON = "{\n" +
@@ -103,7 +99,6 @@ public class UsersCRUTest {
 
 
     @Test
-    @Order(4)
     public void createAdminTest() throws URISyntaxException {
         String randomLogin = RandomStringUtils.randomAlphanumeric(8);
         String JSON = "{\n" +
@@ -132,7 +127,6 @@ public class UsersCRUTest {
     }
 
     @Test
-    @Order(5)
     public void createSuperUserTest() throws URISyntaxException {
         String randomLogin = RandomStringUtils.randomAlphanumeric(8);
         String JSON = "{\n" +
@@ -161,9 +155,8 @@ public class UsersCRUTest {
     }
 
     @Test
-    @Order(6)
     public void updateClient() throws URISyntaxException {
-        String firstUUID = getFirstUUID();
+        String firstUUID = getUUID(5);
         RequestSpecification requestGet = getBasicRequest();
         Response getResponse = requestGet.get(new URI("https://localhost:8181/PAS/rest/users/" + firstUUID));
 
@@ -201,7 +194,7 @@ public class UsersCRUTest {
         return request;
     }
 
-    private String getFirstUUID() throws URISyntaxException {
+    private String getUUID(int number) throws URISyntaxException {
         RequestSpecification request = getBasicRequest();
 
         Response getAllResponse = request.get(new URI("https://localhost:8181/PAS/rest/users"));

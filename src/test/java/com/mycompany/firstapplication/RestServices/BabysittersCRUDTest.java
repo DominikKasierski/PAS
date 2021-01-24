@@ -8,10 +8,8 @@ import io.restassured.http.Header;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
 
 import javax.security.enterprise.identitystore.CredentialValidationResult;
 import java.net.URI;
@@ -25,13 +23,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 //TODO: PRZEJRZEC CZY W TYM TESCIE NIE MA STATUSOW, ZROBIC COS, ZEBY NIE BYLO BLEDOW PO USUNIECIU ORDER()
 
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class BabysittersCRUDTest {
     private final String token = JWTGeneratorVerifier.generateJWTString(new CredentialValidationResult("aAdamski", new HashSet<>(
             Arrays.asList("Admin"))));
 
     @Test
-    @Order(1)
     public void getAllBabysittersTest() throws URISyntaxException {
         RequestSpecification request = getBasicRequest();
         Response response = request.get(new URI("https://localhost:8181/PAS/rest/resources"));
@@ -40,19 +36,16 @@ public class BabysittersCRUDTest {
         assertTrue(responseString.contains("\"surname\":\"Kwiatkowska\""));
         assertTrue(responseString.contains("\"surname\":\"Rusin\""));
         assertTrue(responseString.contains("\"surname\":\"Krupa\""));
-        assertTrue(responseString.contains("\"surname\":\"Sprzątająca\""));
-        assertTrue(responseString.contains("\"surname\":\"Ucząca\""));
         assertTrue(responseString.contains("\"surname\":\"Taczka\""));
         assertTrue(responseString.contains("\"surname\":\"Jajko\""));
     }
 
     @Test
-    @Order(2)
     public void getBabysitterTest() throws URISyntaxException {
         Babysitter babysitter = new Babysitter("Anna", "Kwiatkowska", 123, 12, 4);
 
         RequestSpecification request = getBasicRequest();
-        String firstUUID = getFirstUUID();
+        String firstUUID = getUUID(1);
         Response response = request.get(new URI("https://localhost:8181/PAS/rest/resources/" + firstUUID));
 
         babysitter.setUuid(firstUUID);
@@ -71,14 +64,13 @@ public class BabysittersCRUDTest {
     }
 
     @Test
-    @Order(3)
     public void createBabysitterTest() throws URISyntaxException {
         String JSON = "{\n" +
                 "        \"basePriceForHour\": 123,\n" +
-                "        \"maxNumberOfChildrenInTheFamily\": 4,\n" +
-                "        \"minChildAge\": 12,\n" +
-                "        \"name\": \"Złocista\",\n" +
-                "        \"surname\": \"Chryzantema\"\n" +
+                "        \"maxNumberOfChildrenInTheFamily\": 5,\n" +
+                "        \"minChildAge\": 1,\n" +
+                "        \"name\": \"ZTatiana\",\n" +
+                "        \"surname\": \"Alabaster\"\n" +
                 "    }";
 
         RequestSpecification requestAll = getBasicRequest();
@@ -95,17 +87,16 @@ public class BabysittersCRUDTest {
         getAllResponseString = requestAll.get(new URI("https://localhost:8181/PAS/rest/resources")).asString();
         assertEquals(initialSize + 1, getAllResponseString.split("},").length);
 
-        assertTrue(getAllResponseString.contains("\"name\":\"Złocista\""));
+        assertTrue(getAllResponseString.contains("\"name\":\"ZTatiana\""));
     }
 
     @Test
-    @Order(4)
     public void createTeachingSitterTest() throws URISyntaxException {
         String JSON = "{\n" +
                 "        \"basePriceForHour\": 123,\n" +
-                "        \"maxNumberOfChildrenInTheFamily\": 4,\n" +
-                "        \"minChildAge\": 12,\n" +
-                "        \"name\": \"Złocista\",\n" +
+                "        \"maxNumberOfChildrenInTheFamily\": 3,\n" +
+                "        \"minChildAge\": 1,\n" +
+                "        \"name\": \"ZGrażyna\",\n" +
                 "        \"yearsOfExperienceInTeaching\": 10,\n" +
                 "        \"surname\": \"Chryzantema\"\n" +
                 "    }";
@@ -128,15 +119,14 @@ public class BabysittersCRUDTest {
     }
 
     @Test
-    @Order(5)
     public void createTidingSitterTest() throws URISyntaxException {
         String JSON = "{\n" +
                 "        \"basePriceForHour\": 123,\n" +
-                "        \"maxNumberOfChildrenInTheFamily\": 4,\n" +
-                "        \"minChildAge\": 12,\n" +
-                "        \"name\": \"Złocista\",\n" +
+                "        \"maxNumberOfChildrenInTheFamily\": 6,\n" +
+                "        \"minChildAge\": 1,\n" +
+                "        \"name\": \"ZMarzena\",\n" +
                 "        \"valueOfCleaningEquipment\": 40.0,\n" +
-                "        \"surname\": \"Chryzantema\"\n" +
+                "        \"surname\": \"Rozmarzona\"\n" +
                 "    }";
 
         RequestSpecification requestAll = getBasicRequest();
@@ -157,15 +147,12 @@ public class BabysittersCRUDTest {
     }
 
     @Test
-    @Order(6)
     public void updateBabysitter() throws URISyntaxException {
-        String firstUUID = getFirstUUID();
+        String firstUUID = getUUID(4);
         RequestSpecification requestGet = getBasicRequest();
         Response getResponse = requestGet.get(new URI("https://localhost:8181/PAS/rest/resources/" + firstUUID));
 
-        Pattern surnamePattern = Pattern.compile("(?<=\"surname\":\")[^\"]+");
-        Matcher m = surnamePattern.matcher(getResponse.asString());
-        String originalSurname = m.find() ? m.group() : "";
+        String originalSurname = getSurname(1, getResponse.asString());
         String ETag = getResponse.header("ETag");
 
         RequestSpecification requestPut = getBasicRequest();
@@ -186,15 +173,13 @@ public class BabysittersCRUDTest {
         requestPut.put("https://localhost:8181/PAS/rest/resources/standard/" + firstUUID);
 
         getResponse = requestGet.get(new URI("https://localhost:8181/PAS/rest/resources/" + firstUUID));
-        m = surnamePattern.matcher(getResponse.asString());
-        String changedSurname = m.find() ? m.group() : "";
+        String changedSurname = getSurname(1, getResponse.asString());
         assertNotEquals(originalSurname, changedSurname);
     }
 
     @Test
-    @Order(7)
     public void deleteBabysitter() throws URISyntaxException {
-        String firstUUID = getFirstUUID();
+        String firstUUID = getUUID(5);
         RequestSpecification requestAll = getBasicRequest();
         RequestSpecification requestDelete = getBasicRequest();
 
@@ -203,9 +188,8 @@ public class BabysittersCRUDTest {
         String getAllResponseString = requestAll.get(new URI("https://localhost:8181/PAS/rest/resources")).asString();
         int initialSize = getAllResponseString.split("},").length;
 
-        Pattern surnamePattern = Pattern.compile("(?<=\"surname\":\")[^\"]+");
-        Matcher m = surnamePattern.matcher(getAllResponseString);
-        String originalSurname = m.find() ? m.group() : "";
+
+        String originalSurname = getSurname(5, getAllResponseString);
 
         requestDelete.delete(new URI("https://localhost:8181/PAS/rest/resources/" + firstUUID));
 
@@ -221,17 +205,26 @@ public class BabysittersCRUDTest {
         return request;
     }
 
-    private String getFirstUUID() throws URISyntaxException {
+    private String getUUID(int number) throws URISyntaxException {
         RequestSpecification request = getBasicRequest();
 
         Response getAllResponse = request.get(new URI("https://localhost:8181/PAS/rest/resources"));
         String responseString = getAllResponse.asString();
         Pattern pattern = Pattern.compile("(?<=\"uuid\":\")\\d{8}");
         Matcher m = pattern.matcher(responseString);
-        if (m.find()) {
-            return m.group();
+        for (int i = 0; i < number; i++) {
+            m.find();
         }
-        return "";
+        return m.group();
+    }
+
+    private String getSurname(int number, String response) {
+        Pattern surnamePattern = Pattern.compile("(?<=\"surname\":\")[^\"]+");
+        Matcher m = surnamePattern.matcher(response);
+        for (int i = 0; i < number; i++) {
+            m.find();
+        }
+        return m.group();
     }
 
 }
