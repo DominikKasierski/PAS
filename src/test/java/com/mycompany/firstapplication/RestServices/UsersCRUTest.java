@@ -8,8 +8,10 @@ import io.restassured.http.Header;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-import org.junit.platform.engine.support.discovery.SelectorResolver;
+import org.junit.jupiter.api.TestMethodOrder;
 
 import javax.security.enterprise.identitystore.CredentialValidationResult;
 import java.net.URI;
@@ -21,16 +23,21 @@ import java.util.regex.Pattern;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+//TODO: PRZEJRZEC CZY W TYM TESCIE NIE MA STATUSOW, ZROBIC COS, ZEBY NIE BYLO BLEDOW PO USUNIECIU ORDER()
+
+
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class UsersCRUTest {
     private final String token = JWTGeneratorVerifier.generateJWTString(new CredentialValidationResult("aAdamski", new HashSet<>(
             Arrays.asList("Admin"))));
 
     @Test
+    @Order(1)
     public void getAllUsersTest() throws URISyntaxException {
         RequestSpecification request = getBasicRequest();
         Response response = request.get(new URI("https://localhost:8181/PAS/rest/users"));
         String responseString = response.asString();
-        assertEquals(200, response.statusCode());
+
         assertTrue(responseString.contains("\"login\":\"aAdamski\""));
         assertTrue(responseString.contains("\"login\":\"tTomkowski\""));
         assertTrue(responseString.contains("\"login\":\"aWiadro\""));
@@ -40,6 +47,7 @@ public class UsersCRUTest {
     }
 
     @Test
+    @Order(2)
     public void getUserTest() throws URISyntaxException {
         Admin admin = new Admin("aAdamski", "Adam", "Adamski", "adamski", "Admin");
 
@@ -53,7 +61,6 @@ public class UsersCRUTest {
         String responseString = response.asString();
         String ETag = response.header("ETag");
 
-        assertEquals(200, response.statusCode());
         assertFalse(ETag.isEmpty());
         assertEquals(expectedETag, ETag);
         assertTrue(responseString.contains("aAdamski"));
@@ -64,6 +71,7 @@ public class UsersCRUTest {
     }
 
     @Test
+    @Order(3)
     public void createClientTest() throws URISyntaxException {
         String randomLogin = RandomStringUtils.randomAlphanumeric(8);
         String JSON = "{\n" +
@@ -85,8 +93,7 @@ public class UsersCRUTest {
         String getAllResponseString = requestAll.get(new URI("https://localhost:8181/PAS/rest/users")).asString();
         int initialSize = getAllResponseString.split("},").length;
 
-        Response response = requestPost.post(new URI("https://localhost:8181/PAS/rest/users/client"));
-        assertEquals(201, response.getStatusCode());
+        requestPost.post(new URI("https://localhost:8181/PAS/rest/users/client"));
 
         getAllResponseString = requestAll.get(new URI("https://localhost:8181/PAS/rest/users")).asString();
         assertEquals(initialSize + 1, getAllResponseString.split("},").length);
@@ -96,6 +103,7 @@ public class UsersCRUTest {
 
 
     @Test
+    @Order(4)
     public void createAdminTest() throws URISyntaxException {
         String randomLogin = RandomStringUtils.randomAlphanumeric(8);
         String JSON = "{\n" +
@@ -115,8 +123,7 @@ public class UsersCRUTest {
         String getAllResponseString = requestAll.get(new URI("https://localhost:8181/PAS/rest/users")).asString();
         int initialSize = getAllResponseString.split("},").length;
 
-        Response response = requestPost.post(new URI("https://localhost:8181/PAS/rest/users/admin"));
-        assertEquals(201, response.getStatusCode());
+        requestPost.post(new URI("https://localhost:8181/PAS/rest/users/admin"));
 
         getAllResponseString = requestAll.get(new URI("https://localhost:8181/PAS/rest/users")).asString();
         assertEquals(initialSize + 1, getAllResponseString.split("},").length);
@@ -125,6 +132,7 @@ public class UsersCRUTest {
     }
 
     @Test
+    @Order(5)
     public void createSuperUserTest() throws URISyntaxException {
         String randomLogin = RandomStringUtils.randomAlphanumeric(8);
         String JSON = "{\n" +
@@ -144,8 +152,7 @@ public class UsersCRUTest {
         String getAllResponseString = requestAll.get(new URI("https://localhost:8181/PAS/rest/users")).asString();
         int initialSize = getAllResponseString.split("},").length;
 
-        Response response = requestPost.post(new URI("https://localhost:8181/PAS/rest/users/superUser"));
-        assertEquals(201, response.getStatusCode());
+        requestPost.post(new URI("https://localhost:8181/PAS/rest/users/superUser"));
 
         getAllResponseString = requestAll.get(new URI("https://localhost:8181/PAS/rest/users")).asString();
         assertEquals(initialSize + 1, getAllResponseString.split("},").length);
@@ -154,6 +161,7 @@ public class UsersCRUTest {
     }
 
     @Test
+    @Order(6)
     public void updateClient() throws URISyntaxException {
         String firstUUID = getFirstUUID();
         RequestSpecification requestGet = getBasicRequest();
@@ -172,14 +180,13 @@ public class UsersCRUTest {
         String JSON = "{\n" +
                 "        \"name\": \"Adam\",\n" +
                 "        \"role\": \"Admin\",\n" +
-                "        \"password\": \"noweSuperHasło\",\n" +
+                "        \"password\": \"adamski1\",\n" +
                 "        \"surname\": \"" + randomSurname + "\",\n" +
                 "        \"login\": \"" + "aAdamski" + "\",\n" +
                 "        \"uuid\": \"" + firstUUID + "\"\n" +
                 "    }";
         requestPut.body(JSON);
-        Response putResponse = requestPut.put("https://localhost:8181/PAS/rest/users/admin/" + firstUUID);
-        assertEquals(200, putResponse.statusCode());
+        requestPut.put("https://localhost:8181/PAS/rest/users/admin/" + firstUUID);
 
         getResponse = requestGet.get(new URI("https://localhost:8181/PAS/rest/users/" + firstUUID));
         m = surnamePattern.matcher(getResponse.asString());
