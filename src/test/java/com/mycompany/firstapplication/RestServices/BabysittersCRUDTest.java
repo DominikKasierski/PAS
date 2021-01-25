@@ -8,7 +8,6 @@ import io.restassured.http.Header;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 import javax.security.enterprise.identitystore.CredentialValidationResult;
