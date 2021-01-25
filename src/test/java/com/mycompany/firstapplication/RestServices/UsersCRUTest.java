@@ -151,7 +151,7 @@ public class UsersCRUTest {
     }
 
     @Test
-    public void updateClient() throws URISyntaxException {
+    public void updateAdmin() throws URISyntaxException {
         String firstUUID = getUUID();
         RequestSpecification requestGet = getBasicRequest();
         Response getResponse = requestGet.get(new URI("https://localhost:8181/PAS/rest/users/" + firstUUID));
