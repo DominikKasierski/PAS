@@ -15,7 +15,7 @@ import java.util.HashSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class NegativeTests {
 
@@ -109,7 +109,6 @@ public class NegativeTests {
         assertEquals(202, responseFromAuthClient.statusCode());
 
 
-
         String uuid = getUuid(3);
         RequestSpecification requestGet = getBasicAdminRequest();
         Response getResponse = requestGet.get(new URI("https://localhost:8181/PAS/rest/users/" + uuid));
@@ -133,7 +132,6 @@ public class NegativeTests {
         requestPut.body(JSON);
         Response responseFromPut = requestPut.put("https://localhost:8181/PAS/rest/users/client/" + uuid);
         assertEquals(200, responseFromPut.statusCode());
-
 
 
         RequestSpecification authRequestClient2 = RestAssured.given();
@@ -176,18 +174,19 @@ public class NegativeTests {
         m.find();
         String babysitterUuid = m.group();
 
-        responseFromEmployment = employmentRequest.post(new URI("https://localhost:8181/PAS/rest/employment/" + babysitterUuid));
+        responseFromEmployment =
+                employmentRequest.post(new URI("https://localhost:8181/PAS/rest/employment/" + babysitterUuid));
         assertEquals(422, responseFromEmployment.statusCode());
     }
 
     @Test
-    public void httpsTest() throws URISyntaxException {
-        //1. sprobowac wyslac jakiegos geta uzywajac w URI http i 8080
-        //2. powinno zwrocic status (403?) = redirect
+    public void httpsTest() {
+        RequestSpecification request = RestAssured.given();
+        request.header(new Header("Authorization", "Bearer " + userToken));
+        request.redirects().follow(false);
 
-//        RequestSpecification requestGet = RestAssured.given();
-//        Response getResponse = requestGet.get("http://localhost:8080/PAS/rest/users");
-//        assertEquals(302, getResponse.statusCode());
+        Response response = request.get("http://localhost:8080/PAS/rest/users");
+        assertEquals(302, response.statusCode());
     }
 
     @Test
@@ -203,7 +202,6 @@ public class NegativeTests {
         RequestSpecification adminRequest = getBasicAdminRequest();
         Response adminResponse = adminRequest.get(new URI("https://localhost:8181/PAS/rest/users"));
         assertEquals(200, adminResponse.statusCode());
-
 
         RequestSpecification clientRequest = RestAssured.given();
         clientRequest.relaxedHTTPSValidation();
@@ -226,7 +224,7 @@ public class NegativeTests {
         String responseString = getAllResponse.asString();
         Pattern pattern = Pattern.compile("(?<=\"uuid\":\")\\d{8}");
         Matcher m = pattern.matcher(responseString);
-        for(int i = 0; i < number; i++) {
+        for (int i = 0; i < number; i++) {
             m.find();
         }
         return m.group();
