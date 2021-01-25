@@ -17,31 +17,19 @@
                 <div style="overflow-x: auto;">
                     <h:outputText id="errorLabel"/>
                     <h:message for="errorLabel" style="color:red;"/>
-
-                    <!--                    <div>-->
-                    <!--                        <h:inputText id="search-input" placeholder="search" class="search-bar" type="text"-->
-                    <!--                                     onkeyup="buildFilteredTable(this.value)"/>-->
-                    <!--                    </div>-->
-                    <!--                    <br/>-->
-<!--                    <div class="pagination_container">-->
-<!--                        <div class="first">#{msg.firstPage}</div>-->
-<!--                        <div class="previous">#{msg.previousPage}</div>-->
-<!--                        <div class="next">#{msg.nextPage}</div>-->
-<!--                        <div class="last">#{msg.lastPage}</div>-->
-<!--                    </div>-->
-                    <p:dataTable id="babysittersTable" value="#{resourcesController.currentBabysitters}"
-                                 var="babysitter" class="babysittersTable"
-                                 rows="5"
+                    <br/>
+                    <p:dataTable name="babysittersTable" value="#{resourcesController.currentBabysitters}" var="babysitter" rows="5"
                                  paginator="true"
+                                 rowsPerPageTemplate="5,10,{ShowAll|'All'}"
                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                  currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
-                                 rowsPerPageTemplate="5,10,15">>
-                        <p:column data-colname="Id">
+                    >
+                        <p:column>
                             <f:facet name="header">Id
                                 <h:selectOneMenu
-                                        id="babysitterIDSelect"
-                                        valueChangeListener="#{resourcesController.valueChanged}"
-                                        >
+                                        name="babysitterIDSelect"
+                                        valueChangeListener="#{resourcesController.valueChanged}">
+<!--                                        onchange="submit()">-->
                                     <f:selectItem itemLabel="#{msg.idlabel}" itemValue="0"/>
                                     <f:selectItems
                                             value="#{resourcesController.babysittersManager.allBabysittersArray}"
@@ -51,27 +39,27 @@
                             </f:facet>
                             ${babysitter.uuid}
                         </p:column>
-                        <p:column data-colname="name">
+                        <p:column>
                             <f:facet name="header">#{msg.name}</f:facet>
                             ${babysitter.name}
                         </p:column>
-                        <p:column data-colname="surname">
+                        <p:column>
                             <f:facet name="header">#{msg.surname}</f:facet>
                             ${babysitter.surname}
                         </p:column>
-                        <p:column data-colname="basePriceForHour">
+                        <p:column>
                             <f:facet name="header">#{msg.basePriceForHour}</f:facet>
                             ${babysitter.basePriceForHour}
                         </p:column>
-                        <p:column data-colname="minChildAge">
+                        <p:column>
                             <f:facet name="header">#{msg.minimalChildAge}</f:facet>
                             ${babysitter.minChildAge}
                         </p:column>
-                        <p:column data-colname="maxNumberOfChildrenInTheFamily">
+                        <p:column>
                             <f:facet name="header">#{msg.maximalNumberOfChildren}</f:facet>
                             ${babysitter.maxNumberOfChildrenInTheFamily}
                         </p:column>
-                        <p:column data-colname="employed">
+                        <p:column>
                             <f:facet name="header">#{msg.currentlyEmployed}</f:facet>
                             ${babysitter.employed}
                         </p:column>
